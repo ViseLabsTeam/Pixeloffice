@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600&display=swap');
+
+body { margin: 0; overflow: hidden; background-color: #111827; font-family: 'Inter', sans-serif; touch-action: none; }
+.pixel-font { font-family: 'Press Start 2P', cursive; }
+#game-container { position: relative; width: 100vw; height: 100vh; }
+canvas { display: block; image-rendering: pixelated; width: 100%; height: 100%; }
+.video-container { position: absolute; display: none; flex-direction: column; transform: translate(-50%, -100%); transition: width .2s, height .2s; z-index: 10; pointer-events: none; }
+.video-container.active-stream { display: flex; }
+.video-wrapper { position: relative; border-radius: 8px; overflow: hidden; background: #000; border: 2px solid #374151; box-shadow: 0 4px 6px rgb(0 0 0 / 30%); cursor: pointer; width: 80px; height: 80px; pointer-events: auto; transition: all .2s; }
+.video-wrapper video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+.screenshare-wrapper video { transform: scaleX(1); object-fit: contain; }
+.audio-indicator { position: absolute; bottom: -6px; right: -6px; width: 14px; height: 14px; border-radius: 50%; background-color: #4b5563; border: 2px solid #1f2937; transition: all .1s; }
+.audio-indicator.active { background-color: #22c55e; box-shadow: 0 0 8px #22c55e; }
+.drag-handle { display: none; width: 100%; height: 28px; background: #374151; cursor: grab; align-items: center; justify-content: space-between; padding: 0 10px; font-size: 11px; color: #d1d5db; border-radius: 8px 8px 0 0; pointer-events: auto; user-select: none; }
+.drag-handle:active { cursor: grabbing; }
+.video-container.is-popup { transform: none !important; width: 240px; height: 200px; min-width: 150px; min-height: 120px; z-index: 50; background: #84c718; border-radius: 8px; border: 1px solid #4b5563; box-shadow: 0 10px 25px rgb(0 0 0 / 50%); pointer-events: auto; resize: both; overflow: hidden; }
+.video-container.is-popup .drag-handle { display: flex; }
+.video-container.is-popup .video-wrapper { width: 100%; flex: 1; height: auto; border: 0; border-radius: 0; cursor: default; pointer-events: none; }
+.resize-handle-bl { position: absolute; bottom: 0; left: 0; width: 25px; height: 25px; cursor: sw-resize; z-index: 60; display: none; pointer-events: auto; }
+.video-container.is-popup .resize-handle-bl, .screenshare-container.is-popup .resize-handle-bl { display: block; }
+.resize-handle-bl::after { content: ''; position: absolute; bottom: 4px; left: 4px; width: 10px; height: 10px; border-bottom: 2px solid #9ca3af; border-left: 2px solid #9ca3af; }
+.screenshare-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 480px; max-width: 90vw; background: #1f2937; border-radius: 8px; border: 2px solid #3b82f6; z-index: 40; display: none; box-shadow: 0 10px 25px rgb(0 0 0 / 50%); resize: both; overflow: hidden; min-width: 200px; min-height: 150px; }
+.screenshare-container.active { display: block; }
+.screenshare-container.is-popup .drag-handle { display: flex; }
+.screenshare-wrapper { position: relative; width: 100%; height: calc(100% - 28px); background: #000; }
+.screenshare-wrapper video { width: 100%; height: 100%; object-fit: contain; transform: scaleX(1); }
+.joystick-zone { position: fixed; bottom: 20px; width: 120px; height: 120px; border-radius: 50%; background: rgb(255 255 255 / 10%); display: none; z-index: 100; touch-action: none; }
+#joystick-left { left: 20px; }
+.action-btn { position: fixed; bottom: 40px; right: 40px; width: 80px; height: 80px; border-radius: 50%; background: rgb(255 255 255 / 20%); display: none; z-index: 100; color: #fff; font-size: 24px; font-weight: bold; border: 2px solid rgb(255 255 255 / 40%); touch-action: none; }
+.modal { display: none; position: fixed; inset: 0; background: rgb(0 0 0 / 85%); z-index: 200; justify-content: center; align-items: center; backdrop-filter: blur(6px); }
+.modal.active { display: flex; }
+.color-option { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all .2s; }
+.color-option.selected { border-color: #fff; transform: scale(1.15); box-shadow: 0 0 12px rgb(255 255 255 / 60%); }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
