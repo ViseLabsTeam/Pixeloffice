@@ -1,9 +1,19 @@
-FROM nginx:1.27-alpine
+FROM node:22.14.0-alpine AS build
+WORKDIR /app
+COPY package.json package-lock.json tsconfig.json ./
+COPY apps/web/package.json apps/web/package.json
+COPY apps/api/package.json apps/api/package.json
+COPY packages/contracts/package.json packages/contracts/package.json
+RUN npm ci
+COPY apps ./apps
+COPY packages ./packages
+COPY scripts ./scripts
+RUN npm run build
+
+FROM nginx:1.28.0-alpine
 
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY index.html /usr/share/nginx/html/index.html
-COPY src /usr/share/nginx/html/src
-COPY assets /usr/share/nginx/html/assets
+COPY --from=build /app/apps/web/dist /usr/share/nginx/html
 
 EXPOSE 80
 

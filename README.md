@@ -1,24 +1,31 @@
 # Pixel Office
 
-Oficina virtual 2D en el navegador. Permite recorrer un mapa pixelado, abrir recursos de trabajo, jugar Snake y reunirse mediante sincronización P2P, cámara, micrófono y pantalla compartida.
+Oficina virtual web con Canvas 2D y TypeScript. El proyecto está en migración hacia las especificaciones [00–08](00_LEEME.md).
 
-## Funciones
-
-- Movimiento con WASD, flechas o joystick móvil.
-- Interacción con escritorios, sillas, puertas, arcade y servidores.
-- Salas compartidas por URL con el parámetro `room`.
-- Sincronización local con BroadcastChannel y remota con PeerJS.
-- Cámara, micrófono, pantalla compartida y skins PNG.
+La nueva aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 5 % y joystick analógico. El arte es provisional. Cuentas, sesiones multiusuario, horarios, LiveKit y Google Workspace corresponden a las siguientes etapas y todavía no están activados en este recorrido.
 
 ## Ejecutar
 
-Se debe usar un servidor estático: abrir `index.html` directamente impide o limita funciones de red y multimedia.
+Node 22.14 o superior compatible con el lockfile.
 
 ```sh
-node scripts/serve.mjs
+npm ci
+npm run dev
 ```
 
-Abrir la dirección indicada por el servidor. Para cámara, micrófono y pantalla compartida se necesita `localhost` o HTTPS y aceptar los permisos del navegador.
+Abrir `http://127.0.0.1:5173`. WASD/flechas o joystick para moverse; E o **Interactuar** para abrir puertas y examinar objetos. La puerta derecha de recepción conecta con el estudio; la izquierda del estudio permite volver. La escena completa conserva su proporción al cambiar el tamaño de pantalla.
+
+API inicial opcional en otra terminal: `npm run dev:api`. Expone `http://127.0.0.1:3001/healthz` y `/maps/demo-v1/manifest`. Sólo contiene el mapa público de prueba; aún no autentica ni sincroniza usuarios.
+
+## Verificar
+
+```sh
+npm run build
+npm test
+npm run test:e2e
+```
+
+Los recorridos usan Edge instalado. Si falta: `npx playwright install msedge`. La emulación móvil en Chromium no equivale a validar Safari iOS ni Android real. Consultar [validación](docs/validacion.md).
 
 ## Docker y pruebas de usuario
 
@@ -26,20 +33,20 @@ Abrir la dirección indicada por el servidor. Para cámara, micrófono y pantall
 docker compose up --build -d
 ```
 
-La aplicación quedará disponible en `http://localhost:8080`. Consulta la [guía de pruebas](docs/pruebas-usuario.md) para invitar participantes, cambiar el puerto y detener el entorno.
+Frontend: `http://localhost:8080`. API opcional: `docker compose --profile api up --build -d`. Los puertos se configuran con `.env.example`. Vercel apunta a `apps/web/dist`. No se ha desplegado esta reestructuración.
 
 ## Estructura
 
 ```text
-assets/images/       Recursos gráficos organizados por tipo
-docs/                Funcionamiento, arquitectura y auditoría
-src/js/              Módulos ES de la aplicación
-src/styles/          Estilos propios
-index.html           Marcado y dependencias CDN
+apps/web/              Vite, DOM, Canvas, input y ciclo de vida
+apps/api/              Fastify; salud y manifest público de I1
+packages/contracts/    Dominio, protocolos, JSON Schema, geometría y mapa de prueba
+tests/                 Pruebas unitarias, API y navegador
+scripts/               Validación, arte provisional reproducible y servidor legacy
+legacy/pre-alpha/      Versión anterior aislada para comparación
+docs/                  Arquitectura, migración, pendientes y evidencia
 ```
 
-Consulta [funcionamiento](docs/funcionamiento.md), [arquitectura](docs/arquitectura.md) y la [auditoría de calidad](docs/auditoria-calidad.md).
+La pre-alpha conserva código, recursos, A/V experimental, Snake y documentación histórica. Se ejecuta por separado con `npm run dev:legacy` en `http://127.0.0.1:3000`; no se incluye en el build productivo. Sus enlaces de sala PeerJS no son credenciales de la nueva arquitectura.
 
-## Tecnologías
-
-HTML, CSS, JavaScript ES modules, Canvas API, Web Media API, BroadcastChannel, PeerJS, Tailwind CSS y Font Awesome.
+Ver [análisis y etapas](docs/reestructuracion.md), [arquitectura](docs/arquitectura.md), [assets](apps/web/public/assets/README.md) y [validación](docs/validacion.md).

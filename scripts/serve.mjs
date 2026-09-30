@@ -2,7 +2,7 @@ import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { extname, resolve, sep } from 'node:path';
 
-const root = process.cwd();
+const root = resolve(process.cwd(), process.argv[2] || 'legacy/pre-alpha');
 const port = Number(process.env.PORT || 3000);
 const mimeTypes = {
   '.css': 'text/css; charset=utf-8',

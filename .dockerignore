@@ -1,8 +1,15 @@
 .git
 .idea
 node_modules
+**/node_modules
 coverage
 dist
+**/dist
+test-results
+playwright-report
+legacy
+.env
+.env.*
 docs
 .DS_Store
 Thumbs.db

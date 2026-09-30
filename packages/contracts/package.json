@@ -1,0 +1,13 @@
+{
+  "name": "@pixel-office/contracts",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./demo": "./src/demo.ts"
+  },
+  "dependencies": {
+    "ajv": "8.20.0"
+  }
+}

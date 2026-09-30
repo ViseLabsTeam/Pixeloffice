@@ -1,0 +1,127 @@
+import '../ui/styles.css';
+import { assetById, contains, worldRect } from '@pixel-office/contracts';
+import { demoMap } from '@pixel-office/contracts/demo';
+import { Input } from '../engine/input';
+import { LocalWorld } from '../engine/world';
+import { AssetCache } from '../rendering/assets';
+import { Renderer } from '../rendering/renderer';
+
+function element<T extends HTMLElement>(id: string): T {
+  const node = document.getElementById(id);
+  if (!node) throw new Error(`Elemento de interfaz ausente: ${id}`);
+  return node as T;
+}
+const canvas = element<HTMLCanvasElement>('world');
+const status = element('status');
+const actionButton = element<HTMLButtonElement>('action');
+const resetButton = element<HTMLButtonElement>('reset');
+const sceneName = element('scene-name');
+const position = element('position');
+const hint = element('hint');
+const controller = new AbortController();
+const cache = new AssetCache(demoMap);
+const renderer = new Renderer(canvas,demoMap,cache);
+let world = new LocalWorld(demoMap);
+let frame = 0;
+let lastTime = 0;
+let ready = false;
+let disposed = false;
+
+function notify(message: string, error = false) { status.textContent = message; status.dataset.error = String(error); }
+function inspectable() {
+  return world.scene.objects.find(object => {
+    const asset = assetById(demoMap,object.assetId);
+    return asset.interaction && contains(worldRect(asset.interaction.area,object.position,asset.worldScale),world.position);
+  });
+}
+function updateInterface() {
+  if (sceneName.textContent !== world.scene.name) {
+    sceneName.textContent = world.scene.name;
+    element('scene-count').textContent = `${demoMap.scenes.indexOf(world.scene) + 1} / ${demoMap.scenes.length} espacios`;
+    element('scene-description').textContent = world.scene.sceneId === 'lobby' ? 'La puerta al estudio está a la derecha →' : '← Volvé a recepción por la puerta izquierda';
+    canvas.dataset.scene = world.scene.sceneId;
+  }
+  const x = Math.round(world.position.x); const y = Math.round(world.position.y);
+  const coordinates = `${x}, ${y}`;
+  if (position.textContent !== coordinates) { position.textContent = coordinates; canvas.dataset.x = String(x); canvas.dataset.y = String(y); }
+  canvas.dataset.direction = world.direction;
+  const door = world.nearbyDoor();
+  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o Interactuar` : inspectable() ? 'Inspeccionar pizarra · E o Interactuar' : 'Movete con WASD, flechas o el joystick.';
+  if (hint.textContent !== message) hint.textContent = message;
+  actionButton.disabled = !ready || world.transitioning || (!door && !inspectable());
+}
+function wake() {
+  if (!frame && ready && !disposed && !document.hidden) frame = requestAnimationFrame(tick);
+}
+function action() {
+  if (!ready || world.transitioning) return;
+  const message = world.toggleDoor();
+  if (message) notify(message);
+  else {
+    const object = inspectable();
+    if (object) notify(assetById(demoMap,object.assetId).interaction?.label ?? '');
+  }
+  wake();
+}
+const input = new Input(element('joystick'),element('joystick-knob'),wake,action);
+async function transition() {
+  try {
+    const changed = await world.transition(scene => cache.prepare(scene),performance.now());
+    if (changed && !disposed) { input.reset(); lastTime = 0; notify(`Entraste a ${world.scene.name}.`); updateInterface(); wake(); }
+  } catch (error) { if (!disposed) { input.reset(); notify(error instanceof Error ? error.message : 'No se pudo abrir el destino.',true); wake(); } }
+}
+function tick(time: number) {
+  frame = 0;
+  if (!ready || disposed || document.hidden) { lastTime = 0; return; }
+  if (lastTime && time - lastTime < 1000 / 30) { frame = requestAnimationFrame(tick); return; }
+  const seconds = lastTime ? Math.min(0.1,(time - lastTime) / 1000) : 1 / 30;
+  lastTime = time;
+  const vector = input.vector();
+  world.step(vector,seconds);
+  void transition();
+  const animating = renderer.draw(world,seconds);
+  updateInterface();
+  if (vector.x || vector.y || animating) wake(); else lastTime = 0;
+}
+// A secondary touch contact does not synthesize the mouse click used by a
+// native button in every browser. Preserve keyboard clicks and suppress duplicates.
+let lastTouchAction = -Infinity;
+actionButton.addEventListener('pointerup',event => {
+  if (event.pointerType !== 'touch' || actionButton.disabled) return;
+  event.preventDefault(); lastTouchAction = performance.now(); action();
+},{signal:controller.signal});
+actionButton.addEventListener('click',event => {
+  if (event.detail > 0 && performance.now() - lastTouchAction < 750) return;
+  action();
+},{signal:controller.signal});
+resetButton.addEventListener('click',async () => {
+  if (world.transitioning || !ready) return;
+  const next = new LocalWorld(demoMap);
+  ready = false; resetButton.disabled = true; input.reset();
+  try {
+    await cache.prepare(next.scene);
+    if (disposed) { next.destroy(); return; }
+    world.destroy(); world = next; lastTime = 0; notify('Volviste a la entrada.');
+  } catch (error) { next.destroy(); notify(String(error),true); }
+  finally { if (!disposed) { ready = true; resetButton.disabled = false; wake(); } }
+},{signal:controller.signal});
+const resize = new ResizeObserver(wake); resize.observe(canvas);
+document.addEventListener('visibilitychange',() => {
+  if (document.hidden) { cancelAnimationFrame(frame); frame = 0; input.reset(); lastTime = 0; }
+  else wake();
+},{signal:controller.signal});
+function dispose() {
+  if (disposed) return;
+  disposed = true; ready = false; cancelAnimationFrame(frame); frame = 0;
+  controller.abort(); resize.disconnect(); input.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
+}
+window.addEventListener('pagehide',event => {
+  if (event.persisted) { cancelAnimationFrame(frame); frame = 0; input.reset(); lastTime = 0; }
+  else dispose();
+},{signal:controller.signal});
+window.addEventListener('pageshow',event => { if (event.persisted) wake(); },{signal:controller.signal});
+if (import.meta.hot) import.meta.hot.dispose(dispose);
+cache.prepare(world.scene).then(() => {
+  if (disposed) return;
+  ready = true; canvas.dataset.ready = 'true'; notify('La oficina está lista para explorar.'); wake();
+}).catch(error => { notify(`No pudimos cargar la oficina: ${String(error)}`,true); });

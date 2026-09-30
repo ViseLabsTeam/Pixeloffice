@@ -1,0 +1,965 @@
+{
+  "schemaVersion": 1,
+  "mapVersion": "demo-v1",
+  "entry": {
+    "sceneId": "lobby",
+    "spawnId": "entry"
+  },
+  "avatar": {
+    "avatarId": "demo-avatar",
+    "views": {
+      "up": "avatar-up",
+      "down": "avatar-down",
+      "left": "avatar-left",
+      "right": "avatar-right"
+    },
+    "footCollider": {
+      "shape": "rect",
+      "x": -6,
+      "y": -6,
+      "width": 12,
+      "height": 6
+    }
+  },
+  "assets": [
+    {
+      "schemaVersion": 1,
+      "assetId": "floor",
+      "imageUrl": "/assets/demo/floor.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 32,
+        "height": 32
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "ground",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "601aaabde7eb785dbee79d3fb090c11f47c58333d4d7f4e0ad4d36b1d66a0a95"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-up",
+      "imageUrl": "/assets/demo/avatar-up.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 26,
+        "height": 32
+      },
+      "pivot": {
+        "x": 13,
+        "y": 32
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "a72c9191b61f28d049bbdaae0c3bdf45662c60149673a89df806daa6738dc05e"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-down",
+      "imageUrl": "/assets/demo/avatar-down.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 26,
+        "height": 32
+      },
+      "pivot": {
+        "x": 13,
+        "y": 32
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "1333ad14bcd999469d5cc144d0b8fc2866e181fe66af46c1f18734dc4803b9ac"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-left",
+      "imageUrl": "/assets/demo/avatar-left.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 26,
+        "height": 32
+      },
+      "pivot": {
+        "x": 13,
+        "y": 32
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "b9bcc7daea891c5bee0fab637c026ee9137457c309d2e81507ed6ecd8fbe171b"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-right",
+      "imageUrl": "/assets/demo/avatar-right.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 26,
+        "height": 32
+      },
+      "pivot": {
+        "x": 13,
+        "y": 32
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "1d1269801c947b370505407ef1723416ca29ea4f1818b9c9908d861c9d5904ef"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "desk",
+      "imageUrl": "/assets/demo/desk.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 56
+      },
+      "pivot": {
+        "x": 48,
+        "y": 56
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -44,
+          "y": -25,
+          "width": 88,
+          "height": 25
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -48,
+        "y": -56,
+        "width": 96,
+        "height": 42
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "5d03a6ac8ff08e250842e4396a18191e7cc9c0fd3f4e49e7d641985172f140de"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "bookshelf",
+      "imageUrl": "/assets/demo/bookshelf.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 80,
+        "height": 96
+      },
+      "pivot": {
+        "x": 40,
+        "y": 96
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -38,
+          "y": -12,
+          "width": 76,
+          "height": 12
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -40,
+        "y": -96,
+        "width": 80,
+        "height": 84
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "7d760693b1f57054f1e78be386f8abe90c909eea8f3ffa984175f97017195492"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "partition",
+      "imageUrl": "/assets/demo/partition.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 120,
+        "height": 64
+      },
+      "pivot": {
+        "x": 60,
+        "y": 64
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -60,
+          "y": -10,
+          "width": 120,
+          "height": 10
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -60,
+        "y": -64,
+        "width": 120,
+        "height": 54
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "ee5fb73f9800b04e14e5dab0bafd1a051e7186fa55c6832e11819b8aedb1f817"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "plant",
+      "imageUrl": "/assets/demo/plant.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 40,
+        "height": 60
+      },
+      "pivot": {
+        "x": 20,
+        "y": 60
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -8,
+          "y": -9,
+          "width": 16,
+          "height": 9
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -20,
+        "y": -60,
+        "width": 40,
+        "height": 45
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "dee9bcd48223860a1bb71faf026a1720589813a3706847689a7601a5a55b0b5a"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "tv",
+      "imageUrl": "/assets/demo/tv.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 100,
+        "height": 70
+      },
+      "pivot": {
+        "x": 50,
+        "y": 70
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -22,
+          "y": -5,
+          "width": 44,
+          "height": 5
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -50,
+        "y": -70,
+        "width": 100,
+        "height": 52
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": {
+        "kind": "inspect",
+        "label": "Esta pizarra recibirá presentaciones en la etapa de colaboración.",
+        "area": {
+          "shape": "rect",
+          "x": -65,
+          "y": -80,
+          "width": 130,
+          "height": 105
+        }
+      },
+      "variant": "demo-v1",
+      "contentHash": "64d7f282d62402988699de52667cd55deb6565051578ae036f488077670122c9"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "door-closed",
+      "imageUrl": "/assets/demo/door-closed.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 24,
+        "height": 56
+      },
+      "pivot": {
+        "x": 12,
+        "y": 56
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -8,
+          "y": -48,
+          "width": 16,
+          "height": 48
+        }
+      ],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "4e5877989a561805bb1bc2b017f072a6ca2cb067dbc24bdc25f90bf0920cece9"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "door-open",
+      "imageUrl": "/assets/demo/door-open.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 24,
+        "height": 56
+      },
+      "pivot": {
+        "x": 12,
+        "y": 56
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "18b9a75779d3fb4f5c563c9cf64dd9519fbfdd09edf67cd4d4afb96ffb945b88"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "wall-top",
+      "imageUrl": "/assets/demo/wall-top.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 640,
+        "height": 52
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 52,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 52
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 640,
+        "height": 52
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "14f220a349d66958824c97960079df835ecf2f5ecf39227f7c2ac8de3b3678e4"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "wall-bottom",
+      "imageUrl": "/assets/demo/wall-bottom.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 640,
+        "height": 16
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 16,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 0,
+          "y": 0,
+          "width": 640,
+          "height": 16
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 640,
+        "height": 16
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "ff188d24e7fadc333416135aecc6e98226c34c28ddd0440689796b4a30b801ba"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "wall-side-long",
+      "imageUrl": "/assets/demo/wall-side-long.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 208
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 208,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 208
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 208
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "df0dc48ff9a955bdd57b3fabc353f82422527ad7a008911c4d913a46d6a767d6"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "wall-side-short",
+      "imageUrl": "/assets/demo/wall-side-short.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 128
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 128,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 128
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 128
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "6233d65b4767f6401d44afc106f45fdd83d2cf9c9a57b9386df4c32369ad35e9"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "wall-side-full",
+      "imageUrl": "/assets/demo/wall-side-full.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 400
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 400,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 0,
+          "y": 0,
+          "width": 16,
+          "height": 400
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 16,
+        "height": 400
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "demo-v1",
+      "contentHash": "7865a747d2e05a79f731050fe0941d7e76e0f099bb6187767c76618c476c5820"
+    }
+  ],
+  "scenes": [
+    {
+      "schemaVersion": 1,
+      "mapVersion": "demo-v1",
+      "sceneId": "lobby",
+      "name": "Recepción",
+      "logicalSize": {
+        "width": 640,
+        "height": 400
+      },
+      "background": {
+        "assetId": "floor",
+        "color": "#b99770"
+      },
+      "spawnPoints": {
+        "entry": {
+          "x": 88,
+          "y": 240,
+          "direction": "right"
+        },
+        "portal": {
+          "x": 592,
+          "y": 240,
+          "direction": "left"
+        }
+      },
+      "environments": [
+        {
+          "environmentId": "lobby-environment",
+          "name": "Recepción",
+          "area": {
+            "shape": "rect",
+            "x": 16,
+            "y": 52,
+            "width": 608,
+            "height": 332
+          },
+          "communicationMode": "PROXIMITY"
+        }
+      ],
+      "objects": [
+        {
+          "objectId": "lobby-north",
+          "assetId": "wall-top",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "objectId": "lobby-south",
+          "assetId": "wall-bottom",
+          "position": {
+            "x": 0,
+            "y": 384
+          }
+        },
+        {
+          "objectId": "lobby-edge",
+          "assetId": "wall-side-full",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "objectId": "lobby-edge-top",
+          "assetId": "wall-side-long",
+          "position": {
+            "x": 624,
+            "y": 0
+          }
+        },
+        {
+          "objectId": "lobby-edge-bottom",
+          "assetId": "wall-side-short",
+          "position": {
+            "x": 624,
+            "y": 272
+          }
+        },
+        {
+          "objectId": "lobby-desk-a",
+          "assetId": "desk",
+          "position": {
+            "x": 176,
+            "y": 154
+          }
+        },
+        {
+          "objectId": "lobby-desk-b",
+          "assetId": "desk",
+          "position": {
+            "x": 328,
+            "y": 154
+          }
+        },
+        {
+          "objectId": "lobby-shelf",
+          "assetId": "bookshelf",
+          "position": {
+            "x": 440,
+            "y": 218
+          }
+        },
+        {
+          "objectId": "lobby-partition",
+          "assetId": "partition",
+          "position": {
+            "x": 220,
+            "y": 344
+          }
+        },
+        {
+          "objectId": "lobby-plant",
+          "assetId": "plant",
+          "position": {
+            "x": 552,
+            "y": 142
+          }
+        },
+        {
+          "objectId": "lobby-tv",
+          "assetId": "tv",
+          "position": {
+            "x": 530,
+            "y": 345
+          }
+        }
+      ],
+      "doors": [
+        {
+          "doorId": "lobby-door",
+          "closedAssetId": "door-closed",
+          "openAssetId": "door-open",
+          "position": {
+            "x": 624,
+            "y": 268
+          },
+          "initiallyOpen": false,
+          "interactionArea": {
+            "shape": "rect",
+            "x": 568,
+            "y": 200,
+            "width": 72,
+            "height": 84
+          }
+        }
+      ],
+      "portals": [
+        {
+          "portalId": "lobby-exit",
+          "doorId": "lobby-door",
+          "area": {
+            "shape": "rect",
+            "x": 616,
+            "y": 220,
+            "width": 24,
+            "height": 44
+          },
+          "destinationSceneId": "studio",
+          "destinationSpawnId": "portal"
+        }
+      ],
+      "presentationSurfaces": [
+        {
+          "surfaceId": "lobby-tv-surface",
+          "objectId": "lobby-tv",
+          "area": {
+            "shape": "rect",
+            "x": 485,
+            "y": 280,
+            "width": 90,
+            "height": 40
+          }
+        }
+      ]
+    },
+    {
+      "schemaVersion": 1,
+      "mapVersion": "demo-v1",
+      "sceneId": "studio",
+      "name": "Estudio",
+      "logicalSize": {
+        "width": 640,
+        "height": 400
+      },
+      "background": {
+        "assetId": "floor",
+        "color": "#b99770"
+      },
+      "spawnPoints": {
+        "entry": {
+          "x": 48,
+          "y": 240,
+          "direction": "right"
+        },
+        "portal": {
+          "x": 48,
+          "y": 240,
+          "direction": "right"
+        }
+      },
+      "environments": [
+        {
+          "environmentId": "studio-environment",
+          "name": "Estudio",
+          "area": {
+            "shape": "rect",
+            "x": 16,
+            "y": 52,
+            "width": 608,
+            "height": 332
+          },
+          "communicationMode": "PROXIMITY"
+        }
+      ],
+      "objects": [
+        {
+          "objectId": "studio-north",
+          "assetId": "wall-top",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "objectId": "studio-south",
+          "assetId": "wall-bottom",
+          "position": {
+            "x": 0,
+            "y": 384
+          }
+        },
+        {
+          "objectId": "studio-edge",
+          "assetId": "wall-side-full",
+          "position": {
+            "x": 624,
+            "y": 0
+          }
+        },
+        {
+          "objectId": "studio-edge-top",
+          "assetId": "wall-side-long",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        },
+        {
+          "objectId": "studio-edge-bottom",
+          "assetId": "wall-side-short",
+          "position": {
+            "x": 0,
+            "y": 272
+          }
+        },
+        {
+          "objectId": "studio-desk-a",
+          "assetId": "desk",
+          "position": {
+            "x": 176,
+            "y": 154
+          }
+        },
+        {
+          "objectId": "studio-desk-b",
+          "assetId": "desk",
+          "position": {
+            "x": 328,
+            "y": 154
+          }
+        },
+        {
+          "objectId": "studio-shelf",
+          "assetId": "bookshelf",
+          "position": {
+            "x": 440,
+            "y": 218
+          }
+        },
+        {
+          "objectId": "studio-partition",
+          "assetId": "partition",
+          "position": {
+            "x": 220,
+            "y": 344
+          }
+        },
+        {
+          "objectId": "studio-plant",
+          "assetId": "plant",
+          "position": {
+            "x": 552,
+            "y": 142
+          }
+        },
+        {
+          "objectId": "studio-tv",
+          "assetId": "tv",
+          "position": {
+            "x": 530,
+            "y": 345
+          }
+        }
+      ],
+      "doors": [
+        {
+          "doorId": "studio-door",
+          "closedAssetId": "door-closed",
+          "openAssetId": "door-open",
+          "position": {
+            "x": 16,
+            "y": 268
+          },
+          "initiallyOpen": false,
+          "interactionArea": {
+            "shape": "rect",
+            "x": 0,
+            "y": 200,
+            "width": 72,
+            "height": 84
+          }
+        }
+      ],
+      "portals": [
+        {
+          "portalId": "studio-exit",
+          "doorId": "studio-door",
+          "area": {
+            "shape": "rect",
+            "x": 0,
+            "y": 220,
+            "width": 24,
+            "height": 44
+          },
+          "destinationSceneId": "lobby",
+          "destinationSpawnId": "portal"
+        }
+      ],
+      "presentationSurfaces": [
+        {
+          "surfaceId": "studio-tv-surface",
+          "objectId": "studio-tv",
+          "area": {
+            "shape": "rect",
+            "x": 485,
+            "y": 280,
+            "width": 90,
+            "height": 40
+          }
+        }
+      ]
+    }
+  ]
+}
