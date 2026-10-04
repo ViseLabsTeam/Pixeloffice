@@ -1,40 +1,41 @@
-# Validación de la reestructuración
+# Estado de validación — demo v2
 
-Fecha: 2026-09-30. Base Git: `ed44923` más los cambios locales de esta reestructuración, sin commit nuevo. Especificaciones 1.0; mapa `demo-v1`. No es aceptación del alcance completo I1–I4.
+Actualizado el 2026-10-04. Alcance: [04](../04_REQUERIMIENTOS_Y_ACEPTACION.md) y escenarios de [06](../06_RENDIMIENTO_Y_PLAN_VALIDACION.md).
 
-## Entorno y resultados
+## Evidencia anterior
 
-Windows, Node 22.14.0, npm 10.9.2, Edge 154.0.4258.37, Playwright 1.63.0. Navegación por loopback sin A/V. Escritorio 1280×720 y emulación de iPhone 13 en Chromium (390×664 CSS, DPR 3; render limitado a DPR 2). No se midió red móvil ni hardware de referencia.
+El [registro del 30 de septiembre](historico/validacion-v1.md) conserva resultados originales, entorno, IDs v1 y limitaciones del recorrido individual. No se ha convertido esa evidencia en aprobación automática de v2. La inspección publicada del 4 de octubre está registrada en [00](../00_LEEME.md).
 
-| Comprobación | Resultado / alcance |
-| --- | --- |
-| TypeScript estricto y builds web/API | Aprobados |
-| JSON Schema y referencias del mapa | Dos escenas, entradas/portales válidos y IDs únicos |
-| Recursos | 17 PNG; firmas, SHA-256 y regiones comprobadas |
-| Vitest | 14 pruebas aprobadas: movimiento, colisión, oclusión, puertas, fallos de destino, API y contratos |
-| Playwright, ejecución final | 4 pruebas aprobadas; 2 omitidas por perfil (50 cruces sólo escritorio, multitouch sólo móvil). Sin fallos |
-| 50 cruces en navegador | Aprobados en Edge; el avatar cruza mediante input real de teclado |
-| Input de escritorio y emulación móvil | Cuatro vistas, foco editable, blur y pointercancel comprobados |
-| Multitouch RF-048 | Dos contactos mediante CDP: joystick sostenido y segundo dedo abre la puerta; transición confirmada. El botón procesa pointerup táctil y evita duplicar el click |
-| Capturas de escritorio/portrait | Revisadas visualmente; sin desbordamiento horizontal ni controles sobre la escena |
-| Docker | Frontend y API construidos en Linux; API arrancada en contenedor temporal y GET manifest = 200, dos escenas |
-| Peso inicial | JS ≈44.7 kB gzip y CSS ≈1.80 kB gzip, según Vite; no equivale a benchmark de consumo |
+Los nombres de las pruebas existentes se actualizan para referir a v2, pero sus aserciones siguen evaluando la base espacial/API inicial. Ninguna prueba existente demuestra diez participantes, A/V, chat, pizarrón o juegos integrados.
 
-Capturas regenerables: `test-results/desktop-office.png` y `test-results/mobile-office.png`. El directorio no se versiona; CI conserva resultados fallidos. Los tests refieren RF en sus nombres. Se verificaron por hash los 22 archivos originales de código, arte y documentación movidos a la pre-alpha.
+## Cobertura actual y brechas
 
-## Requisitos cubiertos y límites
+| Parte implementada | Requisitos v2 relacionados | Lo que falta |
+|---|---|---|
+| Mapa fijo, geometría y spawns | V2-RF-005, V2-RF-007; V2-RNF-006 | Regiones/interacciones definitivas y autoridad de servidor |
+| Movimiento, cuatro vistas provisionales e input | V2-RF-006, V2-RF-010, V2-RF-019 | Avatar hombre/mujer, ropa y pruebas Android/iOS reales |
+| Puertas y 50 cruces locales | V2-RF-008 | Compartir estado y validar transiciones en servidor |
+| Profundidad y oclusión local | V2-RF-009 | Arte definitivo y ocultación de ocupantes de ambientes ajenos |
+| Limpieza local y render bajo demanda | V2-RNF-004 | Recursos multimedia, paneles, sesiones y medición prolongada |
+| API salud/manifest y schema de comando | V2-RNF-006 | Endpoints de sesiones/WS y autorización con credenciales temporales |
 
-- RF-007/008/009/010/012/013/015/016/017: implementación local y pruebas espaciales; falta validar la composición con arte definitivo.
-- RF-047/048: interfaz adaptable e input implementados; pendiente Android/iOS real y landscape con arte final.
-- RF-011/014: apertura/oclusión locales preparadas; sincronización entre usuarios corresponde a I2.
-- RNF-003/004: limpieza y dibujo por demanda implementados; falta jornada de dos horas y medición de memoria nativa.
-- RNF-010: contratos versionados, tipado, builds y CI incorporados. CI remoto aún no ejecutado.
+## Validación de la alineación del 4 de octubre
 
-## Gates abiertos antes de ampliar el producto
+Base Git: `d20baa3` más cambios locales sin commit. Windows, Node 22.14.0 y npm 10.9.2.
 
-1. **SP-03 / D-03 / D-10:** assets y referencia de Peredo, licencias, medidas definitivas y legibilidad mobile real. Los PNG actuales son provisionales.
-2. **V01/V02/SP-04:** CPU p95, memoria atribuible, latencia de input, dos usuarios y comparación con IDE abierto. Los 50 cruces automatizados no acreditan estabilidad de memoria por dos horas.
-3. **I2:** identidad/membresías, PostgreSQL, WS autoritativo, horarios, prórrogas idempotentes, reinicio y control por tenant.
-4. **I3/I4:** conectividad de medios real, cámara/pantalla simultáneas, privacidad, capacidad de 15, Workspace y juegos; sin credenciales/proveedores contratados ni soporte anunciado.
+| Comprobación ejecutada | Resultado |
+|---|---|
+| `npm run build` | TypeScript, validación de assets y builds API/web aprobados; dos escenas y 17 PNG provisionales verificados |
+| `npm test` | 14 pruebas aprobadas en dos archivos; geometría y API/contratos iniciales |
+| Enlaces Markdown locales de documentos vigentes | 40 destinos existentes |
+| Trazabilidad 04 → 06 | Los 22 requisitos funcionales y ocho no funcionales tienen escenario de validación |
+| Búsqueda de referencias v1 activas | Sin IDs antiguos de requisitos ni entidades de equipo/jornada fuera de registros históricos; las exclusiones siguen documentadas |
+| `git diff --check` | Sin errores de whitespace |
 
-Las imágenes Docker se construyeron como validación local. No se publicó en Vercel ni se reemplazó un entorno compartido. No se modificaron los documentos normativos 00–08 ni los pendientes de producto.
+No se ejecutó Playwright en esta edición ni se realizaron recorridos multiusuario o pruebas en dispositivos reales. Los tests aprobados no certifican las funciones futuras de la demo.
+
+## Aceptación final pendiente
+
+I1 sigue parcial por arte y dispositivos reales. I2–I4 requieren implementación y todos los recorridos aplicables de 06. La capacidad de diez, los presupuestos de consumo, el aislamiento multimedia, el pizarrón y los juegos siguen pendientes de evidencia.
+
+Los cambios locales de esta alineación no se han publicado. El estado de la publicación no se deduce de un build local.

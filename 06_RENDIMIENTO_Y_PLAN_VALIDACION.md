@@ -1,110 +1,62 @@
 # 06 — Rendimiento y plan de validación
 
-**Versión:** 1.0 · **Fecha:** 2026-09-30 · **Prioridad:** requisito transversal de producto.
+**Versión:** 2.0 · **Fecha:** 2026-10-04 · **Estado:** objetivos propuestos, sin medición v2 completa.
 
-## 1. Objetivo
+## 1. Método
 
-La aplicación permanecerá abierta mientras se programa, compila, consulta documentación y utilizan otras herramientas. Debe reducir el consumo en reposo, limitar recursos de medios y no degradarse con el tiempo. Evaluar carga inicial, CPU/GPU, memoria, red, latencia y batería. Una animación fluida no demuestra consumo reducido.
+Validar la demo junto con herramientas de trabajo habituales, declarando commit, hardware, sistema, navegador, red, resolución, DPR y cantidad de participantes/medios. Medir cliente y servidor por separado. Emulación móvil y bots no sustituyen pruebas de Android/iOS o medios en dispositivos reales.
 
-No hay mediciones certificadas de la pre-alpha. Todos los números de este documento son **presupuestos iniciales propuestos**, no compromisos de rendimiento ya alcanzados ni requisitos numéricos dictados por el usuario. Tras el primer benchmark, aprobar o ajustar objetivos con evidencia y versión.
+Comparar reposo, movimiento, conversación de cuatro y sesión de diez. Registrar latencias p50/p95, memoria atribuible, CPU, frames y tráfico. No confundir heap JavaScript con memoria total ni peso de build con consumo de ejecución.
 
-## 2. Perfil de referencia propuesto
+## 2. Presupuestos iniciales
 
-- Notebook Windows con cuatro procesadores lógicos, 8 GB de RAM, SSD y gráficos integrados; registrar modelo real antes de medir.
-- Navegador estable y perfil de pruebas limpio; comparar Chromium y Firefox/Safari según matriz.
-- IDE, proyecto real, servidor local y herramientas habituales abiertos. Registrar compilación de referencia con y sin Pixel Office.
-- Red normalizada: 10 Mbps disponibles de descarga, 5 Mbps subida, 80 ms RTT y pérdida inferior al 1 % para pruebas funcionales; sumar degradación específica.
-- Mobile: un Android de gama media con 4 GB y un iPhone disponible, con modelos/OS concretos al iniciar QA. No inferir comportamiento de uno a partir del otro.
+Se conservan como propuestas de ingeniería los presupuestos útiles del prototipo, adaptados a diez participantes. No son resultados ni garantías de proveedores. Cualquier ajuste requiere medición y motivo registrado.
 
-Registrar resolución, DPR, número de escenas/objetos, versión de assets, vídeo recibido/publicado, navegador, temperatura y energía. Los FPS de mapa y de cámara son métricas distintas.
-
-## 3. Presupuestos propuestos
-
-| Métrica | Objetivo inicial | Método y alcance |
+| Métrica | Objetivo inicial | Condición |
 |---|---|---|
-| JS inicial de mapa/UI | ≤250 KiB transferidos con compresión | Build productivo; excluye SDK A/V y juegos diferidos. |
-| JS total con A/V cargado | ≤700 KiB comprimidos | Incluir dependencias transitivas y duplicados. |
-| Transferencia inicial hasta mapa usable | ≤3 MiB | HTML/CSS/scripts/font/assets necesarios; caché fría. |
-| Entrada interactiva en red de referencia | ≤4 s | Desde navegación autenticada hasta mapa/input; OAuth externo medido aparte. |
-| CPU de mapa quieto sin A/V | ≤3 % de CPU total, p95 | Muestras 1 s durante 5 min; declarar normalización de herramienta. |
-| CPU con movimiento sin A/V | ≤8 % de CPU total, p95 | Dos escenas y 15 avatares; dispositivo de referencia. |
-| CPU conversación de cuatro | ≤20 % de CPU total, p95 | Cuatro cámaras moderadas + audio; registrar códecs, layers y tamaño. |
-| Memoria atribuible sin A/V | ≤250 MiB | Medida de pestaña/renderer con método documentado; separar memoria GPU compartida. |
-| Memoria conversación de cuatro | ≤500 MiB | Incluir buffers nativos de medios en método cuando sea posible. |
-| Estabilidad de memoria | Sin crecimiento retenido sostenido; aumento final ≤15 % | Tras warm-up, 2 h y limpieza; repetir por fugas, no por ruido puntual. |
-| Mapa en uso | 30 FPS estables como perfil base | p95 frame ≤33.3 ms; 60 FPS opcional si cumple consumo. |
-| Respuesta local al movimiento | p95 ≤100 ms | De input a respuesta visible. |
-| Movimiento remoto | p95 ≤250 ms | Red de referencia; registrar tiempo servidor y recepción. |
-| Entrada enviada | Máximo 15 mensajes/s por usuario | Sólo durante cambio/movimiento; heartbeat separado. |
-| Vídeos recibidos habituales | Sólo audiencia activa, hasta 5 remotos para grupo de seis | Sin pistas ocultas innecesarias. |
-| Daily | Máximo inicial 9 vídeos remotos visibles por dispositivo | Speaker/grilla paginada; 15 participantes siguen en reunión. |
-| Caché gráfica | ≤64 MiB de bitmaps decodificados como objetivo | Escena actual y hasta dos vecinas completas; otras sólo metadata/bytes si caben. |
+| JS inicial mapa/UI | ≤250 KiB comprimidos | Sin SDK de medios ni juegos diferidos |
+| JS con A/V cargado | ≤700 KiB comprimidos | Incluir dependencias transitivas |
+| Transferencia hasta mapa usable | ≤3 MiB | Caché fría |
+| Entrada interactiva | ≤4 s | Desde entrar a sesión hasta mapa/input; declarar red |
+| CPU de mapa quieto sin A/V | ≤3 % del total, p95 | Muestras de 1 s durante 5 min; declarar normalización |
+| CPU en movimiento sin A/V | ≤8 % del total, p95 | Diez avatares y dos escenas |
+| CPU conversación de cuatro | ≤20 % del total, p95 | Calidad y códecs registrados |
+| Memoria sin A/V / con cuatro | ≤250 / ≤500 MiB | Método que contemple medios nativos |
+| Estabilidad de memoria | Aumento retenido final ≤15 % | Tras calentamiento y 2 h con limpieza |
+| Render | 30 FPS base; p95 frame ≤33.3 ms | Movimiento; reposo sin frames innecesarios |
+| Respuesta local / movimiento remoto | p95 ≤100 / ≤250 ms | Red de referencia documentada |
+| Entrada de movimiento | Máximo 15 mensajes/s por participante | Heartbeat separado; sin emitir movimiento en reposo |
+| Cámara inicial propuesta | 360p, 15 FPS | Adaptar calidad y reducir suscripciones |
+| Vídeos remotos | Hasta nueve en sesión de diez | Sólo audiencia autorizada; paginar/reducir según dispositivo |
+| Bitmaps decodificados | ≤64 MiB | Caché y expulsión acotadas; recursos por escena |
 
-CPU incluye coste multimedia del cliente aunque corresponda a procesos auxiliares. Las herramientas varían: documentar comparación de memoria/CPU, no mezclar heap JS con memoria total. Si un límite falla, localizar coste y reducirlo; modificar presupuesto requiere justificación y registro.
+Diez participantes no obliga a decodificar nueve vídeos permanentemente en cada celular. La interfaz debe permitir conversación y presentación legibles con límites de recepción explícitos. La capacidad total de sesiones simultáneas del servicio se define con el hosting; no se deduce del cupo por sesión.
 
-## 4. Estrategia de optimización
+## 3. Recorridos de aceptación
 
-### Render y entrada
-
-Preparar fondo y elementos estáticos por escena. Redibujar capas dinámicas cuando cambian; oclusión sólo en candidatos cercanos que pueden superponerse. Índice espacial simple para colisión/oclusores cuando el perfil lo justifique. Reutilizar buffers y objetos de frame; evitar reconstruir DOM de cada avatar cada ciclo. [P1]
-
-Mantener precisión de simulación separada de rasterización del pixel art. Render con escalas/pivots coherentes y límite de DPR configurable, para no multiplicar el framebuffer de forma innecesaria. No ejecutar juego o animación de descanso fuera de su panel. Elegir 30 FPS base; nunca ajustar velocidad física por FPS.
-
-### Segundo plano
-
-Detectar visibilidad de página y reducir o suspender trabajo visual; mantener comunicación necesaria y estado de servidor. Al volver, obtener estado actual. No atar heartbeat/cierre a rAF. Los navegadores aplican sus propias restricciones de segundo plano; testear reconexión y mobile real. [P2]
-
-No apagar automáticamente la cámara del emisor sólo porque escondió su pestaña: otros pueden estar viéndolo. Reducir vídeo recibido que no se muestra cuando sea posible. Dar un modo ahorro explícito que permita audio solo y conserve la elección del usuario.
-
-### Audio/vídeo
-
-Miniaturas moderadas: propuesta inicial cámara 360p/15 FPS, con adaptación a 180p o audio solo. Para pantalla de texto, priorizar legibilidad con frecuencia moderada; vídeo compartido requiere perfil aparte. Publicar sólo a contexto activo, usar autoSubscribe=false, seleccionar pistas y activar opciones de adaptación del SDK después de validación. No recibir todas las cámaras y esconderlas en CSS. [P3]
-
-Indicador de habla aprovecha evento del proveedor cuando suficiente; no agregar analizadores por avatar sin necesidad. Evitar duplicar procesamiento de audio entre SDK y app. Al abandonar contexto, desuscribir/detach/limpiar medios.
-
-### Recursos y datos
-
-Assets recortados y atlases organizados; carga diferida de SDK A/V, juegos y Workspace. Caché con presupuesto y descarga versionada; no un archivo enorme con toda la oficina futura. World state sólo de escena relevante; contador/directorio del resto sin posición de alta frecuencia. Coalescer updates y limitar payload, chat y rate. Evitar escrituras de posición a DB por tick.
-
-## 5. Escenarios de validación
-
-| ID | Escenario | Requisitos principales y evidencia |
+| ID | Escenario y evidencia | Requisitos |
 |---|---|---|
-| V01 | Primer usuario en espera; quieto y moviéndose | RF-006/009, RNF-001/004; CPU, memoria, FPS e input. |
-| V02 | Dos usuarios en escenas distintas; 50 cruces | RF-007/008/017/039, RNF-003; logs de transición y memoria estabilizada. |
-| V03 | Conversación cuatro, IDE y compilación | RF-018/021/025, RNF-001; consumo, latencia y comparación de tarea real. |
-| V04 | Quince en oficina distribuidos en grupos de 2–6 | RF-023/027, RNF-002/006; tráfico por contexto y aislamiento. |
-| V05 | Daily quince, cámaras publicadas y grilla limitada | RF-027, RNF-002; bitrate/subscripciones, CPU, voces y paginación. |
-| V06 | Cámara + pantalla de código + nuevo espectador | RF-028/030/049; legibilidad, reserva, calidad y limpieza. |
-| V07 | Jornada 2 h con juegos, cambios y segundo plano | RNF-003/004; curvas de memoria, handlers/tracks y reanudación. |
-| V08 | Administrador sale y vuelve; oficina vacía 15:00–15:20 | RF-004/032/034; transición y datos conservados. |
-| V09 | Prórroga duplicada/concurrente y cierre vencido | RF-035/037/039; DB revision, ACK, timer servidor y expulsión efectiva. |
-| V10 | Android/iOS: joystick, chat, orientación, documentos | RF-047/049, RNF-008/009; vídeo de recorrido y consumo/temperatura. |
-| V11 | Red degradada: 200 ms RTT, 3 % pérdida y corte 20 s | RF-039, RNF-006; reconexión, no duplicación y calidad degradada. |
-| V12 | Cliente alterado y tokens de contexto expulsado | RF-002/003/023, RNF-006; denegación real en backend y SFU. |
-| V13 | Google: permitido, denegado, revocado y conflicto | RF-040/043; archivos de prueba, scopes y ausencia de publicación accidental. |
-| V14 | API reinicia cerca del cierre, SFU continúa | RF-037/039, RNF-012; reconstrucción autoritativa y limpieza reintentada. |
-| V15 | Snake/Pong bajo uso habitual | RF-044/046, RNF-003; foco, resultado sincronizado y loops desmontados. |
+| V2-V01 | Entrar sin cuenta, crear sesión, recorrer solo, nombre/avatar y error de enlace | V2-RF-001, V2-RF-002, V2-RF-010, V2-RF-021 |
+| V2-V02 | Dos clientes, 50 cruces, puertas compartidas, sólidos y recuperación tras fallo de destino | V2-RF-005, V2-RF-006, V2-RF-007, V2-RF-008 |
+| V2-V03 | Diez plazas, ingresos concurrentes y rechazo de undécima; dos sesiones aisladas | V2-RF-003, V2-RF-011, V2-RNF-002, V2-RNF-003 |
+| V2-V04 | Creador sale, corte/reconexión, credencial retomada desde otra pestaña y expiración de reserva | V2-RF-002, V2-RF-004, V2-RF-021 |
+| V2-V05 | Chat y A/V de cuatro; cambio de ambiente, proximidad, paredes/puertas y cliente alterado | V2-RF-011, V2-RF-012, V2-RF-013, V2-RNF-003 |
+| V2-V06 | Diez conectados con medios, cámara + pantalla, audiencia y reservas concurrentes | V2-RF-003, V2-RF-013, V2-RF-014, V2-RNF-001 |
+| V2-V07 | Dibujo/borrado concurrentes, incorporación tardía, limpio/sucio y presentación sin borrar trazos | V2-RF-014, V2-RF-015 |
+| V2-V08 | Computadora abre destinos HTTPS externos; permisos denegados en destino no rompen sesión | V2-RF-016, V2-RNF-003 |
+| V2-V09 | Snake completo y Pong de dos: tercer jugador, abandono, reinicio y cierre del panel | V2-RF-017, V2-RF-018, V2-RNF-004 |
+| V2-V10 | Android/iOS real, portrait/landscape, joystick + acción, escritura, paneles y permisos | V2-RF-019, V2-RF-021, V2-RNF-005, V2-RNF-007 |
+| V2-V11 | Sesión vacía expira, reinicio API, credenciales anteriores y nueva sesión limpia | V2-RF-020, V2-RNF-008 |
+| V2-V12 | Dos horas, segundo plano, red degradada y recuperación; CPU/memoria/recursos con IDE abierto | V2-RNF-001, V2-RNF-004 |
+| V2-V13 | Arte real contra referencia: escala, pies, oclusión 0.05, máscaras, ambientes y sprites | V2-RF-009, V2-RF-010, V2-RF-022 |
+| V2-V14 | Build, schemas, assets, versiones y comandos malformados; límites de payload/frecuencia | V2-RNF-002, V2-RNF-003, V2-RNF-006 |
 
-Primero verificar dos clientes reales en redes distintas; una prueba con bots/headless evalúa escala del servidor pero no prueba consumo de cámara en notebooks o conectividad móvil. Para V05 registrar medios sintéticos y reales por separado y probar recepción en al menos un dispositivo de referencia real.
+En V2-V05/V06 usar al menos dos redes reales y registrar qué participantes/medios son sintéticos. En V2-V12 incluir corte de 20 s, RTT de 200 ms y pérdida del 3 % como perfil propuesto, además de red normal. Comparar con los tiempos de gracia aprobados antes de interpretar reconexión.
 
-## 6. Matriz de compatibilidad
+## 4. Compatibilidad y evidencia
 
-Validar las dos últimas versiones estables disponibles al ejecutar QA de Chrome/Edge y Firefox en escritorio, Safari macOS cuando disponible, Chrome Android y Safari iOS. Registrar versiones concretas, no declarar soporte sin ejecutarlas.
+Registrar versiones concretas de Chrome/Edge y Firefox de escritorio, Safari macOS cuando disponible, Chrome Android y Safari iOS. Verificar mapa/input, chat, dibujo, juegos, recepción/publicación de medios y captura de pantalla por separado.
 
-Por función registrar: mapa/input; recepción A/V; publicación cámara/mic; recepción presentación; captura de pantalla; audio del sistema; selector de salida; Google; comportamiento oculto. Una API presente no garantiza que todas sus opciones funcionen. Captura de pantalla y audio de sistema tienen soporte variable; mostrar alternativa por función. [P4]
+Si la captura no está disponible, permitir recibir presentaciones y continuar usando la oficina; mostrar que ese dispositivo no puede presentar. No declarar una API compatible sólo porque existe su nombre en el navegador.
 
-## 7. Definition of Done y evidencias
-
-Cada incremento: build de producción, validación de contratos/assets, pruebas pertinentes de reglas críticas, recorrido escritorio/mobile y comparación de rendimiento. Archivar resultados con commit, dispositivos, red, perfiles de medios, métricas p50/p95 y limitaciones. No registrar documentos/medios del equipo real para usar como evidencia sin autorización.
-
-Cerrar fugas y errores antes de ampliar features. La capacidad de 15 sólo se anuncia al pasar V04/V05; «liviana» requiere V01/V03/V07 sobre dispositivo real. No introducir complejidad de optimización sin perfil, pero no postergar liberación de recursos/aislamiento hasta una fase futura.
-
-## Fuentes
-
-- **P1:** https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas
-- **P2:** https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
-- **P3:** https://docs.livekit.io/transport/media/subscribe/
-- **P4:** https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getDisplayMedia
-
-Consultadas el 2026-09-30. Los presupuestos y escenarios son propios del proyecto y no cifras garantizadas por esas fuentes.
+Cada resultado incluye fecha, commit, pasos, métricas/capturas y limitaciones. `docs/validacion.md` contiene antecedentes del recorrido individual; no certifica los escenarios v2. La entrega sólo se cierra con requisitos y recorridos cubiertos, incluidos juegos y arte final.

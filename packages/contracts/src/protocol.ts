@@ -1,5 +1,5 @@
 export const PROTOCOL_VERSION = 1;
-// Proposed envelope for I2. Actor and tenant always come from an authenticated connection.
+// Proposed envelope for I2. Actor and session come from a validated temporary participant credential.
 export interface CommandEnvelope<T extends string, P> {
   protocolVersion: 1; type: T; sessionId: string; epoch: number;
   requestId: string; expectedRevision: number; payload: P;

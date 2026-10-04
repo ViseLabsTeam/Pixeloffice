@@ -1,5 +1,7 @@
 # Pruebas de usuario con Docker
 
+> Instrucciones históricas de la pre-alpha; los comandos y rutas siguientes corresponden a esa versión. Para ejecutar la aplicación actual usar el [README vigente](../../../README.md); para abrir la pre-alpha, `npm run dev:legacy` desde la raíz.
+
 ## Levantar la aplicación
 
 Desde la raíz del repositorio:

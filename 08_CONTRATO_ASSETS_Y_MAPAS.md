@@ -1,96 +1,100 @@
-# 08 — Contrato de assets y mapas para arte y desarrollo
+# 08 — Assets y mapa fijo: contrato con Peredo
 
-**Versión:** 1.0 · **Fecha:** 2026-09-30 · **Destinatarios:** Peredo y desarrollo.
+**Versión:** 2.0 · **Fecha:** 2026-10-04 · **Destinatarios:** Peredo y desarrollo.
 
 ## 1. Objetivo
 
-Reconstruir el diseño de oficina entregado por Peredo conservando composición, perspectiva y detalle, y permitir movimiento, profundidad, colisión y transparencia individual. La captura es referencia de composición; no debe convertirse en el único fondo que contenga todas las paredes y muebles.
+Integrar una oficina fija de pixel art conservando el diseño de Peredo. No habrá editor ni muebles movibles para usuarios, pero paredes y objetos altos deben seguir separados del piso para ordenar profundidad y atenuar lo que tapa al avatar.
 
-«32 bits» es la etiqueta visual usada por el equipo. El contrato técnico describe ancho/alto, pivots, escala y atlas en píxeles; todavía no se acordó que un tile sea 32×32 ni un avatar de una dimensión concreta. No reinterpretar esa etiqueta como una medida confirmada.
+La expresión “32 bits” es una referencia de estilo del equipo; no fija un tile de 32×32 ni dimensiones de avatar. Registrar ancho/alto reales, escala y pivots antes de exportar todo. No confundir profundidad de color del PNG con cantidad de píxeles del dibujo.
 
-## 2. Entrega esperada
+## 2. Primera entrega pequeña
 
-| Recurso | Entrega | Motivo |
-|---|---|---|
-| Referencia de escena | Imagen completa y archivo editable si disponible | Comparar composición final. |
-| Piso/fondo | Capa exportada, sin obstáculos altos integrados | Cacheable y reutilizable. |
-| Paredes/tabiques | Tramos independientes con transparencia de fondo | Atenuar sólo lo que oculta al avatar. |
-| Muebles | Sprites individuales o atlas con regiones | Profundidad, colisión y personalización posterior. |
-| Mueble complejo | Piezas por altura/apoyo si hace falta | Evitar un orden de profundidad incorrecto en elementos grandes. |
-| Puertas | Abierta/cerrada y dirección | Collider y estado visual sincronizados. |
-| Avatar | Frente, espalda, izquierda, derecha | Cuatro vistas estáticas consistentes. |
-| Televisor/pizarra | Marco y rectángulo de superficie útil | Ubicar vídeo/presentación sin pintar encima del marco. |
-| Sombras | Separadas o decisión explícita por asset | Control de oclusión y composición. |
-| Metadatos | Medidas, pivot, ubicación sugerida, categoría | Reconstrucción sin adivinar coordenadas. |
-| Derechos | Autoría y licencia/uso comercial permitido | Catálogo futuro y uso en producto. |
+Peredo entrega una escena de referencia y un paquete de prueba con: piso, tramo de pared, puerta abierta/cerrada, escritorio, silla, biblioteca o planta alta, avatar de cuatro vistas y máscara de ropa, más pizarrón limpio/sucio.
 
-PNG transparente o atlas PNG con manifest JSON. Nombres estables en minúsculas y guiones, sin espacios o acentos, por ejemplo `desk-team-front.png`. No interpolar/escalar los exports sin registrar escala. Evitar bordes transparentes grandes; mantener pivot al recortar. Fuente y export separados; elegir herramientas de arte según preferencia de Peredo.
+Desarrollo integra este paquete y comprueba escala, punto de pies, collider, orden y opacidad hasta 0.05 en desktop/mobile. Corregir el contrato antes de producir todas las piezas. No necesita exportar de una vez todas las variantes de color.
 
-## 3. Coordenadas y puntos de apoyo
+## 3. Formato y recursos finales
 
-- Mundo lógico por escena con origen arriba/izquierda; x aumenta a derecha, y hacia abajo.
-- Posición del avatar = centro de apoyo de los pies. Pivot de sprite registra dónde está ese apoyo dentro de la imagen.
-- Posición del mueble = pivot acordado. Collider y máscara son locales a ese pivot; la conversión a mundo es explícita.
-- Conversión de píxeles de arte a unidades de mundo mediante `worldScale`; no depende del tamaño CSS de pantalla.
-- Sprites de cuatro orientaciones conservan escala y apoyo. Si cambian medidas, ajustar rect/pivot por orientación.
-- Profundidad usa `sortAnchorY` o punto de apoyo; desempate estable. Elementos por encima del mundo y HUD tienen capas explícitas.
+PNG transparente individual o atlas PNG con manifest JSON. Nombre estable en minúsculas y guiones; originales editables separados de exports. Mantener tamaño original sin suavizado ni escalado accidental. Acompañar cada entrega con versión y lista de cambios.
 
-No hacer coincidir automáticamente el collider con todo el PNG. Una planta alta puede tener collider pequeño en la maceta y región de oclusión grande en el follaje. Una mesa necesita base física según movilidad esperada; validar con recorridos, no sólo con su dibujo.
+| Recurso | Entrega necesaria |
+|---|---|
+| Referencia | Imagen de cada escena completa y fuente editable si está disponible. |
+| Piso | Fondo/capa sin paredes o muebles altos pegados. |
+| Paredes | Tramos independientes; collider y región visual separables. |
+| Puertas | Abierta/cerrada coherentes con vano, orientación y pivot. |
+| Muebles | Sprites fijos individuales; base física y máscara de oclusión cuando corresponda. |
+| Avatar hombre/mujer | Frente, espalda, izquierda y derecha; mismo punto de pies por vista. |
+| Ropa | Máscara o capas para recolorear sólo ropa, conservando piel, pelo y sombras. |
+| Pizarrón | Dos sprites: limpio y sucio; ambos con mismas medidas/pivot y zona de interacción. |
+| Computadora | Sprite y punto de interacción; iconos de accesos para panel, no edición del mueble. |
+| Juegos | Arcade Snake y mesa/estación Pong; recursos de minijuegos mínimos. |
+| UI | Iconos coherentes para lápiz, goma, presentar, cerrar, cámara, micrófono, chat y acción. |
 
-## 4. Tres propiedades independientes por objeto
+No hacen falta animaciones de caminar, avatares subibles, variantes premium, catálogos ni assets de tienda. El mapa muestra clean/dirty, no captura real del dibujo ni una pantalla de vídeo. La presentación y el lienzo grande son UI del panel.
 
-| Propiedad | Qué controla | Ejemplo |
-|---|---|---|
-| collider | Área que bloquea pies | Base de estantería. |
-| occluder | Región que puede tapar avatar | Cuerpo alto de estantería. |
-| interaction | Área/acción interactiva | Abrir documento o usar TV. |
+## 4. Metadatos
 
-Piso puede carecer de las tres. Un portal puede ser interactivo sin ocultar. Pared transparente conserva collider. Un sillón bajo puede ordenar por profundidad sin requerir transparencia. Paredes largas se dividen en tramos si atenuar toda la pared perjudica legibilidad.
+Coordenadas por escena, origen arriba/izquierda. Posición del avatar = centro de pies. Pivot de objeto = apoyo acordado. Convertir píxeles de arte a unidades lógicas con escala explícita, independiente del tamaño CSS.
 
-## 5. Campos de manifest y escena
+| Campo | Qué define |
+|---|---|
+| assetId/image/sourceRect | Recurso y región dentro del atlas. |
+| pivot/worldScale | Anclaje y conversión a mundo. |
+| sortAnchorY | Offset de apoyo utilizado para ordenar profundidad. |
+| colliders | Área que bloquea la caja de pies. |
+| occluder | Máscara visual, margen de aproximación y opacidad mínima. |
+| soundBlockers | Segmentos de bloqueo acústico; no derivarlos de todo mueble. |
+| interaction | Tipo, alcance y datos de objeto interactivo. |
 
-Asset: `schemaVersion`, `assetId`, `imageUrl`, `sourceRect`, `pivot`, `worldScale`, `layer`, `sortAnchorY`, `colliders`, `occlusionMask`, `occlusionApproachMargin`, `interaction`, `variant`, `contentHash`. Recursos originales no contienen credenciales ni URLs de documento privado.
+Una biblioteca puede tener collider sólo en su base y occluder en todo su cuerpo. Una pared mantiene su collider aunque se vea translúcida. La máscara de recolor no debe teñir toda la silueta del personaje.
 
-Escena: `schemaVersion`, `mapVersion`, `sceneId`, `logicalSize`, `background`, `spawnPoints`, `environments`, `objects`, `doors`, `portals`, `presentationSurfaces`. Cada portal referencia escena destino y spawn; cada objeto referencia asset de catálogo.
+## 5. Plantilla fija
 
-Ejemplo ilustrativo de objeto (medidas elegidas sólo para explicar el contrato):
+El mapa incluye schemaVersion/mapVersion, escenas con tamaño lógico, ambientes con regiones, objetos, puertas, portales y spawns. Los objetos tienen posiciones fijas. El servidor y cliente usan la misma geometría y versión; no aceptar mapa enviado por participante.
+
+Cada portal referencia escena/spawn de destino. Cada pizarrón, computadora y juego pertenece a un ambiente. Las regiones deben evitar huecos sin regla, solapamientos ambiguos y spawns sobre sólidos. Dividir paredes largas en piezas cuando la atenuación de todo el tramo dificulte leer el espacio.
+
+Ejemplo ilustrativo; las medidas no fijan el diseño de Peredo:
 
 ```json
 {
-  "objectId": "bookshelf-west-01",
-  "assetId": "bookshelf-front-v1",
-  "position": { "x": 120, "y": 180 },
+  "objectId": "bookshelf-01",
+  "assetId": "bookshelf-front",
+  "position": { "x": 240, "y": 220 },
   "pivot": { "x": 24, "y": 64 },
   "worldScale": 1,
-  "layer": "world",
   "sortAnchorY": 0,
-  "colliders": [{ "shape": "rect", "x": -20, "y": -10, "width": 40, "height": 10 }],
+  "colliders": [{ "x": -20, "y": -10, "width": 40, "height": 10 }],
   "occluder": {
-    "mask": { "shape": "rect", "x": -24, "y": -64, "width": 48, "height": 54 },
-    "approachMargin": 16,
+    "mask": { "x": -24, "y": -64, "width": 48, "height": 54 },
+    "approachMargin": 24,
     "minOpacity": 0.05
   },
+  "soundBlockers": [],
   "interaction": null
 }
 ```
 
-No es un mapa terminado ni fija dimensiones de arte. En esta convención `sortAnchorY` es un offset local a la posición de apoyo; cada implementación debe conservar la misma semántica en schema y render.
+Los estados abiertos/cerrados de puertas, clean/dirty y presentación se guardan sólo en sesión. La ubicación y el sprite inicial se guardan en plantilla. No añadir un formato de editor, importador de mapas de usuario ni catálogo comercial.
 
-Estado temporal abierto/cerrado de puertas y TV en uso va en estado de sesión. El estado inicial/configuración y la posición de la puerta van en mapa persistente. Configuración de colisión tiene una representación común para cliente y servidor; no aceptar geometrías distintas que permitan atravesar sólo desde un cliente.
+## 6. Organización de la entrega
 
-## 6. Preparación para personalización futura
+Carpetas sugeridas: `references`, `floors`, `walls`, `doors`, `furniture`, `avatars`, `interactive`, `ui` y `manifests`. Puede usarse atlas por grupo sin cambiar IDs. Incluir medidas, peso, escala, fecha/versión y autoría de assets propios o licencia de recursos externos.
 
-Instancias del mapa referencian catálogo; no incrustar PNG como base64 en cada objeto. Color/variante/fondo usan IDs y parámetros. Mapas publicados tienen versión; editor futuro valida conectividad, entradas libres, límites y derechos antes de publicar. Conservar última versión válida para rollback. Cambiar plan o asset no debe borrar un mapa sin una política de producto acordada.
+Una imagen de oficina completa ayuda a comparar composición, pero no sustituye exports por capas. No reconstruir manualmente cada detalle desde una captura si Peredo tiene los originales. Desarrollo define geometría con Peredo sobre el sprite real; el artista no necesita programar el manifest.
 
-## 7. Checklist de entrega y aceptación
+Estado de recepción al 2026-10-04: piso, cuatro orientaciones de silla, cuatro de escritorio y una referencia en `legacy/pre-alpha/assets/images`. Es una entrega parcial aún no integrada en el mapa activo. Ver [inventario y faltantes](docs/assets.md); la ubicación en legacy no convierte estos archivos recientes en material histórico.
 
-1. Referencia y exports coinciden en perspectiva, escala y paleta.
-2. Todas las regiones de atlas están dentro de la imagen y tienen pivot válido.
-3. PNGs transparentes no contienen franjas o halos visibles al escalar.
-4. Colisiones y spawns permiten recorrer escenas y cruzar portales.
-5. Una pared y un mueble alto se atenúan independientemente hasta 5 % de opacidad.
-6. Cuatro sprites de avatar no saltan al cambiar orientación.
-7. Pantalla de TV tiene región útil para presentación ampliable.
-8. Bitmaps y transferencias respetan presupuestos de `06`; informar medidas/peso y versión.
-9. Autoría y uso comercial están registrados; no utilizar assets de procedencia desconocida para futura venta.
-10. Prueba de escena completa en escritorio y celular antes de producir el resto de habitaciones.
+## 7. Aceptación de arte
+
+1. Exports coinciden con referencia en paleta, escala y perspectiva.
+2. Regiones/pivots del atlas son válidos y cuatro vistas no desplazan pies.
+3. Colores de ropa son reconocibles y legibles como lápiz sobre blanco.
+4. Muebles y puertas permiten pasar/interactuar en la escena real.
+5. Pared y mueble alto se atenúan gradualmente hasta 5 % de opacidad sin perder colisión.
+6. Los sprites clean/dirty no saltan ni requieren copiar el dibujo.
+7. El fondo de otro ambiente se puede atenuar sin revelar sus ocupantes.
+8. Pesos y dimensiones respetan o justifican los objetivos de 06.
+9. Se verifica un celular antes de producir todos los recursos restantes.

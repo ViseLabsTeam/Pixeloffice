@@ -1,53 +1,43 @@
-# Pixel Office — Especificación del producto y de implementación
+# Pixel Office — Especificación v2: demo de portafolio
 
-**Versión:** 1.0 · **Fecha:** 30 de septiembre de 2026 · **Proyecto:** Pixel Office / Pro Workspace A/V · **Equipo:** ViseLabs.
+**Versión:** 2.0 · **Fecha:** 2026-10-04 · **Marca:** Vice Labs.
 
-## Propósito de este paquete
+Este paquete reemplaza íntegramente la especificación v1 del 30 de septiembre. Define una oficina virtual fija, accesible sin cuenta, con sesiones temporales de hasta diez participantes. Es una especificación para implementar; no una certificación de funcionalidades ya disponibles.
 
-Establecer una base común, versionada y utilizable por desarrollo y arte. Los requisitos de producto proceden de la conversación con Vittorio; la arquitectura, las políticas de borde y los valores numéricos no acordados son propuestas de ingeniería identificadas explícitamente. Estos archivos especifican trabajo por realizar: no acreditan que las funciones estén implementadas ni que la capacidad o el rendimiento hayan sido medidos.
+## Documentos
 
-El producto será una oficina virtual web de pixel art para trabajar en equipo, con escenas conectadas, comunicación contextual, presentación de pantalla en objetos del entorno, Google Workspace, roles y horarios. Debe coexistir durante la jornada con IDE, compilaciones y otras herramientas con un consumo reducido.
-
-## Archivos y orden de lectura
-
-| Archivo | Contenido |
+| Archivo | Qué resuelve |
 |---|---|
-| [01_ALCANCE_Y_VISION.md](01_ALCANCE_Y_VISION.md) | Objetivos, alcance inicial, evolución y límites. |
-| [02_DOMINIO_Y_REGLAS_NEGOCIO.md](02_DOMINIO_Y_REGLAS_NEGOCIO.md) | Entidades, estados, permisos, invariantes y persistencia. |
-| [03_TECNOLOGIAS_Y_ARQUITECTURA.md](03_TECNOLOGIAS_Y_ARQUITECTURA.md) | Stack de referencia, componentes, infraestructura y migración. |
-| [04_REQUERIMIENTOS_Y_ACEPTACION.md](04_REQUERIMIENTOS_Y_ACEPTACION.md) | Requisitos identificados y criterios observables de aceptación. |
-| [05_ESPECIFICACION_FUNCIONAL.md](05_ESPECIFICACION_FUNCIONAL.md) | Flujos, protocolos, transiciones y comportamientos de borde. |
-| [06_RENDIMIENTO_Y_PLAN_VALIDACION.md](06_RENDIMIENTO_Y_PLAN_VALIDACION.md) | Optimización, presupuestos propuestos y pruebas del sistema. |
-| [07_DECISIONES_Y_PLAN_IMPLEMENTACION.md](07_DECISIONES_Y_PLAN_IMPLEMENTACION.md) | Trazabilidad, decisiones pendientes, etapas y fuentes oficiales. |
-| [08_CONTRATO_ASSETS_Y_MAPAS.md](08_CONTRATO_ASSETS_Y_MAPAS.md) | Entrega de arte, coordenadas, colisiones y oclusión. |
+| [01_ALCANCE_Y_VISION.md](01_ALCANCE_Y_VISION.md) | Entrega incluida, exclusiones y criterios adoptados. |
+| [02_DOMINIO_Y_REGLAS_NEGOCIO.md](02_DOMINIO_Y_REGLAS_NEGOCIO.md) | Entidades, vocabulario, permisos y vida de la sesión. |
+| [03_TECNOLOGIAS_Y_ARQUITECTURA.md](03_TECNOLOGIAS_Y_ARQUITECTURA.md) | Stack recomendado, componentes y despliegue. |
+| [04_REQUERIMIENTOS_Y_ACEPTACION.md](04_REQUERIMIENTOS_Y_ACEPTACION.md) | Requisitos verificables de esta entrega. |
+| [05_ESPECIFICACION_FUNCIONAL.md](05_ESPECIFICACION_FUNCIONAL.md) | Flujos, estados, errores y protocolo. |
+| [06_RENDIMIENTO_Y_PLAN_VALIDACION.md](06_RENDIMIENTO_Y_PLAN_VALIDACION.md) | Presupuestos iniciales y pruebas de la demo. |
+| [07_DECISIONES_Y_PLAN_IMPLEMENTACION.md](07_DECISIONES_Y_PLAN_IMPLEMENTACION.md) | Cambios frente a v1 y orden de implementación. |
+| [08_CONTRATO_ASSETS_Y_MAPAS.md](08_CONTRATO_ASSETS_Y_MAPAS.md) | Entregas de Peredo y datos para integrar el arte. |
+
+Leer 01 y 02 antes de presupuestar o desarrollar. Después, 03 y 05 para implementación; 04 y 06 para aceptación; 08 para arte. Los requisitos usan identificadores nuevos `V2-RF-xxx` y `V2-RNF-xxx`; no heredan los identificadores de v1.
+
+Los documentos 01–07 están alineados con esta v2. El [estado de validación](docs/validacion.md) distingue evidencia histórica y aceptación pendiente; el [inventario de assets](docs/assets.md) registra la entrega parcial. La documentación bajo `legacy/pre-alpha` y `docs/historico` es histórica y no define alcance vigente.
+
+La versión 2.0 identifica esta especificación. `demo-v1`, `schemaVersion: 1` y `protocolVersion: 1` siguen siendo identificadores técnicos válidos del prototipo mientras sus contratos no cambien.
 
 ## Cómo interpretar las decisiones
 
-- **Acordado:** requisito o preferencia expresado por el usuario. Constituye la base del producto.
-- **Base técnica:** elección recomendada en esta documentación para poder implementar; no equivale a una aprobación previa del usuario de cada herramienta.
-- **Propuesto:** comportamiento de borde, valor inicial o distribución por etapas decidido por ingeniería; configurable o revisable.
-- **Pendiente:** requiere una decisión de producto, proveedor, arte o una prueba de viabilidad. No debe presentarse como una función resuelta.
+- **Acordado:** decisión expresada por Vittorio en la conversación.
+- **Criterio adoptado:** precisión de funcionamiento elegida para hacer ejecutable la entrega; figura en 01 y 07 y puede modificarse expresamente.
+- **Recomendación técnica:** arquitectura propuesta; debe contrastarse con el repositorio y las pruebas antes de migrar código.
+- **Objetivo de validación:** presupuesto de rendimiento propuesto; no es una medición de la publicación actual.
 
-Ante una discrepancia, un requisito acordado prevalece sobre un parámetro propuesto. Las aclaraciones más recientes prevalecen sobre la descripción de la pre-alpha. Las reglas se centralizan en `02` y `05`; la matriz de requisitos de `04` conserva los criterios de aceptación.
+No volver a incorporar funciones de v1 por encontrarlas en el código o en documentación antigua. Los minijuegos sí son obligatorios en esta entrega. Google Workspace significa enlaces externos desde computadoras; no OAuth ni edición de documentos dentro de Pixel Office.
 
-## Definiciones que no deben confundirse
+## Estado observado de la publicación
 
-1. Oficina guardada ≠ jornada de acceso ≠ sesión activa ≠ sala multimedia.
-2. Escena del mapa ≠ tamaño físico de la pantalla ≠ ambiente de comunicación.
-3. Quince usuarios en la oficina ≠ quince vídeos decodificados simultáneamente por cada dispositivo.
-4. Transparencia visual ≠ ausencia de colisión ≠ permiso para escuchar.
-5. Persistencia ≠ consistencia eventual.
-6. Autorizar la app en Google ≠ compartir un archivo con todos los compañeros.
-7. La etiqueta artística «32 bits» se conserva como intención visual; las medidas de producción se especifican en píxeles y metadatos.
+En la revisión del 4 de octubre de https://pixeloffice-pearl.vercel.app/ se observaron un recorrido individual, Recepción y Estudio, movimiento por teclado y joystick, apertura de puerta con E y cambio de pantalla. Se comprobó una colisión frontal con la biblioteca y su atenuación visual al pasar detrás.
 
-## Estado de la pre-alpha y límites de la revisión
+No se verificaron el porcentaje exacto de opacidad, todos los sólidos, dispositivos móviles reales, diez usuarios, sesiones compartidas, chat, A/V, pizarrón o juegos. La interfaz anuncia llamadas, equipo y documentos para próximas etapas. La inspección de la publicación no incluyó el código fuente del repositorio.
 
-Se proporcionó https://pixeloffice-pearl.vercel.app/ como pre-alpha. La revisión visual anterior observó v1.0.23, Canvas, configuración A/V, skins PNG y referencias a scripts externos. El código completo, las colisiones, las llamadas entre usuarios y el consumo real no fueron auditados. La descripción inicial de un HTML monolítico y cinco zonas puede corresponder a otra revisión. Antes de modificar el repositorio, comprobar su estado actual, instrucciones y recursos.
+## Entrega y vigencia
 
-## Uso por un agente de implementación
-
-Leer todos los archivos antes de editar código. Inspeccionar después el repositorio real y su documentación. Elaborar una comparación entre lo existente y estos requisitos. Implementar por las etapas de `07`, comenzando por la porción vertical de dos escenas. Conservar IDs de requisitos en tareas y validaciones. No crear cuentas de proveedores, contratar servicios, activar cobros ni desplegar como parte de la mera lectura de este paquete. No deducir dimensiones, perspectivas o presupuestos garantizados de una captura.
-
-## Gestión de cambios
-
-Modificar la versión y registrar fecha, motivo y documentos afectados cuando cambie una regla. Los parámetros ajustados por medición deben incluir dispositivo y evidencia. Los pendientes resueltos pasan a decisión explícita; no se sustituyen silenciosamente. Este paquete no contiene plazos, presupuesto comercial ni infraestructura ya contratada.
+La demo estará terminada cuando cumpla todos los requisitos obligatorios de 04 y los recorridos de 06. Las etapas de 07 ordenan el trabajo; ninguna elimina chat, Snake o Pong de la entrega final. La personalización del mapa, las cuentas y la integración Google mediante APIs quedan fuera, incluso si después sobra tiempo, salvo nuevo cambio de alcance.

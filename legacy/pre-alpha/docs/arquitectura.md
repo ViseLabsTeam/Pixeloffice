@@ -1,5 +1,7 @@
 # Arquitectura
 
+> Documento histórico de la pre-alpha. No describe la aplicación actual ni define su alcance. Consultar [00–08 v2](../../../00_LEEME.md) y la [arquitectura actual](../../../docs/arquitectura.md).
+
 La aplicación no requiere compilación: `index.html` carga los estilos y `src/js/main.js` como módulo ES.
 
 ```text

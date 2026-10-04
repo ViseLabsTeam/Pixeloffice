@@ -3,7 +3,7 @@ const x = async(page:Page)=>Number(await page.locator('#world').getAttribute('da
 async function hold(page:Page,key:string,milliseconds:number) {
   await page.keyboard.down(key); await page.waitForTimeout(milliseconds); await page.keyboard.up(key);
 }
-test('RF-007/008/010 — recorrido real, puertas y 50 cruces',async({page},info)=>{
+test('V2-RF-005/007/008 — recorrido local, puertas y 50 cruces',async({page},info)=>{
   test.skip(info.project.name==='mobile','Recorrido de teclado de escritorio; joystick en prueba separada.');
   const errors:string[]=[]; page.on('pageerror',error=>errors.push(error.message));
   await page.goto('/'); await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
@@ -18,7 +18,7 @@ test('RF-007/008/010 — recorrido real, puertas y 50 cruces',async({page},info)
   }
   expect(errors).toEqual([]);
 });
-test('RF-009/015/048 — foco, cuatro vistas, joystick y cancelación',async({page},info)=>{
+test('V2-RF-006/010/019 — foco, cuatro vistas provisionales, joystick y cancelación',async({page},info)=>{
   await page.goto('/'); await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   for(const [key,direction] of [['w','up'],['s','down'],['a','left'],['d','right']]) {
     await hold(page,key!,100); await expect(page.locator('#world')).toHaveAttribute('data-direction',direction!);
@@ -45,7 +45,7 @@ test('RF-009/015/048 — foco, cuatro vistas, joystick y cancelación',async({pa
   await page.screenshot({path:`test-results/${info.project.name}-office.png`,fullPage:true});
 });
 
-test('RF-048 — dos contactos táctiles permiten moverse y abrir una puerta',async({page},info)=>{
+test('V2-RF-019 — dos contactos táctiles permiten moverse y abrir una puerta',async({page},info)=>{
   test.skip(info.project.name!=='mobile','Escenario táctil de emulación móvil.');
   const errors:string[]=[]; page.on('pageerror',error=>errors.push(error.message));
   await page.goto('/'); await expect(page.locator('#world')).toHaveAttribute('data-ready','true');

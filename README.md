@@ -1,8 +1,10 @@
 # Pixel Office
 
-Oficina virtual web con Canvas 2D y TypeScript. El proyecto está en migración hacia las especificaciones [00–08](00_LEEME.md).
+Demo de portafolio de **Vice Labs** con Canvas 2D y TypeScript. Objetivo final: oficina fija, acceso sin cuenta y sesiones temporales de hasta diez participantes, según las especificaciones [00–08 v2](00_LEEME.md).
 
-La nueva aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 5 % y joystick analógico. El arte es provisional. Cuentas, sesiones multiusuario, horarios, LiveKit y Google Workspace corresponden a las siguientes etapas y todavía no están activados en este recorrido.
+La aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 5 % y joystick analógico. El arte es provisional. Sesiones compartidas, chat, audio/vídeo, pantalla, pizarrón, accesos externos a Google Workspace, Snake y Pong son parte de la entrega final y están pendientes en la aplicación actual.
+
+Cuentas, equipos persistentes, horarios, OAuth/APIs de Google, editor de mapas y tienda están fuera del alcance. La entrega reciente de arte aún no está integrada; ver [inventario y faltantes](docs/assets.md).
 
 ## Ejecutar
 
@@ -33,7 +35,7 @@ Los recorridos usan Edge instalado. Si falta: `npx playwright install msedge`. L
 docker compose up --build -d
 ```
 
-Frontend: `http://localhost:8080`. API opcional: `docker compose --profile api up --build -d`. Los puertos se configuran con `.env.example`. Vercel apunta a `apps/web/dist`. No se ha desplegado esta reestructuración.
+Frontend: `http://localhost:8080`. API opcional: `docker compose --profile api up --build -d`. Los puertos se configuran con `.env.example`. Vercel apunta a `apps/web/dist`. El estado observado de la publicación del 4 de octubre está en [00](00_LEEME.md); estos comandos no acreditan que los cambios locales estén desplegados.
 
 ## Estructura
 
@@ -43,7 +45,7 @@ apps/api/              Fastify; salud y manifest público de I1
 packages/contracts/    Dominio, protocolos, JSON Schema, geometría y mapa de prueba
 tests/                 Pruebas unitarias, API y navegador
 scripts/               Validación, arte provisional reproducible y servidor legacy
-legacy/pre-alpha/      Versión anterior aislada para comparación
+legacy/pre-alpha/      Versión anterior aislada; contiene también arte reciente pendiente de integrar
 docs/                  Arquitectura, migración, pendientes y evidencia
 ```
 

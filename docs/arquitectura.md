@@ -1,4 +1,6 @@
-# Arquitectura actual — I1
+# Arquitectura actual — base espacial para la demo v2
+
+Actualizado el 2026-10-04. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue incompleto respecto al arte definitivo y validación real.
 
 `apps/web/src/app` posee el ciclo de vida. Crea input, mundo local, caché y renderer; desmonta listeners, ResizeObserver, rAF e imágenes al salir. Detiene el dibujo en segundo plano y no programa frames cuando input y oclusión están quietos. El límite visual es 30 FPS, con simulación basada en tiempo y subpasos de hasta dos unidades.
 
@@ -16,14 +18,16 @@
 
 | Módulo futuro | Responsabilidad y condición de entrada |
 | --- | --- |
-| API auth/teams/offices | OIDC, cookie segura, membresía por tenant y autorización por capacidad |
-| API schedule/jobs/persistence | PostgreSQL, SQL versionado, jornada UTC/revisión, cierre durable, idempotencia y outbox |
-| API realtime/presence | Conexión autenticada, una presencia por usuario, epoch, backpressure y autoridad espacial con geometría compartida |
+| API sessions/presence | Acceso sin cuenta, enlace de sesión, credencial temporal, diez plazas, reconexión y expiración en memoria |
+| API realtime/world | Conexión validada por sesión, una presencia por credencial, epoch, límites y autoridad espacial con geometría compartida |
 | Web realtime | Predicción/ACK, reconexión y descarte de eventos de otra epoch/mapVersion |
-| Web/API media | LiveKit cargado bajo demanda, contextos privados aislados, cámara/mic/pantalla independientes y revocación efectiva |
-| Web/API workspace | OAuth separado, archivos seleccionados, control de permiso por usuario y operaciones limitadas Docs/Sheets |
+| Web/API media | SFU recomendada: LiveKit bajo demanda, audiencia por ambiente/proximidad, cámara/mic/pantalla independientes y revocación efectiva |
+| Web/API chat/whiteboard | Chat y trazos temporales del ambiente, lápiz/goma, limpio/sucio en mapa y presentación en panel |
+| Web computers | Panel de enlaces HTTPS externos a Google Workspace configurados en la plantilla |
 | Web/API games | Snake con montaje/desmontaje y Pong autoritativo, sin economía inferida |
 
-Estos módulos se incorporarán con implementación y pruebas en I2–I4. No se agregan SDKs sin uso a I1. Catálogo/derechos y editor corresponden a I5.
+Estos módulos se incorporarán con implementación y pruebas en I2–I4. No se agregan SDKs sin uso a I1. Cuentas, equipos, horarios, PostgreSQL, OAuth/APIs de Google, catálogo comercial y editor quedan fuera del plan; no hay I5 de esta entrega.
+
+Los tipos de dominio expresan ahora participantes y sesiones temporales, pero no implementan el servicio ni hacen efectivo el límite de diez. El esquema del mapa de prueba todavía necesita ampliarse para máscaras de ropa, bloqueos acústicos, variantes de pizarrón e interacciones definitivas de 08.
 
 La pre-alpha vive aislada en `legacy/pre-alpha`; el nuevo grafo de imports no incluye PeerJS, BroadcastChannel, Tailwind CDN ni los antiguos handlers.

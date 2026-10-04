@@ -1,11 +1,17 @@
-# Arte provisional demo-v1
+# Assets del recorrido y entrega de arte v2
 
-Los 17 PNG de `demo/` son formas originales dibujadas por código en `scripts/generate-demo-assets.mjs` para este proyecto. No proceden de packs externos ni representan la entrega de Peredo. Su fuente editable es ese script; regenerar con `node scripts/generate-demo-assets.mjs` y validar con `npm run validate:assets`.
+Los 17 PNG de `demo/` son formas originales dibujadas por código en `scripts/generate-demo-assets.mjs` para probar el motor. No representan la entrega de Peredo. Su fuente editable es el script; regenerar desde la raíz con `node scripts/generate-demo-assets.mjs` y comprobar con `npm run validate:assets`.
 
-El script escribe también `packages/contracts/data/demo-map.json` con SHA-256, rectángulos, pivots, escala, collider y máscara independientes. Escena 640×400 y avatar 26×32 son elecciones provisionales para comprobar la mecánica; «32 bits» no se interpreta como tamaño de tile.
+El script escribe también `packages/contracts/data/demo-map.json` con SHA-256, rectángulos, pivots, escala, collider y máscara independientes. Escena 640×400 y avatar 26×32 son dimensiones provisionales. «32 bits» expresa estilo y no fija tamaño de tile.
 
-El collider del avatar se ubica en los pies. Collider y máscara de objeto están en coordenadas locales al pivot; `worldScale` escala ambos. `sortAnchorY` es un offset local, escalado al transformar. Las áreas de portales, superficies e interacción de puerta son coordenadas de escena. Las interacciones del asset son locales.
+El collider del avatar se ubica en los pies. Collider y máscara de objeto usan coordenadas locales al pivot; `worldScale` escala ambos. `sortAnchorY` es un offset local escalado al transformar. Portales, superficies e interacción de puerta usan coordenadas de escena; las interacciones del asset son locales.
 
-Los estados de puerta pertenecen al mundo temporal; un reinicio del recorrido restablece `initiallyOpen`. No se incluyen skins arbitrarios ni contenido base64. Los recursos antiguos se preservan en `legacy/pre-alpha/assets`; su autoría/licencia no fue acreditada, por lo que no se incorporan a este catálogo.
+Las puertas locales recuperan `initiallyOpen` al reiniciar el recorrido. En la demo completa, puertas, chat, dibujo y partidas pertenecerán a la sesión temporal; la plantilla seguirá fija.
 
-Pendiente D-10/SP-03: referencia y exports separados de Peredo, licencia de uso, medidas definitivas, comparación de composición y prueba portrait/landscape real. El catálogo provisional no es arte aprobado para comercializar.
+## Arte recibido y pendiente
+
+La entrega reciente de piso, cuatro sillas, cuatro escritorios y referencia está en `legacy/pre-alpha/assets/images/`. Aún no se utiliza en el manifest. Consultar el [inventario de archivos y faltantes](../../../../docs/assets.md) y el [contrato 08](../../../../08_CONTRATO_ASSETS_Y_MAPAS.md).
+
+Ese directorio mezcla material antiguo y la entrega reciente: no tratar todo su contenido como arte histórico descartado o como arte final aprobado. Conservar originales y registrar autoría, dimensiones, escala, pivots y geometría antes de producir exports estables.
+
+V2-D02/V2-D03 y V2-V13 cubren plano, metadatos y aceptación de arte. Faltan piezas del paquete de prueba, máscaras y comprobación en un celular real. El esquema de prueba aún necesita ampliaciones para todas las interacciones, estados y bloqueos acústicos de 08.

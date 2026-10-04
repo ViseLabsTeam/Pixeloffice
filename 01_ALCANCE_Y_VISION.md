@@ -1,76 +1,49 @@
-# 01 — Alcance y visión
+# 01 — Alcance y visión de la demo
 
-**Versión:** 1.0 · **Fecha:** 2026-09-30 · **Estado:** base acordada de producto con secuencia de entrega propuesta.
+**Versión:** 2.0 · **Fecha:** 2026-10-04 · **Marca:** Vice Labs.
 
-## 1. Problema y objetivo
+## 1. Objetivo y autoridad
 
-Los equipos remotos necesitan conversar, presentar trabajo y encontrarse de forma espontánea mientras mantienen sus herramientas habituales. Pixel Office representa una oficina con avatares y ambientes que conectan esas actividades. La aplicación debe ocupar un lugar secundario en el consumo de recursos, aunque permanezca abierta durante la jornada.
+Pixel Office es una demo de portafolio: una oficina virtual fija de pixel art, accesible sin cuenta, con sesiones temporales de hasta diez participantes. El alcance vigente parte de [00](00_LEEME.md) y del contrato de arte [08](08_CONTRATO_ASSETS_Y_MAPAS.md). Este documento reemplaza la visión v1 de producto con equipos y configuración persistente.
 
-La experiencia lleva al espacio virtual reglas reconocibles de una oficina: el administrador puede salir sin expulsar al equipo; existen ambientes, horarios y prórrogas; las conversaciones se organizan por proximidad, ambiente o grupo; las cuentas y la configuración sobreviven a cada sesión.
+Los requisitos describen la entrega final. El código actual ofrece un recorrido individual de dos escenas con arte provisional; no demuestra todavía colaboración ni capacidad para diez personas. El estado de implementación y la evidencia se registran en `docs/`.
 
-## 2. Usuarios y actores
+## 2. Entrega incluida
 
-- **Administrador del equipo:** gestiona miembros, horarios, políticas y configuración.
-- **Coordinador:** rol propuesto para permisos delegados sobre reuniones, ambientes y prórrogas.
-- **Miembro:** trabaja, conversa, presenta, accede a recursos y juega según sus permisos.
-- **Invitado:** rol propuesto de acceso limitado, sujeto a habilitación del equipo.
-- **Servicios externos:** identidad y Workspace de Google; transporte de medios; almacenamiento de recursos.
-- **Equipo de producción:** Vittorio en desarrollo y Peredo en arte; no son roles obligatorios del producto.
-
-## 3. Alcance inicial del producto
-
-### 3.1 Oficina y motor espacial
-
-Escenas completas conectadas por puertas en sus bordes. El usuario sólo visualiza la escena actual; los demás pueden estar en otras escenas de la misma oficina. Movimiento libre en ocho direcciones, teclado en escritorio y joystick analógico táctil. Colisiones contra paredes, puertas cerradas, muebles y objetos definidos como sólidos. Profundidad visual y atenuación de paredes/muebles altos que oculten al avatar local, hasta 5 % de opacidad.
-
-Arte de pixel art con el nivel de detalle de la referencia de Peredo; avatares inicialmente estáticos con vistas frontal, posterior, izquierda y derecha. El tamaño lógico de escena es independiente de la resolución del navegador. El mapa inicial será fijo pero descrito mediante datos para permitir edición posterior.
-
-### 3.2 Trabajo colaborativo
-
-Objetivo de hasta 15 usuarios distintos presentes por oficina, sujeto a validar. Uso habitual de 2–6 personas por habitación y conversaciones de 2–4; son patrones de uso, no límites rígidos de seis personas. Una daily puede reunir a los 15. Controles de cámara y micrófono independientes, selección de dispositivos cuando sea compatible, indicador de habla y chat contextual.
-
-Tres modos de comunicación: proximidad, ambiente y grupo elegido. Políticas administradas y permisos delegables; los ajustes personales no amplían la audiencia autorizada. Cámara y pantalla compartida simultáneas. Las presentaciones se vinculan a televisores/pizarras y pueden ampliarse para leer contenido.
-
-### 3.3 Identidad, horarios y continuidad
-
-Cuentas, equipos y permisos persistentes. Oficina independiente del primer participante. Horario de apertura/cierre por equipo y zona horaria. Opciones explícitas de cierre y permanencia disponible al quedar vacía. Aviso de cierre y prórrogas autorizadas; 30 minutos es el ejemplo solicitado y el valor inicial propuesto. La sesión vacía libera recursos temporales. El ingreso posterior depende de la política de cierre de esa jornada.
-
-La experiencia es colaborativa con un mínimo conceptual de dos personas. Permitir al primer usuario entrar a esperar es una solución propuesta, no una prohibición acordada de acceso individual. Un administrador debe poder gestionar configuración sin un segundo usuario.
-
-### 3.4 Google Workspace y descanso
-
-Integración real con autorización de Google, selección de archivos, asociación a objetos del ambiente y operaciones autorizadas de Docs/Sheets. Mostrar contenido o vistas compatibles dentro de Pixel Office. La edición nativa completa incrustada requiere un estudio específico: no se presume disponible para todos los servicios.
-
-Sala de descanso con Snake y ping pong. Se propone Snake individual y ping pong de dos jugadores; el formato competitivo, ranking y recompensas queda pendiente. Estos juegos pertenecen al alcance inicial completo, aunque su implementación llegue después de la base espacial y A/V.
-
-## 4. Evolución posterior acordada
-
-- Editor por equipo: muebles, colores, fondos y distribución de escenas.
-- Más habitaciones y recursos según plan.
-- Personalización de avatar y oficina.
-- Catálogo de assets, desbloqueos y puntos.
-- Monetización mediante planes y/o assets.
-
-La forma de ganar puntos, precios, condiciones comerciales, pasarela y catálogo no se definieron. No implementar cobros o economía virtual por inferencia. Preparar IDs, catálogo y derechos de uso sin construir una tienda en la primera entrega.
-
-## 5. Fuera del alcance inicial
-
-Se propone excluir de la primera entrega: motor 3D/isométrico, apps nativas, editor público completo, cobros reales, sistema de puntos, grabación de llamadas, bots/IA, transcripción, ranking de juegos, analítica de productividad de empleados y una réplica completa de los editores de Google. Son límites de planificación; una inclusión posterior requiere revisar requisitos y rendimiento.
-
-## 6. Secuencia de entrega propuesta
-
-| Incremento | Resultado utilizable |
+| Área | Resultado esperado |
 |---|---|
-| I1 — Base espacial | Dos escenas, puertas, colisiones, cuatro vistas, oclusión, escritorio y mobile. |
-| I2 — Oficina multiusuario | Identidad, permisos, presencia, horarios, cierre, prórrogas y recuperación. |
-| I3 — Colaboración | Los tres modos A/V, grupos, daily, chat y presentación sin apagar cámara. |
-| I4 — Recursos y descanso | Integración Workspace inicial, Snake y ping pong; validación integral del alcance inicial. |
-| I5 — Evolución comercial | Editor, catálogo, derechos de uso, puntos y planes tras definición comercial. |
+| Acceso | Entrar sin registro, elegir nombre y avatar y compartir una sesión temporal; máximo diez participantes por sesión. |
+| Oficina fija | Escenas conectadas mediante puertas y portales; ambientes definidos en la plantilla, sin edición por participantes. |
+| Movimiento | Ocho direcciones, WASD/flechas y joystick analógico táctil; velocidad independiente de FPS y tamaño CSS. |
+| Geometría | Colisiones de pies, profundidad por apoyo y atenuación gradual de paredes/muebles que oculten al avatar local, hasta 5 % de opacidad. |
+| Avatar | Opciones hombre/mujer, cuatro vistas estáticas y color de ropa mediante máscara o capas que preserven piel, pelo y sombras. |
+| Colaboración | Presencia compartida, chat, audio/vídeo y presentación de pantalla; controles de cámara y micrófono independientes. |
+| Pizarrón | Lienzo compartido en un panel, lápiz y goma; en el mapa únicamente sprites limpio/sucio. La presentación también se visualiza en un panel. |
+| Computadoras | Accesos externos a Google Workspace desde objetos de la oficina. |
+| Descanso | Snake individual y Pong de dos participantes; ambos obligatorios en la entrega final. |
+| Dispositivos | Recorrido y paneles adaptables a escritorio y móvil, con limitaciones de captura/medios comprobadas y visibles. |
+| Arte | Diseño de Peredo mediante exports separados y metadatos de escala, pivots, colisiones, oclusión e interacción. |
 
-I1 no equivale al producto inicial completo. I4 completa el alcance inicial descrito. No se asignan fechas sin estimación del código, assets y pruebas de proveedores.
+## 3. Criterios adoptados para implementar
 
-## 7. Condiciones de aceptación global
+Estos criterios concretan aspectos que 00 y 08 no detallan; no se presentan como decisiones expresas del usuario. Están trazados en [07](07_DECISIONES_Y_PLAN_IMPLEMENTACION.md) y pueden modificarse expresamente.
 
-El alcance inicial se considera terminado cuando los requisitos de su etapa en `04` y las pruebas de `06` tienen evidencia, incluidas: independencia del administrador, cierre autoritativo, dos escenas, permisos efectivos, conversaciones aisladas, cámara/pantalla simultáneas, recursos Google autorizados, juegos y mobile.
+- Se puede crear una sesión y recorrerla estando solo. Quien la crea no es un host técnico ni un administrador permanente; su salida no expulsa a los demás.
+- La sesión se comparte por enlace opaco. La identidad de participante y la credencial de reconexión son temporales y pertenecen a esa sesión.
+- Al quedar vacía se libera la sesión tras una gracia configurable. Un reinicio del servicio puede terminar las sesiones, con aviso al cliente. Los valores de gracia, expiración y límites operativos deben fijarse antes de I2; no hay horarios laborales ni prórrogas.
+- La audiencia se organiza por ambientes de la plantilla; la proximidad y los bloqueos acústicos se aplican donde lo indique el mapa. Se recalcula al cruzar puertas. No se heredan grupos privados, roles ni reuniones especiales de v1.
+- El chat y los paneles colaborativos pertenecen al ambiente. El servidor controla la audiencia; ocultar elementos visualmente no otorga aislamiento.
+- Un participante presenta por pizarrón a la vez. Cambiar de ambiente o salir libera su presentación. Compartir pantalla conserva la cámara si estaba encendida.
+- Dibujo, chat, puertas y partidas son temporales. Una sesión nueva parte de la plantilla limpia. No se prometen historial persistente, recuperación tras reinicio ni preferencias persistentes.
 
-La capacidad de 15 y los presupuestos de rendimiento son objetivos por verificar. Cualquier incompatibilidad del navegador o editor Google debe documentarse con alternativa funcional y alcance explícito; no anunciar soporte que no se ha comprobado.
+## 4. Exclusiones
+
+Cuentas, login Google, equipos, membresías, roles administrativos, horarios, prórrogas, base de datos de usuarios, OAuth o APIs de Google, edición de documentos dentro de Pixel Office, editor/importador de mapas, muebles movibles, avatares subidos por usuarios, tienda, planes, puntos, rankings, compras, grabación, transcripción y bots quedan fuera.
+
+Tampoco se programa una etapa comercial posterior como parte de esta entrega. Una ampliación requiere cambiar expresamente el alcance. Conservar código histórico no habilita sus funciones en la demo.
+
+## 5. Entrega y aceptación
+
+I1 prepara espacio y arte; I2 incorpora sesiones temporales; I3 incorpora comunicación y pizarrón; I4 completa accesos externos, juegos y validación integral. Las etapas ordenan el trabajo y no vuelven opcionales los componentes finales.
+
+La demo se acepta al cumplir [04](04_REQUERIMIENTOS_Y_ACEPTACION.md), los recorridos de [06](06_RENDIMIENTO_Y_PLAN_VALIDACION.md) y el contrato de [08](08_CONTRATO_ASSETS_Y_MAPAS.md). Diez participantes y los presupuestos de rendimiento son objetivos pendientes de evidencia, no capacidades ya certificadas.

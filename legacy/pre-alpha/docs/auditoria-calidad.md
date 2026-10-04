@@ -1,5 +1,7 @@
 # Auditoría de calidad
 
+> Auditoría histórica de la pre-alpha. Sus pendientes no constituyen el backlog vigente. Consultar [00–08 v2](../../../00_LEEME.md) y el [plan actual](../../../07_DECISIONES_Y_PLAN_IMPLEMENTACION.md).
+
 Esta auditoría parte de la revisión del repositorio antes de la reorganización y distingue los problemas corregidos de los que requieren decisiones de producto o infraestructura.
 
 | Hallazgo | Impacto | Estado |

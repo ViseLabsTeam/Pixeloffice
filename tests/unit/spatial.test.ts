@@ -5,7 +5,7 @@ import { LocalWorld } from '../../apps/web/src/engine/world';
 
 const scene = demoMap.scenes[0]!;
 const rect = (x: number,y: number,width: number,height: number): Rect => ({shape:'rect',x,y,width,height});
-describe('RF-009/010/015 — movimiento y apoyo',() => {
+describe('V2-RF-006/007/010 — movimiento y apoyo (cobertura parcial)',() => {
   it('iguala distancia diagonal/horizontal sin perder intensidad analógica',() => {
     const start = {x:80,y:240};
     const horizontal = move(demoMap,scene,start,{x:1,y:0},0.1,[]);
@@ -38,7 +38,7 @@ describe('RF-009/010/015 — movimiento y apoyo',() => {
     expect(worldRect(rect(-5,-10,10,10),{x:100,y:200},2)).toEqual(rect(90,180,20,20));
   });
 });
-describe('RF-010/013/017 — geometría independiente de apariencia',() => {
+describe('V2-RF-005/007/009 — geometría independiente de apariencia (cobertura parcial)',() => {
   it('mantiene sólidos puerta cerrada y muebles',() => {
     const doors=initialDoors(demoMap);
     const closed=sceneColliders(demoMap,scene,doors);
@@ -66,7 +66,7 @@ describe('RF-010/013/017 — geometría independiente de apariencia',() => {
     expect(()=>validateMap({...demoMap,schemaVersion:2})).toThrow('Manifest inválido');
   });
 });
-describe('RF-007/008/017 — transición atómica',() => {
+describe('V2-RF-005/008 — transición atómica local (cobertura parcial)',() => {
   function atPortal() {
     const world=new LocalWorld(demoMap); world.position={x:620,y:240}; world.doors['lobby-door']=true;
     return world;

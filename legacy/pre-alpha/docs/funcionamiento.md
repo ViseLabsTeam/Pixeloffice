@@ -1,5 +1,7 @@
 # Funcionamiento de Pixel Office
 
+> Funcionamiento histórico de la pre-alpha. Las opciones descritas aquí, incluidos skins subidos, no definen la demo actual. Consultar [00–08 v2](../../../00_LEEME.md).
+
 Al abrir la aplicación se solicita nombre, color y, opcionalmente, un skin PNG. Al entrar, se inicia el bucle Canvas y la conectividad de la sala.
 
 ## Juego e interacciones

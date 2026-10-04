@@ -1,138 +1,63 @@
-# 02 — Dominio y reglas de negocio
+# 02 — Dominio y reglas de la demo
 
-**Versión:** 1.0 · **Fecha:** 2026-09-30. Las reglas RB son normativas para esta base; las identificadas como propuestas derivan de ingeniería.
+**Versión:** 2.0 · **Fecha:** 2026-10-04.
 
-## 1. Lenguaje del dominio
+## 1. Modelo de dominio
 
-| Término | Definición |
-|---|---|
-| Equipo | Organización de usuarios con membresías, políticas y recursos propios. |
-| Oficina | Configuración persistente del espacio del equipo. No depende de un host navegador. |
-| Escena | Sector lógico del mapa, visible como una pantalla y conectado mediante portales. |
-| Ambiente | Área funcional/comunicacional. Puede ocupar toda una escena o parte de ella. |
-| Portal | Salida espacial que conecta una escena con un punto de entrada de otra. |
-| Puerta | Objeto con estado abierto/cerrado que puede habilitar un portal o dividir ambientes. |
-| Objeto | Instancia de un asset, con propiedades gráficas, físicas e interactivas independientes. |
-| Jornada | Ventana temporal concreta de acceso, calculada desde un horario y una zona horaria. |
-| Sesión de oficina | Presencia temporal de usuarios y estado compartido mientras trabajan. |
-| Presencia | Avatar de un usuario conectado a una sesión; reconexión y múltiples pestañas no deben duplicarlo. |
-| Contexto de conversación | Audiencia A/V autorizada por proximidad, ambiente, grupo o reunión. |
-| Sala multimedia | Recurso técnico SFU; no es necesariamente una escena ni la oficina completa. |
-| Presentación | Flujo temporal de pantalla asociado a una superficie y una audiencia. |
-| Vínculo Workspace | Asociación persistente entre un objeto/ambiente y un archivo externo; no cambia sus permisos por sí sola. |
-| Asset | Recurso reutilizable de arte con medidas y metadatos de producción. |
-| Derecho de uso | Habilitación futura de un asset o capacidad para un equipo/usuario; separada de poseer sus bytes. |
-
-## 2. Modelo conceptual
-
-```mermaid
-erDiagram
-    EQUIPO ||--o{ MEMBRESIA : incluye
-    USUARIO ||--o{ MEMBRESIA : integra
-    EQUIPO ||--o{ OFICINA : configura
-    OFICINA ||--o{ ESCENA : contiene
-    ESCENA ||--o{ AMBIENTE : delimita
-    ESCENA ||--o{ OBJETO : ubica
-    ASSET ||--o{ OBJETO : representa
-    ESCENA ||--o{ PORTAL : ofrece
-    OFICINA ||--o{ JORNADA : habilita
-    JORNADA ||--o{ SESION_OFICINA : aloja
-    SESION_OFICINA ||--o{ PRESENCIA : mantiene
-    USUARIO ||--o{ PRESENCIA : aparece
-    SESION_OFICINA ||--o{ CONVERSACION : organiza
-    CONVERSACION ||--o{ PARTICIPACION : autoriza
-    PRESENCIA ||--o{ PARTICIPACION : conversa
-    CONVERSACION ||--o{ PRESENTACION : comparte
-    OBJETO ||--o{ VINCULO_WORKSPACE : vincula
-```
-
-Un portal referencia también su escena destino. El diagrama es conceptual, no un esquema de tablas definitivo. La primera entrega propone una oficina por equipo; la relación permite ampliarlo sin cambiar identidad.
-
-## 3. Entidades y campos principales
-
-| Entidad | Campos mínimos de referencia | Persistencia |
+| Entidad | Responsabilidad | Vida útil |
 |---|---|---|
-| Usuario | id opaco, identidad externa, nombre visible, avatarId, preferencias | Sí |
-| Membresía | equipoId, usuarioId, rol, estado, permisos delegados | Sí |
-| Oficina | id, equipoId, nombre, configuración, mapVersion | Sí |
-| Escena | id, oficinaId, ancho/alto lógicos, spawn, versión | Sí |
-| Ambiente | id, escenaId, área, acceso, modo A/V predeterminado | Sí |
-| Objeto | id, escenaId, assetId, posición, orientación, collider, occluder, interacción | Sí; estados temporales separados |
-| Horario | oficinaId, zona IANA, días, apertura/cierre, políticas | Sí |
-| Jornada | id, oficinaId, aperturaUTC, cierreBaseUTC, cierreEfectivoUTC, políticaVacío, revision | Sí, con retención operativa por definir |
-| Sesión | id, jornadaId, epoch, estado, inicio/fin | Metadatos de coordinación; contenido efímero |
-| Presencia | usuarioId, sesiónId, escenaId, posición, orientación, conexión, lastSeen | Efímera |
-| Conversación | id, tipo, contexto, miembros autorizados, estado | Efímera; política del ambiente persistente |
-| Presentación | id, autor, superficie, contexto, trackId, estado | Efímera |
-| GoogleConnection | usuario, identidad externa, scopes, estado | Sí; credenciales protegidas |
-| VínculoWorkspace | objeto/ambiente, proveedor, fileId, título, tipo | Sí; sin copiar contenido por defecto |
-| Partida | id, juego, participantes, estado, revisión | Efímera en alcance inicial |
-| Catálogo/DerechoUso | asset/plan, titular, origen, vigencia | Evolución; persistente |
+| Plantilla de oficina | Mapa fijo, versiones, escenas, ambientes, objetos y spawns | Archivo versionado del proyecto |
+| Escena | Pantalla del mundo con dimensiones lógicas y portales | Plantilla |
+| Ambiente | Región de interacción y audiencia dentro de una escena | Plantilla |
+| Asset | Imagen, región, pivot, escala y metadatos gráficos/físicos | Archivo versionado |
+| Puerta / portal | Estado inicial y enlace a escena/spawn; geometría fija | Plantilla; apertura temporal |
+| Sesión | Instancia temporal de la plantilla, hasta diez participantes | Memoria del servicio |
+| Participante | ID de sesión, nombre visible, avatar y color de ropa | Sesión |
+| Presencia | Posición, dirección, ambiente y conexión de un participante | Sesión |
+| Pizarrón | Trazos, revisión, estado limpio/sucio y reserva de presentación | Sesión; ubicación fija |
+| Computadora | Accesos externos configurados en el proyecto | Plantilla |
+| Chat | Mensajes atribuidos a participantes y a un ambiente | Sesión, historial acotado |
+| Presentación | Emisor, pizarrón, ambiente y pista multimedia | Hasta detener, cambiar de ambiente o salir |
+| Partida | Snake local o Pong compartido de dos jugadores | Partida dentro de sesión |
 
-## 4. Roles y permisos propuestos
+No existen entidades de cuenta, equipo, membresía, jornada, compra ni derecho comercial. La credencial temporal verifica pertenencia a una sesión; no representa una cuenta persistente.
 
-Los roles son conjuntos de capacidades comprobadas por el backend. Las preferencias del navegador no otorgan permisos.
+## 2. Estados
 
-| Capacidad | Administrador | Coordinador | Miembro | Invitado |
-|---|---|---|---|---|
-| Ingresar a ambientes autorizados | Sí | Sí | Sí | Sólo habilitados |
-| Controlar cámara/micrófono propios | Sí | Sí | Sí | Si habilitado |
-| Crear grupos | Sí | Sí | Si política permite | Si delegado |
-| Presentar pantalla | Sí | Sí | Si habilitado | Si delegado |
-| Configurar modo de ambiente | Sí | Si delegado | Si delegado | No por defecto |
-| Solicitar prórroga | Sí | Sí | Sí, propuesta | Si habilitado |
-| Aprobar prórroga | Sí | Si delegado | Si delegado | No por defecto |
-| Seleccionar política de vacío | Sí | Si delegado | No por defecto | No |
-| Cerrar/reabrir oficina | Sí | Si delegado | No por defecto | No |
-| Gestionar miembros y roles | Sí | No por defecto | No | No |
-| Cambiar horario/configuración | Sí | Si delegado | No | No |
-| Personalizar mapa futuro | Sí | Si delegado | Si delegado | No |
+La sesión usa `WAITING` con un conectado, `COLLABORATIVE` con dos o más, `EMPTY` durante la gracia sin conectados y `CLOSED` tras finalizar. Una sesión cerrada no se reabre; se crea una nueva desde la plantilla. La creación/asignación inicial es atómica para evitar sesiones vacías huérfanas.
 
-No retirar o degradar al último administrador sin transferir esa capacidad. Una invitación no equivale a compartir archivos de Google. Acceso a una escena y permiso para publicar vídeo se validan por separado.
+La presencia usa `CONNECTED` o `RECONNECTING`; tras vencer la gracia se elimina. Las reservas de reconexión cuentan para el límite de diez plazas mientras sean válidas. Retomar una credencial reemplaza la conexión anterior de esa presencia y no crea otro avatar. Sin cuentas no puede garantizarse que dos credenciales distintas sean personas distintas.
 
-## 5. Reglas de negocio
+El pizarrón usa `clean` cuando no tiene trazos visibles y `dirty` cuando sí los tiene. La presentación es un estado independiente del dibujo; detenerla no borra trazos. Snake y Pong liberan controles y recursos al cerrar su panel o salir de la sesión.
+
+## 3. Reglas de negocio
 
 | ID | Regla |
 |---|---|
-| RB-001 | La salida del primer participante o de un administrador no termina la sesión de los demás. |
-| RB-002 | El servidor decide acceso y cierre usando la jornada efectiva, nunca el reloj del cliente. |
-| RB-003 | La oficina se habilita dentro del horario; 08:00–16:00 es un ejemplo, no un valor global obligatorio. |
-| RB-004 | Cerrar una sesión vacía libera recursos efímeros; no borra oficina, cuenta, avatar, vínculos o derechos. |
-| RB-005 | Si se selecciona KEEP_UNTIL_DEADLINE, una sesión vacía puede recrearse al volver dentro del horario. |
-| RB-006 | Si se selecciona CLOSE_WHEN_EMPTY, quedar vacía bloquea el ingreso hasta reapertura autorizada o próxima jornada. |
-| RB-007 | Sólo un usuario con capacidad puede cambiar política, cierre o prórroga; la elección es explícita y queda registrada. |
-| RB-008 | Prórroga actualiza una única fecha de cierre y se difunde a todos. Peticiones duplicadas no suman tiempo dos veces. |
-| RB-009 | Dos usuarios distintos constituyen una sesión colaborativa activa. Se propone admitir a uno en espera y permitir gestión individual. |
-| RB-010 | Dos pestañas del mismo usuario no cuentan como dos participantes; se propone una conexión principal por oficina. |
-| RB-011 | Quince presentes es el objetivo inicial de capacidad; 2–6 por ambiente no es una restricción universal. |
-| RB-012 | La transparencia se calcula para el avatar local, afecta lo que lo oculta y mantiene colisiones y permisos. |
-| RB-013 | Compartir pantalla conserva la cámara si estaba encendida; detener pantalla no altera el micrófono por inferencia. |
-| RB-014 | Grupo privado requiere membresía explícita y aislamiento de medios; no basta silenciar otros vídeos en UI. |
-| RB-015 | Workspace respeta tanto la autorización de la app como el permiso de cada usuario sobre el archivo. |
-| RB-016 | Ninguna cámara, micrófono o captura de pantalla se activa sin una acción/consentimiento compatible con el navegador. |
-| RB-017 | Objetos y escenas utilizan IDs estables y versiones; el cliente no altera distribución o derechos sin permiso. |
-| RB-018 | La evolución comercial conserva compras/desbloqueos al cerrar; aún no hay reglas de precios o puntos. |
-| RB-019 | Toda acción crítica de equipo se limita a su tenant; una URL o peer ID no sustituye autorización. |
-| RB-020 | En una transición se conserva usuario/sesión y se recalculan escena, ambiente y audiencia. |
+| V2-RB-001 | No se exige cuenta ni autorización de Google para ingresar. |
+| V2-RB-002 | El servidor admite como máximo diez plazas por sesión, incluidas reservas vigentes. |
+| V2-RB-003 | La salida del creador no termina una sesión con otros participantes. |
+| V2-RB-004 | Un participante puede explorar solo; cámara/micrófono no se activan automáticamente. |
+| V2-RB-005 | Toda acción compartida se valida contra la sesión, presencia, ambiente y alcance de interacción actuales. |
+| V2-RB-006 | El participante no puede enviar un mapa propio ni mover muebles; cliente y servidor comparten versión y geometría. |
+| V2-RB-007 | Abrir puertas cambia estado temporal; una puerta no puede cerrarse sobre los pies de un participante. |
+| V2-RB-008 | La atenuación gráfica es local y nunca elimina colisiones ni amplía audiencias. |
+| V2-RB-009 | Un portal cambia escena/spawn de manera confirmada, conserva participante/sesión y recalcula audiencia. |
+| V2-RB-010 | Un ambiente ajeno no revela sus ocupantes mediante la transparencia del fondo. |
+| V2-RB-011 | El servidor determina quién recibe chat, dibujo y medios; no basta ocultarlos en la interfaz. |
+| V2-RB-012 | El pizarrón conserva dibujo compartido en el panel y muestra únicamente limpio/sucio en el mapa. |
+| V2-RB-013 | Una reserva de presentación admite un emisor; cámara y pantalla son pistas independientes. |
+| V2-RB-014 | Al cambiar de ambiente, desconectarse o detener la presentación se libera la reserva y su audiencia. |
+| V2-RB-015 | Google Workspace abre enlaces externos; los permisos del sitio destino siguen a cargo de Google. |
+| V2-RB-016 | Chat, dibujo, puertas y partidas se descartan al finalizar la sesión; una nueva sesión no restaura contenido. |
+| V2-RB-017 | Snake es individual y Pong de dos jugadores, sin rankings, puntos ni recompensas. |
+| V2-RB-018 | Nombre y ropa no conceden privilegios; no hay roles administrativos heredados de v1. |
+| V2-RB-019 | Acceso, reconexión y reservas se procesan atómicamente para evitar plazas o presentaciones duplicadas. |
 
-## 6. Estados independientes
+## 4. Autoridad y consistencia
 
-### Jornada de acceso
+El servidor posee las presencias, cupo, geometría compartida, puertas, revisiones de pizarrón, reservas y estado de Pong. La identidad del actor proviene de la conexión validada, nunca de campos de rol/actor enviados en el comando. El cliente puede predecir movimiento y debe reconciliarlo con el servidor.
 
-`SCHEDULED` → `OPEN` → `CLOSED`. Cierre temprano marca motivo `MANUAL` o `EMPTY_POLICY`; horario marca `DEADLINE`. La extensión cambia `effectiveCloseAt`, no crea otra jornada. Reapertura autorizada dentro de ventana pasa de `CLOSED` a `OPEN`. Reapertura fuera de ventana requiere una excepción explícita, pendiente de producto.
+Las acciones discretas llevan identificador de petición y revisión cuando corresponde. Reintentos no duplican efectos. Movimiento tolera interpolación y descarte de actualizaciones viejas. Una nueva instancia de sesión invalida credenciales y mensajes anteriores; no reutilizar una identidad cerrada tras un reinicio.
 
-### Sesión y presencia
-
-`EMPTY` (cero) → `WAITING` (uno) → `COLLABORATIVE` (dos o más). La reducción de participantes recorre el camino inverso. Una pérdida de conexión puede reservar la presencia durante la gracia de reconexión propuesta en `05`, sin contarla como online confirmado. Una sesión en espera no enciende medios sin audiencia.
-
-### Comunicación
-
-`NONE`, `PROXIMITY`, `AMBIENT`, `GROUP`, `MEETING`. Base propuesta: un contexto A/V principal por usuario, evitando audio duplicado. Entrar a un grupo suspende el contexto automático; al salir se reevalúa el ambiente actual. La decisión se conserva como pendiente explícito en `07`.
-
-## 7. Persistencia y consistencia
-
-Persistir cambios de configuración, membresía y avatar antes de responder éxito. Usar revisión y control de concurrencia para horarios, prórrogas, roles y derechos futuros. Aplicar autorización desde la fuente central al ejecutar cada acción; no confiar en una caché eventual para conceder acceso.
-
-Posiciones, indicadores de habla y presencia visual toleran sincronización eventual, interpolación y snapshots. No guardar cada movimiento en PostgreSQL. Las preferencias personales se guardan con respuesta de confirmación y pueden propagarse a otras pestañas después.
-
-Contenido de documentos permanece en Google. No eliminar documentos al cerrar oficina. Chat y partidas se proponen efímeros en la primera versión; retención de chat/auditoría y consentimiento de grabación quedan pendientes, sin grabación por defecto. Las puertas recuperan su estado inicial de mapa en una sesión nueva como default propuesto; su posición y configuración sí persisten. La entrada de una jornada no restaura por inferencia las llamadas o partidas de la anterior.
+Los límites de tiempo, mensajes, trazos y solicitudes se documentarán y validarán antes de activar cada módulo. No se introduce PostgreSQL ni almacenamiento de contenido para resolver la temporalidad. Los parámetros pendientes están en [07](07_DECISIONES_Y_PLAN_IMPLEMENTACION.md).
