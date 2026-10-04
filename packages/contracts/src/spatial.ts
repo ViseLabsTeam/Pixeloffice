@@ -2,6 +2,8 @@ import { assetById, type Direction, type Door, type DoorStates, type MapBundle, 
 
 export const MOVEMENT_SPEED = 120;
 export const MAX_STEP_SECONDS = 0.1;
+// 90% transparency leaves 10% opacity when an object occludes the avatar.
+export const OCCLUSION_MIN_OPACITY = 0.1;
 
 export function worldRect(rect: Rect, position: Point, scale = 1): Rect {
   return { shape: 'rect', x: position.x + rect.x * scale, y: position.y + rect.y * scale, width: rect.width * scale, height: rect.height * scale };
@@ -68,6 +70,6 @@ export function occlusionTarget(mask: Rect, avatar: Rect, inFront: boolean, marg
   const dx = Math.max(mask.x - avatar.x - avatar.width, avatar.x - mask.x - mask.width, 0);
   const dy = Math.max(mask.y - avatar.y - avatar.height, avatar.y - mask.y - mask.height, 0);
   const distance = Math.hypot(dx, dy);
-  if (distance === 0) return 0.05;
-  return margin > 0 ? 0.05 + 0.95 * Math.min(1, distance / margin) : 1;
+  if (distance === 0) return OCCLUSION_MIN_OPACITY;
+  return margin > 0 ? OCCLUSION_MIN_OPACITY + (1 - OCCLUSION_MIN_OPACITY) * Math.min(1, distance / margin) : 1;
 }

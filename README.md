@@ -2,7 +2,7 @@
 
 Demo de portafolio de **Vice Labs** con Canvas 2D y TypeScript. Objetivo final: oficina fija, acceso sin cuenta y sesiones temporales de hasta diez participantes, según las especificaciones [00–08 v2](00_LEEME.md).
 
-La aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 5 % y joystick analógico. El arte es provisional. Sesiones compartidas, chat, audio/vídeo, pantalla, pizarrón, accesos externos a Google Workspace, Snake y Pong son parte de la entrega final y están pendientes en la aplicación actual.
+La aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 90 % de transparencia (10 % de opacidad) y joystick analógico. El arte es provisional. Sesiones compartidas, chat, audio/vídeo, pantalla, pizarrón, accesos externos a Google Workspace, Snake y Pong son parte de la entrega final y están pendientes en la aplicación actual.
 
 Cuentas, equipos persistentes, horarios, OAuth/APIs de Google, editor de mapas y tienda están fuera del alcance. La entrega reciente de arte aún no está integrada; ver [inventario y faltantes](docs/assets.md).
 

@@ -15,7 +15,7 @@ Los requisitos describen la entrega final. El código actual ofrece un recorrido
 | Acceso | Entrar sin registro, elegir nombre y avatar y compartir una sesión temporal; máximo diez participantes por sesión. |
 | Oficina fija | Escenas conectadas mediante puertas y portales; ambientes definidos en la plantilla, sin edición por participantes. |
 | Movimiento | Ocho direcciones, WASD/flechas y joystick analógico táctil; velocidad independiente de FPS y tamaño CSS. |
-| Geometría | Colisiones de pies, profundidad por apoyo y atenuación gradual de paredes/muebles que oculten al avatar local, hasta 5 % de opacidad. |
+| Geometría | Colisiones de pies, profundidad por apoyo y atenuación gradual de paredes/muebles que oculten al avatar local, hasta 90 % de transparencia (10 % de opacidad). |
 | Avatar | Opciones hombre/mujer, cuatro vistas estáticas y color de ropa mediante máscara o capas que preserven piel, pelo y sombras. |
 | Colaboración | Presencia compartida, chat, audio/vídeo y presentación de pantalla; controles de cámara y micrófono independientes. |
 | Pizarrón | Lienzo compartido en un panel, lápiz y goma; en el mapa únicamente sprites limpio/sucio. La presentación también se visualiza en un panel. |

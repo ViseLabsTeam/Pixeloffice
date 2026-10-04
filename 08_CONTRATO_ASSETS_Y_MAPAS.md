@@ -12,7 +12,7 @@ La expresión “32 bits” es una referencia de estilo del equipo; no fija un t
 
 Peredo entrega una escena de referencia y un paquete de prueba con: piso, tramo de pared, puerta abierta/cerrada, escritorio, silla, biblioteca o planta alta, avatar de cuatro vistas y máscara de ropa, más pizarrón limpio/sucio.
 
-Desarrollo integra este paquete y comprueba escala, punto de pies, collider, orden y opacidad hasta 0.05 en desktop/mobile. Corregir el contrato antes de producir todas las piezas. No necesita exportar de una vez todas las variantes de color.
+Desarrollo integra este paquete y comprueba escala, punto de pies, collider, orden y transparencia hasta 90 % (opacidad 0.1) en desktop/mobile. Corregir el contrato antes de producir todas las piezas. No necesita exportar de una vez todas las variantes de color.
 
 ## 3. Formato y recursos finales
 
@@ -70,7 +70,7 @@ Ejemplo ilustrativo; las medidas no fijan el diseño de Peredo:
   "occluder": {
     "mask": { "x": -24, "y": -64, "width": 48, "height": 54 },
     "approachMargin": 24,
-    "minOpacity": 0.05
+    "minOpacity": 0.1
   },
   "soundBlockers": [],
   "interaction": null
@@ -93,7 +93,7 @@ Estado de recepción al 2026-10-04: piso, cuatro orientaciones de silla, cuatro 
 2. Regiones/pivots del atlas son válidos y cuatro vistas no desplazan pies.
 3. Colores de ropa son reconocibles y legibles como lápiz sobre blanco.
 4. Muebles y puertas permiten pasar/interactuar en la escena real.
-5. Pared y mueble alto se atenúan gradualmente hasta 5 % de opacidad sin perder colisión.
+5. Pared y mueble alto se atenúan gradualmente hasta 90 % de transparencia (10 % de opacidad) sin perder colisión.
 6. Los sprites clean/dirty no saltan ni requieren copiar el dibujo.
 7. El fondo de otro ambiente se puede atenuar sin revelar sus ocupantes.
 8. Pesos y dimensiones respetan o justifican los objetivos de 06.

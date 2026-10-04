@@ -48,7 +48,7 @@ Diez participantes no obliga a decodificar nueve vídeos permanentemente en cada
 | V2-V10 | Android/iOS real, portrait/landscape, joystick + acción, escritura, paneles y permisos | V2-RF-019, V2-RF-021, V2-RNF-005, V2-RNF-007 |
 | V2-V11 | Sesión vacía expira, reinicio API, credenciales anteriores y nueva sesión limpia | V2-RF-020, V2-RNF-008 |
 | V2-V12 | Dos horas, segundo plano, red degradada y recuperación; CPU/memoria/recursos con IDE abierto | V2-RNF-001, V2-RNF-004 |
-| V2-V13 | Arte real contra referencia: escala, pies, oclusión 0.05, máscaras, ambientes y sprites | V2-RF-009, V2-RF-010, V2-RF-022 |
+| V2-V13 | Arte real contra referencia: escala, pies, transparencia del 90 % (opacidad 0.1), máscaras, ambientes y sprites | V2-RF-009, V2-RF-010, V2-RF-022 |
 | V2-V14 | Build, schemas, assets, versiones y comandos malformados; límites de payload/frecuencia | V2-RNF-002, V2-RNF-003, V2-RNF-006 |
 
 En V2-V05/V06 usar al menos dos redes reales y registrar qué participantes/medios son sintéticos. En V2-V12 incluir corte de 20 s, RTT de 200 ms y pérdida del 3 % como perfil propuesto, además de red normal. Comparar con los tiempos de gracia aprobados antes de interpretar reconexión.

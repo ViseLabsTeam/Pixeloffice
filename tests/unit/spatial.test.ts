@@ -50,9 +50,9 @@ describe('V2-RF-005/007/009 — geometría independiente de apariencia (cobertur
   });
   it('atenúa sólo máscaras delante del avatar y gradualmente al aproximarse',() => {
     const mask=rect(0,0,20,30); const avatar=rect(10,10,10,20);
-    expect(occlusionTarget(mask,avatar,true,16)).toBe(0.05);
+    expect(occlusionTarget(mask,avatar,true,16)).toBe(0.1);
     expect(occlusionTarget(mask,avatar,false,16)).toBe(1);
-    expect(occlusionTarget(mask,rect(28,10,10,20),true,16)).toBeCloseTo(0.525);
+    expect(occlusionTarget(mask,rect(28,10,10,20),true,16)).toBeCloseTo(0.55);
     expect(occlusionTarget(mask,rect(50,10,10,20),true,16)).toBe(1);
   });
   it('valida spawns, IDs, versiones y referencias',() => {
