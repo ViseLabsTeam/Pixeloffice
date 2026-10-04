@@ -15,11 +15,11 @@ No se necesita una base de cuentas, equipos ni horarios. PostgreSQL, Google OIDC
 | `apps/web` | Recorrido individual, dos escenas, input, renderer y caché | Entrada a sesiones, participantes remotos, paneles de chat, A/V, pizarrón, enlaces y juegos |
 | `apps/api` | Fastify, salud y manifest público | Crear/unirse/reconectar, límites, WS, simulación y limpieza de sesiones |
 | `packages/contracts` | Tipos, esquema del mapa, geometría y comando de puerta propuesto | Schemas de sesión, snapshots, audiencias, pizarrón, chat y Pong |
-| `packages/contracts/data/demo-map.json` | Plantilla de prueba con 17 PNG provisionales | Arte de Peredo y metadatos completos de 08 |
+| `packages/contracts/data/demo-map.json` | Plantilla de prueba con 15 assets provisionales y cinco exports recibidos (piso y escritorios) | Paredes independientes y demás arte de Peredo; metadatos definitivos de 08 |
 | `legacy/pre-alpha` | Código y documentación históricos, Snake/A/V experimentales; también entrega reciente de arte | Extraer sólo lo útil con adaptación al alcance actual; el directorio no se publica con el cliente |
 | `tests` | Geometría, API inicial y recorridos del prototipo | Pruebas multiusuario, medios, dibujo, juegos, aislamiento y dispositivos reales |
 
-La versión de especificación 2.0 no cambia por sí sola `schemaVersion: 1`, `protocolVersion: 1` ni `mapVersion: demo-v1`. Son versiones técnicas independientes: sólo deben cambiar cuando cambie el formato o contenido que representan.
+La versión de especificación 2.0 no cambia por sí sola `schemaVersion: 1` ni `protocolVersion: 1`. El contenido del mapa sí cambió, por lo que ahora usa `mapVersion: demo-v2`.
 
 ## 3. Límites de módulos propuestos
 
@@ -51,7 +51,7 @@ Las pistas de cámara, micrófono y pantalla son independientes. La pertenencia 
 
 Conservar piso, paredes, puertas, objetos y avatar separados. Reutilizar la geometría validada en cliente y servidor. Los metadatos finales de 08 incluyen bloqueos acústicos, tipos de interacción y variantes limpio/sucio que el esquema de prueba aún no representa por completo; ampliar tipos, validadores, generador y fixtures juntos al integrarlos.
 
-La nueva entrega de piso, escritorio, silla y referencia está en `legacy/pre-alpha/assets/images`. Su ubicación no determina si es arte viejo: el inventario [docs/assets.md](docs/assets.md) distingue esa entrega del material histórico. Antes de integrarla, registrar dimensiones, escala, pivots y geometría sobre los sprites reales.
+La nueva entrega de piso, escritorio, silla y referencia está en `legacy/pre-alpha/assets/images`. Piso y escritorios ya se copian a `apps/web/public/assets/peredo` por el generador, con parámetros iniciales basados en los sprites reales; sillas y referencia siguen sin integrarse. El inventario [docs/assets.md](docs/assets.md) registra las medidas, la escala provisional y las piezas faltantes. No hay export independiente de pared en el repositorio.
 
 ## 7. Despliegue y dependencias
 

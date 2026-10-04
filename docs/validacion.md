@@ -25,7 +25,8 @@ Base Git: `d20baa3` más cambios locales sin commit. Windows, Node 22.14.0 y npm
 
 | Comprobación ejecutada | Resultado |
 |---|---|
-| `npm run build` | TypeScript, validación de assets y builds API/web aprobados; dos escenas y 17 PNG provisionales verificados |
+| `npm run build` (alineación anterior) | TypeScript, validación de assets y builds API/web aprobados para `demo-v1`; dos escenas y 17 PNG provisionales verificados. Este resultado no cubre `demo-v2`. |
+| `npm run build` (integración inicial de arte) | TypeScript y builds API/web aprobados para `demo-v2`; dos escenas y 20 PNG verificados por firma, SHA-256 y región. No acredita apariencia, escala final ni recorrido móvil. |
 | `npm test` | 14 pruebas aprobadas en dos archivos; geometría y API/contratos iniciales |
 | Enlaces Markdown locales de documentos vigentes | 40 destinos existentes |
 | Trazabilidad 04 → 06 | Los 22 requisitos funcionales y ocho no funcionales tienen escenario de validación |

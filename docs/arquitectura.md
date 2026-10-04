@@ -10,7 +10,7 @@ Actualizado el 2026-10-04. Describe implementación existente; los módulos futu
 
 `rendering` separa fondo cacheado, sprites ordenados por layer/apoyo/ID y rótulos. El collider nunca depende de alpha. La máscara sólo se atenúa cuando su objeto se dibuja delante del avatar; cada objeto mantiene alpha local. Límite DPR=2 y presupuesto de bitmaps=64 MiB, aún propuestos. La caché incluye los assets de las dos escenas de demostración y rechaza exceder el presupuesto; una oficina más grande necesitará expulsión LRU.
 
-`packages/contracts` centraliza coordenadas, geometría, modelos y validación. JSON Schema comprueba forma/versiones; validaciones semánticas comprueban IDs, referencias, spawns y puertas. El build comprueba bytes PNG, hash y regiones de atlas. El mapa está versionado en `data/demo-map.json`; no contiene credenciales ni estado temporal. Las dimensiones de `demo-v1` no fijan las dimensiones de producción.
+`packages/contracts` centraliza coordenadas, geometría, modelos y validación. JSON Schema comprueba forma/versiones; validaciones semánticas comprueban IDs, referencias, spawns y puertas. El build comprueba bytes PNG, hash y regiones de atlas. El mapa está versionado en `data/demo-map.json`; no contiene credenciales ni estado temporal. `demo-v2` identifica la integración inicial del piso y los escritorios recibidos; sus dimensiones y pivots todavía se deben contrastar con el plano final de Peredo.
 
 `apps/api` usa Fastify con límites de payload y validación de parámetros. Expone únicamente salud y el manifest público. Los contratos de comando propuestos son comprobados en pruebas, pero aún no existe un endpoint WS. No hay persistencia, login simulado, roles locales ni tokens multimedia.
 

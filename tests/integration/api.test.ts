@@ -8,7 +8,7 @@ describe('V2-RNF-006 — API inicial y contratos (cobertura parcial)',()=>{
   it('sirve salud y únicamente el mapa público validado',async()=>{
     const app=buildApp(); applications.push(app);
     expect((await app.inject('/healthz')).json()).toMatchObject({status:'ok',stage:'I1'});
-    const response=await app.inject('/maps/demo-v1/manifest'); expect(response.statusCode).toBe(200);
+    const response=await app.inject('/maps/demo-v2/manifest'); expect(response.statusCode).toBe(200);
     expect(validateMap(response.json()).scenes).toHaveLength(2);
     expect((await app.inject('/maps/unknown-map/manifest')).statusCode).toBe(404);
     expect((await app.inject('/maps/INVALID/manifest')).statusCode).toBe(400);

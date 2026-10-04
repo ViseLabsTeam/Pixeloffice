@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "mapVersion": "demo-v1",
+  "mapVersion": "demo-v2",
   "entry": {
     "sceneId": "lobby",
     "spawnId": "entry"
@@ -25,27 +25,27 @@
     {
       "schemaVersion": 1,
       "assetId": "floor",
-      "imageUrl": "/assets/demo/floor.png",
+      "imageUrl": "/assets/peredo/floor.png",
       "sourceRect": {
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 32,
-        "height": 32
+        "width": 344,
+        "height": 344
       },
       "pivot": {
         "x": 0,
         "y": 0
       },
-      "worldScale": 1,
+      "worldScale": 0.35,
       "layer": "ground",
       "sortAnchorY": 0,
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 16,
       "interaction": null,
-      "variant": "demo-v1",
-      "contentHash": "601aaabde7eb785dbee79d3fb090c11f47c58333d4d7f4e0ad4d36b1d66a0a95"
+      "variant": "peredo-import",
+      "contentHash": "67f0b3f1884432c1be1d8b47a4d7f579fb09e757799486766ee1b1f2b9cadc8d"
     },
     {
       "schemaVersion": 1,
@@ -149,42 +149,159 @@
     },
     {
       "schemaVersion": 1,
-      "assetId": "desk",
-      "imageUrl": "/assets/demo/desk.png",
+      "assetId": "desk-negative-x",
+      "imageUrl": "/assets/peredo/desk-negative-x.png",
       "sourceRect": {
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 96,
-        "height": 56
+        "width": 584,
+        "height": 698
       },
       "pivot": {
-        "x": 48,
-        "y": 56
+        "x": 304,
+        "y": 656
       },
-      "worldScale": 1,
+      "worldScale": 0.18,
       "layer": "world",
       "sortAnchorY": 0,
       "colliders": [
         {
           "shape": "rect",
-          "x": -44,
-          "y": -25,
-          "width": 88,
-          "height": 25
+          "x": -170,
+          "y": -140,
+          "width": 340,
+          "height": 140
         }
       ],
       "occlusionMask": {
         "shape": "rect",
-        "x": -48,
-        "y": -56,
-        "width": 96,
-        "height": 42
+        "x": -304,
+        "y": -656,
+        "width": 584,
+        "height": 516
       },
       "occlusionApproachMargin": 16,
       "interaction": null,
-      "variant": "demo-v1",
-      "contentHash": "5d03a6ac8ff08e250842e4396a18191e7cc9c0fd3f4e49e7d641985172f140de"
+      "variant": "peredo-import",
+      "contentHash": "8a93f497e8f7512abffe69ee1938514b9fb0dbd4a493c72e6c177c1bc3183d45"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "desk-positive-x",
+      "imageUrl": "/assets/peredo/desk-positive-x.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 554,
+        "height": 722
+      },
+      "pivot": {
+        "x": 270,
+        "y": 660
+      },
+      "worldScale": 0.18,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -170,
+          "y": -140,
+          "width": 340,
+          "height": 140
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -270,
+        "y": -660,
+        "width": 554,
+        "height": 520
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "ee811242b91d1900bdb3270d36e53c8d1bf26e9a637adcc537470b05a7603ecf"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "desk-negative-y",
+      "imageUrl": "/assets/peredo/desk-negative-y.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 992,
+        "height": 740
+      },
+      "pivot": {
+        "x": 496,
+        "y": 680
+      },
+      "worldScale": 0.18,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -330,
+          "y": -175,
+          "width": 660,
+          "height": 175
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -496,
+        "y": -680,
+        "width": 992,
+        "height": 505
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "8483637e3bfff8d303982f3bad1196a02c8d22361d4c4fd14fc4efcc60a51a7a"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "desk-positive-y",
+      "imageUrl": "/assets/peredo/desk-positive-y.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 818,
+        "height": 662
+      },
+      "pivot": {
+        "x": 409,
+        "y": 624
+      },
+      "worldScale": 0.18,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": -340,
+          "y": -175,
+          "width": 680,
+          "height": 175
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": -409,
+        "y": -624,
+        "width": 818,
+        "height": 449
+      },
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "c977caedd77931d7fe19c63c5feae837d2e41b566d6d40c388c7b880c9ea7b2b"
     },
     {
       "schemaVersion": 1,
@@ -609,7 +726,7 @@
   "scenes": [
     {
       "schemaVersion": 1,
-      "mapVersion": "demo-v1",
+      "mapVersion": "demo-v2",
       "sceneId": "lobby",
       "name": "Recepción",
       "logicalSize": {
@@ -689,18 +806,18 @@
         },
         {
           "objectId": "lobby-desk-a",
-          "assetId": "desk",
+          "assetId": "desk-negative-y",
           "position": {
             "x": 176,
-            "y": 154
+            "y": 190
           }
         },
         {
           "objectId": "lobby-desk-b",
-          "assetId": "desk",
+          "assetId": "desk-positive-y",
           "position": {
             "x": 328,
-            "y": 154
+            "y": 190
           }
         },
         {
@@ -786,7 +903,7 @@
     },
     {
       "schemaVersion": 1,
-      "mapVersion": "demo-v1",
+      "mapVersion": "demo-v2",
       "sceneId": "studio",
       "name": "Estudio",
       "logicalSize": {
@@ -866,18 +983,18 @@
         },
         {
           "objectId": "studio-desk-a",
-          "assetId": "desk",
+          "assetId": "desk-positive-x",
           "position": {
             "x": 176,
-            "y": 154
+            "y": 190
           }
         },
         {
           "objectId": "studio-desk-b",
-          "assetId": "desk",
+          "assetId": "desk-negative-x",
           "position": {
             "x": 328,
-            "y": 154
+            "y": 190
           }
         },
         {

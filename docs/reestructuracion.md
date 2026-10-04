@@ -26,7 +26,7 @@ Actualizado el 2026-10-04. Alcance vigente: [00–08](../00_LEEME.md). Este regi
 - Referencias de pruebas renombradas a los requisitos v2 que cubren parcialmente.
 - Documentación de pre-alpha identificada como histórica; entrega reciente de arte distinguida del material anterior.
 
-Las versiones técnicas `demo-v1`, schema 1 y protocolo 1 permanecen porque esta alineación no cambia sus formatos. Los originales nuevos de arte permanecen en su ubicación de entrega.
+El mapa pasó a `demo-v2` al incorporar piso y escritorios; schema 1 y protocolo 1 mantienen su formato. Los PNG originales permanecen en su ubicación de entrega y el generador prepara copias de uso web.
 
 ## Siguientes pasos
 

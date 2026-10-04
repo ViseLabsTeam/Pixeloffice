@@ -85,7 +85,7 @@ Carpetas sugeridas: `references`, `floors`, `walls`, `doors`, `furniture`, `avat
 
 Una imagen de oficina completa ayuda a comparar composición, pero no sustituye exports por capas. No reconstruir manualmente cada detalle desde una captura si Peredo tiene los originales. Desarrollo define geometría con Peredo sobre el sprite real; el artista no necesita programar el manifest.
 
-Estado de recepción al 2026-10-04: piso, cuatro orientaciones de silla, cuatro de escritorio y una referencia en `legacy/pre-alpha/assets/images`. Es una entrega parcial aún no integrada en el mapa activo. Ver [inventario y faltantes](docs/assets.md); la ubicación en legacy no convierte estos archivos recientes en material histórico.
+Estado de recepción al 2026-10-04: piso, cuatro orientaciones de silla, cuatro de escritorio y una referencia en `legacy/pre-alpha/assets/images`. El piso y los cuatro escritorios están integrados con escala/pivots provisionales en `demo-v2`; faltan los exports independientes de pared y demás piezas del paquete. Ver [inventario y faltantes](docs/assets.md); la ubicación en legacy no convierte estos archivos recientes en material histórico.
 
 ## 7. Aceptación de arte
 
