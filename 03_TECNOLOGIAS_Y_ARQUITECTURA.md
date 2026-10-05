@@ -19,7 +19,7 @@ No se necesita una base de cuentas, equipos ni horarios. PostgreSQL, Google OIDC
 | `legacy/pre-alpha` | Código y documentación históricos, Snake/A/V experimentales; también entrega reciente de arte | Extraer sólo lo útil con adaptación al alcance actual; el directorio no se publica con el cliente |
 | `tests` | Geometría, API inicial y recorridos del prototipo | Pruebas multiusuario, medios, dibujo, juegos, aislamiento y dispositivos reales |
 
-La versión de especificación 2.0 no cambia por sí sola `schemaVersion: 1` ni `protocolVersion: 1`. El contenido del mapa sí cambió, por lo que ahora usa `mapVersion: demo-v2`.
+La versión de especificación 2.0 no cambia por sí sola `schemaVersion: 1` ni `protocolVersion: 1`. El contenido del mapa sí cambió, por lo que ahora usa `mapVersion: demo-v3`.
 
 ## 3. Límites de módulos propuestos
 

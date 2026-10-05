@@ -2,7 +2,7 @@
 
 Demo de portafolio de **Vice Labs** con Canvas 2D y TypeScript. Objetivo final: oficina fija, acceso sin cuenta y sesiones temporales de hasta diez participantes, según las especificaciones [00–08 v2](00_LEEME.md).
 
-La aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 90 % de transparencia (10 % de opacidad) y joystick analógico. El piso y los cuatro escritorios del mapa usan los PNG recibidos de Peredo con escala y pivots provisionales. Los muros, puertas, avatar y otros objetos siguen con arte de prueba hasta recibir sus exports. Sesiones compartidas, chat, audio/vídeo, pantalla, pizarrón, accesos externos a Google Workspace, Snake y Pong son parte de la entrega final y están pendientes en la aplicación actual.
+La aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 90 % de transparencia (10 % de opacidad) y joystick analógico. El piso, los cuatro escritorios y el avatar masculino usan los archivos recibidos de Peredo con escala y pivots provisionales. El avatar muestra su PNG en reposo y los cuadros de su GIF al desplazarse. Los muros, puertas y otros objetos siguen con arte de prueba hasta recibir sus exports. Sesiones compartidas, chat, audio/vídeo, pantalla, pizarrón, accesos externos a Google Workspace, Snake y Pong son parte de la entrega final y están pendientes en la aplicación actual.
 
 Cuentas, equipos persistentes, horarios, OAuth/APIs de Google, editor de mapas y tienda están fuera del alcance. Ver [inventario y faltantes de arte](docs/assets.md).
 
@@ -17,7 +17,7 @@ npm run dev
 
 Abrir `http://127.0.0.1:5173`. WASD/flechas o joystick para moverse; E o **Interactuar** para abrir puertas y examinar objetos. La puerta derecha de recepción conecta con el estudio; la izquierda del estudio permite volver. La escena completa conserva su proporción al cambiar el tamaño de pantalla.
 
-API inicial opcional en otra terminal: `npm run dev:api`. Expone `http://127.0.0.1:3001/healthz` y `/maps/demo-v2/manifest`. Sólo contiene el mapa público de prueba; aún no autentica ni sincroniza usuarios.
+API inicial opcional en otra terminal: `npm run dev:api`. Expone `http://127.0.0.1:3001/healthz` y `/maps/demo-v3/manifest`. Sólo contiene el mapa público de prueba; aún no autentica ni sincroniza usuarios.
 
 ## Verificar
 

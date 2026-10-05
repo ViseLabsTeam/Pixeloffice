@@ -53,7 +53,7 @@ Estos pendientes permiten avanzar en trabajo independiente. No habilitan agregar
 
 ### I1 — Espacio y arte
 
-Mantener el recorrido de dos escenas y preparar una escena de referencia con assets reales. Registrar escala, pivots, colisiones, oclusión y vistas del avatar; ampliar schemas al integrar metadatos de 08. Completar paquete de prueba con pared, puerta, objeto alto, avatar/máscara y pizarrón.
+Mantener el recorrido de dos escenas y preparar una escena de referencia con assets reales. Registrar escala, pivots, colisiones, oclusión y vistas del avatar; ampliar schemas al integrar metadatos de 08. El avatar masculino de cuatro vistas ya está integrado con reposo y movimiento. Completar paquete de prueba con pared, puerta, objeto alto, avatar femenino/máscaras de ropa y pizarrón.
 
 Salida: evidencia espacial V2-V02 en su parte local, V2-V10, V2-V13 y V2-V14. El prototipo actual cubre parte de I1; faltan arte definitivo y dispositivos reales.
 

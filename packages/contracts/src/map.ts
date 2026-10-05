@@ -1,6 +1,7 @@
 export interface Point { x: number; y: number }
 export interface Rect extends Point { shape: 'rect'; width: number; height: number }
 export type Direction = 'up' | 'down' | 'left' | 'right';
+export interface AnimationFrame { assetId: string; durationMs: number }
 export interface Asset {
   schemaVersion: 1;
   assetId: string;
@@ -52,7 +53,7 @@ export interface MapBundle {
   schemaVersion: 1;
   mapVersion: string;
   entry: { sceneId: string; spawnId: string };
-  avatar: { avatarId: string; views: Record<Direction, string>; footCollider: Rect };
+  avatar: { avatarId: string; views: Record<Direction, string>; animations: Record<Direction, AnimationFrame[]>; footCollider: Rect };
   assets: Asset[];
   scenes: Scene[];
 }

@@ -1,13 +1,15 @@
-// Reproducible placeholder art plus the received Peredo floor and desk PNGs.
+// Reproducible placeholder art plus the received Peredo floor, desk and avatar exports.
 // Dimensions and placement remain provisional until the complete art export arrives.
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { parseGIF, decompressFrames } from 'gifuct-js';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = `${root}apps/web/public/assets/demo`;
 const officialOutput = `${root}apps/web/public/assets/peredo`;
 const officialSource = `${root}legacy/pre-alpha/assets/images`;
+const avatarGifSource = `${root}legacy/pre-alpha/assets/gifs/avatar/man`;
 mkdirSync(output, { recursive: true });
 mkdirSync(officialOutput, { recursive: true });
 mkdirSync(`${root}packages/contracts/data`, { recursive: true });
@@ -28,18 +30,33 @@ function chunk(type, data) {
   return Buffer.concat([size, bytes, crc]);
 }
 function png(width, height, shapes) {
-  const pixels = Buffer.alloc(height * (1 + width * 4));
+  const rgba = Buffer.alloc(width * height * 4);
   for (const [x, y, w, h, color] of shapes) {
-    const rgba = [...color.matchAll(/[a-f0-9]{2}/gi)].map(value => parseInt(value[0], 16));
+    const channels = [...color.matchAll(/[a-f0-9]{2}/gi)].map(value => parseInt(value[0], 16));
     for (let row = Math.max(0, y); row < Math.min(height, y + h); row++) {
       for (let col = Math.max(0, x); col < Math.min(width, x + w); col++) {
-        const offset = row * (1 + width * 4) + 1 + col * 4;
-        pixels.set([rgba[0], rgba[1], rgba[2], rgba[3] ?? 255], offset);
+        const offset = (row * width + col) * 4;
+        rgba.set([channels[0], channels[1], channels[2], channels[3] ?? 255], offset);
       }
     }
   }
+  return pngPixels(width, height, rgba);
+}
+function pngPixels(width, height, rgba) {
+  if (rgba.length !== width * height * 4) throw new Error('Píxeles RGBA incompletos');
+  const pixels = Buffer.alloc(height * (1 + width * 4));
+  for (let row = 0; row < height; row++) rgba.copy(pixels, row * (1 + width * 4) + 1, row * width * 4, (row + 1) * width * 4);
   const header = Buffer.alloc(13); header.writeUInt32BE(width); header.writeUInt32BE(height, 4); header[8] = 8; header[9] = 6;
   return Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]), chunk('IHDR', header), chunk('IDAT', deflateSync(pixels)), chunk('IEND', Buffer.alloc(0))]);
+}
+function registerOfficialPng(assetId, bytes, options = {}) {
+  if (!bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) throw new Error(`PNG inválido: ${assetId}`);
+  const width = bytes.readUInt32BE(16); const height = bytes.readUInt32BE(20);
+  writeFileSync(`${officialOutput}/${assetId}.png`, bytes);
+  assets.push({ schemaVersion:1, assetId, imageUrl:`/assets/peredo/${assetId}.png`, sourceRect:rect(0,0,width,height),
+    pivot:{x:width/2,y:height}, worldScale:1, layer:'world', sortAnchorY:0,
+    colliders:[], occlusionMask:null, occlusionApproachMargin:16, interaction:null,
+    variant:'peredo-import', contentHash:createHash('sha256').update(bytes).digest('hex'), ...options });
 }
 function asset(assetId, width, height, shapes, options = {}) {
   const bytes = png(width, height, shapes);
@@ -49,24 +66,31 @@ function asset(assetId, width, height, shapes, options = {}) {
 function officialAsset(assetId, relativePath, options) {
   const source = `${officialSource}/${relativePath}`;
   const bytes = readFileSync(source);
-  if (!bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) throw new Error(`PNG inválido: ${source}`);
-  const width = bytes.readUInt32BE(16); const height = bytes.readUInt32BE(20);
-  copyFileSync(source, `${officialOutput}/${assetId}.png`);
-  assets.push({ schemaVersion:1, assetId, imageUrl:`/assets/peredo/${assetId}.png`, sourceRect:rect(0,0,width,height),
-    pivot:{x:width/2,y:height}, worldScale:1, layer:'world', sortAnchorY:0,
-    colliders:[], occlusionMask:null, occlusionApproachMargin:16, interaction:null,
-    variant:'peredo-import', contentHash:createHash('sha256').update(bytes).digest('hex'), ...options });
+  registerOfficialPng(assetId, bytes, options);
 }
 // The source floor is a 4×4 tile: 344 px across, with 86 px per tile.
 // At scale .35 its tiles are about 30 logical pixels; the two-scene layout is still provisional.
 officialAsset('floor','floors/PISO-export.png',{pivot:{x:0,y:0},worldScale:0.35,layer:'ground'});
-for (const view of ['up','down','left','right']) {
-  const shapes = [[5,29,7,3,'24344a'],[14,29,7,3,'24344a'],[5,14,16,15,'4c84d8'],[3,16,3,10,'ebbb95'],[21,16,3,10,'ebbb95'],[6,3,14,12,'edc49f'],[5,0,16,5,'29374a']];
-  if (view === 'up') shapes.push([5,3,16,10,'29374a'],[8,17,10,7,'3565ab']);
-  if (view === 'down') shapes.push([9,8,2,2,'29374a'],[16,8,2,2,'29374a']);
-  if (view === 'left') shapes.push([5,7,2,2,'29374a'],[15,3,6,9,'29374a']);
-  if (view === 'right') shapes.push([19,7,2,2,'29374a'],[5,3,6,9,'29374a']);
-  asset(`avatar-${view}`, 26, 32, shapes);
+// X is right/D, -X left/A, Y up/W, -Y down/S. All received frames are
+// complete 45×66 images, so no GIF disposal/compositing is needed.
+const avatarDirections = { left:'-X', right:'X', up:'Y', down:'-Y' };
+const avatarViews = {};
+const avatarAnimations = {};
+for (const [direction, suffix] of Object.entries(avatarDirections)) {
+  const idleId = `avatar-man-${direction}-idle`;
+  officialAsset(idleId, `avatar/man/avatar-hombre${suffix}.png`, {worldScale:0.5});
+  avatarViews[direction] = idleId;
+  const bytes = readFileSync(`${avatarGifSource}/avatar-hombre${suffix}.gif`);
+  const gif = parseGIF(bytes);
+  const frames = decompressFrames(gif, true);
+  if (gif.lsd.width !== 45 || gif.lsd.height !== 66 || !frames.length) throw new Error(`GIF de avatar inesperado: ${suffix}`);
+  avatarAnimations[direction] = frames.map((frame, index) => {
+    const {dims} = frame;
+    if (dims.left !== 0 || dims.top !== 0 || dims.width !== gif.lsd.width || dims.height !== gif.lsd.height) throw new Error(`Cuadro GIF parcial: ${suffix}/${index}`);
+    const assetId = `avatar-man-${direction}-walk-${index}`;
+    registerOfficialPng(assetId, pngPixels(dims.width, dims.height, Buffer.from(frame.patch)), {worldScale:0.5});
+    return {assetId, durationMs:Math.max(20, frame.delay)};
+  });
 }
 // Tabletop bounds are measured in each source PNG. Convert them to pivot-local
 // coordinates; the monitor, front trim and legs remain visual only.
@@ -99,7 +123,7 @@ for (const [name,w,h] of [['wall-top',640,52],['wall-bottom',640,16],['wall-side
   asset(name,w,h,[[0,0,w,h,'718b96'],[0,0,w,5,'c1d0cd'],[0,h-7,w,7,'405d6b']], { pivot: {x:0,y:0}, colliders: [rect(0,0,w,h)], sortAnchorY: h, occlusionMask: rect(0,0,w,h) });
 }
 const object = (objectId, assetId, x, y) => ({ objectId, assetId, position:{x,y} });
-const mapVersion = 'demo-v2';
+const mapVersion = 'demo-v3';
 function scene(sceneId, name, side) {
   const right = side === 'right';
   const doorId = `${sceneId}-door`;
@@ -112,6 +136,6 @@ function scene(sceneId, name, side) {
     presentationSurfaces:[{surfaceId:`sceneId-tv-surface`.replace('sceneId',sceneId),objectId:`${sceneId}-tv`,area:rect(485,280,90,40)}]
   };
 }
-const map = {schemaVersion:1,mapVersion,entry:{sceneId:'lobby',spawnId:'entry'},avatar:{avatarId:'demo-avatar',views:{up:'avatar-up',down:'avatar-down',left:'avatar-left',right:'avatar-right'},footCollider:rect(-6,-6,12,6)},assets,scenes:[scene('lobby','Recepción','right'),scene('studio','Estudio','left')]};
+const map = {schemaVersion:1,mapVersion,entry:{sceneId:'lobby',spawnId:'entry'},avatar:{avatarId:'man-avatar',views:avatarViews,animations:avatarAnimations,footCollider:rect(-6,-6,12,6)},assets,scenes:[scene('lobby','Recepción','right'),scene('studio','Estudio','left')]};
 writeFileSync(`${root}packages/contracts/data/demo-map.json`, `${JSON.stringify(map,null,2)}\n`);
-console.log(`Generated map ${mapVersion}: ${assets.length} assets (15 placeholders, 5 received exports) and two scenes.`);
+console.log(`Generated map ${mapVersion}: ${assets.length} assets (11 placeholders, 9 received PNGs, 10 frames from 4 received GIFs) and two scenes.`);

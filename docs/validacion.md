@@ -43,6 +43,10 @@ Se midieron los tableros en los cuatro PNG oficiales de escritorio y se reemplaz
 
 La vista temporal `?debug=colliders` muestra sprite, máscara, colliders y caja de pies; la captura local `test-results/desk-colliders.png` permitió revisar la alineación, pero no se versiona. `npm run build` aprobó TypeScript, el manifest `demo-v2` y sus 20 PNG. `npm test` aprobó 19 pruebas. Playwright aprobó seis recorridos de navegador: entrada desde atrás, delante, ambos laterales y diagonales con teclado en escritorio y joystick en escritorio/emulación móvil; además verificó la biblioteca con ambos controles. Se omitieron dos recorridos de teclado del perfil móvil. La emulación no acredita comportamiento en dispositivos físicos.
 
+### Avatar masculino — 2026-10-05
+
+Se integraron los cuatro PNG de reposo y los cuatro GIF de movimiento. El generador extrae diez cuadros PNG sin reinterpretar el pixel art y conserva las duraciones originales. El render muestra el PNG al detenerse y avanza los cuadros sólo al desplazarse; el collider de pies no depende del cuadro. `npm run build` aprobó TypeScript, los builds API/web y los 30 PNG del manifest `demo-v3` por firma, SHA-256 y región. No se ejecutaron recorridos de navegador ni pruebas automatizadas adicionales en esta integración.
+
 I1 sigue parcial por arte y dispositivos reales. I2–I4 requieren implementación y todos los recorridos aplicables de 06. La capacidad de diez, los presupuestos de consumo, el aislamiento multimedia, el pizarrón y los juegos siguen pendientes de evidencia.
 
 Los cambios locales de esta alineación no se han publicado. El estado de la publicación no se deduce de un build local.

@@ -5,6 +5,7 @@ export class LocalWorld {
   scene: Scene;
   position: Point;
   direction: Direction;
+  moving = false;
   readonly doors: Record<string, boolean>;
   colliders: Rect[];
   transitioning = false;
@@ -21,10 +22,11 @@ export class LocalWorld {
     this.colliders = sceneColliders(map, scene, this.doors);
   }
   step(input: Point, seconds: number): boolean {
-    if (this.transitioning || this.destroyed) return false;
+    if (this.transitioning || this.destroyed) { this.moving = false; return false; }
     const next = move(this.map, this.scene, this.position, input, seconds, this.colliders);
     const direction = facing(input, this.direction);
-    const changed = next.x !== this.position.x || next.y !== this.position.y || direction !== this.direction;
+    this.moving = next.x !== this.position.x || next.y !== this.position.y;
+    const changed = this.moving || direction !== this.direction;
     this.position = next; this.direction = direction;
     return changed;
   }
@@ -56,7 +58,7 @@ export class LocalWorld {
     try {
       await prepare(destination);
       if (this.destroyed) return false;
-      this.scene = destination; this.position = { x: spawn.x, y: spawn.y }; this.direction = spawn.direction;
+      this.scene = destination; this.position = { x: spawn.x, y: spawn.y }; this.direction = spawn.direction; this.moving = false;
       this.colliders = colliders; this.cooldownUntil = now + 400; this.blockedPortal = undefined;
       return true;
     } finally { this.transitioning = false; }

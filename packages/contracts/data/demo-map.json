@@ -1,17 +1,67 @@
 {
   "schemaVersion": 1,
-  "mapVersion": "demo-v2",
+  "mapVersion": "demo-v3",
   "entry": {
     "sceneId": "lobby",
     "spawnId": "entry"
   },
   "avatar": {
-    "avatarId": "demo-avatar",
+    "avatarId": "man-avatar",
     "views": {
-      "up": "avatar-up",
-      "down": "avatar-down",
-      "left": "avatar-left",
-      "right": "avatar-right"
+      "left": "avatar-man-left-idle",
+      "right": "avatar-man-right-idle",
+      "up": "avatar-man-up-idle",
+      "down": "avatar-man-down-idle"
+    },
+    "animations": {
+      "left": [
+        {
+          "assetId": "avatar-man-left-walk-0",
+          "durationMs": 300
+        },
+        {
+          "assetId": "avatar-man-left-walk-1",
+          "durationMs": 300
+        },
+        {
+          "assetId": "avatar-man-left-walk-2",
+          "durationMs": 300
+        }
+      ],
+      "right": [
+        {
+          "assetId": "avatar-man-right-walk-0",
+          "durationMs": 250
+        },
+        {
+          "assetId": "avatar-man-right-walk-1",
+          "durationMs": 250
+        },
+        {
+          "assetId": "avatar-man-right-walk-2",
+          "durationMs": 250
+        }
+      ],
+      "up": [
+        {
+          "assetId": "avatar-man-up-walk-0",
+          "durationMs": 250
+        },
+        {
+          "assetId": "avatar-man-up-walk-1",
+          "durationMs": 250
+        }
+      ],
+      "down": [
+        {
+          "assetId": "avatar-man-down-walk-0",
+          "durationMs": 250
+        },
+        {
+          "assetId": "avatar-man-down-walk-1",
+          "durationMs": 250
+        }
+      ]
     },
     "footCollider": {
       "shape": "rect",
@@ -49,103 +99,353 @@
     },
     {
       "schemaVersion": 1,
-      "assetId": "avatar-up",
-      "imageUrl": "/assets/demo/avatar-up.png",
+      "assetId": "avatar-man-left-idle",
+      "imageUrl": "/assets/peredo/avatar-man-left-idle.png",
       "sourceRect": {
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 26,
-        "height": 32
+        "width": 45,
+        "height": 66
       },
       "pivot": {
-        "x": 13,
-        "y": 32
+        "x": 22.5,
+        "y": 66
       },
-      "worldScale": 1,
+      "worldScale": 0.5,
       "layer": "world",
       "sortAnchorY": 0,
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 16,
       "interaction": null,
-      "variant": "demo-v1",
-      "contentHash": "a72c9191b61f28d049bbdaae0c3bdf45662c60149673a89df806daa6738dc05e"
+      "variant": "peredo-import",
+      "contentHash": "a331361f15e1902c926ed014647b09dda1ca8ecc1abb49757dc0172febf3f3c9"
     },
     {
       "schemaVersion": 1,
-      "assetId": "avatar-down",
-      "imageUrl": "/assets/demo/avatar-down.png",
+      "assetId": "avatar-man-left-walk-0",
+      "imageUrl": "/assets/peredo/avatar-man-left-walk-0.png",
       "sourceRect": {
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 26,
-        "height": 32
+        "width": 45,
+        "height": 66
       },
       "pivot": {
-        "x": 13,
-        "y": 32
+        "x": 22.5,
+        "y": 66
       },
-      "worldScale": 1,
+      "worldScale": 0.5,
       "layer": "world",
       "sortAnchorY": 0,
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 16,
       "interaction": null,
-      "variant": "demo-v1",
-      "contentHash": "1333ad14bcd999469d5cc144d0b8fc2866e181fe66af46c1f18734dc4803b9ac"
+      "variant": "peredo-import",
+      "contentHash": "d29c005ebeb9c13983bb46f286db501c9988767673f7dc63f1fe070d47e7a727"
     },
     {
       "schemaVersion": 1,
-      "assetId": "avatar-left",
-      "imageUrl": "/assets/demo/avatar-left.png",
+      "assetId": "avatar-man-left-walk-1",
+      "imageUrl": "/assets/peredo/avatar-man-left-walk-1.png",
       "sourceRect": {
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 26,
-        "height": 32
+        "width": 45,
+        "height": 66
       },
       "pivot": {
-        "x": 13,
-        "y": 32
+        "x": 22.5,
+        "y": 66
       },
-      "worldScale": 1,
+      "worldScale": 0.5,
       "layer": "world",
       "sortAnchorY": 0,
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 16,
       "interaction": null,
-      "variant": "demo-v1",
-      "contentHash": "b9bcc7daea891c5bee0fab637c026ee9137457c309d2e81507ed6ecd8fbe171b"
+      "variant": "peredo-import",
+      "contentHash": "a5c4450af490ed8ccbc6edf67e37ba63d2da749d05562d3e5373ac35c61fe0df"
     },
     {
       "schemaVersion": 1,
-      "assetId": "avatar-right",
-      "imageUrl": "/assets/demo/avatar-right.png",
+      "assetId": "avatar-man-left-walk-2",
+      "imageUrl": "/assets/peredo/avatar-man-left-walk-2.png",
       "sourceRect": {
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 26,
-        "height": 32
+        "width": 45,
+        "height": 66
       },
       "pivot": {
-        "x": 13,
-        "y": 32
+        "x": 22.5,
+        "y": 66
       },
-      "worldScale": 1,
+      "worldScale": 0.5,
       "layer": "world",
       "sortAnchorY": 0,
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 16,
       "interaction": null,
-      "variant": "demo-v1",
-      "contentHash": "1d1269801c947b370505407ef1723416ca29ea4f1818b9c9908d861c9d5904ef"
+      "variant": "peredo-import",
+      "contentHash": "fb5831852423f973350b06ae900e432324df6d06e16177ac6b35894b2b52a768"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-right-idle",
+      "imageUrl": "/assets/peredo/avatar-man-right-idle.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "14a8a34732ceb13d824355ff26c6ff65a317ad7b5b2c27c480a73ef12e89c6a2"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-right-walk-0",
+      "imageUrl": "/assets/peredo/avatar-man-right-walk-0.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "7a000b193d7480e5a4fa7edd01e2454be3a7f215dada9f589c4bbbb42f75ac8b"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-right-walk-1",
+      "imageUrl": "/assets/peredo/avatar-man-right-walk-1.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "5c228152738e7332226905ee518673aabf6a0f7c77209be9b1f867ac88321795"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-right-walk-2",
+      "imageUrl": "/assets/peredo/avatar-man-right-walk-2.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "b100c01a718a02fea26b1a1aeb113dcfa42d04e4b0424f97ff70cf5606745cd1"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-up-idle",
+      "imageUrl": "/assets/peredo/avatar-man-up-idle.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "c2ddb53d15b2b66b971ab6e707101b4538ddcde909dbc4a99e2cd208340d1fb0"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-up-walk-0",
+      "imageUrl": "/assets/peredo/avatar-man-up-walk-0.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "85b41a951efffdee22f6e5a7c84a836acccd2fb91f65b7a4254db843f3e116c2"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-up-walk-1",
+      "imageUrl": "/assets/peredo/avatar-man-up-walk-1.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e4f509c8be88e2dd41738290da94294c1e348b8b920af742a20a29b0d2531f00"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-down-idle",
+      "imageUrl": "/assets/peredo/avatar-man-down-idle.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e3a712f414cb9a694f79f99775955da0653def1a6942c089819050c756f0195f"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-down-walk-0",
+      "imageUrl": "/assets/peredo/avatar-man-down-walk-0.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "25bb374a763fc1381da30645fe93b0ec5d7125550e5c91120a17584b26ec6849"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "avatar-man-down-walk-1",
+      "imageUrl": "/assets/peredo/avatar-man-down-walk-1.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 45,
+        "height": 66
+      },
+      "pivot": {
+        "x": 22.5,
+        "y": 66
+      },
+      "worldScale": 0.5,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "occlusionMask": null,
+      "occlusionApproachMargin": 16,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "746f9b46cd4153dcdedbda161bc7669ea9803a1fd82cce0e2cd4ee5293fed3ba"
     },
     {
       "schemaVersion": 1,
@@ -726,7 +1026,7 @@
   "scenes": [
     {
       "schemaVersion": 1,
-      "mapVersion": "demo-v2",
+      "mapVersion": "demo-v3",
       "sceneId": "lobby",
       "name": "Recepción",
       "logicalSize": {
@@ -903,7 +1203,7 @@
     },
     {
       "schemaVersion": 1,
-      "mapVersion": "demo-v2",
+      "mapVersion": "demo-v3",
       "sceneId": "studio",
       "name": "Estudio",
       "logicalSize": {

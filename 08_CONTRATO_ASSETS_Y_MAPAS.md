@@ -32,7 +32,7 @@ PNG transparente individual o atlas PNG con manifest JSON. Nombre estable en min
 | Juegos | Arcade Snake y mesa/estación Pong; recursos de minijuegos mínimos. |
 | UI | Iconos coherentes para lápiz, goma, presentar, cerrar, cámara, micrófono, chat y acción. |
 
-No hacen falta animaciones de caminar, avatares subibles, variantes premium, catálogos ni assets de tienda. El mapa muestra clean/dirty, no captura real del dibujo ni una pantalla de vídeo. La presentación y el lienzo grande son UI del panel.
+El avatar masculino recibido incluye cuatro PNG de reposo y cuatro GIF de movimiento, uno por dirección; se usan en el recorrido actual. Por ahora las direcciones son `-X` = izquierda/A, `X` = derecha/D, `Y` = arriba/W y `-Y` = abajo/S. No hacen falta avatares subibles, variantes premium, catálogos ni assets de tienda. El mapa muestra clean/dirty, no captura real del dibujo ni una pantalla de vídeo. La presentación y el lienzo grande son UI del panel.
 
 ## 4. Metadatos
 
@@ -85,7 +85,7 @@ Carpetas sugeridas: `references`, `floors`, `walls`, `doors`, `furniture`, `avat
 
 Una imagen de oficina completa ayuda a comparar composición, pero no sustituye exports por capas. No reconstruir manualmente cada detalle desde una captura si Peredo tiene los originales. Desarrollo define geometría con Peredo sobre el sprite real; el artista no necesita programar el manifest.
 
-Estado de recepción al 2026-10-04: piso, cuatro orientaciones de silla, cuatro de escritorio y una referencia en `legacy/pre-alpha/assets/images`. El piso y los cuatro escritorios están integrados con escala/pivots provisionales en `demo-v2`; faltan los exports independientes de pared y demás piezas del paquete. Ver [inventario y faltantes](docs/assets.md); la ubicación en legacy no convierte estos archivos recientes en material histórico.
+Estado de recepción al 2026-10-05: piso, cuatro orientaciones de silla, cuatro de escritorio, una referencia y cuatro PNG de avatar masculino en `legacy/pre-alpha/assets/images`; también cuatro GIF de movimiento en `legacy/pre-alpha/assets/gifs/avatar/man`. El piso, los cuatro escritorios y el avatar masculino están integrados con escala/pivots provisionales en `demo-v3`; faltan los exports independientes de pared y demás piezas del paquete. Ver [inventario y faltantes](docs/assets.md); la ubicación en legacy no convierte estos archivos recientes en material histórico.
 
 ## 7. Aceptación de arte
 

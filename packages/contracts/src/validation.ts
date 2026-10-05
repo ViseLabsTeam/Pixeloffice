@@ -16,7 +16,7 @@ export const mapSchema = {
   ...object({
     schemaVersion: { const: 1 }, mapVersion: id,
     entry: object({ sceneId: id, spawnId: id }),
-    avatar: object({ avatarId: id, views: object({ up: id, down: id, left: id, right: id }), footCollider: rect }),
+    avatar: object({ avatarId: id, views: object({ up: id, down: id, left: id, right: id }), animations: object({ up: array(object({ assetId: id, durationMs: positive })), down: array(object({ assetId: id, durationMs: positive })), left: array(object({ assetId: id, durationMs: positive })), right: array(object({ assetId: id, durationMs: positive })) }), footCollider: rect }),
     assets: array(object({
       schemaVersion: { const: 1 }, assetId: id,
       imageUrl: { type: 'string', pattern: '^/assets/[a-z0-9/-]+\\.png$' },
@@ -52,6 +52,10 @@ export function validateMap(candidate: unknown): MapBundle {
   const entry = map.scenes.find(scene => scene.sceneId === map.entry.sceneId);
   if (!entry?.spawnPoints[map.entry.spawnId]) throw new Error('Entrada de mapa inexistente');
   for (const view of Object.values(map.avatar.views)) assetById(map, view);
+  for (const frames of Object.values(map.avatar.animations)) {
+    if (!frames.length) throw new Error('Animación de avatar vacía');
+    for (const frame of frames) assetById(map, frame.assetId);
+  }
   const doors = initialDoors(map);
   for (const asset of map.assets) {
     if (asset.sourceRect.x < 0 || asset.sourceRect.y < 0 || asset.pivot.x < 0 || asset.pivot.y < 0 || asset.pivot.x > asset.sourceRect.width || asset.pivot.y > asset.sourceRect.height) throw new Error(`Pivot/región inválida: ${asset.assetId}`);

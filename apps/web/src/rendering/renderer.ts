@@ -1,4 +1,4 @@
-import { assetById, occlusionTarget, spriteRect, worldRect, type MapBundle, type Point, type Scene } from '@pixel-office/contracts';
+import { assetById, occlusionTarget, spriteRect, worldRect, type Direction, type MapBundle, type Point, type Scene } from '@pixel-office/contracts';
 import { type LocalWorld } from '../engine/world';
 import { type AssetCache } from './assets';
 interface DrawItem { id: string; assetId: string; position: Point; avatar?: boolean }
@@ -8,6 +8,8 @@ export class Renderer {
   private readonly alpha = new Map<string, number>();
   private readonly debugColliders = import.meta.env.DEV && new URLSearchParams(window.location.search).get('debug') === 'colliders';
   private sceneId = '';
+  private animationDirection: Direction | undefined;
+  private animationTime = 0;
   constructor(private readonly canvas: HTMLCanvasElement, private readonly map: MapBundle, private readonly cache: AssetCache) {
     const context = canvas.getContext('2d');
     if (!context) throw new Error('El navegador no permite dibujar la oficina.');
@@ -80,7 +82,19 @@ export class Renderer {
     const scale = Math.min(width / scene.logicalSize.width, height / scene.logicalSize.height);
     context.translate((width - scene.logicalSize.width * scale) / 2, (height - scene.logicalSize.height * scale) / 2); context.scale(scale,scale);
     context.drawImage(this.floor,0,0);
-    const avatarId = this.map.avatar.views[direction];
+    let avatarId = this.map.avatar.views[direction];
+    if (world.moving) {
+      if (this.animationDirection !== direction) { this.animationDirection = direction; this.animationTime = 0; }
+      const frames = this.map.avatar.animations[direction];
+      const duration = frames.reduce((total, frame) => total + frame.durationMs, 0);
+      this.animationTime = (this.animationTime + seconds * 1000) % duration;
+      let elapsed = this.animationTime;
+      for (const frame of frames) {
+        avatarId = frame.assetId;
+        if (elapsed < frame.durationMs) break;
+        elapsed -= frame.durationMs;
+      }
+    } else { this.animationDirection = undefined; this.animationTime = 0; }
     const avatarRect = spriteRect(this.map, avatarId, position);
     const items: DrawItem[] = [...scene.objects.map(item => ({ id:item.objectId, assetId:item.assetId, position:item.position })), ...scene.doors.map(door => ({ id:door.doorId, assetId:world.doors[door.doorId] ? door.openAssetId : door.closedAssetId, position:door.position })), { id:'local-avatar', assetId:avatarId, position, avatar:true }];
     const layer = { ground:0, world:1, overlay:2 };
@@ -105,5 +119,5 @@ export class Renderer {
     this.drawDebugGeometry(world);
     return animating;
   }
-  destroy() { this.alpha.clear(); this.floor.width = 0; this.floor.height = 0; this.canvas.width = 0; this.canvas.height = 0; }
+  destroy() { this.alpha.clear(); this.animationDirection = undefined; this.animationTime = 0; this.floor.width = 0; this.floor.height = 0; this.canvas.width = 0; this.canvas.height = 0; }
 }

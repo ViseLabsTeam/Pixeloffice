@@ -23,6 +23,7 @@
   "devDependencies": {
     "@playwright/test": "1.63.0",
     "@types/node": "22.20.4",
+    "gifuct-js": "2.1.2",
     "tsup": "8.5.1",
     "tsx": "4.23.15",
     "typescript": "7.0.2",
