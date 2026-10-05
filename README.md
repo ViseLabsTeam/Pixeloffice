@@ -29,6 +29,8 @@ npm run test:e2e
 
 Los recorridos usan Edge instalado. Si falta: `npx playwright install msedge`. La emulación móvil en Chromium no equivale a validar Safari iOS ni Android real. Consultar [validación](docs/validacion.md).
 
+Para inspeccionar geometría durante desarrollo, abrir `http://127.0.0.1:5173/?debug=colliders`. La vista dibuja el rectángulo del sprite en blanco, la máscara visual en magenta, los colliders en cian y los pies del avatar en verde. Sólo se activa en el servidor de desarrollo; permite iniciar en una posición válida con `&x=176&y=120` para recorrer el pasillo posterior.
+
 ## Docker y pruebas de usuario
 
 ```sh

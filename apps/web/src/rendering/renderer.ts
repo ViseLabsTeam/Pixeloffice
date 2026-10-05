@@ -6,6 +6,7 @@ export class Renderer {
   private readonly context: CanvasRenderingContext2D;
   private readonly floor = document.createElement('canvas');
   private readonly alpha = new Map<string, number>();
+  private readonly debugColliders = import.meta.env.DEV && new URLSearchParams(window.location.search).get('debug') === 'colliders';
   private sceneId = '';
   constructor(private readonly canvas: HTMLCanvasElement, private readonly map: MapBundle, private readonly cache: AssetCache) {
     const context = canvas.getContext('2d');
@@ -24,6 +25,48 @@ export class Renderer {
     const width = rect.width * asset.worldScale; const height = rect.height * asset.worldScale;
     context.fillStyle = scene.background.color; context.fillRect(0, 0, this.floor.width, this.floor.height);
     for (let y = 0; y < this.floor.height; y += height) for (let x = 0; x < this.floor.width; x += width) context.drawImage(image, rect.x, rect.y, rect.width, rect.height, x, y, width, height);
+  }
+  private drawDebugGeometry(world: LocalWorld) {
+    if (!this.debugColliders) return;
+    const context = this.context;
+    context.save();
+    context.globalAlpha = 1;
+    context.lineWidth = 1;
+    for (const object of world.scene.objects) {
+      const asset = assetById(this.map, object.assetId);
+      const furniture = asset.assetId.startsWith('desk-') || asset.assetId === 'bookshelf';
+      if (furniture) {
+        const sprite = spriteRect(this.map, asset.assetId, object.position);
+        context.strokeStyle = '#f1f4f4'; context.setLineDash([3, 3]);
+        context.strokeRect(sprite.x, sprite.y, sprite.width, sprite.height);
+        if (asset.occlusionMask) {
+          const mask = worldRect(asset.occlusionMask, object.position, asset.worldScale);
+          context.strokeStyle = '#ed7bdd'; context.strokeRect(mask.x, mask.y, mask.width, mask.height);
+        }
+        context.setLineDash([]);
+      }
+      for (const local of asset.colliders) {
+        const collider = worldRect(local, object.position, asset.worldScale);
+        if (furniture) { context.fillStyle = '#00d4e655'; context.fillRect(collider.x, collider.y, collider.width, collider.height); }
+        context.strokeStyle = furniture ? '#00edff' : '#ffab5f';
+        context.strokeRect(collider.x, collider.y, collider.width, collider.height);
+      }
+      if (furniture) { context.fillStyle = '#ffe376'; context.fillRect(object.position.x - 2, object.position.y - 2, 4, 4); }
+    }
+    for (const door of world.scene.doors) {
+      const asset = assetById(this.map, world.doors[door.doorId] ? door.openAssetId : door.closedAssetId);
+      for (const local of asset.colliders) {
+        const collider = worldRect(local, door.position, asset.worldScale);
+        context.strokeStyle = '#ffab5f'; context.strokeRect(collider.x, collider.y, collider.width, collider.height);
+      }
+    }
+    const foot = worldRect(this.map.avatar.footCollider, world.position);
+    context.fillStyle = '#aaff76aa'; context.fillRect(foot.x, foot.y, foot.width, foot.height);
+    context.strokeStyle = '#aaff76'; context.strokeRect(foot.x, foot.y, foot.width, foot.height);
+    context.fillStyle = '#15212b'; context.fillRect(19, 57, 265, 17);
+    context.fillStyle = '#f1f4f4'; context.font = '9px system-ui'; context.textAlign = 'left';
+    context.fillText('Blanco sprite · magenta oclusión · cian sólido · verde pies', 23, 69);
+    context.restore();
   }
   draw(world: LocalWorld, seconds: number): boolean {
     const { scene, position, direction } = world;
@@ -59,6 +102,7 @@ export class Renderer {
     context.globalAlpha = 1;
     context.fillStyle = '#f4f4dc'; context.font = 'bold 10px system-ui'; context.textAlign = 'center';
     context.fillText('Vos',position.x,position.y - 39);
+    this.drawDebugGeometry(world);
     return animating;
   }
   destroy() { this.alpha.clear(); this.floor.width = 0; this.floor.height = 0; this.canvas.width = 0; this.canvas.height = 0; }

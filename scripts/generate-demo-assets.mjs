@@ -68,22 +68,26 @@ for (const view of ['up','down','left','right']) {
   if (view === 'right') shapes.push([19,7,2,2,'29374a'],[5,3,6,9,'29374a']);
   asset(`avatar-${view}`, 26, 32, shapes);
 }
-// Pivots follow the visible feet; colliders cover each desk's base, not its full sprite.
+// Tabletop bounds are measured in each source PNG. Convert them to pivot-local
+// coordinates; the monitor, front trim and legs remain visual only.
+function tabletopCollider(pivot, x, y, width, height) {
+  return rect(x - pivot.x, y - pivot.y, width, height);
+}
 officialAsset('desk-negative-x','furniture/table/escritorio -x.png',{
   pivot:{x:304,y:656},worldScale:0.18,
-  colliders:[rect(-170,-140,340,140)],occlusionMask:rect(-304,-656,584,516)
+  colliders:[tabletopCollider({x:304,y:656},130,29,350,516)],occlusionMask:rect(-304,-656,584,516)
 });
 officialAsset('desk-positive-x','furniture/table/escritorio x.png',{
   pivot:{x:270,y:660},worldScale:0.18,
-  colliders:[rect(-170,-140,340,140)],occlusionMask:rect(-270,-660,554,520)
+  colliders:[tabletopCollider({x:270,y:660},94,35,348,515)],occlusionMask:rect(-270,-660,554,520)
 });
 officialAsset('desk-negative-y','furniture/table/escritorio -y.png',{
   pivot:{x:496,y:680},worldScale:0.18,
-  colliders:[rect(-330,-175,660,175)],occlusionMask:rect(-496,-680,992,505)
+  colliders:[tabletopCollider({x:496,y:680},158,215,675,340)],occlusionMask:rect(-496,-680,992,505)
 });
 officialAsset('desk-positive-y','furniture/table/escritorio y.png',{
   pivot:{x:409,y:624},worldScale:0.18,
-  colliders:[rect(-340,-175,680,175)],occlusionMask:rect(-409,-624,818,449)
+  colliders:[tabletopCollider({x:409,y:624},50,164,685,340)],occlusionMask:rect(-409,-624,818,449)
 });
 asset('bookshelf', 80, 96, [[0,0,80,96,'554331'],[4,4,72,86,'846348'],[6,28,68,5,'ba9066'],[6,57,68,5,'ba9066'],[6,86,68,5,'ba9066'],[10,7,12,21,'5c91a5'],[25,10,9,18,'d7b874'],[40,6,14,22,'aa695b'],[58,11,11,17,'779b81'],[10,37,18,20,'aa695b'],[35,36,12,21,'779b81'],[53,38,14,19,'5c91a5'],[10,68,58,18,'d7b874']], { colliders: [rect(-38,-12,76,12)], occlusionMask: rect(-40,-96,80,84) });
 asset('partition', 120, 64, [[0,0,120,64,'a7b6ba'],[0,0,120,6,'dce4df'],[0,54,120,10,'607985'],[8,12,104,34,'c4d0cc'],[59,7,2,47,'899d9f']], { colliders: [rect(-60,-10,120,10)], occlusionMask: rect(-60,-64,120,54) });
@@ -102,7 +106,7 @@ function scene(sceneId, name, side) {
   return { schemaVersion:1,mapVersion,sceneId,name,logicalSize:{width:640,height:400},background:{assetId:'floor',color:'#b99770'},
     spawnPoints:{entry:{x:right?88:48,y:240,direction:'right'},portal:{x:right?592:48,y:240,direction:right?'left':'right'}},
     environments:[{environmentId:`${sceneId}-environment`,name,area:rect(16,52,608,332),communicationMode:'PROXIMITY'}],
-    objects:[object(`${sceneId}-north`,'wall-top',0,0),object(`${sceneId}-south`,'wall-bottom',0,384),object(`${sceneId}-edge`,'wall-side-full',right?0:624,0),object(`${sceneId}-edge-top`,'wall-side-long',right?624:0,0),object(`${sceneId}-edge-bottom`,'wall-side-short',right?624:0,272),object(`${sceneId}-desk-a`,right?'desk-negative-y':'desk-positive-x',176,190),object(`${sceneId}-desk-b`,right?'desk-positive-y':'desk-negative-x',328,190),object(`${sceneId}-shelf`,'bookshelf',440,218),object(`${sceneId}-partition`,'partition',220,344),object(`${sceneId}-plant`,'plant',552,142),object(`${sceneId}-tv`,'tv',530,345)],
+    objects:[object(`${sceneId}-north`,'wall-top',0,0),object(`${sceneId}-south`,'wall-bottom',0,384),object(`${sceneId}-edge`,'wall-side-full',right?0:624,0),object(`${sceneId}-edge-top`,'wall-side-long',right?624:0,0),object(`${sceneId}-edge-bottom`,'wall-side-short',right?624:0,272),object(`${sceneId}-desk-a`,right?'desk-negative-y':'desk-positive-x',176,220),object(`${sceneId}-desk-b`,right?'desk-positive-y':'desk-negative-x',328,220),object(`${sceneId}-shelf`,'bookshelf',440,218),object(`${sceneId}-partition`,'partition',220,344),object(`${sceneId}-plant`,'plant',552,142),object(`${sceneId}-tv`,'tv',530,345)],
     doors:[{doorId,closedAssetId:'door-closed',openAssetId:'door-open',position:{x:right?624:16,y:268},initiallyOpen:false,interactionArea:rect(right?568:0,200,72,84)}],
     portals:[{portalId:`${sceneId}-exit`,doorId,area:rect(right?616:0,220,24,44),destinationSceneId:right?'studio':'lobby',destinationSpawnId:'portal'}],
     presentationSurfaces:[{surfaceId:`sceneId-tv-surface`.replace('sceneId',sceneId),objectId:`${sceneId}-tv`,area:rect(485,280,90,40)}]

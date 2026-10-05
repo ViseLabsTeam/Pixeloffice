@@ -48,7 +48,7 @@ Coordenadas por escena, origen arriba/izquierda. Posición del avatar = centro d
 | soundBlockers | Segmentos de bloqueo acústico; no derivarlos de todo mueble. |
 | interaction | Tipo, alcance y datos de objeto interactivo. |
 
-Una biblioteca puede tener collider sólo en su base y occluder en todo su cuerpo. Una pared mantiene su collider aunque se vea translúcida. La máscara de recolor no debe teñir toda la silueta del personaje.
+Una biblioteca puede tener collider sólo en su base y occluder en todo su cuerpo. El escritorio bloquea todo el tablero en ancho y profundidad; monitor, frente decorativo y patas no amplían ese collider. Una pared mantiene su collider aunque se vea translúcida. La máscara de recolor no debe teñir toda la silueta del personaje.
 
 ## 5. Plantilla fija
 

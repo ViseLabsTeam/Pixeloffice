@@ -1,5 +1,5 @@
 import '../ui/styles.css';
-import { assetById, contains, worldRect } from '@pixel-office/contracts';
+import { assetById, canOccupy, contains, worldRect } from '@pixel-office/contracts';
 import { demoMap } from '@pixel-office/contracts/demo';
 import { Input } from '../engine/input';
 import { LocalWorld } from '../engine/world';
@@ -22,6 +22,12 @@ const controller = new AbortController();
 const cache = new AssetCache(demoMap);
 const renderer = new Renderer(canvas,demoMap,cache);
 let world = new LocalWorld(demoMap);
+// Developer-only setup for visually checking colliders and input at a valid position.
+const debugParams = new URLSearchParams(window.location.search);
+if (import.meta.env.DEV && debugParams.get('debug') === 'colliders' && debugParams.has('x') && debugParams.has('y')) {
+  const point = { x: Number(debugParams.get('x')), y: Number(debugParams.get('y')) };
+  if (canOccupy(demoMap, world.scene, point, world.colliders)) world.position = point;
+}
 let frame = 0;
 let lastTime = 0;
 let ready = false;

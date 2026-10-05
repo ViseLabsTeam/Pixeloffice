@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { demoMap } from '@pixel-office/contracts/demo';
-import { canCloseDoor, canOccupy, facing, initialDoors, move, normalizeInput, occlusionTarget, sceneColliders, validateMap, worldRect, type Rect } from '@pixel-office/contracts';
+import { assetById, canCloseDoor, canOccupy, facing, initialDoors, move, normalizeInput, occlusionTarget, overlaps, sceneColliders, spriteRect, validateMap, worldRect, type Point, type Rect } from '@pixel-office/contracts';
 import { LocalWorld } from '../../apps/web/src/engine/world';
 
 const scene = demoMap.scenes[0]!;
@@ -64,6 +64,64 @@ describe('V2-RF-005/007/009 — geometría independiente de apariencia (cobertur
     const duplicate=structuredClone(demoMap); duplicate.assets.push(duplicate.assets[0]!);
     expect(()=>validateMap(duplicate)).toThrow('IDs duplicados');
     expect(()=>validateMap({...demoMap,schemaVersion:2})).toThrow('Manifest inválido');
+  });
+});
+describe('V2-RF-007/009 — tablero completo y pasillo posterior',() => {
+  const expectedTabletops:Record<string,Rect> = {
+    'desk-negative-x':rect(130,29,350,516),
+    'desk-positive-x':rect(94,35,348,515),
+    'desk-negative-y':rect(158,215,675,340),
+    'desk-positive-y':rect(50,164,685,340)
+  };
+  const travel=(start:Point,input:Point,collider:Rect) => {
+    let position=start;
+    for(let tick=0;tick<100;tick++) {
+      position=move(demoMap,scene,position,input,1/30,[collider]);
+      expect(canOccupy(demoMap,scene,position,[collider])).toBe(true);
+    }
+    return position;
+  };
+  for(const sceneItem of demoMap.scenes) for(const object of sceneItem.objects.filter(item=>item.assetId.startsWith('desk-'))) {
+    it(`${object.assetId}: bloquea tablero desde atrás, delante, ambos lados y diagonales`,() => {
+      const asset=assetById(demoMap,object.assetId);
+      const local=asset.colliders[0]!;
+      const expected=expectedTabletops[object.assetId]!;
+      expect(local).toEqual(rect(expected.x-asset.pivot.x,expected.y-asset.pivot.y,expected.width,expected.height));
+      const collider=worldRect(local,object.position,asset.worldScale);
+      const sprite=spriteRect(demoMap,object.assetId,object.position);
+      expect(collider.height).toBeLessThan(sprite.height);
+      expect(collider.y+collider.height).toBeLessThan(sprite.y+sprite.height);
+      const center={x:collider.x+collider.width/2,y:collider.y+collider.height/2};
+      const rear=travel({x:center.x,y:collider.y-12},{x:0,y:1},collider);
+      expect(rear.y).toBeLessThanOrEqual(collider.y);
+      expect(rear.y).toBeGreaterThan(collider.y-4);
+      const front=travel({x:center.x,y:collider.y+collider.height+18},{x:0,y:-1},collider);
+      expect(front.y).toBeGreaterThanOrEqual(collider.y+collider.height+6);
+      expect(front.y).toBeLessThan(collider.y+collider.height+10);
+      const left=travel({x:collider.x-18,y:center.y},{x:1,y:0},collider);
+      expect(left.x).toBeLessThanOrEqual(collider.x-6);
+      const right=travel({x:collider.x+collider.width+18,y:center.y},{x:-1,y:0},collider);
+      expect(right.x).toBeGreaterThanOrEqual(collider.x+collider.width+6);
+      travel({x:collider.x-18,y:collider.y-18},{x:1,y:1},collider);
+      travel({x:collider.x+collider.width+18,y:collider.y-18},{x:-0.5,y:0.5},collider);
+      travel({x:collider.x-18,y:collider.y+collider.height+18},{x:0.5,y:-0.5},collider);
+      const behind={x:center.x,y:collider.y-2};
+      expect(canOccupy(demoMap,scene,behind,[collider])).toBe(true);
+      expect(overlaps(worldRect(asset.occlusionMask!,object.position,asset.worldScale),spriteRect(demoMap,demoMap.avatar.views.down,behind))).toBe(true);
+      expect(occlusionTarget(worldRect(asset.occlusionMask!,object.position,asset.worldScale),spriteRect(demoMap,demoMap.avatar.views.down,behind),true,asset.occlusionApproachMargin*asset.worldScale)).toBe(0.1);
+      const across=travel({x:collider.x-22,y:behind.y},{x:0.5,y:0},collider);
+      expect(across.x).toBeGreaterThan(collider.x+collider.width+20);
+      expect(across.y).toBe(behind.y);
+    });
+  }
+  it('conserva la base estrecha y la oclusión alta de la biblioteca',() => {
+    const shelf=assetById(demoMap,'bookshelf');
+    expect(shelf.colliders).toEqual([rect(-38,-12,76,12)]);
+    expect(shelf.occlusionMask).toEqual(rect(-40,-96,80,84));
+    const object=scene.objects.find(item=>item.assetId==='bookshelf')!;
+    const collider=worldRect(shelf.colliders[0]!,object.position,shelf.worldScale);
+    expect(canOccupy(demoMap,scene,{x:object.position.x,y:collider.y-2},[collider])).toBe(true);
+    expect(occlusionTarget(worldRect(shelf.occlusionMask!,object.position,shelf.worldScale),spriteRect(demoMap,demoMap.avatar.views.down,{x:object.position.x,y:collider.y-2}),true,16)).toBe(0.1);
   });
 });
 describe('V2-RF-005/008 — transición atómica local (cobertura parcial)',() => {

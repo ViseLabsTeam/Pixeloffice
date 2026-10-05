@@ -1,6 +1,6 @@
 # Inventario de arte — entrega parcial
 
-Revisado el 2026-10-04. Contrato vigente: [08](../08_CONTRATO_ASSETS_Y_MAPAS.md). Los tamaños se leyeron de los archivos locales; no acreditan escala de mundo, transparencia, pivots ni aprobación visual.
+Revisado el 2026-10-05. Contrato vigente: [08](../08_CONTRATO_ASSETS_Y_MAPAS.md). Los tamaños se leyeron de los archivos locales; no acreditan por sí solos escala de mundo, transparencia, pivots ni aprobación visual.
 
 ## Entrega reciente recibida
 
@@ -37,7 +37,7 @@ Hay imágenes antiguas de computadora, planta, sillas y arcade en legacy; su exi
 
 ## Estado de integración
 
-El mapa actual `packages/contracts/data/demo-map.json` tiene versión `demo-v2` y referencia el piso y los cuatro escritorios recibidos. `scripts/generate-demo-assets.mjs` copia sus PNG sin modificarlos desde `legacy/pre-alpha/assets/images/` a `apps/web/public/assets/peredo/`, calcula sus hashes y reconstruye el manifest. El suelo se repite a escala 0.35, equivalente a unos 30 píxeles lógicos por baldosa de 86 píxeles de origen. Los escritorios tienen colliders en la base y máscara de oclusión sobre la parte alta; sus valores siguen siendo provisionales.
+El mapa actual `packages/contracts/data/demo-map.json` tiene versión `demo-v2` y referencia el piso y los cuatro escritorios recibidos. `scripts/generate-demo-assets.mjs` copia sus PNG sin modificarlos desde `legacy/pre-alpha/assets/images/` a `apps/web/public/assets/peredo/`, calcula sus hashes y reconstruye el manifest. El suelo se repite a escala 0.35, equivalente a unos 30 píxeles lógicos por baldosa de 86 píxeles de origen. Los colliders de las cuatro mesas cubren el tablero completo medido en cada PNG: izquierda, derecha, borde posterior y borde anterior. Monitor, patas y frente decorativo permanecen fuera de la colisión. La máscara visual y el ancla de profundidad son datos independientes. Los valores siguen siendo provisionales hasta comparar con el plano final.
 
 Los otros 15 assets del manifest son figuras de prueba. Las sillas recibidas y la imagen de referencia aún no forman parte del mapa. Tampoco hay un PNG independiente de pared en el repositorio; los muros actuales usan placeholders. Los antiguos archivos `demo/floor.png` y `demo/desk.png` ya no están referenciados.
 

@@ -168,10 +168,10 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": -170,
-          "y": -140,
-          "width": 340,
-          "height": 140
+          "x": -174,
+          "y": -627,
+          "width": 350,
+          "height": 516
         }
       ],
       "occlusionMask": {
@@ -207,10 +207,10 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": -170,
-          "y": -140,
-          "width": 340,
-          "height": 140
+          "x": -176,
+          "y": -625,
+          "width": 348,
+          "height": 515
         }
       ],
       "occlusionMask": {
@@ -246,10 +246,10 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": -330,
-          "y": -175,
-          "width": 660,
-          "height": 175
+          "x": -338,
+          "y": -465,
+          "width": 675,
+          "height": 340
         }
       ],
       "occlusionMask": {
@@ -285,10 +285,10 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": -340,
-          "y": -175,
-          "width": 680,
-          "height": 175
+          "x": -359,
+          "y": -460,
+          "width": 685,
+          "height": 340
         }
       ],
       "occlusionMask": {
@@ -809,7 +809,7 @@
           "assetId": "desk-negative-y",
           "position": {
             "x": 176,
-            "y": 190
+            "y": 220
           }
         },
         {
@@ -817,7 +817,7 @@
           "assetId": "desk-positive-y",
           "position": {
             "x": 328,
-            "y": 190
+            "y": 220
           }
         },
         {
@@ -986,7 +986,7 @@
           "assetId": "desk-positive-x",
           "position": {
             "x": 176,
-            "y": 190
+            "y": 220
           }
         },
         {
@@ -994,7 +994,7 @@
           "assetId": "desk-negative-x",
           "position": {
             "x": 328,
-            "y": 190
+            "y": 220
           }
         },
         {

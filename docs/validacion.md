@@ -37,6 +37,12 @@ No se ejecutó Playwright en esta edición ni se realizaron recorridos multiusua
 
 ## Aceptación final pendiente
 
+### Collider de escritorio — 2026-10-05
+
+Se midieron los tableros en los cuatro PNG oficiales de escritorio y se reemplazó la colisión de patas por el área completa de cada tablero. Las cuatro mesas se ubicaron a `y=220` para permitir paso posterior sin meter los pies en el tablero. La máscara de oclusión, la opacidad mínima de 0.1 y el ancla de profundidad permanecen independientes. La biblioteca conserva su collider bajo y su máscara alta.
+
+La vista temporal `?debug=colliders` muestra sprite, máscara, colliders y caja de pies; la captura local `test-results/desk-colliders.png` permitió revisar la alineación, pero no se versiona. `npm run build` aprobó TypeScript, el manifest `demo-v2` y sus 20 PNG. `npm test` aprobó 19 pruebas. Playwright aprobó seis recorridos de navegador: entrada desde atrás, delante, ambos laterales y diagonales con teclado en escritorio y joystick en escritorio/emulación móvil; además verificó la biblioteca con ambos controles. Se omitieron dos recorridos de teclado del perfil móvil. La emulación no acredita comportamiento en dispositivos físicos.
+
 I1 sigue parcial por arte y dispositivos reales. I2–I4 requieren implementación y todos los recorridos aplicables de 06. La capacidad de diez, los presupuestos de consumo, el aislamiento multimedia, el pizarrón y los juegos siguen pendientes de evidencia.
 
 Los cambios locales de esta alineación no se han publicado. El estado de la publicación no se deduce de un build local.
