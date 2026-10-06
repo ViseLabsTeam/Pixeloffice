@@ -1,6 +1,6 @@
 import { assetById, type Direction, type Door, type DoorStates, type MapBundle, type Point, type Rect, type Scene } from './map';
 
-export const MOVEMENT_SPEED = 120;
+export const MOVEMENT_SPEED = 240;
 export const MAX_STEP_SECONDS = 0.1;
 // 90% transparency leaves 10% opacity when an object occludes the avatar.
 export const OCCLUSION_MIN_OPACITY = 0.1;

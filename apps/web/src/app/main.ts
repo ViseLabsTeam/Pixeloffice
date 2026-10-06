@@ -5,6 +5,7 @@ import { Input } from '../engine/input';
 import { LocalWorld } from '../engine/world';
 import { AssetCache } from '../rendering/assets';
 import { Renderer } from '../rendering/renderer';
+import { LocalMedia } from '../media/local-media';
 
 function element<T extends HTMLElement>(id: string): T {
   const node = document.getElementById(id);
@@ -21,6 +22,12 @@ const hint = element('hint');
 const controller = new AbortController();
 const cache = new AssetCache(demoMap);
 const renderer = new Renderer(canvas,demoMap,cache);
+const localMedia = new LocalMedia(
+  { camera: element<HTMLButtonElement>('camera-toggle'), microphone: element<HTMLButtonElement>('microphone-toggle') },
+  element<HTMLVideoElement>('camera-preview'),
+  element('camera-placeholder'),
+  element('media-status')
+);
 let world = new LocalWorld(demoMap);
 // Developer-only setup for visually checking colliders and input at a valid position.
 const debugParams = new URLSearchParams(window.location.search);
@@ -115,10 +122,10 @@ document.addEventListener('visibilitychange',() => {
 function dispose() {
   if (disposed) return;
   disposed = true; ready = false; cancelAnimationFrame(frame); frame = 0;
-  controller.abort(); resize.disconnect(); input.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
+  controller.abort(); resize.disconnect(); input.destroy(); localMedia.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
 }
 window.addEventListener('pagehide',event => {
-  if (event.persisted) { cancelAnimationFrame(frame); frame = 0; input.reset(); lastTime = 0; }
+  if (event.persisted) { cancelAnimationFrame(frame); frame = 0; input.reset(); localMedia.stopAll(); lastTime = 0; }
   else dispose();
 },{signal:controller.signal});
 window.addEventListener('pageshow',event => { if (event.persisted) wake(); },{signal:controller.signal});

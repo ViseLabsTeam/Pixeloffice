@@ -2,7 +2,7 @@
 
 Demo de portafolio de **Vice Labs** con Canvas 2D y TypeScript. Objetivo final: oficina fija, acceso sin cuenta y sesiones temporales de hasta diez participantes, según las especificaciones [00–08 v2](00_LEEME.md).
 
-La aplicación implementa un **recorrido individual por la oficina completa** de la imagen `total-office.jpeg`. La composición de 1600×900 se dibuja como un fondo único; paredes, tabiques, bases de muebles, tableros, sillas, zonas de interacción y oclusión se definen por separado en el mapa. El avatar masculino conserva sus cuatro direcciones, PNG de reposo y cuadros de GIF de movimiento, con escala adaptada al escenario. El pizarrón permite alternar entre limpio y marcado; sus sprites finales y el GIF del tren siguen pendientes de recepción. Sesiones compartidas, chat, audio/vídeo, pantalla, accesos externos a Google Workspace, Snake y Pong siguen pendientes en la aplicación actual.
+La aplicación implementa un **recorrido individual por la oficina completa** de la imagen `total-office.jpeg`. La composición de 1600×900 se dibuja como un fondo único; paredes, tabiques, bases de muebles, tableros, sillas, zonas de interacción y oclusión se definen por separado en el mapa. El avatar masculino conserva sus cuatro direcciones, PNG de reposo y cuadros de GIF de movimiento, con escala adaptada al escenario. Su velocidad es de 240 unidades por segundo. La cámara y el micrófono se pueden activar por separado para uso local, con vista previa de cámara. El pizarrón permite alternar entre limpio y marcado; sus sprites finales y el GIF del tren siguen pendientes de recepción. Sesiones compartidas, chat, transmisión de audio/vídeo, pantalla, accesos externos a Google Workspace, Snake y Pong siguen pendientes en la aplicación actual.
 
 Cuentas, equipos persistentes, horarios, OAuth/APIs de Google, editor de mapas y tienda están fuera del alcance. Ver [inventario y faltantes de arte](docs/assets.md).
 
@@ -15,7 +15,7 @@ npm ci
 npm run dev
 ```
 
-Abrir `http://127.0.0.1:5173`. WASD/flechas o joystick para moverse; E o **Interactuar** para cambiar el pizarrón o consultar las zonas de computadoras. La oficina completa conserva su proporción al cambiar el tamaño de pantalla.
+Abrir `http://127.0.0.1:5173`. WASD/flechas o joystick para moverse; E o **Interactuar** para cambiar el pizarrón o consultar las zonas de computadoras. **Activar cámara** y **Activar micrófono** solicitan permisos sólo al pulsarlos; los botones permiten apagarlos por separado. La captura funciona en localhost o HTTPS y no se transmite a otros participantes en este recorrido. La oficina completa conserva su proporción al cambiar el tamaño de pantalla.
 
 API inicial opcional en otra terminal: `npm run dev:api`. Expone `http://127.0.0.1:3001/healthz` y `/maps/demo-v4/manifest`. Sólo contiene el mapa público de prueba; aún no autentica ni sincroniza usuarios.
 

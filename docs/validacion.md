@@ -53,6 +53,10 @@ Se integraron los cuatro PNG de reposo y los cuatro GIF de movimiento. El genera
 
 Playwright aprobó 12 recorridos en Edge de escritorio y emulación móvil: tablero desde atrás, delante, ambos laterales y diagonal con teclado/joystick, base de biblioteca, cuatro direcciones del avatar, cambio local del pizarrón, joystick y proporción al cambiar viewport. Se omitieron dos recorridos de teclado en perfil móvil y dos pruebas del tren: el GIF solicitado no está en los assets recibidos. La vista marcada del pizarrón usa trazos temporales; tampoco se recibieron sus sprites limpio/sucio. No se han verificado tren animado, sprites definitivos ni dispositivos físicos.
 
+### Velocidad y medios locales — 2026-10-06
+
+La velocidad base se duplicó de 120 a 240 unidades por segundo. Se agregaron controles independientes para solicitar y detener cámara y micrófono, con vista previa de cámara y mensajes de error. `npm run build` aprobó TypeScript, validación de assets y builds API/web. En esta edición no se ejecutaron pruebas de dispositivos ni se verificó captura con hardware físico; tampoco hay transmisión entre participantes.
+
 I1 sigue parcial por arte y dispositivos reales. I2–I4 requieren implementación y todos los recorridos aplicables de 06. La capacidad de diez, los presupuestos de consumo, el aislamiento multimedia, el pizarrón y los juegos siguen pendientes de evidencia.
 
 Los cambios locales de esta alineación no se han publicado. El estado de la publicación no se deduce de un build local.

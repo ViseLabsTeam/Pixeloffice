@@ -24,6 +24,18 @@
   canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; touch-action: pan-y; }
   .world-footer { display: flex; justify-content: space-between; gap: 10px; padding: 13px 18px; border-top: 1px solid #344854; font-size: .76rem; color: #b6c6ce; }
   .guide { padding: 20px 8px 0; }
+  .media-panel { margin-top: 20px; border: 1px solid #344854; border-radius: 12px; background: #152a36; padding: 16px; display: flex; align-items: center; gap: 18px; max-width: 850px; }
+  .media-preview { width: 152px; aspect-ratio: 4 / 3; flex-shrink: 0; border-radius: 9px; overflow: hidden; background: #0c1a23; display: grid; place-items: center; color: #94a8b4; font-size: .75rem; }
+  .media-preview video { display: block; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+  .media-preview [hidden] { display: none; }
+  .media-details { min-width: 0; flex: 1; }
+  .media-details h2 { font-size: 1rem; margin: 0 0 5px; }
+  .media-details p { margin: 0; color: #aebfc7; font-size: .78rem; }
+  .media-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 7px; }
+  .media-button { width: auto; min-width: 155px; }
+  .media-button[data-state="on"] { border-color: #80bca1; background: #214939; color: #e7f6e9; }
+  .media-button[data-state="requesting"] { border-color: #d9be83; }
+  #media-status[data-error="true"] { color: #ffbaac; }
   .controls { max-width: calc(100% - 284px); display: flex; align-items: center; gap: 22px; padding: 20px 0; }
   .control-message { flex: 1; }
   .control-message p { margin: 0; font-size: .85rem; }
@@ -56,6 +68,10 @@
     .preview-badge { font-size: .6rem; padding: 6px 8px; }
     main { padding-top: 20px; } .scene-header { margin-bottom: 16px; }
     .controls { gap: 12px; flex-wrap: wrap; padding: 20px 0; } .control-message { min-width: 140px; } .primary { margin-left: auto; }
+    .media-panel { align-items: flex-start; gap: 12px; padding: 12px; }
+    .media-preview { width: 92px; }
+    .media-buttons { display: grid; }
+    .media-button { min-width: 0; width: 100%; padding-inline: 10px; }
     .world-footer { padding: 10px; font-size: .65rem; } .page-footer { flex-wrap: wrap; gap: 8px; }
   }
   @media (max-height: 500px) and (orientation: landscape) {

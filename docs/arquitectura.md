@@ -2,9 +2,11 @@
 
 Actualizado el 2026-10-06. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue incompleto respecto al tren, sprites del pizarrón y validación en dispositivo real.
 
-`apps/web/src/app` posee el ciclo de vida. Crea input, mundo local, caché y renderer; desmonta listeners, ResizeObserver, rAF e imágenes al salir. Detiene el dibujo en segundo plano y no programa frames cuando input y oclusión están quietos. El límite visual es 30 FPS, con simulación basada en tiempo y subpasos de hasta dos unidades.
+`apps/web/src/app` posee el ciclo de vida. Crea input, mundo local, caché, renderer y controles de medios; desmonta listeners, ResizeObserver, rAF, imágenes y pistas de captura al salir. Detiene el dibujo en segundo plano y programa frames mientras haya movimiento o paisaje animado. El límite visual es 30 FPS, con simulación basada en tiempo y subpasos de hasta dos unidades.
 
-`engine/input` traduce teclado y Pointer Events a un vector normalizado. Conserva intensidad, aplica zona muerta y libera el control en blur, foco editable, pointercancel y pérdida de captura. La acción usa un botón DOM independiente, permitiendo un segundo pointer.
+`engine/input` traduce teclado y Pointer Events a un vector normalizado. Conserva intensidad, aplica zona muerta y libera el control en blur, foco editable, pointercancel y pérdida de captura. La velocidad base es 240 unidades de mapa por segundo. La acción usa un botón DOM independiente, permitiendo un segundo pointer.
+
+`media/local-media` pide cámara y micrófono sólo por acción del usuario, con solicitudes y pistas independientes. La cámara se muestra en una vista previa silenciada; el micrófono queda capturado sin reproducción local. Los controles muestran permiso denegado o dispositivo ausente, permiten cancelar una solicitud pendiente y detienen pistas al apagar o salir. Esta etapa no publica medios a otros participantes.
 
 `engine/world` es **una demostración local**, sin autoridad de permisos. Usa una escena fija de 1600×900 y una caja de pies para resolver movimiento contra colliders definidos aparte del JPEG. Guarda localmente el estado limpio/marcado del pizarrón. Las estructuras de puertas y portales siguen disponibles en el contrato para etapas futuras, pero no se usan en esta oficina.
 
