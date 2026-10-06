@@ -1,16 +1,16 @@
 # Arquitectura actual — base espacial para la demo v2
 
-Actualizado el 2026-10-04. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue incompleto respecto al arte definitivo y validación real.
+Actualizado el 2026-10-06. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue incompleto respecto al tren, sprites del pizarrón y validación en dispositivo real.
 
 `apps/web/src/app` posee el ciclo de vida. Crea input, mundo local, caché y renderer; desmonta listeners, ResizeObserver, rAF e imágenes al salir. Detiene el dibujo en segundo plano y no programa frames cuando input y oclusión están quietos. El límite visual es 30 FPS, con simulación basada en tiempo y subpasos de hasta dos unidades.
 
 `engine/input` traduce teclado y Pointer Events a un vector normalizado. Conserva intensidad, aplica zona muerta y libera el control en blur, foco editable, pointercancel y pérdida de captura. La acción usa un botón DOM independiente, permitiendo un segundo pointer.
 
-`engine/world` es **una demostración local**, sin autoridad de permisos. Mantiene puertas temporales fuera del manifest. Carga el destino antes de cambiar escena/posición; al fallar conserva origen y requiere salir del portal antes de reintentar. La transición ignora acciones/movimiento mientras está pendiente. I2 sustituirá la confirmación local por el ACK autorizado del servidor.
+`engine/world` es **una demostración local**, sin autoridad de permisos. Usa una escena fija de 1600×900 y una caja de pies para resolver movimiento contra colliders definidos aparte del JPEG. Guarda localmente el estado limpio/marcado del pizarrón. Las estructuras de puertas y portales siguen disponibles en el contrato para etapas futuras, pero no se usan en esta oficina.
 
-`rendering` separa fondo cacheado, sprites ordenados por layer/apoyo/ID y rótulos. El collider nunca depende de alpha. La máscara sólo se atenúa cuando su objeto se dibuja delante del avatar; cada objeto mantiene alpha local. Límite DPR=2 y presupuesto de bitmaps=64 MiB, aún propuestos. La caché incluye los assets de las dos escenas de demostración y rechaza exceder el presupuesto; una oficina más grande necesitará expulsión LRU.
+`rendering` dibuja la composición completa como fondo cacheado. El avatar, la vista marcada del pizarrón y las ventanas animadas se superponen por separado. Las regiones de oclusión redibujan solo el recorte correspondiente del fondo con 10 % de opacidad sobre el avatar cuando pasa detrás. El collider nunca depende del alpha. Límite DPR=2 y presupuesto de bitmaps=64 MiB. El canvas conserva proporción 16:9 y usa escalado sin suavizado.
 
-`packages/contracts` centraliza coordenadas, geometría, modelos y validación. JSON Schema comprueba forma/versiones; validaciones semánticas comprueban IDs, referencias, spawns y puertas. El build comprueba bytes PNG, hash y regiones de atlas. El mapa está versionado en `data/demo-map.json`; no contiene credenciales ni estado temporal. `demo-v3` identifica la integración del piso, los escritorios y el avatar masculino recibidos; sus dimensiones y pivots todavía se deben contrastar con el plano final de Peredo. Las animaciones guardan referencias y duraciones de cuadros independientes de la colisión de pies.
+`packages/contracts` centraliza coordenadas, geometría, modelos y validación. JSON Schema comprueba forma/versiones; validaciones semánticas comprueban IDs, referencias, spawns y geometría. El build comprueba firma, hash y dimensiones de JPEG/PNG. El mapa `demo-v4` en `data/demo-map.json` contiene una escena, 20 colliders, regiones de ventanas, oclusión e interacciones; no contiene credenciales ni estado temporal. Las animaciones guardan referencias y duraciones de cuadros independientes de la colisión de pies.
 
 `apps/api` usa Fastify con límites de payload y validación de parámetros. Expone únicamente salud y el manifest público. Los contratos de comando propuestos son comprobados en pruebas, pero aún no existe un endpoint WS. No hay persistencia, login simulado, roles locales ni tokens multimedia.
 

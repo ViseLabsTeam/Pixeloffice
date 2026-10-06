@@ -6,7 +6,7 @@ export class AssetCache {
   private destroyed = false;
   constructor(private readonly map: MapBundle) {}
   async prepare(scene: Scene): Promise<void> {
-    const ids = new Set([scene.background.assetId, ...Object.values(this.map.avatar.views), ...Object.values(this.map.avatar.animations).flatMap(frames => frames.map(frame => frame.assetId)), ...scene.objects.map(item => item.assetId), ...scene.doors.flatMap(door => [door.closedAssetId, door.openAssetId])]);
+    const ids = new Set([scene.background.assetId, ...Object.values(this.map.avatar.views), ...Object.values(this.map.avatar.animations).flatMap(frames => frames.map(frame => frame.assetId)), ...scene.trainFrames.map(frame => frame.assetId), ...scene.objects.map(item => item.assetId), ...scene.doors.flatMap(door => [door.closedAssetId, door.openAssetId])]);
     const assets = this.map.assets.filter(asset => ids.has(asset.assetId));
     await Promise.all(assets.map(asset => this.load(asset)));
   }

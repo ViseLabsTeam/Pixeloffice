@@ -27,10 +27,10 @@ export function facing(input: Point, previous: Direction): Direction {
   return Math.abs(input.x) > Math.abs(input.y) ? horizontal : vertical;
 }
 export function sceneColliders(map: MapBundle, scene: Scene, doors: DoorStates): Rect[] {
-  const result = scene.objects.flatMap(object => {
+  const result = [...scene.colliders.map(item => item.area), ...scene.objects.flatMap(object => {
     const asset = assetById(map, object.assetId);
     return asset.colliders.map(rect => worldRect(rect, object.position, asset.worldScale));
-  });
+  })];
   for (const door of scene.doors) {
     const asset = assetById(map, doors[door.doorId] ? door.openAssetId : door.closedAssetId);
     result.push(...asset.colliders.map(rect => worldRect(rect, door.position, asset.worldScale)));

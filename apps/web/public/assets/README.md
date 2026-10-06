@@ -1,17 +1,9 @@
-# Assets del recorrido y entrega de arte v3
+# Assets de la oficina compuesta
 
-El manifest `demo-v3` combina 11 figuras de prueba dibujadas por `scripts/generate-demo-assets.mjs` con nueve PNG recibidos de Peredo: piso, cuatro orientaciones de escritorio y cuatro poses de avatar masculino en reposo. De cuatro GIF oficiales de movimiento extrae diez cuadros PNG para poder animarlos en el canvas. El script conserva los originales, copia los PNG oficiales sin alterar sus píxeles a `peredo/` y recalcula hashes y mapa. Regenerar desde la raíz con `node scripts/generate-demo-assets.mjs` y comprobar con `npm run validate:assets`.
+El manifest `demo-v4` usa `legacy/pre-alpha/assets/images/ensambled/total-office.jpeg` como fondo único de 1600×900. `scripts/generate-demo-assets.mjs` lo copia sin modificar sus píxeles a `peredo/office-composite.jpeg` y reconstruye el mapa y sus hashes. No coloca muebles individuales encima de la composición.
 
-El script escribe también `packages/contracts/data/demo-map.json` con SHA-256, rectángulos, pivots, escala, collider y máscara independientes. Escena 640×400, avatar de origen 45×66 a escala 0.5, escala de suelo 0.35 y escala de escritorio 0.18 son parámetros provisionales de esta composición. «32 bits» expresa estilo y no fija tamaño de tile.
+También conserva cuatro PNG de reposo del avatar masculino y extrae diez cuadros PNG de sus cuatro GIF de movimiento. El avatar se dibuja a escala 2 y la caja de pies es independiente del sprite. Colliders, ventanas, oclusión e interacciones están en coordenadas de la imagen original dentro de `packages/contracts/data/demo-map.json`.
 
-El collider del avatar se ubica en los pies. Collider y máscara de objeto usan coordenadas locales al pivot; `worldScale` escala ambos. `sortAnchorY` es un offset local escalado al transformar. Portales, superficies e interacción de puerta usan coordenadas de escena; las interacciones del asset son locales.
+Regenerar desde la raíz con `node scripts/generate-demo-assets.mjs`; verificar con `npm run validate:assets`. Si se recibe el GIF oficial del tren en `legacy/pre-alpha/assets/gifs/train.gif`, el generador extrae sus cuadros y el renderer los recorta a las tres ventanas. Los sprites oficiales limpio/sucio del pizarrón siguen pendientes; la región limpia ya está en la composición y el estado marcado actual usa trazos temporales.
 
-Las puertas locales recuperan `initiallyOpen` al reiniciar el recorrido. En la demo completa, puertas, chat, dibujo y partidas pertenecerán a la sesión temporal; la plantilla seguirá fija.
-
-## Arte recibido y pendiente
-
-La entrega reciente de piso, cuatro sillas, cuatro escritorios, cuatro PNG de avatar y referencia está en `legacy/pre-alpha/assets/images/`. Los cuatro GIF de movimiento están en `legacy/pre-alpha/assets/gifs/avatar/man/`. Piso, escritorios y avatar masculino se utilizan; las sillas siguen pendientes. No se encontró un export de pared independiente, por lo que los muros son provisionales. Consultar el [inventario de archivos y faltantes](../../../../docs/assets.md) y el [contrato 08](../../../../08_CONTRATO_ASSETS_Y_MAPAS.md).
-
-Ese directorio mezcla material antiguo y la entrega reciente: no tratar todo su contenido como arte histórico descartado o como arte final aprobado. Conservar originales y registrar autoría, dimensiones, escala, pivots y geometría antes de producir exports estables.
-
-V2-D02/V2-D03 y V2-V13 cubren plano, metadatos y aceptación de arte. Faltan piezas del paquete de prueba, máscaras y comprobación en un celular real. El esquema de prueba aún necesita ampliaciones para todas las interacciones, estados y bloqueos acústicos de 08.
+La imagen ensamblada no reemplaza el registro de origen, autoría y versión del arte. Consultar el [inventario](../../../../docs/assets.md) y el [contrato de assets](../../../../08_CONTRATO_ASSETS_Y_MAPAS.md).

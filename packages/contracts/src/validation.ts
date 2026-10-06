@@ -19,7 +19,7 @@ export const mapSchema = {
     avatar: object({ avatarId: id, views: object({ up: id, down: id, left: id, right: id }), animations: object({ up: array(object({ assetId: id, durationMs: positive })), down: array(object({ assetId: id, durationMs: positive })), left: array(object({ assetId: id, durationMs: positive })), right: array(object({ assetId: id, durationMs: positive })) }), footCollider: rect }),
     assets: array(object({
       schemaVersion: { const: 1 }, assetId: id,
-      imageUrl: { type: 'string', pattern: '^/assets/[a-z0-9/-]+\\.png$' },
+      imageUrl: { type: 'string', pattern: '^/assets/[a-z0-9/-]+\\.(png|jpeg)$' },
       sourceRect: rect, pivot: point, worldScale: positive,
       layer: { enum: ['ground', 'world', 'overlay'] }, sortAnchorY: number,
       colliders: array(rect), occlusionMask: nullable(rect), occlusionApproachMargin: { type: 'number', minimum: 0 },
@@ -35,7 +35,11 @@ export const mapSchema = {
       objects: array(object({ objectId: id, assetId: id, position: point })),
       doors: array(object({ doorId: id, closedAssetId: id, openAssetId: id, position: point, initiallyOpen: { type: 'boolean' }, interactionArea: rect })),
       portals: array(object({ portalId: id, doorId: id, area: rect, destinationSceneId: id, destinationSpawnId: id })),
-      presentationSurfaces: array(object({ surfaceId: id, objectId: id, area: rect }))
+      presentationSurfaces: array(object({ surfaceId: id, objectId: id, area: rect })),
+      colliders: array(object({ colliderId: id, area: rect })),
+      occluders: array(object({ occluderId: id, area: rect, baseY: number, polygon: {type:'array',items:point,minItems:3,maxItems:24} })),
+      interactions: array(object({ hotspotId: id, kind: { enum: ['board','computer'] }, label: { type:'string', minLength:1 }, area: rect })),
+      windows: array(rect), trainFrames: array(object({ assetId: id, durationMs: positive })), boardSurface: rect, boardCorners: {type:'array',items:point,minItems:4,maxItems:4}
     }))
   })
 };
@@ -67,7 +71,11 @@ export function validateMap(candidate: unknown): MapBundle {
     unique(scene.portals.map(item => item.portalId), 'portales');
     unique(scene.environments.map(item => item.environmentId), 'ambientes');
     unique(scene.presentationSurfaces.map(item => item.surfaceId), 'superficies');
+    unique(scene.colliders.map(item => item.colliderId), 'colliders');
+    unique(scene.occluders.map(item => item.occluderId), 'oclusiones');
+    unique(scene.interactions.map(item => item.hotspotId), 'interacciones');
     for (const item of scene.objects) assetById(map, item.assetId);
+    for (const frame of scene.trainFrames) assetById(map, frame.assetId);
     for (const door of scene.doors) {
       assetById(map, door.openAssetId); assetById(map, door.closedAssetId);
     }

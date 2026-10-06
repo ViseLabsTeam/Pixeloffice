@@ -1,5 +1,5 @@
 import '../ui/styles.css';
-import { assetById, canOccupy, contains, worldRect } from '@pixel-office/contracts';
+import { canOccupy } from '@pixel-office/contracts';
 import { demoMap } from '@pixel-office/contracts/demo';
 import { Input } from '../engine/input';
 import { LocalWorld } from '../engine/world';
@@ -34,27 +34,23 @@ let ready = false;
 let disposed = false;
 
 function notify(message: string, error = false) { status.textContent = message; status.dataset.error = String(error); }
-function inspectable() {
-  return world.scene.objects.find(object => {
-    const asset = assetById(demoMap,object.assetId);
-    return asset.interaction && contains(worldRect(asset.interaction.area,object.position,asset.worldScale),world.position);
-  });
-}
 function updateInterface() {
   if (sceneName.textContent !== world.scene.name) {
     sceneName.textContent = world.scene.name;
-    element('scene-count').textContent = `${demoMap.scenes.indexOf(world.scene) + 1} / ${demoMap.scenes.length} espacios`;
-    element('scene-description').textContent = world.scene.sceneId === 'lobby' ? 'La puerta al estudio está a la derecha →' : '← Volvé a recepción por la puerta izquierda';
+    element('scene-count').textContent = '1 espacio';
+    element('scene-description').textContent = 'Oficina completa · Movete con WASD, flechas o joystick';
     canvas.dataset.scene = world.scene.sceneId;
   }
   const x = Math.round(world.position.x); const y = Math.round(world.position.y);
   const coordinates = `${x}, ${y}`;
   if (position.textContent !== coordinates) { position.textContent = coordinates; canvas.dataset.x = String(x); canvas.dataset.y = String(y); }
   canvas.dataset.direction = world.direction;
+  canvas.dataset.board = world.boardDirty ? 'dirty' : 'clean';
   const door = world.nearbyDoor();
-  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o Interactuar` : inspectable() ? 'Inspeccionar pizarra · E o Interactuar' : 'Movete con WASD, flechas o el joystick.';
+  const interaction = world.nearbyInteraction();
+  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o Interactuar` : interaction?.kind === 'board' ? 'Cambiar pizarrón · E o Interactuar' : interaction ? `${interaction.label} · E o Interactuar` : 'Movete con WASD, flechas o el joystick.';
   if (hint.textContent !== message) hint.textContent = message;
-  actionButton.disabled = !ready || world.transitioning || (!door && !inspectable());
+  actionButton.disabled = !ready || world.transitioning || (!door && !interaction);
 }
 function wake() {
   if (!frame && ready && !disposed && !document.hidden) frame = requestAnimationFrame(tick);
@@ -64,8 +60,8 @@ function action() {
   const message = world.toggleDoor();
   if (message) notify(message);
   else {
-    const object = inspectable();
-    if (object) notify(assetById(demoMap,object.assetId).interaction?.label ?? '');
+    const result = world.activateInteraction();
+    if (result) notify(result);
   }
   wake();
 }

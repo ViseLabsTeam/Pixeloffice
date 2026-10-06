@@ -20,7 +20,7 @@
   .scene-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
   .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 24px; }
   .world-panel { border: 1px solid #445762; border-radius: 12px; overflow: hidden; background: #182936; }
-  .stage { width: 100%; height: clamp(300px, 55vh, 650px); }
+  .stage { width: 100%; aspect-ratio: 16 / 9; }
   canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; touch-action: pan-y; }
   .world-footer { display: flex; justify-content: space-between; gap: 10px; padding: 13px 18px; border-top: 1px solid #344854; font-size: .76rem; color: #b6c6ce; }
   .guide { padding: 20px 8px 0; }
@@ -54,12 +54,12 @@
     .app-shell { padding-inline: max(12px, env(safe-area-inset-left)) max(12px, env(safe-area-inset-right)); }
     .topbar { height: 74px; } .brand { font-size: .75rem; gap: 8px; } .brand small { font-size: .59rem; } .brand-mark { width: 34px; height: 34px; }
     .preview-badge { font-size: .6rem; padding: 6px 8px; }
-    main { padding-top: 20px; } .scene-header { margin-bottom: 16px; } .stage { height: auto; aspect-ratio: 8/5; }
+    main { padding-top: 20px; } .scene-header { margin-bottom: 16px; }
     .controls { gap: 12px; flex-wrap: wrap; padding: 20px 0; } .control-message { min-width: 140px; } .primary { margin-left: auto; }
     .world-footer { padding: 10px; font-size: .65rem; } .page-footer { flex-wrap: wrap; gap: 8px; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
     .topbar { height: 54px; } main { padding-top: 12px; } .scene-header { margin-bottom: 10px; }
-    .stage { height: 240px; } .page-footer { display: none; }
+    .page-footer { display: none; }
   }
 }

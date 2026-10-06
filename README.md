@@ -2,7 +2,7 @@
 
 Demo de portafolio de **Vice Labs** con Canvas 2D y TypeScript. Objetivo final: oficina fija, acceso sin cuenta y sesiones temporales de hasta diez participantes, según las especificaciones [00–08 v2](00_LEEME.md).
 
-La aplicación implementa un **recorrido individual de dos escenas**: portales, puertas locales, colisiones de pies, cuatro orientaciones, profundidad, oclusión hasta 90 % de transparencia (10 % de opacidad) y joystick analógico. El piso, los cuatro escritorios y el avatar masculino usan los archivos recibidos de Peredo con escala y pivots provisionales. El avatar muestra su PNG en reposo y los cuadros de su GIF al desplazarse. Los muros, puertas y otros objetos siguen con arte de prueba hasta recibir sus exports. Sesiones compartidas, chat, audio/vídeo, pantalla, pizarrón, accesos externos a Google Workspace, Snake y Pong son parte de la entrega final y están pendientes en la aplicación actual.
+La aplicación implementa un **recorrido individual por la oficina completa** de la imagen `total-office.jpeg`. La composición de 1600×900 se dibuja como un fondo único; paredes, tabiques, bases de muebles, tableros, sillas, zonas de interacción y oclusión se definen por separado en el mapa. El avatar masculino conserva sus cuatro direcciones, PNG de reposo y cuadros de GIF de movimiento, con escala adaptada al escenario. El pizarrón permite alternar entre limpio y marcado; sus sprites finales y el GIF del tren siguen pendientes de recepción. Sesiones compartidas, chat, audio/vídeo, pantalla, accesos externos a Google Workspace, Snake y Pong siguen pendientes en la aplicación actual.
 
 Cuentas, equipos persistentes, horarios, OAuth/APIs de Google, editor de mapas y tienda están fuera del alcance. Ver [inventario y faltantes de arte](docs/assets.md).
 
@@ -15,9 +15,9 @@ npm ci
 npm run dev
 ```
 
-Abrir `http://127.0.0.1:5173`. WASD/flechas o joystick para moverse; E o **Interactuar** para abrir puertas y examinar objetos. La puerta derecha de recepción conecta con el estudio; la izquierda del estudio permite volver. La escena completa conserva su proporción al cambiar el tamaño de pantalla.
+Abrir `http://127.0.0.1:5173`. WASD/flechas o joystick para moverse; E o **Interactuar** para cambiar el pizarrón o consultar las zonas de computadoras. La oficina completa conserva su proporción al cambiar el tamaño de pantalla.
 
-API inicial opcional en otra terminal: `npm run dev:api`. Expone `http://127.0.0.1:3001/healthz` y `/maps/demo-v3/manifest`. Sólo contiene el mapa público de prueba; aún no autentica ni sincroniza usuarios.
+API inicial opcional en otra terminal: `npm run dev:api`. Expone `http://127.0.0.1:3001/healthz` y `/maps/demo-v4/manifest`. Sólo contiene el mapa público de prueba; aún no autentica ni sincroniza usuarios.
 
 ## Verificar
 
@@ -29,7 +29,7 @@ npm run test:e2e
 
 Los recorridos usan Edge instalado. Si falta: `npx playwright install msedge`. La emulación móvil en Chromium no equivale a validar Safari iOS ni Android real. Consultar [validación](docs/validacion.md).
 
-Para inspeccionar geometría durante desarrollo, abrir `http://127.0.0.1:5173/?debug=colliders`. La vista dibuja el rectángulo del sprite en blanco, la máscara visual en magenta, los colliders en cian y los pies del avatar en verde. Sólo se activa en el servidor de desarrollo; permite iniciar en una posición válida con `&x=176&y=120` para recorrer el pasillo posterior.
+Para inspeccionar geometría durante desarrollo, abrir `http://127.0.0.1:5173/?debug=colliders`. La vista dibuja colliders en cian, regiones de oclusión en magenta, interacciones en amarillo, ventanas en azul y pies del avatar en verde. Sólo se activa en desarrollo; permite iniciar en una posición válida con `&x=1090&y=610` para revisar un escritorio.
 
 ## Docker y pruebas de usuario
 

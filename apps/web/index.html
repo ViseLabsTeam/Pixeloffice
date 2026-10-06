@@ -10,7 +10,7 @@
     <div class="app-shell">
       <header class="topbar">
         <a class="brand" href="/" aria-label="Pixel Office, inicio"><span class="brand-mark" aria-hidden="true">▦</span><span>PIXEL OFFICE<small>Un lugar para encontrarse</small></span></a>
-        <span class="preview-badge">Recorrido individual</span>
+        <span class="preview-badge">Oficina interactiva</span>
       </header>
       <main>
         <section class="scene-header" aria-labelledby="scene-name">
@@ -19,15 +19,15 @@
         </section>
         <div class="workspace">
           <section class="world-panel" aria-label="Mapa de la oficina">
-            <div class="stage"><canvas id="world" tabindex="0" aria-label="Mapa interactivo. Movete con WASD o flechas y usá E para abrir puertas.">Tu navegador necesita Canvas para mostrar el mapa.</canvas></div>
+            <div class="stage"><canvas id="world" tabindex="0" aria-label="Oficina interactiva. Movete con WASD o flechas y usá E para interactuar.">Tu navegador necesita Canvas para mostrar el mapa.</canvas></div>
             <div class="world-footer"><span id="scene-description">Cargando recursos…</span><output id="position" aria-label="Posición del avatar"></output></div>
           </section>
           <aside class="guide" aria-label="Guía del recorrido">
             <span class="eyebrow">EXPLORÁ LA OFICINA</span>
-            <h2>El próximo espacio está del otro lado.</h2>
-            <p>Acercate a la puerta, abrila y cruzá para descubrir la otra habitación.</p>
+            <h2>Explorá la oficina completa.</h2>
+            <p>Recorré los pasillos y acercate al pizarrón o a las computadoras para interactuar.</p>
             <div class="keyboard-guide"><kbd>W</kbd><div><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div><span>o las flechas para moverte</span></div>
-            <p class="action-guide"><kbd>E</kbd> Abrir, cerrar o inspeccionar</p>
+            <p class="action-guide"><kbd>E</kbd> Interactuar con los objetos</p>
             <hr />
             <p class="preview-note">Estás explorando el recorrido individual. La demo completa sumará sesiones de hasta diez personas, chat, llamadas, pizarrón, accesos a Google Workspace y juegos.</p>
             <button id="reset" class="secondary" type="button">Volver a la entrada</button>
@@ -39,7 +39,7 @@
           <button id="action" type="button" class="primary" disabled>Interactuar <kbd>E</kbd></button>
         </section>
       </main>
-      <footer class="page-footer"><span>Vice Labs / Pixel Office</span><span>Arte provisional · Dos espacios conectados</span></footer>
+      <footer class="page-footer"><span>Vice Labs / Pixel Office</span><span>Composición de oficina integrada · Geometría en revisión</span></footer>
     </div>
     <script type="module" src="/src/app/main.ts"></script>
   </body>

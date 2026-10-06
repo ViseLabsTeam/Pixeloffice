@@ -35,6 +35,9 @@ export interface Portal {
   destinationSceneId: string;
   destinationSpawnId: string;
 }
+export interface SceneCollider { colliderId: string; area: Rect }
+export interface SceneOccluder { occluderId: string; area: Rect; baseY: number; polygon: Point[] }
+export interface SceneInteraction { hotspotId: string; kind: 'board' | 'computer'; label: string; area: Rect }
 export interface Scene {
   schemaVersion: 1;
   mapVersion: string;
@@ -48,6 +51,13 @@ export interface Scene {
   doors: Door[];
   portals: Portal[];
   presentationSurfaces: { surfaceId: string; objectId: string; area: Rect }[];
+  colliders: SceneCollider[];
+  occluders: SceneOccluder[];
+  interactions: SceneInteraction[];
+  windows: Rect[];
+  trainFrames: AnimationFrame[];
+  boardSurface: Rect;
+  boardCorners: Point[];
 }
 export interface MapBundle {
   schemaVersion: 1;

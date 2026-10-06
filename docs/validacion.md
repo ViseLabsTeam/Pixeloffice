@@ -47,6 +47,12 @@ La vista temporal `?debug=colliders` muestra sprite, máscara, colliders y caja 
 
 Se integraron los cuatro PNG de reposo y los cuatro GIF de movimiento. El generador extrae diez cuadros PNG sin reinterpretar el pixel art y conserva las duraciones originales. El render muestra el PNG al detenerse y avanza los cuadros sólo al desplazarse; el collider de pies no depende del cuadro. `npm run build` aprobó TypeScript, los builds API/web y los 30 PNG del manifest `demo-v3` por firma, SHA-256 y región. No se ejecutaron recorridos de navegador ni pruebas automatizadas adicionales en esta integración.
 
+### Oficina compuesta — 2026-10-06
+
+`demo-v4` usa `total-office.jpeg` a 1600×900 como fondo único, 20 colliders de escena y zonas separadas de oclusión, ventanas e interacción. La vista `?debug=colliders` se inspeccionó en una captura de escritorio; el fondo, avatar y geometría comparten la misma escala. `npm run build` aprobó TypeScript, los builds API/web y las 15 imágenes referenciadas. `npm test` aprobó siete pruebas, incluida una búsqueda de rutas transitables hacia las zonas de interacción.
+
+Playwright aprobó 12 recorridos en Edge de escritorio y emulación móvil: tablero desde atrás, delante, ambos laterales y diagonal con teclado/joystick, base de biblioteca, cuatro direcciones del avatar, cambio local del pizarrón, joystick y proporción al cambiar viewport. Se omitieron dos recorridos de teclado en perfil móvil y dos pruebas del tren: el GIF solicitado no está en los assets recibidos. La vista marcada del pizarrón usa trazos temporales; tampoco se recibieron sus sprites limpio/sucio. No se han verificado tren animado, sprites definitivos ni dispositivos físicos.
+
 I1 sigue parcial por arte y dispositivos reales. I2–I4 requieren implementación y todos los recorridos aplicables de 06. La capacidad de diez, los presupuestos de consumo, el aislamiento multimedia, el pizarrón y los juegos siguen pendientes de evidencia.
 
 Los cambios locales de esta alineación no se han publicado. El estado de la publicación no se deduce de un build local.

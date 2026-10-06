@@ -1,34 +1,32 @@
 # 08 — Assets y mapa fijo: contrato con Peredo
 
-**Versión:** 2.0 · **Fecha:** 2026-10-04 · **Destinatarios:** Peredo y desarrollo.
+**Versión:** 2.0 · **Actualizado:** 2026-10-06 · **Destinatarios:** Peredo y desarrollo.
 
 ## 1. Objetivo
 
-Integrar una oficina fija de pixel art conservando el diseño de Peredo. No habrá editor ni muebles movibles para usuarios, pero paredes y objetos altos deben seguir separados del piso para ordenar profundidad y atenuar lo que tapa al avatar.
+Integrar una oficina fija de pixel art conservando el diseño de Peredo. La composición `total-office.jpeg` define el escenario visible completo; no se reconstruye colocando muebles individuales. La colisión, la interacción, la oclusión y el avatar permanecen separados del fondo. No habrá editor ni muebles movibles para usuarios.
 
 La expresión “32 bits” es una referencia de estilo del equipo; no fija un tile de 32×32 ni dimensiones de avatar. Registrar ancho/alto reales, escala y pivots antes de exportar todo. No confundir profundidad de color del PNG con cantidad de píxeles del dibujo.
 
-## 2. Primera entrega pequeña
+## 2. Entrega para la oficina compuesta
 
-Peredo entrega una escena de referencia y un paquete de prueba con: piso, tramo de pared, puerta abierta/cerrada, escritorio, silla, biblioteca o planta alta, avatar de cuatro vistas y máscara de ropa, más pizarrón limpio/sucio.
+La oficina completa recibida es la referencia visual y el fondo fijo del mapa. Para completar sus capas dinámicas faltan el GIF del tren, los sprites del pizarrón limpio/sucio y los recursos de ropa. Las piezas individuales recibidas de piso, mesa y silla se conservan como originales, sin dibujarlas nuevamente sobre la composición.
 
-Desarrollo integra este paquete y comprueba escala, punto de pies, collider, orden y transparencia hasta 90 % (opacidad 0.1) en desktop/mobile. Corregir el contrato antes de producir todas las piezas. No necesita exportar de una vez todas las variantes de color.
+Desarrollo comprueba escala, punto de pies, colliders y transparencia hasta 90 % (opacidad 0.1) en desktop/mobile. Las geometrías de muebles y paredes se miden sobre la composición original y no dependen de archivos individuales.
 
 ## 3. Formato y recursos finales
 
-PNG transparente individual o atlas PNG con manifest JSON. Nombre estable en minúsculas y guiones; originales editables separados de exports. Mantener tamaño original sin suavizado ni escalado accidental. Acompañar cada entrega con versión y lista de cambios.
+Conservar la composición original de 1600×900 sin suavizado ni escalado accidental. Las capas dinámicas pueden entregarse como PNG/GIF individuales o atlas PNG con manifest JSON. Nombre estable en minúsculas y guiones; originales editables separados de exports. Acompañar cada entrega con versión y lista de cambios.
 
 | Recurso | Entrega necesaria |
 |---|---|
-| Referencia | Imagen de cada escena completa y fuente editable si está disponible. |
-| Piso | Fondo/capa sin paredes o muebles altos pegados. |
-| Paredes | Tramos independientes; collider y región visual separables. |
-| Puertas | Abierta/cerrada coherentes con vano, orientación y pivot. |
-| Muebles | Sprites fijos individuales; base física y máscara de oclusión cuando corresponda. |
+| Oficina | `total-office.jpeg` define la composición visible; fuente editable si está disponible. |
+| Paredes y muebles | Ya dibujados en el fondo. Colliders, regiones de oclusión e interacciones se entregan como metadatos independientes. |
+| Tren | GIF de paisaje para recortar dentro de las tres ventanas, conservando marcos y paredes. |
 | Avatar hombre/mujer | Frente, espalda, izquierda y derecha; mismo punto de pies por vista. |
 | Ropa | Máscara o capas para recolorear sólo ropa, conservando piel, pelo y sombras. |
 | Pizarrón | Dos sprites: limpio y sucio; ambos con mismas medidas/pivot y zona de interacción. |
-| Computadora | Sprite y punto de interacción; iconos de accesos para panel, no edición del mueble. |
+| Computadora | Ya dibujada en el fondo; zona invisible de interacción e iconos de accesos para panel. |
 | Juegos | Arcade Snake y mesa/estación Pong; recursos de minijuegos mínimos. |
 | UI | Iconos coherentes para lápiz, goma, presentar, cerrar, cámara, micrófono, chat y acción. |
 
@@ -36,56 +34,44 @@ El avatar masculino recibido incluye cuatro PNG de reposo y cuatro GIF de movimi
 
 ## 4. Metadatos
 
-Coordenadas por escena, origen arriba/izquierda. Posición del avatar = centro de pies. Pivot de objeto = apoyo acordado. Convertir píxeles de arte a unidades lógicas con escala explícita, independiente del tamaño CSS.
+Coordenadas de la oficina en los píxeles originales de 1600×900, origen arriba/izquierda. Posición del avatar = centro de pies. Fondo, avatar y geometrías comparten la misma transformación al tamaño CSS. La escala del avatar se declara por separado.
 
 | Campo | Qué define |
 |---|---|
-| assetId/image/sourceRect | Recurso y región dentro del atlas. |
-| pivot/worldScale | Anclaje y conversión a mundo. |
-| sortAnchorY | Offset de apoyo utilizado para ordenar profundidad. |
-| colliders | Área que bloquea la caja de pies. |
-| occluder | Máscara visual, margen de aproximación y opacidad mínima. |
+| background | Imagen de oficina y dimensiones originales. |
+| pivot/worldScale | Anclaje y escala de sprites dinámicos como el avatar. |
+| colliders | Superficie física que bloquea la caja de pies, separada por obstáculo. |
+| occluders | Regiones visuales que pueden cubrir al avatar, independientes de la colisión. |
+| windows | Recortes que muestran el tren sin cubrir marcos ni paredes. |
 | soundBlockers | Segmentos de bloqueo acústico; no derivarlos de todo mueble. |
 | interaction | Tipo, alcance y datos de objeto interactivo. |
 
-Una biblioteca puede tener collider sólo en su base y occluder en todo su cuerpo. El escritorio bloquea todo el tablero en ancho y profundidad; monitor, frente decorativo y patas no amplían ese collider. Una pared mantiene su collider aunque se vea translúcida. La máscara de recolor no debe teñir toda la silueta del personaje.
+Una biblioteca tiene collider sólo en su base y una región visual en todo su cuerpo. El escritorio bloquea todo el tablero en ancho y profundidad; monitor, frente decorativo y patas no amplían ese collider. Una pared mantiene su collider aunque se vea translúcida. La máscara de recolor no debe teñir toda la silueta del personaje.
 
 ## 5. Plantilla fija
 
-El mapa incluye schemaVersion/mapVersion, escenas con tamaño lógico, ambientes con regiones, objetos, puertas, portales y spawns. Los objetos tienen posiciones fijas. El servidor y cliente usan la misma geometría y versión; no aceptar mapa enviado por participante.
+El mapa incluye schemaVersion/mapVersion, la escena fija de 1600×900, ambiente, spawn, colliders, oclusiones, ventanas e interacciones. El servidor y cliente usan la misma geometría y versión; no aceptar mapa enviado por participante. El contrato conserva tipos de puertas y portales para etapas futuras, aunque la composición actual no los usa.
 
-Cada portal referencia escena/spawn de destino. Cada pizarrón, computadora y juego pertenece a un ambiente. Las regiones deben evitar huecos sin regla, solapamientos ambiguos y spawns sobre sólidos. Dividir paredes largas en piezas cuando la atenuación de todo el tramo dificulte leer el espacio.
+Cada pizarrón, computadora y juego pertenece a un ambiente. Las regiones deben evitar huecos sin regla, solapamientos ambiguos y spawns sobre sólidos. Dividir colliders largos cuando sus aberturas permitan paso; atenuar sólo las regiones visuales que cubren al avatar.
 
-Ejemplo ilustrativo; las medidas no fijan el diseño de Peredo:
+Ejemplo ilustrativo de geometría separada del fondo:
 
 ```json
 {
-  "objectId": "bookshelf-01",
-  "assetId": "bookshelf-front",
-  "position": { "x": 240, "y": 220 },
-  "pivot": { "x": 24, "y": 64 },
-  "worldScale": 1,
-  "sortAnchorY": 0,
-  "colliders": [{ "x": -20, "y": -10, "width": 40, "height": 10 }],
-  "occluder": {
-    "mask": { "x": -24, "y": -64, "width": 48, "height": 54 },
-    "approachMargin": 24,
-    "minOpacity": 0.1
-  },
-  "soundBlockers": [],
-  "interaction": null
+  "colliderId": "center-bookshelf-base",
+  "area": { "shape": "rect", "x": 604, "y": 304, "width": 105, "height": 21 }
 }
 ```
 
-Los estados abiertos/cerrados de puertas, clean/dirty y presentación se guardan sólo en sesión. La ubicación y el sprite inicial se guardan en plantilla. No añadir un formato de editor, importador de mapas de usuario ni catálogo comercial.
+Los estados clean/dirty y presentación se guardan sólo en sesión al implementar colaboración. En el recorrido actual, clean/dirty es local y se reinicia al recargar. No añadir un formato de editor, importador de mapas de usuario ni catálogo comercial.
 
 ## 6. Organización de la entrega
 
-Carpetas sugeridas: `references`, `floors`, `walls`, `doors`, `furniture`, `avatars`, `interactive`, `ui` y `manifests`. Puede usarse atlas por grupo sin cambiar IDs. Incluir medidas, peso, escala, fecha/versión y autoría de assets propios o licencia de recursos externos.
+Carpetas sugeridas para los recursos que falten: `ensambled`, `gifs`, `avatar`, `interactive`, `ui` y `manifests`. Incluir medidas, peso, escala, fecha/versión y autoría de assets propios o licencia de recursos externos.
 
-Una imagen de oficina completa ayuda a comparar composición, pero no sustituye exports por capas. No reconstruir manualmente cada detalle desde una captura si Peredo tiene los originales. Desarrollo define geometría con Peredo sobre el sprite real; el artista no necesita programar el manifest.
+La imagen de oficina completa es el fondo oficial del mapa actual. No reconstruir manualmente muebles desde piezas sueltas. Desarrollo define geometría con Peredo sobre esta composición; el artista no necesita programar el manifest.
 
-Estado de recepción al 2026-10-05: piso, cuatro orientaciones de silla, cuatro de escritorio, una referencia y cuatro PNG de avatar masculino en `legacy/pre-alpha/assets/images`; también cuatro GIF de movimiento en `legacy/pre-alpha/assets/gifs/avatar/man`. El piso, los cuatro escritorios y el avatar masculino están integrados con escala/pivots provisionales en `demo-v3`; faltan los exports independientes de pared y demás piezas del paquete. Ver [inventario y faltantes](docs/assets.md); la ubicación en legacy no convierte estos archivos recientes en material histórico.
+Estado de recepción al 2026-10-06: `total-office.jpeg` en `legacy/pre-alpha/assets/images/ensambled/` define la distribución y apariencia. `demo-v4` lo usa como fondo único de 1600×900 y guarda colliders y zonas de interacción independientes. El avatar masculino recibido conserva sus cuatro PNG de reposo y cuatro GIF de movimiento. Faltan en el repositorio el GIF del tren y los sprites limpio/sucio del pizarrón; el estado marcado actual es una representación temporal. Ver [inventario y faltantes](docs/assets.md).
 
 ## 7. Aceptación de arte
 

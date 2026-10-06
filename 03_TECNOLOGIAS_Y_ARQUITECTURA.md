@@ -12,14 +12,14 @@ No se necesita una base de cuentas, equipos ni horarios. PostgreSQL, Google OIDC
 
 | Componente | Existe | Falta para v2 |
 |---|---|---|
-| `apps/web` | Recorrido individual, dos escenas, input, renderer y caché | Entrada a sesiones, participantes remotos, paneles de chat, A/V, pizarrón, enlaces y juegos |
+| `apps/web` | Recorrido individual por la oficina compuesta, input, renderer y caché | Entrada a sesiones, participantes remotos, paneles de chat, A/V, enlaces y juegos |
 | `apps/api` | Fastify, salud y manifest público | Crear/unirse/reconectar, límites, WS, simulación y limpieza de sesiones |
 | `packages/contracts` | Tipos, esquema del mapa, geometría y comando de puerta propuesto | Schemas de sesión, snapshots, audiencias, pizarrón, chat y Pong |
 | `packages/contracts/data/demo-map.json` | Plantilla de prueba con 15 assets provisionales y cinco exports recibidos (piso y escritorios) | Paredes independientes y demás arte de Peredo; metadatos definitivos de 08 |
 | `legacy/pre-alpha` | Código y documentación históricos, Snake/A/V experimentales; también entrega reciente de arte | Extraer sólo lo útil con adaptación al alcance actual; el directorio no se publica con el cliente |
 | `tests` | Geometría, API inicial y recorridos del prototipo | Pruebas multiusuario, medios, dibujo, juegos, aislamiento y dispositivos reales |
 
-La versión de especificación 2.0 no cambia por sí sola `schemaVersion: 1` ni `protocolVersion: 1`. El contenido del mapa sí cambió, por lo que ahora usa `mapVersion: demo-v3`.
+La versión de especificación 2.0 no cambia por sí sola `schemaVersion: 1` ni `protocolVersion: 1`. El contenido del mapa sí cambió, por lo que ahora usa `mapVersion: demo-v4`.
 
 ## 3. Límites de módulos propuestos
 

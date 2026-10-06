@@ -6,6 +6,7 @@ export class LocalWorld {
   position: Point;
   direction: Direction;
   moving = false;
+  boardDirty = false;
   readonly doors: Record<string, boolean>;
   colliders: Rect[];
   transitioning = false;
@@ -32,6 +33,18 @@ export class LocalWorld {
   }
   nearbyDoor() {
     return this.scene.doors.find(door => contains(door.interactionArea, this.position));
+  }
+  nearbyInteraction() {
+    return this.scene.interactions.find(item => contains(item.area, this.position));
+  }
+  activateInteraction(): string | undefined {
+    const item = this.nearbyInteraction();
+    if (!item) return;
+    if (item.kind === 'board') {
+      this.boardDirty = !this.boardDirty;
+      return this.boardDirty ? 'Pizarrón marcado.' : 'Pizarrón limpio.';
+    }
+    return item.label;
   }
   toggleDoor(): string | undefined {
     if (this.transitioning || this.destroyed) return;
