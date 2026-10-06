@@ -4,7 +4,7 @@ import { deflateSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { parseGIF, decompressFrames } from 'gifuct-js';
-import { furniture, fixedColliders, fixedOccluders, interactions, windows, boardSurface, boardCorners } from './office-layout.mjs';
+import { furniture, fixedColliders, interactions, windows, boardSurface, boardCorners } from './office-layout.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const output=`${root}apps/web/public/assets/peredo`;
@@ -35,7 +35,7 @@ function register(assetId,bytes,width,height,extension,options={}) {
   writeFileSync(`${output}/${assetId}.${extension}`,bytes);
   assets.push({schemaVersion:1,assetId,imageUrl:`/assets/peredo/${assetId}.${extension}`,
     sourceRect:rect(0,0,width,height),pivot:{x:width/2,y:height},worldScale:1,layer:'world',sortAnchorY:0,
-    colliders:[],occlusionMask:null,occlusionApproachMargin:0,occlusionMinOpacity:0.05,
+    colliders:[],
     depth:null,renderOrder:0,interaction:null,variant:'peredo-import',
     contentHash:createHash('sha256').update(bytes).digest('hex'),...options});
 }
@@ -49,9 +49,7 @@ for(const item of furniture){
   const width=bytes.readUInt32BE(16),height=bytes.readUInt32BE(20);
   register(item.id,bytes,width,height,'png',{
     pivot:item.pivot,worldScale:item.scale,colliders:item.collider,depth:item.depth,
-    renderOrder:item.renderOrder,occlusionMask:item.occlusion.region,
-    occlusionApproachMargin:item.occlusion.approachMargin,
-    occlusionMinOpacity:item.occlusion.minOpacity
+    renderOrder:item.renderOrder
   });
 }
 
@@ -111,7 +109,6 @@ const scene={
   objects:furniture.map(item=>({objectId:item.id,assetId:item.id,position:item.position})),
   doors:[],portals:[],presentationSurfaces:[],
   colliders:fixedColliders,
-  occluders:fixedOccluders,
   interactions,
   windows,
   trainFrames,

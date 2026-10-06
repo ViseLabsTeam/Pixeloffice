@@ -1,9 +1,6 @@
-import { assetById, isBehindObject, objectRect, occlusionTarget, overlaps, spriteRect, worldRect, type Direction, type MapBundle, type Rect, type Scene, type SceneObject } from '@pixel-office/contracts';
+import { assetById, isBehindObject, objectRect, spriteRect, worldRect, type Direction, type MapBundle, type Scene, type SceneObject } from '@pixel-office/contracts';
 import { type LocalWorld } from '../engine/world';
 import { type AssetCache } from './assets';
-
-const wallIds=new Set(['north-wall','west-border','east-border','south-border',
-  'upper-divider','lower-divider-west','lower-divider-east']);
 
 export class Renderer {
   private readonly context: CanvasRenderingContext2D;
@@ -13,7 +10,6 @@ export class Renderer {
   private animationDirection: Direction | undefined;
   private animationTime=0;
   private trainTime=0;
-  private readonly objectOpacity=new Map<string,number>();
   constructor(private readonly canvas:HTMLCanvasElement,private readonly map:MapBundle,private readonly cache:AssetCache){
     const context=canvas.getContext('2d');
     if(!context)throw new Error('El navegador no permite dibujar la oficina.');
@@ -74,44 +70,14 @@ export class Renderer {
     for(const frame of frames){if(elapsed<frame.durationMs)return frame.assetId;elapsed-=frame.durationMs;}
     return frames[0]!.assetId;
   }
-  private drawOcclusion(scene:Scene,world:LocalWorld,avatarRect:Rect){
-    const context=this.context;
-    // Wall pixels are foreground wherever the avatar sprite reaches into
-    // their footprint; the separate foot collider still controls movement.
-    for(const wall of scene.colliders){
-      if(!wallIds.has(wall.colliderId)||!overlaps(wall.area,avatarRect))continue;
-      const area=wall.area;
-      context.drawImage(this.floor,area.x,area.y,area.width,area.height,
-        area.x,area.y,area.width,area.height);
-    }
-    for(const occluder of scene.occluders){
-      if(world.position.y>occluder.baseY||!overlaps(occluder.area,avatarRect))continue;
-      const area=occluder.area;
-      context.save();
-      context.beginPath();
-      occluder.polygon.forEach((point,index)=>index?context.lineTo(point.x,point.y):context.moveTo(point.x,point.y));
-      context.closePath();context.clip();
-      context.globalAlpha=0.05;
-      context.drawImage(this.floor,area.x,area.y,area.width,area.height,area.x,area.y,area.width,area.height);
-      context.restore();
-    }
-  }
   private objectBehind(object:SceneObject,world:LocalWorld):boolean{
     return isBehindObject(assetById(this.map,object.assetId),object.position,world.position);
   }
-  private drawObject(object:SceneObject,avatarRect:Rect,seconds:number,behind:boolean):boolean{
+  private drawObject(object:SceneObject){
     const asset=assetById(this.map,object.assetId),source=asset.sourceRect;
-    const mask=asset.occlusionMask&&objectRect(asset.occlusionMask,asset,object.position);
-    const target=mask?occlusionTarget(mask,avatarRect,behind,asset.occlusionApproachMargin,asset.occlusionMinOpacity):1;
-    const previous=this.objectOpacity.get(object.objectId)??1;
-    const opacity=behind?previous+(target-previous)*Math.min(1,seconds*12):1;
-    this.objectOpacity.set(object.objectId,opacity);
     const area=spriteRect(this.map,asset.assetId,object.position);
-    this.context.save();this.context.globalAlpha=opacity;
     this.context.drawImage(this.cache.get(asset.assetId),source.x,source.y,source.width,source.height,
       Math.round(area.x),Math.round(area.y),area.width,area.height);
-    this.context.restore();
-    return Math.abs(opacity-target)>0.005;
   }
   private drawDebugGeometry(scene:Scene,world:LocalWorld){
     if(!this.debugColliders)return;
@@ -131,9 +97,6 @@ export class Renderer {
         context.strokeRect(area.x,area.y,area.width,area.height);
         context.fillStyle='#fff';context.font='15px system-ui';context.fillText(object.objectId,area.x+2,area.y+16);
       }
-      if(asset.occlusionMask){const area=objectRect(asset.occlusionMask,asset,object.position);
-        context.strokeStyle='#ed7bdd';context.setLineDash([8,6]);context.strokeRect(area.x,area.y,area.width,area.height);
-      }
       if(asset.depth){const area=spriteRect(this.map,asset.assetId,object.position);
         context.strokeStyle='#ffa54d';context.setLineDash([4,4]);context.beginPath();
         for(const rule of [asset.depth,asset.depth.secondary].filter(item=>item!==undefined)){
@@ -143,12 +106,6 @@ export class Renderer {
         }
         context.stroke();
       }
-    }
-    context.strokeStyle='#ed7bdd';context.setLineDash([8,6]);
-    for(const item of scene.occluders){
-      context.beginPath();
-      item.polygon.forEach((point,index)=>index?context.lineTo(point.x,point.y):context.moveTo(point.x,point.y));
-      context.closePath();context.stroke();
     }
     context.strokeStyle='#ffe376';
     for(const item of scene.interactions){const area=item.area;context.strokeRect(area.x,area.y,area.width,area.height);}
@@ -161,7 +118,7 @@ export class Renderer {
     context.beginPath();context.arc(world.position.x,world.position.y,5,0,Math.PI*2);context.fillStyle='#f43f5e';context.fill();
     context.fillStyle='#15212bd9';context.fillRect(1000,475,885,31);
     context.fillStyle='#f1f4f4';context.font='19px system-ui';context.textAlign='left';
-    context.fillText('Cian: collider · Magenta: oclusión · Naranja: profundidad · Verde: pies · Rojo: punto de pies',1008,497);
+    context.fillText('Cian: collider · Naranja: profundidad · Verde: pies · Rojo: punto de pies',1008,497);
     context.restore();
   }
   draw(world:LocalWorld,seconds:number):boolean{
@@ -183,17 +140,14 @@ export class Renderer {
     const asset=assetById(this.map,avatarId),source=asset.sourceRect;
     const avatarRect=spriteRect(this.map,avatarId,position);
     const objects=[...scene.objects].sort((a,b)=>assetById(this.map,a.assetId).renderOrder-assetById(this.map,b.assetId).renderOrder);
-    let fading=false;
-    for(const object of objects)if(!this.objectBehind(object,world))fading=this.drawObject(object,avatarRect,seconds,false)||fading;
+    for(const object of objects)if(!this.objectBehind(object,world))this.drawObject(object);
     context.drawImage(this.cache.get(avatarId),source.x,source.y,source.width,source.height,
       Math.round(avatarRect.x),Math.round(avatarRect.y),avatarRect.width,avatarRect.height);
-    this.drawOcclusion(scene,world,avatarRect);
-    if(world.boardDirty && position.y<=431)this.drawBoard(scene,true);
-    for(const object of objects)if(this.objectBehind(object,world))fading=this.drawObject(object,avatarRect,seconds,true)||fading;
+    for(const object of objects)if(this.objectBehind(object,world))this.drawObject(object);
     context.fillStyle='#f4f4dc';context.font='bold 19px system-ui';context.textAlign='center';
     context.fillText('Vos',position.x,avatarRect.y-8);
     this.drawDebugGeometry(scene,world);
-    return trainAnimating||fading;
+    return trainAnimating;
   }
   destroy(){this.floor.width=0;this.floor.height=0;this.canvas.width=0;this.canvas.height=0;}
 }

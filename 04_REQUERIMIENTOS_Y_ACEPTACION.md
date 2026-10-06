@@ -14,9 +14,9 @@ Todos los requisitos de esta página son obligatorios para la entrega final. Los
 | V2-RF-004 | Reconexión temporal: recuperar la misma presencia dentro de la gracia sin duplicarla; credencial vencida o de otra sesión no otorga acceso. | I2 |
 | V2-RF-005 | Oficina fija versionada: escenas, ambientes, objetos y spawns válidos; el participante no modifica la distribución ni aporta mapas. | I1/I2 |
 | V2-RF-006 | Movimiento en ocho direcciones: teclado y joystick analógico, diagonal normalizada, intensidad conservada y velocidad independiente de FPS/CSS. | I1 |
-| V2-RF-007 | Colisiones de pies: paredes, puertas cerradas y bases sólidas impiden atravesar; transparencias no alteran física. | I1/I2 |
+| V2-RF-007 | Colisiones de pies: paredes, puertas cerradas y bases sólidas impiden atravesar; el orden visual no altera la física. | I1/I2 |
 | V2-RF-008 | Puertas y portales: apertura compartida, cierre sin atrapar avatares y transición a escena/spawn válidos; fallo de carga conserva origen. | I1/I2 |
-| V2-RF-009 | Profundidad y oclusión: orden por apoyo, atenuación gradual local hasta 90 % de transparencia (opacidad 0.1) y restauración al salir. Atenuar un ambiente ajeno no revela ocupantes. | I1/I3 |
+| V2-RF-009 | Profundidad: el avatar se dibuja sobre el fondo fijo; los muebles separados usan su referencia de apoyo para ordenarse con el avatar y conservan opacidad completa. La visibilidad de otros ambientes respeta la audiencia autorizada. | I1/I3 |
 | V2-RF-010 | Avatar: opciones hombre/mujer, cuatro vistas con pies estables y color de ropa que no tiñe piel, pelo ni sombras. | I1/I2 |
 | V2-RF-011 | Presencia y audiencias: mostrar participantes autorizados de la escena/ambiente; cruzar un portal recalcula visibilidad y comunicación. | I2/I3 |
 | V2-RF-012 | Chat de ambiente: enviar y recibir mensajes atribuidos, en orden y con límites; no filtrar contenido a otra sesión o ambiente. | I3 |

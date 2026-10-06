@@ -2,7 +2,7 @@
 
 El manifest `demo-v5` usa `legacy/pre-alpha/assets/images/ensambled/SIN MUEBLESL.png` como fondo de 1920×1080. `scripts/generate-demo-assets.mjs` copia el fondo y los PNG de mesa, silla y planta sin modificar sus píxeles y reconstruye el mapa y sus hashes. Las posiciones y geometrías editables están en `scripts/office-layout.mjs`.
 
-También conserva cuatro PNG de reposo del avatar masculino y extrae diez cuadros PNG de sus cuatro GIF de movimiento. El avatar se dibuja a escala 2 y la caja de pies es independiente del sprite. Colliders, ventanas, oclusión e interacciones están en coordenadas de la imagen original dentro de `packages/contracts/data/demo-map.json`.
+También conserva cuatro PNG de reposo del avatar masculino y extrae diez cuadros PNG de sus cuatro GIF de movimiento. El avatar se dibuja a escala 2 y la caja de pies es independiente del sprite. Colliders, ventanas, profundidad e interacciones están en coordenadas de la imagen original dentro de `packages/contracts/data/demo-map.json`.
 
 Regenerar desde la raíz con `node scripts/generate-demo-assets.mjs`; verificar con `npm run validate:assets`. Si se recibe el GIF oficial del tren en `legacy/pre-alpha/assets/gifs/train.gif`, el generador extrae sus cuadros y el renderer los recorta a las tres ventanas. Los sprites oficiales limpio/sucio del pizarrón siguen pendientes; la región limpia ya está en la composición y el estado marcado actual usa trazos temporales.
 

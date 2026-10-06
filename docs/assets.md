@@ -38,14 +38,14 @@ No se identificaron en esta entrega reciente exports nuevos para:
 - Sprites del pizarrón limpio y sucio que coincidan con su perspectiva en la composición.
 - Avatar femenino de cuatro vistas y máscaras/capas de ropa para ambos avatares.
 - Arcade Snake, estación Pong e iconos de UI.
-- Metadatos de escala, pivots, colliders, oclusión, acústica e interacción.
+- Metadatos de escala, pivots, colliders, profundidad, acústica e interacción.
 - Referencias de todas las escenas, fuentes editables disponibles y registro de autoría/versión.
 
 Hay otras imágenes antiguas de computadora, sillas y arcade en legacy; su existencia no las convierte en exports finales de esta entrega ni resuelve automáticamente estos faltantes.
 
 ## Estado de integración
 
-El mapa actual `packages/contracts/data/demo-map.json` usa `demo-v5` y una escena de 1920×1080. `scripts/generate-demo-assets.mjs` copia el fondo y los tres muebles sin alterar sus píxeles, conserva los cuatro PNG del avatar y extrae diez cuadros de sus GIF para el canvas. El avatar se dibuja a escala 2. Sus pies tienen una caja de 30×12 unidades independiente del sprite. Hay 13 colliders fijos y tres objetos con collider, profundidad y oclusión independientes. `?debug=colliders` muestra su alineación. [Campos de ajuste](ajuste-mapa-oficina.md).
+El mapa actual `packages/contracts/data/demo-map.json` usa `demo-v5` y una escena de 1920×1080. `scripts/generate-demo-assets.mjs` copia el fondo y los tres muebles sin alterar sus píxeles, conserva los cuatro PNG del avatar y extrae diez cuadros de sus GIF para el canvas. El avatar se dibuja a escala 2 sobre todo el fondo. Sus pies tienen una caja de 30×12 unidades independiente del sprite. Hay 13 colliders fijos y tres objetos opacos con collider y profundidad independientes. `?debug=colliders` muestra su alineación. [Campos de ajuste](ajuste-mapa-oficina.md).
 
 El manifest contiene 18 imágenes: fondo, tres muebles, cuatro PNG de reposo y diez cuadros de movimiento. Los muebles integrados en la pared permanecen en el fondo. La región limpia del pizarrón forma parte del PNG de fondo. El estado marcado usa trazos temporales recortados a su panel hasta recibir los sprites oficiales. Las tres regiones de ventana están definidas, pero el tren no se muestra porque su GIF todavía no figura entre los archivos entregados.
 

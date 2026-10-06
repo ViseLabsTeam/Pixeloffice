@@ -4,7 +4,7 @@
 
 ## 1. Objetivo
 
-Integrar una oficina fija de pixel art conservando el diseño de Peredo. `SIN MUEBLESL.png` define el fondo de 1920×1080. Los muebles incorporados contra las paredes permanecen allí; `escritorio x.png`, `SILLA X.png` y `PLANTASL.png` son objetos separados, con colisión, oclusión y profundidad propias. No habrá editor ni muebles movibles para usuarios.
+Integrar una oficina fija de pixel art conservando el diseño de Peredo. `SIN MUEBLESL.png` define el fondo de 1920×1080. Los muebles incorporados contra las paredes permanecen allí; `escritorio x.png`, `SILLA X.png` y `PLANTASL.png` son objetos separados, con colisión y profundidad propias. El avatar se dibuja sobre todo el fondo y los muebles son opacos. No habrá editor ni muebles movibles para usuarios.
 
 La expresión “32 bits” es una referencia de estilo del equipo; no fija un tile de 32×32 ni dimensiones de avatar. Registrar ancho/alto reales, escala y pivots antes de exportar todo. No confundir profundidad de color del PNG con cantidad de píxeles del dibujo.
 
@@ -12,7 +12,7 @@ La expresión “32 bits” es una referencia de estilo del equipo; no fija un t
 
 `SIN MUEBLESL.png` es el fondo fijo y `total-office.jpeg` queda como referencia histórica de distribución. Para completar las capas dinámicas faltan el GIF del tren, los sprites del pizarrón limpio/sucio y los recursos de ropa. Mesa lateral, silla y planta se dibujan por separado, conservando los PNG originales.
 
-Desarrollo comprueba escala, punto de pies, colliders y atenuación hasta 5 % de opacidad en desktop/mobile. Las paredes y muebles incorporados usan coordenadas del fondo; los muebles sueltos usan coordenadas de sus PNG, pivot y escala explícitos. [Guía de ajuste](docs/ajuste-mapa-oficina.md).
+Desarrollo comprueba escala, punto de pies, colliders y profundidad en desktop/mobile. Las paredes y muebles incorporados usan coordenadas del fondo; los muebles sueltos usan coordenadas de sus PNG, pivot y escala explícitos. El escritorio con monitor tiene 4 píxeles del mapa de margen adicional hacia `−Y` en su collider. [Guía de ajuste](docs/ajuste-mapa-oficina.md).
 
 ## 3. Formato y recursos finales
 
@@ -21,7 +21,7 @@ Conservar el fondo original de 1920×1080 sin suavizado ni escalado accidental. 
 | Recurso | Entrega necesaria |
 |---|---|
 | Oficina | `SIN MUEBLESL.png` define el fondo visible; `total-office.jpeg` es referencia histórica. |
-| Paredes y muebles incorporados | Dibujados en el fondo. Colliders, regiones de oclusión e interacciones se entregan como metadatos independientes. |
+| Paredes y muebles incorporados | Dibujados detrás del avatar en el fondo. Colliders e interacciones se entregan como metadatos independientes. |
 | Muebles sueltos | `escritorio x.png`, `SILLA X.png` y `PLANTASL.png` se dibujan como objetos con geometría propia. |
 | Tren | GIF de paisaje para recortar dentro de las tres ventanas, conservando marcos y paredes. |
 | Avatar hombre/mujer | Frente, espalda, izquierda y derecha; mismo punto de pies por vista. |
@@ -42,25 +42,25 @@ Coordenadas de la oficina en los píxeles originales de 1920×1080, origen arrib
 | background | Imagen de oficina y dimensiones originales. |
 | pivot/worldScale | Anclaje y escala de sprites dinámicos como el avatar. |
 | colliders | Superficie física que bloquea la caja de pies, separada por obstáculo. |
-| occluders | Regiones visuales que pueden cubrir al avatar, independientes de la colisión. |
+| depth/renderOrder | Referencias de dibujo de los muebles PNG separados; no afectan sus colliders ni su opacidad. |
 | windows | Recortes que muestran el tren sin cubrir marcos ni paredes. |
 | soundBlockers | Segmentos de bloqueo acústico; no derivarlos de todo mueble. |
 | interaction | Tipo, alcance y datos de objeto interactivo. |
 
-La biblioteca incorporada tiene una zona sólida que conecta con la pared para impedir pasar por detrás. El escritorio bloquea todo el tablero en ancho y profundidad; monitor, frente decorativo y patas no amplían ese collider. La planta bloquea la maceta, no el follaje. Una pared mantiene su collider aunque se vea translúcida. La máscara de recolor no debe teñir toda la silueta del personaje.
+La biblioteca incorporada tiene una zona sólida que conecta con la pared para impedir pasar por detrás. El escritorio bloquea todo el tablero en ancho y profundidad, con un margen adicional de 4 píxeles hacia `−Y`; monitor, frente decorativo y patas no amplían el resto del collider. La planta bloquea la maceta, no el follaje. La máscara de recolor no debe teñir toda la silueta del personaje.
 
 ## 5. Plantilla fija
 
-El mapa incluye schemaVersion/mapVersion, la escena fija de 1920×1080, ambiente, spawn, colliders, muebles sueltos, oclusiones, ventanas e interacciones. El servidor y cliente usan la misma geometría y versión; no aceptar mapa enviado por participante. El contrato conserva tipos de puertas y portales para etapas futuras, aunque la composición actual no los usa.
+El mapa incluye schemaVersion/mapVersion, la escena fija de 1920×1080, ambiente, spawn, colliders, muebles sueltos, ventanas e interacciones. El servidor y cliente usan la misma geometría y versión; no aceptar mapa enviado por participante. El contrato conserva tipos de puertas y portales para etapas futuras, aunque la composición actual no los usa.
 
-Cada pizarrón, computadora y juego pertenece a un ambiente. Las regiones deben evitar huecos sin regla, solapamientos ambiguos y spawns sobre sólidos. Dividir colliders largos cuando sus aberturas permitan paso; atenuar sólo las regiones visuales que cubren al avatar.
+Cada pizarrón, computadora y juego pertenece a un ambiente. Las regiones deben evitar huecos sin regla, solapamientos ambiguos y spawns sobre sólidos. Dividir colliders largos cuando sus aberturas permitan paso.
 
 Ejemplo ilustrativo de geometría separada del fondo:
 
 ```json
 {
   "colliderId": "center-bookshelf-base",
-  "area": { "shape": "rect", "x": 724, "y": 283, "width": 127, "height": 107 }
+  "area": { "shape": "rect", "x": 724, "y": 283, "width": 127, "height": 109 }
 }
 ```
 
@@ -80,8 +80,8 @@ Estado de recepción al 2026-10-06: `demo-v5` usa `SIN MUEBLESL.png` como fondo 
 2. Regiones/pivots del atlas son válidos y cuatro vistas no desplazan pies.
 3. Colores de ropa son reconocibles y legibles como lápiz sobre blanco.
 4. Muebles y puertas permiten pasar/interactuar en la escena real.
-5. Los muebles que tapan al avatar desde detrás se atenúan gradualmente hasta 5 % de opacidad sin perder colisión; desde delante se ven opacos.
+5. El avatar se dibuja sobre todo el fondo; los muebles separados se ordenan por profundidad y siempre se ven opacos. Ninguna decisión de dibujo modifica colliders.
 6. Los sprites clean/dirty no saltan ni requieren copiar el dibujo.
-7. El fondo de otro ambiente se puede atenuar sin revelar sus ocupantes.
+7. La visibilidad de ocupantes de otro ambiente respeta la audiencia autorizada.
 8. Pesos y dimensiones respetan o justifican los objetivos de 06.
 9. Se verifica un celular antes de producir todos los recursos restantes.

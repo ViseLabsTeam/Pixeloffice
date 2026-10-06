@@ -2,8 +2,6 @@ import { assetById, type Asset, type Direction, type Door, type DoorStates, type
 
 export const MOVEMENT_SPEED = 240;
 export const MAX_STEP_SECONDS = 0.1;
-// The target opacity is set per object; 5% is the map default.
-export const OCCLUSION_MIN_OPACITY = 0.05;
 
 export function worldRect(rect: Rect, position: Point, scale = 1): Rect {
   return { shape: 'rect', x: position.x + rect.x * scale, y: position.y + rect.y * scale, width: rect.width * scale, height: rect.height * scale };
@@ -75,12 +73,4 @@ export function isBehindObject(asset: Asset, objectPosition: Point, avatarFeet: 
     return rule.behindSide==='positive'?avatarFeet[rule.axis]>reference:avatarFeet[rule.axis]<reference;
   };
   return behind(asset.depth) || (asset.depth.secondary ? behind(asset.depth.secondary) : false);
-}
-export function occlusionTarget(mask: Rect, avatar: Rect, inFront: boolean, margin: number, minOpacity = OCCLUSION_MIN_OPACITY): number {
-  if (!inFront) return 1;
-  const dx = Math.max(mask.x - avatar.x - avatar.width, avatar.x - mask.x - mask.width, 0);
-  const dy = Math.max(mask.y - avatar.y - avatar.height, avatar.y - mask.y - mask.height, 0);
-  const distance = Math.hypot(dx, dy);
-  if (distance === 0) return minOpacity;
-  return margin > 0 ? minOpacity + (1 - minOpacity) * Math.min(1, distance / margin) : 1;
 }

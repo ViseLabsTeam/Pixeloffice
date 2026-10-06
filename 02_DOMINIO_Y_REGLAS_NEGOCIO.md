@@ -41,9 +41,9 @@ El pizarrón usa `clean` cuando no tiene trazos visibles y `dirty` cuando sí lo
 | V2-RB-005 | Toda acción compartida se valida contra la sesión, presencia, ambiente y alcance de interacción actuales. |
 | V2-RB-006 | El participante no puede enviar un mapa propio ni mover muebles; cliente y servidor comparten versión y geometría. |
 | V2-RB-007 | Abrir puertas cambia estado temporal; una puerta no puede cerrarse sobre los pies de un participante. |
-| V2-RB-008 | La atenuación gráfica es local y nunca elimina colisiones ni amplía audiencias. |
+| V2-RB-008 | El orden visual y la opacidad no alteran colisiones ni amplían audiencias; los muebles se dibujan opacos. |
 | V2-RB-009 | Un portal cambia escena/spawn de manera confirmada, conserva participante/sesión y recalcula audiencia. |
-| V2-RB-010 | Un ambiente ajeno no revela sus ocupantes mediante la transparencia del fondo. |
+| V2-RB-010 | El fondo de otro ambiente no revela ocupantes fuera de la audiencia autorizada. |
 | V2-RB-011 | El servidor determina quién recibe chat, dibujo y medios; no basta ocultarlos en la interfaz. |
 | V2-RB-012 | El pizarrón conserva dibujo compartido en el panel y muestra únicamente limpio/sucio en el mapa. |
 | V2-RB-013 | Una reserva de presentación admite un emisor; cámara y pantalla son pistas independientes. |

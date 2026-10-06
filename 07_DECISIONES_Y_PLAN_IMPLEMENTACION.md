@@ -53,7 +53,7 @@ Estos pendientes permiten avanzar en trabajo independiente. No habilitan agregar
 
 ### I1 — Espacio y arte
 
-Usar la oficina compuesta como escenario fijo y mantener colisiones, oclusión e interacciones en coordenadas independientes de la imagen. El avatar masculino de cuatro vistas ya está integrado con reposo y movimiento. Completar el GIF del tren, los sprites limpio/sucio del pizarrón, el avatar femenino y las máscaras de ropa cuando se entreguen.
+Usar `SIN MUEBLESL.png` como fondo fijo, con mesa, silla y planta como objetos separados. Mantener colliders e interacciones en coordenadas del mapa; dibujar el avatar sobre todo el fondo y ordenar los muebles separados con opacidad completa. El avatar masculino de cuatro vistas ya está integrado con reposo y movimiento. Completar el GIF del tren, los sprites limpio/sucio del pizarrón, el avatar femenino y las máscaras de ropa cuando se entreguen.
 
 Salida: evidencia espacial V2-V02 en su parte local, V2-V10, V2-V13 y V2-V14. El prototipo actual cubre parte de I1; faltan arte definitivo y dispositivos reales.
 

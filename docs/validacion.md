@@ -1,6 +1,6 @@
 # Estado de validación — demo v2
 
-Actualizado el 2026-10-04. Alcance: [04](../04_REQUERIMIENTOS_Y_ACEPTACION.md) y escenarios de [06](../06_RENDIMIENTO_Y_PLAN_VALIDACION.md).
+Actualizado el 2026-10-06. Alcance: [04](../04_REQUERIMIENTOS_Y_ACEPTACION.md) y escenarios de [06](../06_RENDIMIENTO_Y_PLAN_VALIDACION.md).
 
 ## Evidencia anterior
 
@@ -15,7 +15,7 @@ Los nombres de las pruebas existentes se actualizan para referir a v2, pero sus 
 | Mapa fijo, geometría y spawns | V2-RF-005, V2-RF-007; V2-RNF-006 | Regiones/interacciones definitivas y autoridad de servidor |
 | Movimiento, cuatro vistas provisionales e input | V2-RF-006, V2-RF-010, V2-RF-019 | Avatar hombre/mujer, ropa y pruebas Android/iOS reales |
 | Puertas y 50 cruces locales | V2-RF-008 | Compartir estado y validar transiciones en servidor |
-| Profundidad y oclusión local | V2-RF-009 | Arte definitivo y ocultación de ocupantes de ambientes ajenos |
+| Profundidad de muebles opacos y avatar sobre el fondo | V2-RF-009 | Arte definitivo y autorización de visibilidad de ocupantes de otros ambientes |
 | Limpieza local y render bajo demanda | V2-RNF-004 | Recursos multimedia, paneles, sesiones y medición prolongada |
 | API salud/manifest y schema de comando | V2-RNF-006 | Endpoints de sesiones/WS y autorización con credenciales temporales |
 
@@ -72,3 +72,7 @@ El GIF del tren y los sprites definitivos del pizarrón siguen pendientes de rec
 ### Ajuste de borde frontal y paredes — 2026-10-06
 
 Se agregaron 2 píxeles del mapa al borde inferior de los colliders de mesa, silla, maceta, bases de muebles fijos y segmentos de pared pertinentes. En la convención de controles ese borde apunta a `−Y` (abajo); en Canvas aumenta `y`. La parte del sprite del avatar que se superpone a una pared se cubre con los píxeles de esa pared, mientras la caja de pies sigue determinando la colisión. `npm run build` y las ocho pruebas unitarias aprobaron. Playwright aprobó seis recorridos de escritorio/móvil sobre escritorio y biblioteca, y dos comprobaciones visuales de la pared norte; se omitieron los dos casos de teclado en perfil móvil. Como en la validación anterior, el proceso quedó abierto al cerrar Vite en Windows y se interrumpió tras registrar los resultados.
+
+### Fondo detrás del avatar y escritorio opaco — 2026-10-06
+
+La decisión vigente reemplaza la atenuación descrita en los registros anteriores: fondo, paredes, muebles integrados, tren y estado del pizarrón se dibujan antes del avatar. Se retiraron las máscaras y los parámetros de transparencia; los tres muebles PNG separados permanecen opacos y conservan su orden de profundidad. Sus colliders y los del fondo siguen bloqueando los pies. El margen del escritorio con monitor hacia `−Y` pasó de 2 a 4 píxeles del mapa; silla, maceta y bases fijas conservan 2 píxeles. `npm run build` y las ocho pruebas unitarias aprobaron. En Playwright pasaron cuatro comprobaciones visuales de avatar sobre pared y mesa opaca en escritorio/móvil, y seis recorridos de colisión del escritorio y biblioteca; dos casos de teclado en perfil móvil se omitieron. Los casos completaron, aunque el proceso quedó abierto al cerrar Vite en Windows y se interrumpió después de registrar los resultados.

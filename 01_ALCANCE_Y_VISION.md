@@ -15,14 +15,14 @@ Los requisitos describen la entrega final. El código actual ofrece un recorrido
 | Acceso | Entrar sin registro, elegir nombre y avatar y compartir una sesión temporal; máximo diez participantes por sesión. |
 | Oficina fija | Escenas conectadas mediante puertas y portales; ambientes definidos en la plantilla, sin edición por participantes. |
 | Movimiento | Ocho direcciones, WASD/flechas y joystick analógico táctil; velocidad independiente de FPS y tamaño CSS. |
-| Geometría | Colisiones de pies, profundidad por apoyo y atenuación gradual de paredes/muebles que oculten al avatar local, hasta 90 % de transparencia (10 % de opacidad). |
+| Geometría | Colisiones de pies y profundidad por apoyo. El avatar se dibuja sobre todo el fondo; los muebles separados conservan su orden de profundidad y son opacos. |
 | Avatar | Opciones hombre/mujer, cuatro vistas estáticas y color de ropa mediante máscara o capas que preserven piel, pelo y sombras. |
 | Colaboración | Presencia compartida, chat, audio/vídeo y presentación de pantalla; controles de cámara y micrófono independientes. |
 | Pizarrón | Lienzo compartido en un panel, lápiz y goma; en el mapa únicamente sprites limpio/sucio. La presentación también se visualiza en un panel. |
 | Computadoras | Accesos externos a Google Workspace desde objetos de la oficina. |
 | Descanso | Snake individual y Pong de dos participantes; ambos obligatorios en la entrega final. |
 | Dispositivos | Recorrido y paneles adaptables a escritorio y móvil, con limitaciones de captura/medios comprobadas y visibles. |
-| Arte | Diseño de Peredo mediante exports separados y metadatos de escala, pivots, colisiones, oclusión e interacción. |
+| Arte | Diseño de Peredo mediante fondo fijo, muebles PNG separados y metadatos de escala, pivots, colisiones, profundidad e interacción. |
 
 ## 3. Criterios adoptados para implementar
 

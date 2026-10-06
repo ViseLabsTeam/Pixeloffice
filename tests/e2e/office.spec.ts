@@ -54,7 +54,7 @@ test('joystick mueve y se detiene al soltarlo',async({page})=>{
   await page.waitForTimeout(150);const stopped=await x(page);
   await page.waitForTimeout(150);expect(await x(page)).toBe(stopped);
 });
-test('la pared norte cubre el sprite cuando los pies se acercan',async({page})=>{
+test('el avatar se dibuja encima de la pared del fondo al acercarse',async({page})=>{
   const pixel=async()=>page.locator('#world').evaluate(canvas=>{
     const image=canvas as HTMLCanvasElement;
     const x=Math.round(1100*image.width/1920),y=Math.round(250*image.height/1080);
@@ -65,7 +65,20 @@ test('la pared norte cubre el sprite cuando los pies se acercan',async({page})=>
   const wallAlone=await pixel();
   await page.goto('/?debug=colliders&x=1100&y=300');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
-  expect(await pixel()).toEqual(wallAlone);
+  expect(await pixel()).not.toEqual(wallAlone);
+});
+test('el escritorio separado permanece opaco delante del avatar',async({page})=>{
+  const pixel=async()=>page.locator('#world').evaluate(canvas=>{
+    const image=canvas as HTMLCanvasElement;
+    const x=Math.round(320*image.width/1920),y=Math.round(600*image.height/1080);
+    return [...image.getContext('2d')!.getImageData(x,y,1,1).data];
+  });
+  await page.goto('/?debug=colliders&x=948&y=600');
+  await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  const deskAlone=await pixel();
+  await page.goto('/?debug=colliders&x=320&y=691');
+  await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  expect(await pixel()).toEqual(deskAlone);
 });
 test('el tren cambia de cuadro dentro de las ventanas',async({page})=>{
   test.skip(map.scenes[0]!.trainFrames.length<2,'Falta el GIF oficial del tren en los assets recibidos.');

@@ -2,7 +2,7 @@
 
 Demo de portafolio de **Vice Labs** con Canvas 2D y TypeScript. Objetivo final: oficina fija, acceso sin cuenta y sesiones temporales de hasta diez participantes, según las especificaciones [00–08 v2](00_LEEME.md).
 
-La aplicación implementa un **recorrido individual por la oficina fija**. `SIN MUEBLESL.png` (1920×1080) forma el fondo; mesa lateral, silla y planta se dibujan por separado, con collider, profundidad y oclusión propios. El avatar masculino conserva sus cuatro direcciones, PNG de reposo y cuadros de GIF de movimiento, con escala adaptada al escenario. Su velocidad es de 240 unidades por segundo. La cámara y el micrófono se pueden activar por separado para uso local, con vista previa de cámara. El pizarrón permite alternar entre limpio y marcado; sus sprites finales y el GIF del tren siguen pendientes de recepción. Sesiones compartidas, chat, transmisión de audio/vídeo, pantalla, accesos externos a Google Workspace, Snake y Pong siguen pendientes en la aplicación actual. [Ajuste manual del mapa](docs/ajuste-mapa-oficina.md).
+La aplicación implementa un **recorrido individual por la oficina fija**. `SIN MUEBLESL.png` (1920×1080) forma el fondo; mesa lateral, silla y planta se dibujan por separado, con collider y profundidad propios, siempre opacos. El avatar se dibuja sobre todo el fondo. Conserva sus cuatro direcciones, PNG de reposo y cuadros de GIF de movimiento, con escala adaptada al escenario. Su velocidad es de 240 unidades por segundo. La cámara y el micrófono se pueden activar por separado para uso local, con vista previa de cámara. El pizarrón permite alternar entre limpio y marcado; sus sprites finales y el GIF del tren siguen pendientes de recepción. Sesiones compartidas, chat, transmisión de audio/vídeo, pantalla, accesos externos a Google Workspace, Snake y Pong siguen pendientes en la aplicación actual. [Ajuste manual del mapa](docs/ajuste-mapa-oficina.md).
 
 Cuentas, equipos persistentes, horarios, OAuth/APIs de Google, editor de mapas y tienda están fuera del alcance. Ver [inventario y faltantes de arte](docs/assets.md).
 
@@ -29,7 +29,7 @@ npm run test:e2e
 
 Los recorridos usan Edge instalado. Si falta: `npx playwright install msedge`. La emulación móvil en Chromium no equivale a validar Safari iOS ni Android real. Consultar [validación](docs/validacion.md).
 
-Para inspeccionar geometría durante desarrollo, abrir `http://127.0.0.1:5173/?debug=colliders`. La vista dibuja colliders en cian, regiones de oclusión en magenta, interacciones en amarillo, ventanas en azul y pies del avatar en verde. Sólo se activa en desarrollo; permite iniciar en una posición válida con `&x=1090&y=610` para revisar un escritorio.
+Para inspeccionar geometría durante desarrollo, abrir `http://127.0.0.1:5173/?debug=colliders`. La vista dibuja colliders en cian, referencias de profundidad en naranja, interacciones en amarillo, ventanas en azul y pies del avatar en verde. Sólo se activa en desarrollo; permite iniciar en una posición válida con `&x=320&y=750` para revisar el escritorio.
 
 ## Docker y pruebas de usuario
 

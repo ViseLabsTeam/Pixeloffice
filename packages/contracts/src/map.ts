@@ -12,9 +12,6 @@ export interface Asset {
   layer: 'ground' | 'world' | 'overlay';
   sortAnchorY: number;
   colliders: Rect[];
-  occlusionMask: Rect | null;
-  occlusionApproachMargin: number;
-  occlusionMinOpacity: number;
   depth: { axis: 'x' | 'y'; offset: number; behindSide: 'positive' | 'negative';
     secondary?: { axis: 'x' | 'y'; offset: number; behindSide: 'positive' | 'negative' } } | null;
   renderOrder: number;
@@ -40,7 +37,6 @@ export interface Portal {
   destinationSpawnId: string;
 }
 export interface SceneCollider { colliderId: string; area: Rect }
-export interface SceneOccluder { occluderId: string; area: Rect; baseY: number; polygon: Point[] }
 export interface SceneInteraction { hotspotId: string; kind: 'board' | 'computer'; label: string; area: Rect }
 export interface Scene {
   schemaVersion: 1;
@@ -56,7 +52,6 @@ export interface Scene {
   portals: Portal[];
   presentationSurfaces: { surfaceId: string; objectId: string; area: Rect }[];
   colliders: SceneCollider[];
-  occluders: SceneOccluder[];
   interactions: SceneInteraction[];
   windows: Rect[];
   trainFrames: AnimationFrame[];

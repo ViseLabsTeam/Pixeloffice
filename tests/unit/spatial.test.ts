@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { demoMap } from '@pixel-office/contracts/demo';
-import { assetById, canOccupy, facing, initialDoors, isBehindObject, move, normalizeInput, objectRect, occlusionTarget, overlaps, sceneColliders, validateMap, worldRect, type Point } from '@pixel-office/contracts';
+import { assetById, canOccupy, facing, initialDoors, isBehindObject, move, normalizeInput, objectRect, overlaps, sceneColliders, validateMap, worldRect, type Point } from '@pixel-office/contracts';
 import { LocalWorld } from '../../apps/web/src/engine/world';
 
 const scene=demoMap.scenes[0]!;
@@ -31,7 +31,7 @@ describe('oficina mixta: coordenadas y circulación',()=>{
       const item=scene.objects.find(object=>object.objectId===id)!;
       const asset=assetById(demoMap,item.assetId);
       const table=objectRect(asset.colliders[0]!,asset,item.position);
-      expect(table.y+table.height).toBeCloseTo(676.4);
+      expect(table.y+table.height).toBeCloseTo(678.4);
       expect(table.width).toBeGreaterThan(80);
       expect(table.height).toBeGreaterThan(70);
       expect(canOccupy(demoMap,scene,{x:table.x+table.width/2,y:table.y+table.height/2},colliders)).toBe(false);
@@ -50,15 +50,12 @@ describe('oficina mixta: coordenadas y circulación',()=>{
     }
     const plant=scene.objects.find(object=>object.objectId==='south-plant')!;
     const plantAsset=assetById(demoMap,plant.assetId);
-    expect(plantAsset.colliders[0]!.height).toBeLessThan(plantAsset.occlusionMask!.height/2);
-    const foliage=objectRect(plantAsset.occlusionMask!,plantAsset,plant.position);
-    expect(occlusionTarget(foliage,foliage,true,48,0.05)).toBe(0.05);
+    expect(plantAsset.colliders[0]!.height).toBeLessThan(plantAsset.sourceRect.height/2);
     const desk=scene.objects.find(object=>object.objectId==='west-desk')!;
     const deskAsset=assetById(demoMap,desk.assetId);
     expect(isBehindObject(deskAsset,desk.position,{x:390,y:600})).toBe(true);
     expect(isBehindObject(deskAsset,desk.position,{x:210,y:600})).toBe(false);
     expect(isBehindObject(deskAsset,desk.position,{x:320,y:690})).toBe(true);
-    expect(occlusionTarget(foliage,foliage,false,48,0.05)).toBe(1);
   });
   it('mantiene los pies fuera de silla y maceta por los cuatro lados y diagonales',()=>{
     for(const id of ['west-chair','south-plant']){
