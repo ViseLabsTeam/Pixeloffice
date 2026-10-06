@@ -63,7 +63,7 @@ describe('oficina mixta: coordenadas y circulación',()=>{
       const object=scene.objects.find(item=>item.objectId===id)!;
       const asset=assetById(demoMap,object.assetId);
       const solid=objectRect(asset.colliders[0]!,asset,object.position);
-      expect(solid.height).toBeCloseTo(id==='west-chair'?65:29.84);
+      expect(solid.height).toBeCloseTo(id==='west-chair'?27:29.84);
       const center={x:solid.x+solid.width/2,y:solid.y+solid.height/2};
       for(const [start,input] of [
         [{x:center.x,y:solid.y-30},{x:0,y:1}],

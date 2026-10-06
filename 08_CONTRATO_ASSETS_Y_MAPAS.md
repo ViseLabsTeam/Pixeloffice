@@ -47,7 +47,7 @@ Coordenadas de la oficina en los píxeles originales de 1920×1080, origen arrib
 | soundBlockers | Segmentos de bloqueo acústico; no derivarlos de todo mueble. |
 | interaction | Tipo, alcance y datos de objeto interactivo. |
 
-La biblioteca incorporada tiene una zona sólida que conecta con la pared para impedir pasar por detrás. Cada escritorio bloquea todo el ancho del tablero. En profundidad, su collider empieza una longitud de pata dentro del borde visual posterior y termina en las puntas de las patas delanteras: así la cintura se alinea aproximadamente con el borde frontal del tablero y los pies sólo avanzan por detrás esa longitud. El monitor no amplía el collider. La planta bloquea la maceta, no el follaje. La máscara de recolor no debe teñir toda la silueta del personaje.
+La biblioteca incorporada tiene una zona sólida que conecta con la pared para impedir pasar por detrás. Cada escritorio bloquea todo el ancho del tablero. En profundidad, su collider empieza una longitud de pata dentro del borde visual posterior y termina en las puntas de las patas delanteras: así la cintura se alinea aproximadamente con el borde frontal del tablero y los pies sólo avanzan por detrás esa longitud. El monitor no amplía el collider. Las sillas usan una base sólida medida desde asiento y patas; delante, el avatar se dibuja sobre ellas, y detrás queda parcialmente oculto. Las sillas delanteras se dibujan sobre la mesa en las zonas donde sus sprites se solapan. La planta bloquea la maceta, no el follaje. La máscara de recolor no debe teñir toda la silueta del personaje.
 
 ## 5. Plantilla fija
 

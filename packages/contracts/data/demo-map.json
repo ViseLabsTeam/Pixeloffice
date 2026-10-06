@@ -118,18 +118,23 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": 32,
-          "y": 70,
-          "width": 75,
-          "height": 72.22222222222223
+          "x": 28,
+          "y": 110,
+          "width": 79,
+          "height": 30
         }
       ],
       "depth": {
-        "axis": "x",
-        "offset": 0,
-        "behindSide": "positive"
+        "axis": "y",
+        "offset": 19.333333333333307,
+        "behindSide": "negative",
+        "secondary": {
+          "axis": "x",
+          "offset": -25,
+          "behindSide": "positive"
+        }
       },
-      "renderOrder": 10,
+      "renderOrder": 30,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "7e057fe258c593652f0f1a57772f3ba4b66943c6c443c8220091d4123ab0b6ff"
@@ -234,18 +239,18 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": 30,
-          "y": 70,
-          "width": 75,
-          "height": 72
+          "x": 22,
+          "y": 97,
+          "width": 89,
+          "height": 45
         }
       ],
       "depth": {
         "axis": "y",
-        "offset": -55,
+        "offset": -45,
         "behindSide": "negative"
       },
-      "renderOrder": 10,
+      "renderOrder": 30,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "81dca229e103ae96ed895c1151207fa7e9bbe4bf017e335378cbfd6d5a5c5b47"
@@ -308,18 +313,18 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": 30,
-          "y": 70,
-          "width": 75,
-          "height": 72
+          "x": 22,
+          "y": 97,
+          "width": 89,
+          "height": 45
         }
       ],
       "depth": {
         "axis": "y",
-        "offset": -55,
+        "offset": -45,
         "behindSide": "negative"
       },
-      "renderOrder": 10,
+      "renderOrder": 30,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "81dca229e103ae96ed895c1151207fa7e9bbe4bf017e335378cbfd6d5a5c5b47"
