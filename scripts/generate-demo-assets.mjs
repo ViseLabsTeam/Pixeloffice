@@ -4,7 +4,7 @@ import { deflateSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { parseGIF, decompressFrames } from 'gifuct-js';
-import { furniture, fixedColliders, interactions, windows, boardSurface, boardCorners } from './office-layout.mjs';
+import { avatarFootCollider, furniture, fixedColliders, interactions, windows, boardSurface, boardCorners } from './office-layout.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const output=`${root}apps/web/public/assets/peredo`;
@@ -116,6 +116,6 @@ const scene={
   boardCorners
 };
 const map={schemaVersion:1,mapVersion,entry:{sceneId:'office',spawnId:'entry'},
-  avatar:{avatarId:'man-avatar',views,animations,footCollider:rect(-15,-12,30,12)},assets,scenes:[scene]};
+  avatar:{avatarId:'man-avatar',views,animations,footCollider:avatarFootCollider},assets,scenes:[scene]};
 writeFileSync(`${root}packages/contracts/data/demo-map.json`,`${JSON.stringify(map,null,2)}\n`);
 console.log(`Generated ${mapVersion}: mixed office 1920×1080, ${assets.length} image assets, ${scene.colliders.length} fixed colliders, ${scene.objects.length} furniture objects.`);

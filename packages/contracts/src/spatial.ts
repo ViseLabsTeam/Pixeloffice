@@ -72,5 +72,7 @@ export function isBehindObject(asset: Asset, objectPosition: Point, avatarFeet: 
     const reference=objectPosition[rule.axis]+rule.offset*asset.worldScale;
     return rule.behindSide==='positive'?avatarFeet[rule.axis]>reference:avatarFeet[rule.axis]<reference;
   };
-  return behind(asset.depth) || (asset.depth.secondary ? behind(asset.depth.secondary) : false);
+  // A secondary line restricts the first one (for example, the chair side of
+  // the lateral desk stays in front even when the avatar is north of it).
+  return behind(asset.depth) && (!asset.depth.secondary || behind(asset.depth.secondary));
 }

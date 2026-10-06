@@ -156,18 +156,18 @@
         {
           "shape": "rect",
           "x": 94,
-          "y": 34,
+          "y": 142,
           "width": 348,
-          "height": 533.3333333333334
+          "height": 520
         }
       ],
       "depth": {
-        "axis": "x",
-        "offset": 185,
-        "behindSide": "positive",
+        "axis": "y",
+        "offset": -108,
+        "behindSide": "negative",
         "secondary": {
-          "axis": "y",
-          "offset": -105,
+          "axis": "x",
+          "offset": -233,
           "behindSide": "positive"
         }
       },
@@ -175,6 +175,154 @@
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "ee811242b91d1900bdb3270d36e53c8d1bf26e9a637adcc537470b05a7603ecf"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "east-desk-left",
+      "imageUrl": "/assets/peredo/east-desk-left.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 992,
+        "height": 740
+      },
+      "pivot": {
+        "x": 158,
+        "y": 674
+      },
+      "worldScale": 0.28,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 158,
+          "y": 336,
+          "width": 680,
+          "height": 338
+        }
+      ],
+      "depth": {
+        "axis": "y",
+        "offset": -120,
+        "behindSide": "negative"
+      },
+      "renderOrder": 20,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "8483637e3bfff8d303982f3bad1196a02c8d22361d4c4fd14fc4efcc60a51a7a"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "east-chair-left",
+      "imageUrl": "/assets/peredo/east-chair-left.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 133,
+        "height": 150
+      },
+      "pivot": {
+        "x": 66,
+        "y": 150
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 30,
+          "y": 70,
+          "width": 75,
+          "height": 72
+        }
+      ],
+      "depth": {
+        "axis": "y",
+        "offset": -55,
+        "behindSide": "negative"
+      },
+      "renderOrder": 10,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "81dca229e103ae96ed895c1151207fa7e9bbe4bf017e335378cbfd6d5a5c5b47"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "east-desk-right",
+      "imageUrl": "/assets/peredo/east-desk-right.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 992,
+        "height": 740
+      },
+      "pivot": {
+        "x": 158,
+        "y": 674
+      },
+      "worldScale": 0.28,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 158,
+          "y": 336,
+          "width": 680,
+          "height": 338
+        }
+      ],
+      "depth": {
+        "axis": "y",
+        "offset": -120,
+        "behindSide": "negative"
+      },
+      "renderOrder": 20,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "8483637e3bfff8d303982f3bad1196a02c8d22361d4c4fd14fc4efcc60a51a7a"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "east-chair-right",
+      "imageUrl": "/assets/peredo/east-chair-right.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 133,
+        "height": 150
+      },
+      "pivot": {
+        "x": 66,
+        "y": 150
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 30,
+          "y": 70,
+          "width": 75,
+          "height": 72
+        }
+      ],
+      "depth": {
+        "axis": "y",
+        "offset": -55,
+        "behindSide": "negative"
+      },
+      "renderOrder": 10,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "81dca229e103ae96ed895c1151207fa7e9bbe4bf017e335378cbfd6d5a5c5b47"
     },
     {
       "schemaVersion": 1,
@@ -617,6 +765,38 @@
           }
         },
         {
+          "objectId": "east-desk-left",
+          "assetId": "east-desk-left",
+          "position": {
+            "x": 1143,
+            "y": 886
+          }
+        },
+        {
+          "objectId": "east-chair-left",
+          "assetId": "east-chair-left",
+          "position": {
+            "x": 1241,
+            "y": 930
+          }
+        },
+        {
+          "objectId": "east-desk-right",
+          "assetId": "east-desk-right",
+          "position": {
+            "x": 1482,
+            "y": 886
+          }
+        },
+        {
+          "objectId": "east-chair-right",
+          "assetId": "east-chair-right",
+          "position": {
+            "x": 1580,
+            "y": 930
+          }
+        },
+        {
           "objectId": "south-plant",
           "assetId": "south-plant",
           "position": {
@@ -780,9 +960,33 @@
           "area": {
             "shape": "rect",
             "x": 162,
-            "y": 696,
+            "y": 720,
             "width": 216,
-            "height": 86
+            "height": 62
+          }
+        },
+        {
+          "hotspotId": "east-workstation-left",
+          "kind": "computer",
+          "label": "Escritorio izquierdo: accesos pendientes",
+          "area": {
+            "shape": "rect",
+            "x": 1118,
+            "y": 891,
+            "width": 246,
+            "height": 87
+          }
+        },
+        {
+          "hotspotId": "east-workstation-right",
+          "kind": "computer",
+          "label": "Escritorio derecho: accesos pendientes",
+          "area": {
+            "shape": "rect",
+            "x": 1457,
+            "y": 891,
+            "width": 246,
+            "height": 87
           }
         }
       ],

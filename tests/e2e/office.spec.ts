@@ -70,13 +70,13 @@ test('el avatar se dibuja encima de la pared del fondo al acercarse',async({page
 test('el escritorio separado permanece opaco delante del avatar',async({page})=>{
   const pixel=async()=>page.locator('#world').evaluate(canvas=>{
     const image=canvas as HTMLCanvasElement;
-    const x=Math.round(320*image.width/1920),y=Math.round(600*image.height/1080);
+    const x=Math.round(320*image.width/1920),y=Math.round(525*image.height/1080);
     return [...image.getContext('2d')!.getImageData(x,y,1,1).data];
   });
   await page.goto('/?debug=colliders&x=948&y=600');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   const deskAlone=await pixel();
-  await page.goto('/?debug=colliders&x=320&y=691');
+  await page.goto('/?debug=colliders&x=320&y=550');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   expect(await pixel()).toEqual(deskAlone);
 });

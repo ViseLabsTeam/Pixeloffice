@@ -28,7 +28,7 @@ Base de las rutas: `legacy/pre-alpha/assets/images/`. Estos diecisiete archivos 
 
 También se recibieron `legacy/pre-alpha/assets/gifs/avatar/man/avatar-hombre-X.gif`, `avatar-hombreX.gif`, `avatar-hombreY.gif` y `avatar-hombre-Y.gif`, todos de 45 × 66 píxeles. Sus secuencias tienen respectivamente 3, 3, 2 y 2 cuadros. Los PNG representan reposo y los GIF movimiento. `-X` corresponde a izquierda/A, `X` a derecha/D, `Y` a arriba/W y `-Y` a abajo/S.
 
-`SIN MUEBLESL.png` define el fondo visible. `escritorio x.png`, `SILLA X.png` y `PLANTASL.png` se colocan como objetos separados; las demás piezas permanecen como originales recibidos. `total-office.jpeg` queda como referencia histórica. El avatar conserva la correspondencia de direcciones indicada arriba.
+`SIN MUEBLESL.png` define el fondo visible. `escritorio x.png`, dos instancias de `escritorio -y.png`, `SILLA X.png`, dos instancias de `SILLA -Y.png` y `PLANTASL.png` se colocan como objetos separados; las demás piezas permanecen como originales recibidos. `total-office.jpeg` guía su distribución. El avatar conserva la correspondencia de direcciones indicada arriba.
 
 ## Paquete todavía incompleto
 
@@ -45,9 +45,9 @@ Hay otras imágenes antiguas de computadora, sillas y arcade en legacy; su exist
 
 ## Estado de integración
 
-El mapa actual `packages/contracts/data/demo-map.json` usa `demo-v5` y una escena de 1920×1080. `scripts/generate-demo-assets.mjs` copia el fondo y los tres muebles sin alterar sus píxeles, conserva los cuatro PNG del avatar y extrae diez cuadros de sus GIF para el canvas. El avatar se dibuja a escala 2 sobre todo el fondo. Sus pies tienen una caja de 30×12 unidades independiente del sprite. Hay 13 colliders fijos y tres objetos opacos con collider y profundidad independientes. `?debug=colliders` muestra su alineación. [Campos de ajuste](ajuste-mapa-oficina.md).
+El mapa actual `packages/contracts/data/demo-map.json` usa `demo-v5` y una escena de 1920×1080. `scripts/generate-demo-assets.mjs` copia el fondo y los cinco PNG originales usados en siete muebles sin alterar sus píxeles, conserva los cuatro PNG del avatar y extrae diez cuadros de sus GIF para el canvas. El avatar se dibuja a escala 2 sobre todo el fondo. Sus pies tienen una caja de 30×12 unidades independiente del sprite. Hay 13 colliders fijos y siete objetos opacos con collider y profundidad independientes. `?debug=colliders` muestra su alineación. [Campos de ajuste](ajuste-mapa-oficina.md).
 
-El manifest contiene 18 imágenes: fondo, tres muebles, cuatro PNG de reposo y diez cuadros de movimiento. Los muebles integrados en la pared permanecen en el fondo. La región limpia del pizarrón forma parte del PNG de fondo. El estado marcado usa trazos temporales recortados a su panel hasta recibir los sprites oficiales. Las tres regiones de ventana están definidas, pero el tren no se muestra porque su GIF todavía no figura entre los archivos entregados.
+El manifest contiene 22 imágenes: fondo, siete instancias PNG de muebles, cuatro PNG de reposo y diez cuadros de movimiento. Los muebles integrados en la pared permanecen en el fondo. La región limpia del pizarrón forma parte del PNG de fondo. El estado marcado usa trazos temporales recortados a su panel hasta recibir los sprites oficiales. Las tres regiones de ventana están definidas, pero el tren no se muestra porque su GIF todavía no figura entre los archivos entregados.
 
 La integración final debe confirmar la geometría, las máscaras y el tamaño del avatar contra el fondo original y un dispositivo físico. Dimensiones de archivo, unidades lógicas y tamaño CSS son conceptos distintos.
 

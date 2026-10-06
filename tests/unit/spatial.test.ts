@@ -31,7 +31,7 @@ describe('oficina mixta: coordenadas y circulación',()=>{
       const item=scene.objects.find(object=>object.objectId===id)!;
       const asset=assetById(demoMap,item.assetId);
       const table=objectRect(asset.colliders[0]!,asset,item.position);
-      expect(table.y+table.height).toBeCloseTo(678.4);
+      expect(table.y+table.height).toBeCloseTo(706.8);
       expect(table.width).toBeGreaterThan(80);
       expect(table.height).toBeGreaterThan(70);
       expect(canOccupy(demoMap,scene,{x:table.x+table.width/2,y:table.y+table.height/2},colliders)).toBe(false);
@@ -55,7 +55,8 @@ describe('oficina mixta: coordenadas y circulación',()=>{
     const deskAsset=assetById(demoMap,desk.assetId);
     expect(isBehindObject(deskAsset,desk.position,{x:390,y:600})).toBe(true);
     expect(isBehindObject(deskAsset,desk.position,{x:210,y:600})).toBe(false);
-    expect(isBehindObject(deskAsset,desk.position,{x:320,y:690})).toBe(true);
+    expect(isBehindObject(deskAsset,desk.position,{x:320,y:540})).toBe(true);
+    expect(isBehindObject(deskAsset,desk.position,{x:320,y:690})).toBe(false);
   });
   it('mantiene los pies fuera de silla y maceta por los cuatro lados y diagonales',()=>{
     for(const id of ['west-chair','south-plant']){
