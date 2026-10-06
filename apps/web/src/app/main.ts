@@ -50,7 +50,9 @@ function updateInterface() {
   }
   const x = Math.round(world.position.x); const y = Math.round(world.position.y);
   const coordinates = `${x}, ${y}`;
-  if (position.textContent !== coordinates) { position.textContent = coordinates; canvas.dataset.x = String(x); canvas.dataset.y = String(y); }
+  if (position.textContent !== coordinates) position.textContent = coordinates;
+  // Debug/test coordinates retain subpixel precision at collision boundaries.
+  canvas.dataset.x = String(world.position.x); canvas.dataset.y = String(world.position.y);
   canvas.dataset.direction = world.direction;
   canvas.dataset.board = world.boardDirty ? 'dirty' : 'clean';
   const door = world.nearbyDoor();

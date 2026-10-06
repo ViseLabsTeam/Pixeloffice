@@ -22,11 +22,11 @@ test('oficina completa, cuatro direcciones y escala al cambiar viewport',async({
   if(info.project.name==='desktop'){
     await page.setViewportSize({width:1100,height:800});
     await expect.poll(async()=>page.locator('#world').evaluate(element=>(element as HTMLCanvasElement).width)).not.toBe(size.width);
-    await page.screenshot({path:'test-results/office-v4-desktop.png',fullPage:true});
-  }else await page.screenshot({path:'test-results/office-v4-mobile.png',fullPage:true});
+    await page.screenshot({path:'test-results/office-v5-desktop.png',fullPage:true});
+  }else await page.screenshot({path:'test-results/office-v5-mobile.png',fullPage:true});
 });
 test('pizarrón limpio y sucio mediante interacción',async({page})=>{
-  await page.goto('/?debug=colliders&x=1410&y=400');
+  await page.goto('/?debug=colliders&x=1692&y=480');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
   await expect(page.locator('#hint')).toContainText('Cambiar pizarrón');
@@ -54,13 +54,26 @@ test('joystick mueve y se detiene al soltarlo',async({page})=>{
   await page.waitForTimeout(150);const stopped=await x(page);
   await page.waitForTimeout(150);expect(await x(page)).toBe(stopped);
 });
+test('la pared norte cubre el sprite cuando los pies se acercan',async({page})=>{
+  const pixel=async()=>page.locator('#world').evaluate(canvas=>{
+    const image=canvas as HTMLCanvasElement;
+    const x=Math.round(1100*image.width/1920),y=Math.round(250*image.height/1080);
+    return [...image.getContext('2d')!.getImageData(x,y,1,1).data];
+  });
+  await page.goto('/?debug=colliders&x=1100&y=600');
+  await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  const wallAlone=await pixel();
+  await page.goto('/?debug=colliders&x=1100&y=300');
+  await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  expect(await pixel()).toEqual(wallAlone);
+});
 test('el tren cambia de cuadro dentro de las ventanas',async({page})=>{
   test.skip(map.scenes[0]!.trainFrames.length<2,'Falta el GIF oficial del tren en los assets recibidos.');
   await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   const sample=async()=>page.locator('#world').evaluate(canvas=>{
     const context=(canvas as HTMLCanvasElement).getContext('2d')!;
     const bounds=(canvas as HTMLCanvasElement).getBoundingClientRect();
-    return [...context.getImageData(Math.round(330*bounds.width/1600),Math.round(175*bounds.height/900),1,1).data];
+    return [...context.getImageData(Math.round(396*bounds.width/1920),Math.round(210*bounds.height/1080),1,1).data];
   });
   const first=await sample();await page.waitForTimeout(600);expect(await sample()).not.toEqual(first);
 });

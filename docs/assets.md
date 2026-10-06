@@ -1,10 +1,10 @@
 # Inventario de arte — entrega parcial
 
-Revisado el 2026-10-05. Contrato vigente: [08](../08_CONTRATO_ASSETS_Y_MAPAS.md). Los tamaños se leyeron de los archivos locales; no acreditan por sí solos escala de mundo, transparencia, pivots ni aprobación visual.
+Revisado el 2026-10-06. Contrato vigente: [08](../08_CONTRATO_ASSETS_Y_MAPAS.md). Los tamaños se leyeron de los archivos locales; no acreditan por sí solos escala de mundo, transparencia, pivots ni aprobación visual.
 
 ## Entrega reciente recibida
 
-Base de las rutas: `legacy/pre-alpha/assets/images/`. Estos quince archivos son la entrega reciente señalada por el usuario, aunque estén dentro de la carpeta legacy. Se conservan sus nombres originales durante la recepción.
+Base de las rutas: `legacy/pre-alpha/assets/images/`. Estos diecisiete archivos son la entrega reciente señalada por el usuario, aunque estén dentro de la carpeta legacy. Se conservan sus nombres originales durante la recepción.
 
 | Ruta relativa | Dimensiones (px) | Bytes |
 |---|---|---:|
@@ -23,10 +23,12 @@ Base de las rutas: `legacy/pre-alpha/assets/images/`. Estos quince archivos son 
 | `avatar/man/avatar-hombreY.png` | 45 × 66 | 165 |
 | `avatar/man/avatar-hombre-Y.png` | 45 × 66 | 590 |
 | `ensambled/total-office.jpeg` | 1600 × 900 | 215554 |
+| `ensambled/SIN MUEBLESL.png` | 1920 × 1080 | 52746 |
+| `furniture/PLANTASL.png` | 906 × 804 | 10607 |
 
 También se recibieron `legacy/pre-alpha/assets/gifs/avatar/man/avatar-hombre-X.gif`, `avatar-hombreX.gif`, `avatar-hombreY.gif` y `avatar-hombre-Y.gif`, todos de 45 × 66 píxeles. Sus secuencias tienen respectivamente 3, 3, 2 y 2 cuadros. Los PNG representan reposo y los GIF movimiento. `-X` corresponde a izquierda/A, `X` a derecha/D, `Y` a arriba/W y `-Y` a abajo/S.
 
-La composición `total-office.jpeg` define ahora la distribución visible. Las piezas individuales de piso, sillas y escritorios permanecen como originales recibidos, pero no se colocan por separado en el mapa. El avatar conserva la correspondencia de direcciones indicada arriba.
+`SIN MUEBLESL.png` define el fondo visible. `escritorio x.png`, `SILLA X.png` y `PLANTASL.png` se colocan como objetos separados; las demás piezas permanecen como originales recibidos. `total-office.jpeg` queda como referencia histórica. El avatar conserva la correspondencia de direcciones indicada arriba.
 
 ## Paquete todavía incompleto
 
@@ -39,14 +41,14 @@ No se identificaron en esta entrega reciente exports nuevos para:
 - Metadatos de escala, pivots, colliders, oclusión, acústica e interacción.
 - Referencias de todas las escenas, fuentes editables disponibles y registro de autoría/versión.
 
-Hay imágenes antiguas de computadora, planta, sillas y arcade en legacy; su existencia no las convierte en exports finales de esta entrega ni resuelve automáticamente estos faltantes.
+Hay otras imágenes antiguas de computadora, sillas y arcade en legacy; su existencia no las convierte en exports finales de esta entrega ni resuelve automáticamente estos faltantes.
 
 ## Estado de integración
 
-El mapa actual `packages/contracts/data/demo-map.json` usa `demo-v4` y una escena de 1600×900. `scripts/generate-demo-assets.mjs` copia la composición JPEG sin alterar sus píxeles, conserva los cuatro PNG del avatar y extrae diez cuadros de sus GIF para el canvas. El avatar se dibuja a escala 2. Sus pies tienen una caja de 30×12 unidades independiente del sprite. Veinte colliders nombrados cubren límites, paredes, tabiques, bases de muebles, tableros y sillas; las zonas de interacción y oclusión están separadas. `?debug=colliders` permite revisar su alineación.
+El mapa actual `packages/contracts/data/demo-map.json` usa `demo-v5` y una escena de 1920×1080. `scripts/generate-demo-assets.mjs` copia el fondo y los tres muebles sin alterar sus píxeles, conserva los cuatro PNG del avatar y extrae diez cuadros de sus GIF para el canvas. El avatar se dibuja a escala 2. Sus pies tienen una caja de 30×12 unidades independiente del sprite. Hay 13 colliders fijos y tres objetos con collider, profundidad y oclusión independientes. `?debug=colliders` muestra su alineación. [Campos de ajuste](ajuste-mapa-oficina.md).
 
-El manifest contiene 15 imágenes: la composición, cuatro PNG de reposo y diez cuadros de movimiento. El fondo ya contiene muebles y paredes; sus archivos individuales no se dibujan de nuevo. La región limpia del pizarrón forma parte del JPEG. El estado marcado usa trazos temporales recortados a su panel hasta recibir los sprites oficiales. Las tres regiones de ventana están definidas, pero el tren no se muestra porque su GIF todavía no figura entre los archivos entregados.
+El manifest contiene 18 imágenes: fondo, tres muebles, cuatro PNG de reposo y diez cuadros de movimiento. Los muebles integrados en la pared permanecen en el fondo. La región limpia del pizarrón forma parte del PNG de fondo. El estado marcado usa trazos temporales recortados a su panel hasta recibir los sprites oficiales. Las tres regiones de ventana están definidas, pero el tren no se muestra porque su GIF todavía no figura entre los archivos entregados.
 
-La integración final debe confirmar la geometría, las máscaras y el tamaño del avatar contra la composición original y un dispositivo físico. Dimensiones de archivo, unidades lógicas y tamaño CSS son conceptos distintos.
+La integración final debe confirmar la geometría, las máscaras y el tamaño del avatar contra el fondo original y un dispositivo físico. Dimensiones de archivo, unidades lógicas y tamaño CSS son conceptos distintos.
 
 La autoría y versión de la entrega se registrarán con Peredo antes de cerrar aceptación de arte. El generador de assets provisionales seguirá separado para evitar sobrescribir los exports finales.

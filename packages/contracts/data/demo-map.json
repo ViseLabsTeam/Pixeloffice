@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "mapVersion": "demo-v4",
+  "mapVersion": "demo-v5",
   "entry": {
     "sceneId": "office",
     "spawnId": "entry"
@@ -74,14 +74,14 @@
   "assets": [
     {
       "schemaVersion": 1,
-      "assetId": "office-composite",
-      "imageUrl": "/assets/peredo/office-composite.jpeg",
+      "assetId": "office-background",
+      "imageUrl": "/assets/peredo/office-background.png",
       "sourceRect": {
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 1600,
-        "height": 900
+        "width": 1920,
+        "height": 1080
       },
       "pivot": {
         "x": 0,
@@ -93,9 +93,155 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
-      "contentHash": "47075f65a2cda53d579d6ee27e41fc3ac0c21499ad45ebaa3e1372771b693fa0"
+      "contentHash": "99d4ae508f71cb9debded089cfaa302e1b3dbf492dc84c2c81508d8ec7f3e174"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "west-chair",
+      "imageUrl": "/assets/peredo/west-chair.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 133,
+        "height": 150
+      },
+      "pivot": {
+        "x": 74,
+        "y": 140
+      },
+      "worldScale": 0.9,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 32,
+          "y": 70,
+          "width": 75,
+          "height": 72.22222222222223
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 28,
+        "y": 10,
+        "width": 79,
+        "height": 130
+      },
+      "occlusionApproachMargin": 36,
+      "occlusionMinOpacity": 0.05,
+      "depth": {
+        "axis": "x",
+        "offset": 0,
+        "behindSide": "positive"
+      },
+      "renderOrder": 10,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "7e057fe258c593652f0f1a57772f3ba4b66943c6c443c8220091d4123ab0b6ff"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "west-desk",
+      "imageUrl": "/assets/peredo/west-desk.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 554,
+        "height": 722
+      },
+      "pivot": {
+        "x": 277,
+        "y": 662
+      },
+      "worldScale": 0.3,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 94,
+          "y": 34,
+          "width": 348,
+          "height": 526.6666666666666
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 86,
+        "y": 26,
+        "width": 362,
+        "height": 637
+      },
+      "occlusionApproachMargin": 42,
+      "occlusionMinOpacity": 0.05,
+      "depth": {
+        "axis": "x",
+        "offset": 185,
+        "behindSide": "positive",
+        "secondary": {
+          "axis": "y",
+          "offset": -105,
+          "behindSide": "positive"
+        }
+      },
+      "renderOrder": 20,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "ee811242b91d1900bdb3270d36e53c8d1bf26e9a637adcc537470b05a7603ecf"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "south-plant",
+      "imageUrl": "/assets/peredo/south-plant.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 906,
+        "height": 804
+      },
+      "pivot": {
+        "x": 453,
+        "y": 724
+      },
+      "worldScale": 0.16,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [
+        {
+          "shape": "rect",
+          "x": 310,
+          "y": 550,
+          "width": 300,
+          "height": 186.5
+        }
+      ],
+      "occlusionMask": {
+        "shape": "rect",
+        "x": 162,
+        "y": 108,
+        "width": 551,
+        "height": 617
+      },
+      "occlusionApproachMargin": 48,
+      "occlusionMinOpacity": 0.05,
+      "depth": {
+        "axis": "y",
+        "offset": -75,
+        "behindSide": "negative"
+      },
+      "renderOrder": 10,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "3ea1d90729882ab0a0db2e924069487ee48f77a4c396908d101f859dae4cca77"
     },
     {
       "schemaVersion": 1,
@@ -118,6 +264,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "a331361f15e1902c926ed014647b09dda1ca8ecc1abb49757dc0172febf3f3c9"
@@ -143,6 +292,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "d29c005ebeb9c13983bb46f286db501c9988767673f7dc63f1fe070d47e7a727"
@@ -168,6 +320,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "a5c4450af490ed8ccbc6edf67e37ba63d2da749d05562d3e5373ac35c61fe0df"
@@ -193,6 +348,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "fb5831852423f973350b06ae900e432324df6d06e16177ac6b35894b2b52a768"
@@ -218,6 +376,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "14a8a34732ceb13d824355ff26c6ff65a317ad7b5b2c27c480a73ef12e89c6a2"
@@ -243,6 +404,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "7a000b193d7480e5a4fa7edd01e2454be3a7f215dada9f589c4bbbb42f75ac8b"
@@ -268,6 +432,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "5c228152738e7332226905ee518673aabf6a0f7c77209be9b1f867ac88321795"
@@ -293,6 +460,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "b100c01a718a02fea26b1a1aeb113dcfa42d04e4b0424f97ff70cf5606745cd1"
@@ -318,6 +488,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "c2ddb53d15b2b66b971ab6e707101b4538ddcde909dbc4a99e2cd208340d1fb0"
@@ -343,6 +516,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "85b41a951efffdee22f6e5a7c84a836acccd2fb91f65b7a4254db843f3e116c2"
@@ -368,6 +544,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "e4f509c8be88e2dd41738290da94294c1e348b8b920af742a20a29b0d2531f00"
@@ -393,6 +572,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "e3a712f414cb9a694f79f99775955da0653def1a6942c089819050c756f0195f"
@@ -418,6 +600,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "25bb374a763fc1381da30645fe93b0ec5d7125550e5c91120a17584b26ec6849"
@@ -443,6 +628,9 @@
       "colliders": [],
       "occlusionMask": null,
       "occlusionApproachMargin": 0,
+      "occlusionMinOpacity": 0.05,
+      "depth": null,
+      "renderOrder": 0,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "746f9b46cd4153dcdedbda161bc7669ea9803a1fd82cce0e2cd4ee5293fed3ba"
@@ -451,21 +639,21 @@
   "scenes": [
     {
       "schemaVersion": 1,
-      "mapVersion": "demo-v4",
+      "mapVersion": "demo-v5",
       "sceneId": "office",
       "name": "Oficina",
       "logicalSize": {
-        "width": 1600,
-        "height": 900
+        "width": 1920,
+        "height": 1080
       },
       "background": {
-        "assetId": "office-composite",
+        "assetId": "office-background",
         "color": "#253949"
       },
       "spawnPoints": {
         "entry": {
-          "x": 790,
-          "y": 500,
+          "x": 948,
+          "y": 600,
           "direction": "down"
         }
       },
@@ -475,15 +663,40 @@
           "name": "Oficina",
           "area": {
             "shape": "rect",
-            "x": 97,
-            "y": 236,
-            "width": 1409,
-            "height": 610
+            "x": 116,
+            "y": 283,
+            "width": 1691,
+            "height": 732
           },
           "communicationMode": "PROXIMITY"
         }
       ],
-      "objects": [],
+      "objects": [
+        {
+          "objectId": "west-chair",
+          "assetId": "west-chair",
+          "position": {
+            "x": 258,
+            "y": 657
+          }
+        },
+        {
+          "objectId": "west-desk",
+          "assetId": "west-desk",
+          "position": {
+            "x": 305.7,
+            "y": 706.8
+          }
+        },
+        {
+          "objectId": "south-plant",
+          "assetId": "south-plant",
+          "position": {
+            "x": 1028.5,
+            "y": 1008
+          }
+        }
+      ],
       "doors": [],
       "portals": [],
       "presentationSurfaces": [],
@@ -492,10 +705,10 @@
           "colliderId": "north-wall",
           "area": {
             "shape": "rect",
-            "x": 96,
+            "x": 115,
             "y": 0,
-            "width": 1411,
-            "height": 236
+            "width": 1694,
+            "height": 285
           }
         },
         {
@@ -504,188 +717,118 @@
             "shape": "rect",
             "x": 0,
             "y": 0,
-            "width": 97,
-            "height": 900
+            "width": 116,
+            "height": 1080
           }
         },
         {
           "colliderId": "east-border",
           "area": {
             "shape": "rect",
-            "x": 1506,
+            "x": 1807,
             "y": 0,
-            "width": 94,
-            "height": 900
+            "width": 113,
+            "height": 1080
           }
         },
         {
           "colliderId": "south-border",
           "area": {
             "shape": "rect",
-            "x": 96,
-            "y": 846,
-            "width": 1411,
-            "height": 54
+            "x": 115,
+            "y": 1015,
+            "width": 1694,
+            "height": 65
           }
         },
         {
           "colliderId": "upper-divider",
           "area": {
             "shape": "rect",
-            "x": 557,
+            "x": 668,
             "y": 0,
-            "width": 47,
-            "height": 413
+            "width": 56,
+            "height": 496
           }
         },
         {
           "colliderId": "lower-divider-west",
           "area": {
             "shape": "rect",
-            "x": 557,
-            "y": 608,
-            "width": 48,
-            "height": 238
+            "x": 668,
+            "y": 730,
+            "width": 58,
+            "height": 287
           }
         },
         {
           "colliderId": "lower-divider-east",
           "area": {
             "shape": "rect",
-            "x": 765,
-            "y": 608,
-            "width": 48,
-            "height": 238
+            "x": 918,
+            "y": 730,
+            "width": 58,
+            "height": 287
           }
         },
         {
           "colliderId": "west-cabinet-base",
           "area": {
             "shape": "rect",
-            "x": 100,
-            "y": 286,
-            "width": 213,
-            "height": 18
+            "x": 120,
+            "y": 283,
+            "width": 256,
+            "height": 82
           }
         },
         {
           "colliderId": "fridge-base",
           "area": {
             "shape": "rect",
-            "x": 473,
-            "y": 236,
-            "width": 84,
-            "height": 39
+            "x": 566,
+            "y": 283,
+            "width": 102,
+            "height": 50
           }
         },
         {
           "colliderId": "center-bookshelf-base",
           "area": {
             "shape": "rect",
-            "x": 604,
-            "y": 304,
-            "width": 105,
-            "height": 21
-          }
-        },
-        {
-          "colliderId": "west-desk-tabletop",
-          "area": {
-            "shape": "rect",
-            "x": 207,
-            "y": 430,
-            "width": 90,
-            "height": 131
-          }
-        },
-        {
-          "colliderId": "west-desk-chair",
-          "area": {
-            "shape": "rect",
-            "x": 178,
-            "y": 451,
-            "width": 29,
-            "height": 111
+            "x": 724,
+            "y": 283,
+            "width": 127,
+            "height": 109
           }
         },
         {
           "colliderId": "board-left-leg",
           "area": {
             "shape": "rect",
-            "x": 1368,
-            "y": 315,
-            "width": 30,
-            "height": 32
+            "x": 1642,
+            "y": 378,
+            "width": 36,
+            "height": 40
           }
         },
         {
           "colliderId": "board-right-leg",
           "area": {
             "shape": "rect",
-            "x": 1469,
-            "y": 330,
-            "width": 33,
-            "height": 36
+            "x": 1762,
+            "y": 396,
+            "width": 40,
+            "height": 46
           }
         },
         {
           "colliderId": "board-base",
           "area": {
             "shape": "rect",
-            "x": 1384,
-            "y": 340,
-            "width": 101,
-            "height": 26
-          }
-        },
-        {
-          "colliderId": "south-plant-base",
-          "area": {
-            "shape": "rect",
-            "x": 838,
-            "y": 819,
-            "width": 50,
-            "height": 27
-          }
-        },
-        {
-          "colliderId": "computer-west-tabletop",
-          "area": {
-            "shape": "rect",
-            "x": 952,
-            "y": 633,
-            "width": 160,
-            "height": 78
-          }
-        },
-        {
-          "colliderId": "computer-west-chair",
-          "area": {
-            "shape": "rect",
-            "x": 993,
-            "y": 711,
-            "width": 79,
-            "height": 66
-          }
-        },
-        {
-          "colliderId": "computer-east-tabletop",
-          "area": {
-            "shape": "rect",
-            "x": 1235,
-            "y": 633,
-            "width": 160,
-            "height": 78
-          }
-        },
-        {
-          "colliderId": "computer-east-chair",
-          "area": {
-            "shape": "rect",
-            "x": 1276,
-            "y": 711,
-            "width": 78,
-            "height": 66
+            "x": 1660,
+            "y": 408,
+            "width": 122,
+            "height": 34
           }
         }
       ],
@@ -694,52 +837,52 @@
           "occluderId": "west-cabinet",
           "area": {
             "shape": "rect",
-            "x": 98,
-            "y": 128,
-            "width": 216,
-            "height": 176
+            "x": 118,
+            "y": 154,
+            "width": 259,
+            "height": 211
           },
-          "baseY": 292,
+          "baseY": 350,
           "polygon": [
             {
-              "x": 98,
-              "y": 200
+              "x": 118,
+              "y": 240
             },
             {
-              "x": 106,
-              "y": 199
+              "x": 127,
+              "y": 239
             },
             {
-              "x": 104,
-              "y": 152
+              "x": 125,
+              "y": 182
             },
             {
-              "x": 120,
-              "y": 128
+              "x": 144,
+              "y": 154
             },
             {
-              "x": 150,
-              "y": 129
+              "x": 180,
+              "y": 155
             },
             {
-              "x": 169,
-              "y": 168
+              "x": 203,
+              "y": 202
             },
             {
-              "x": 164,
-              "y": 199
+              "x": 197,
+              "y": 239
             },
             {
-              "x": 314,
-              "y": 200
+              "x": 377,
+              "y": 240
             },
             {
-              "x": 314,
-              "y": 302
+              "x": 377,
+              "y": 362
             },
             {
-              "x": 98,
-              "y": 302
+              "x": 118,
+              "y": 362
             }
           ]
         },
@@ -747,28 +890,28 @@
           "occluderId": "fridge",
           "area": {
             "shape": "rect",
-            "x": 472,
-            "y": 104,
-            "width": 85,
-            "height": 170
+            "x": 566,
+            "y": 125,
+            "width": 102,
+            "height": 204
           },
-          "baseY": 270,
+          "baseY": 324,
           "polygon": [
             {
-              "x": 472,
-              "y": 104
+              "x": 566,
+              "y": 125
             },
             {
-              "x": 557,
-              "y": 104
+              "x": 668,
+              "y": 125
             },
             {
-              "x": 557,
-              "y": 274
+              "x": 668,
+              "y": 329
             },
             {
-              "x": 472,
-              "y": 274
+              "x": 566,
+              "y": 329
             }
           ]
         },
@@ -776,36 +919,36 @@
           "occluderId": "center-bookshelf",
           "area": {
             "shape": "rect",
-            "x": 601,
-            "y": 169,
-            "width": 109,
-            "height": 156
+            "x": 721,
+            "y": 203,
+            "width": 131,
+            "height": 187
           },
-          "baseY": 318,
+          "baseY": 382,
           "polygon": [
             {
-              "x": 602,
-              "y": 181
+              "x": 722,
+              "y": 217
             },
             {
-              "x": 652,
-              "y": 169
+              "x": 782,
+              "y": 203
             },
             {
-              "x": 708,
-              "y": 187
+              "x": 850,
+              "y": 224
             },
             {
-              "x": 710,
-              "y": 303
+              "x": 852,
+              "y": 364
             },
             {
-              "x": 658,
-              "y": 324
+              "x": 790,
+              "y": 389
             },
             {
-              "x": 602,
-              "y": 304
+              "x": 722,
+              "y": 365
             }
           ]
         },
@@ -813,180 +956,44 @@
           "occluderId": "whiteboard",
           "area": {
             "shape": "rect",
-            "x": 1367,
-            "y": 194,
-            "width": 137,
-            "height": 173
+            "x": 1640,
+            "y": 233,
+            "width": 164,
+            "height": 208
           },
-          "baseY": 359,
+          "baseY": 431,
           "polygon": [
             {
-              "x": 1385,
-              "y": 195
+              "x": 1662,
+              "y": 234
             },
             {
-              "x": 1489,
-              "y": 246
+              "x": 1787,
+              "y": 295
             },
             {
-              "x": 1489,
-              "y": 322
+              "x": 1787,
+              "y": 386
             },
             {
-              "x": 1504,
+              "x": 1805,
+              "y": 416
+            },
+            {
+              "x": 1780,
+              "y": 440
+            },
+            {
+              "x": 1759,
+              "y": 422
+            },
+            {
+              "x": 1640,
+              "y": 388
+            },
+            {
+              "x": 1661,
               "y": 347
-            },
-            {
-              "x": 1483,
-              "y": 367
-            },
-            {
-              "x": 1466,
-              "y": 352
-            },
-            {
-              "x": 1367,
-              "y": 323
-            },
-            {
-              "x": 1384,
-              "y": 289
-            }
-          ]
-        },
-        {
-          "occluderId": "west-desk",
-          "area": {
-            "shape": "rect",
-            "x": 178,
-            "y": 429,
-            "width": 120,
-            "height": 158
-          },
-          "baseY": 560,
-          "polygon": [
-            {
-              "x": 178,
-              "y": 429
-            },
-            {
-              "x": 298,
-              "y": 429
-            },
-            {
-              "x": 298,
-              "y": 587
-            },
-            {
-              "x": 178,
-              "y": 587
-            }
-          ]
-        },
-        {
-          "occluderId": "computer-west-monitor",
-          "area": {
-            "shape": "rect",
-            "x": 978,
-            "y": 589,
-            "width": 105,
-            "height": 59
-          },
-          "baseY": 646,
-          "polygon": [
-            {
-              "x": 978,
-              "y": 589
-            },
-            {
-              "x": 1083,
-              "y": 589
-            },
-            {
-              "x": 1083,
-              "y": 648
-            },
-            {
-              "x": 978,
-              "y": 648
-            }
-          ]
-        },
-        {
-          "occluderId": "computer-east-monitor",
-          "area": {
-            "shape": "rect",
-            "x": 1264,
-            "y": 589,
-            "width": 103,
-            "height": 59
-          },
-          "baseY": 646,
-          "polygon": [
-            {
-              "x": 1264,
-              "y": 589
-            },
-            {
-              "x": 1367,
-              "y": 589
-            },
-            {
-              "x": 1367,
-              "y": 648
-            },
-            {
-              "x": 1264,
-              "y": 648
-            }
-          ]
-        },
-        {
-          "occluderId": "south-plant",
-          "area": {
-            "shape": "rect",
-            "x": 818,
-            "y": 758,
-            "width": 80,
-            "height": 90
-          },
-          "baseY": 842,
-          "polygon": [
-            {
-              "x": 854,
-              "y": 759
-            },
-            {
-              "x": 882,
-              "y": 765
-            },
-            {
-              "x": 898,
-              "y": 792
-            },
-            {
-              "x": 890,
-              "y": 820
-            },
-            {
-              "x": 883,
-              "y": 847
-            },
-            {
-              "x": 842,
-              "y": 847
-            },
-            {
-              "x": 819,
-              "y": 820
-            },
-            {
-              "x": 818,
-              "y": 790
-            },
-            {
-              "x": 830,
-              "y": 771
             }
           ]
         }
@@ -998,34 +1005,10 @@
           "label": "Cambiar estado del pizarrón",
           "area": {
             "shape": "rect",
-            "x": 1360,
-            "y": 370,
-            "width": 145,
-            "height": 78
-          }
-        },
-        {
-          "hotspotId": "computer-west",
-          "kind": "computer",
-          "label": "Computadora izquierda: accesos pendientes",
-          "area": {
-            "shape": "rect",
-            "x": 944,
-            "y": 775,
-            "width": 173,
-            "height": 60
-          }
-        },
-        {
-          "hotspotId": "computer-east",
-          "kind": "computer",
-          "label": "Computadora derecha: accesos pendientes",
-          "area": {
-            "shape": "rect",
-            "x": 1226,
-            "y": 775,
-            "width": 178,
-            "height": 60
+            "x": 1632,
+            "y": 444,
+            "width": 174,
+            "height": 94
           }
         },
         {
@@ -1034,60 +1017,60 @@
           "label": "Escritorio lateral: accesos pendientes",
           "area": {
             "shape": "rect",
-            "x": 135,
-            "y": 580,
-            "width": 180,
-            "height": 72
+            "x": 162,
+            "y": 696,
+            "width": 216,
+            "height": 86
           }
         }
       ],
       "windows": [
         {
           "shape": "rect",
-          "x": 270,
-          "y": 159,
-          "width": 130,
-          "height": 36
+          "x": 324,
+          "y": 191,
+          "width": 156,
+          "height": 43
         },
         {
           "shape": "rect",
-          "x": 753,
-          "y": 159,
-          "width": 130,
-          "height": 36
+          "x": 904,
+          "y": 191,
+          "width": 156,
+          "height": 43
         },
         {
           "shape": "rect",
-          "x": 1289,
-          "y": 159,
-          "width": 131,
-          "height": 36
+          "x": 1547,
+          "y": 191,
+          "width": 157,
+          "height": 43
         }
       ],
       "trainFrames": [],
       "boardSurface": {
         "shape": "rect",
-        "x": 1389,
-        "y": 201,
-        "width": 97,
-        "height": 119
+        "x": 1667,
+        "y": 241,
+        "width": 116,
+        "height": 143
       },
       "boardCorners": [
         {
-          "x": 1390,
-          "y": 205
+          "x": 1668,
+          "y": 246
         },
         {
-          "x": 1485,
-          "y": 249
+          "x": 1782,
+          "y": 299
         },
         {
-          "x": 1485,
-          "y": 317
+          "x": 1782,
+          "y": 380
         },
         {
-          "x": 1390,
-          "y": 272
+          "x": 1668,
+          "y": 326
         }
       ]
     }

@@ -60,3 +60,15 @@ La velocidad base se duplicó de 120 a 240 unidades por segundo. Se agregaron co
 I1 sigue parcial por arte y dispositivos reales. I2–I4 requieren implementación y todos los recorridos aplicables de 06. La capacidad de diez, los presupuestos de consumo, el aislamiento multimedia, el pizarrón y los juegos siguen pendientes de evidencia.
 
 Los cambios locales de esta alineación no se han publicado. El estado de la publicación no se deduce de un build local.
+
+### Oficina mixta — 2026-10-06
+
+`demo-v5` usa `SIN MUEBLESL.png` a 1920×1080 como fondo y los PNG `escritorio x.png`, `SILLA X.png` y `PLANTASL.png` como objetos independientes. Sus valores editables están en `scripts/office-layout.mjs`. Se corrigió la transformación de colliders y máscaras para que aplique el mismo pivot y la misma escala que el sprite; el avatar conserva la caja física pequeña de pies. La opacidad de objetos que lo tapan desde detrás llega gradualmente a 5 %.
+
+`npm run build` aprobó TypeScript, las firmas y hashes de 18 imágenes y los builds API/web. `npm test` aprobó ocho pruebas, incluidas las aproximaciones físicas a mesa, silla y maceta, la separación de profundidad y la accesibilidad de las interacciones. En Playwright pasaron 12 recorridos: cinco entradas a la mesa con teclado y joystick en escritorio, las mismas con joystick móvil, biblioteca, cuatro direcciones, pizarrón y cambio de viewport. Cuatro casos fueron omitidos por diseño: teclado en perfil móvil (dos) y tren sin GIF recibido (dos). Se inspeccionaron las capturas de escritorio y móvil. El proceso de Playwright completó los casos pero quedó abierto al cerrar el servidor de desarrollo en Windows; se interrumpió después de obtener los resultados.
+
+El GIF del tren y los sprites definitivos del pizarrón siguen pendientes de recepción; por eso no se validó animación real del tren ni cambio entre esos sprites. Tampoco se probó con joystick o cámara de hardware físico.
+
+### Ajuste de borde frontal y paredes — 2026-10-06
+
+Se agregaron 2 píxeles del mapa al borde inferior de los colliders de mesa, silla, maceta, bases de muebles fijos y segmentos de pared pertinentes. En la convención de controles ese borde apunta a `−Y` (abajo); en Canvas aumenta `y`. La parte del sprite del avatar que se superpone a una pared se cubre con los píxeles de esa pared, mientras la caja de pies sigue determinando la colisión. `npm run build` y las ocho pruebas unitarias aprobaron. Playwright aprobó seis recorridos de escritorio/móvil sobre escritorio y biblioteca, y dos comprobaciones visuales de la pared norte; se omitieron los dos casos de teclado en perfil móvil. Como en la validación anterior, el proceso quedó abierto al cerrar Vite en Windows y se interrumpió tras registrar los resultados.

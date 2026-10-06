@@ -1,12 +1,15 @@
-import { assetById, type Direction, type Door, type DoorStates, type MapBundle, type Point, type Rect, type Scene } from './map';
+import { assetById, type Asset, type Direction, type Door, type DoorStates, type MapBundle, type Point, type Rect, type Scene } from './map';
 
 export const MOVEMENT_SPEED = 240;
 export const MAX_STEP_SECONDS = 0.1;
-// 90% transparency leaves 10% opacity when an object occludes the avatar.
-export const OCCLUSION_MIN_OPACITY = 0.1;
+// The target opacity is set per object; 5% is the map default.
+export const OCCLUSION_MIN_OPACITY = 0.05;
 
 export function worldRect(rect: Rect, position: Point, scale = 1): Rect {
   return { shape: 'rect', x: position.x + rect.x * scale, y: position.y + rect.y * scale, width: rect.width * scale, height: rect.height * scale };
+}
+export function objectRect(rect: Rect, asset: Asset, position: Point): Rect {
+  return worldRect({ ...rect, x: rect.x-asset.pivot.x, y: rect.y-asset.pivot.y },position,asset.worldScale);
 }
 export function overlaps(a: Rect, b: Rect): boolean {
   return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
@@ -29,11 +32,11 @@ export function facing(input: Point, previous: Direction): Direction {
 export function sceneColliders(map: MapBundle, scene: Scene, doors: DoorStates): Rect[] {
   const result = [...scene.colliders.map(item => item.area), ...scene.objects.flatMap(object => {
     const asset = assetById(map, object.assetId);
-    return asset.colliders.map(rect => worldRect(rect, object.position, asset.worldScale));
+    return asset.colliders.map(rect => objectRect(rect, asset, object.position));
   })];
   for (const door of scene.doors) {
     const asset = assetById(map, doors[door.doorId] ? door.openAssetId : door.closedAssetId);
-    result.push(...asset.colliders.map(rect => worldRect(rect, door.position, asset.worldScale)));
+    result.push(...asset.colliders.map(rect => objectRect(rect, asset, door.position)));
   }
   return result;
 }
@@ -59,17 +62,25 @@ export function move(map: MapBundle, scene: Scene, position: Point, input: Point
 }
 export function canCloseDoor(map: MapBundle, door: Door, positions: Point[]): boolean {
   const asset = assetById(map, door.closedAssetId);
-  return !positions.some(position => asset.colliders.some(rect => overlaps(worldRect(rect, door.position, asset.worldScale), worldRect(map.avatar.footCollider, position))));
+  return !positions.some(position => asset.colliders.some(rect => overlaps(objectRect(rect, asset, door.position), worldRect(map.avatar.footCollider, position))));
 }
 export function spriteRect(map: MapBundle, assetId: string, position: Point): Rect {
   const asset = assetById(map, assetId);
-  return worldRect({ shape: 'rect', x: -asset.pivot.x, y: -asset.pivot.y, width: asset.sourceRect.width, height: asset.sourceRect.height }, position, asset.worldScale);
+  return objectRect({shape:'rect',x:0,y:0,width:asset.sourceRect.width,height:asset.sourceRect.height},asset,position);
 }
-export function occlusionTarget(mask: Rect, avatar: Rect, inFront: boolean, margin: number): number {
+export function isBehindObject(asset: Asset, objectPosition: Point, avatarFeet: Point): boolean {
+  if (!asset.depth) return false;
+  const behind=(rule:NonNullable<Asset['depth']>)=>{
+    const reference=objectPosition[rule.axis]+rule.offset*asset.worldScale;
+    return rule.behindSide==='positive'?avatarFeet[rule.axis]>reference:avatarFeet[rule.axis]<reference;
+  };
+  return behind(asset.depth) || (asset.depth.secondary ? behind(asset.depth.secondary) : false);
+}
+export function occlusionTarget(mask: Rect, avatar: Rect, inFront: boolean, margin: number, minOpacity = OCCLUSION_MIN_OPACITY): number {
   if (!inFront) return 1;
   const dx = Math.max(mask.x - avatar.x - avatar.width, avatar.x - mask.x - mask.width, 0);
   const dy = Math.max(mask.y - avatar.y - avatar.height, avatar.y - mask.y - mask.height, 0);
   const distance = Math.hypot(dx, dy);
-  if (distance === 0) return OCCLUSION_MIN_OPACITY;
-  return margin > 0 ? OCCLUSION_MIN_OPACITY + (1 - OCCLUSION_MIN_OPACITY) * Math.min(1, distance / margin) : 1;
+  if (distance === 0) return minOpacity;
+  return margin > 0 ? minOpacity + (1 - minOpacity) * Math.min(1, distance / margin) : 1;
 }

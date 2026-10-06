@@ -23,6 +23,12 @@ export const mapSchema = {
       sourceRect: rect, pivot: point, worldScale: positive,
       layer: { enum: ['ground', 'world', 'overlay'] }, sortAnchorY: number,
       colliders: array(rect), occlusionMask: nullable(rect), occlusionApproachMargin: { type: 'number', minimum: 0 },
+      occlusionMinOpacity: { type: 'number', minimum: 0, maximum: 1 },
+      depth: nullable({ type:'object',additionalProperties:false,required:['axis','offset','behindSide'],properties:{
+        axis:{enum:['x','y']},offset:number,behindSide:{enum:['positive','negative']},
+        secondary:object({axis:{enum:['x','y']},offset:number,behindSide:{enum:['positive','negative']}})
+      } }),
+      renderOrder: number,
       interaction: nullable(object({ kind: { const: 'inspect' }, label: { type: 'string', minLength: 1, maxLength: 300 }, area: rect })),
       variant: id, contentHash: { type: 'string', pattern: '^[a-f0-9]{64}$' }
     })),

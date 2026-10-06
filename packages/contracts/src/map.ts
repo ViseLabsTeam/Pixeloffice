@@ -14,6 +14,10 @@ export interface Asset {
   colliders: Rect[];
   occlusionMask: Rect | null;
   occlusionApproachMargin: number;
+  occlusionMinOpacity: number;
+  depth: { axis: 'x' | 'y'; offset: number; behindSide: 'positive' | 'negative';
+    secondary?: { axis: 'x' | 'y'; offset: number; behindSide: 'positive' | 'negative' } } | null;
+  renderOrder: number;
   interaction: { kind: 'inspect'; label: string; area: Rect } | null;
   variant: string;
   contentHash: string;

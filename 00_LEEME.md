@@ -21,7 +21,7 @@ Leer 01 y 02 antes de presupuestar o desarrollar. Después, 03 y 05 para impleme
 
 Los documentos 01–07 están alineados con esta v2. El [estado de validación](docs/validacion.md) distingue evidencia histórica y aceptación pendiente; el [inventario de assets](docs/assets.md) registra la entrega parcial. La documentación bajo `legacy/pre-alpha` y `docs/historico` es histórica y no define alcance vigente.
 
-La versión 2.0 identifica esta especificación. El mapa de prueba usa `demo-v4`: una oficina compuesta de 1600×900 con geometría e interacciones separadas, más el avatar masculino de cuatro direcciones. `schemaVersion: 1` y `protocolVersion: 1` siguen siendo identificadores técnicos independientes.
+La versión 2.0 identifica esta especificación. El mapa de prueba usa `demo-v5`: `SIN MUEBLESL.png` como fondo de 1920×1080, muebles sueltos como objetos con colisión y profundidad independientes, y el avatar masculino de cuatro direcciones. `schemaVersion: 1` y `protocolVersion: 1` siguen siendo identificadores técnicos independientes. Los campos editables están en [la guía de ajuste](docs/ajuste-mapa-oficina.md).
 
 ## Cómo interpretar las decisiones
 
