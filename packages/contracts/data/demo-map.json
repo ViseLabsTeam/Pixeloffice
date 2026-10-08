@@ -126,13 +126,8 @@
       ],
       "depth": {
         "axis": "y",
-        "offset": 19.333333333333307,
-        "behindSide": "negative",
-        "secondary": {
-          "axis": "x",
-          "offset": -25,
-          "behindSide": "positive"
-        }
+        "offset": -28.88888888888889,
+        "behindSide": "negative"
       },
       "renderOrder": 10,
       "interaction": null,
@@ -253,7 +248,7 @@
       "renderOrder": 30,
       "interaction": null,
       "variant": "peredo-import",
-      "contentHash": "81dca229e103ae96ed895c1151207fa7e9bbe4bf017e335378cbfd6d5a5c5b47"
+      "contentHash": "f2c9636bbf8916f36f9cafaa7e77d7f21a291f9ea5e10acc922513e71228e627"
     },
     {
       "schemaVersion": 1,
@@ -327,7 +322,7 @@
       "renderOrder": 30,
       "interaction": null,
       "variant": "peredo-import",
-      "contentHash": "81dca229e103ae96ed895c1151207fa7e9bbe4bf017e335378cbfd6d5a5c5b47"
+      "contentHash": "f2c9636bbf8916f36f9cafaa7e77d7f21a291f9ea5e10acc922513e71228e627"
     },
     {
       "schemaVersion": 1,

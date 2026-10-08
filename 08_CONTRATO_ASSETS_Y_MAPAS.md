@@ -22,7 +22,7 @@ Conservar el fondo original de 1920×1080 sin suavizado ni escalado accidental. 
 |---|---|
 | Oficina | `SIN MUEBLESL.png` define el fondo visible; `total-office.jpeg` es referencia histórica. |
 | Paredes y muebles incorporados | Dibujados detrás del avatar en el fondo. Colliders e interacciones se entregan como metadatos independientes. |
-| Muebles sueltos | `escritorio x.png`, dos instancias de `escritorio -y.png`, `SILLA X.png`, dos instancias de `SILLA -Y.png` y `PLANTASL.png` se dibujan como objetos con geometría propia. |
+| Muebles sueltos | `escritorio x.png`, dos instancias de `escritorio -y.png`, `SILLA X.png`, dos instancias de `SILLA Y.png` y `PLANTASL.png` se dibujan como objetos con geometría propia. |
 | Tren | GIF de paisaje para recortar dentro de las tres ventanas, conservando marcos y paredes. |
 | Avatar hombre/mujer | Frente, espalda, izquierda y derecha; mismo punto de pies por vista. |
 | Ropa | Máscara o capas para recolorear sólo ropa, conservando piel, pelo y sombras. |

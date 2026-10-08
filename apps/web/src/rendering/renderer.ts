@@ -140,10 +140,13 @@ export class Renderer {
     const asset=assetById(this.map,avatarId),source=asset.sourceRect;
     const avatarRect=spriteRect(this.map,avatarId,position);
     const objects=[...scene.objects].sort((a,b)=>assetById(this.map,a.assetId).renderOrder-assetById(this.map,b.assetId).renderOrder);
-    for(const object of objects)if(!this.objectBehind(object,world))this.drawObject(object);
+    const behindAvatar=new Set(objects.filter(object=>this.objectBehind(object,world)).map(object=>object.objectId));
+    // The left desk must cover its chair even when the avatar is behind only the chair.
+    if(behindAvatar.has('west-chair'))behindAvatar.add('west-desk');
+    for(const object of objects)if(!behindAvatar.has(object.objectId))this.drawObject(object);
     context.drawImage(this.cache.get(avatarId),source.x,source.y,source.width,source.height,
       Math.round(avatarRect.x),Math.round(avatarRect.y),avatarRect.width,avatarRect.height);
-    for(const object of objects)if(this.objectBehind(object,world))this.drawObject(object);
+    for(const object of objects)if(behindAvatar.has(object.objectId))this.drawObject(object);
     context.fillStyle='#f4f4dc';context.font='bold 19px system-ui';context.textAlign='center';
     context.fillText('Vos',position.x,avatarRect.y-8);
     this.drawDebugGeometry(scene,world);

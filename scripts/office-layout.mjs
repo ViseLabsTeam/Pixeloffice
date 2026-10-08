@@ -13,7 +13,6 @@ const westDesk = { top: 34, front: 554, legTip: 662, left: 94, right: 442, pivot
 const southDesk = { top: 216, front: 554, legTip: 674, left: 158, right: 838, pivot: { x: 158, y: 674 } };
 const westChair = { seatBack: 70, seatFront: 100, legTip: 140, left: 28, right: 107 };
 const southChair = { seatBack: 60, seatFront: 105, legTip: 142, left: 22, right: 111 };
-const westDeskFrontY = 706.8 + (westDesk.front - westDesk.pivot.y) * 0.3;
 
 export const furniture = [
   {
@@ -21,10 +20,10 @@ export const furniture = [
     position: { x: 258, y: 657 }, scale: 0.9, pivot: { x: 74, y: 140 },
     collider: [rect(westChair.left, westChair.seatBack + westChair.legTip - westChair.seatFront,
       westChair.right - westChair.left, westChair.seatFront - westChair.seatBack)],
-    // Front approaches from the left or below stay above both furniture sprites.
-    // Keep the same front line so the avatar's depth behavior stays unchanged.
-    depth: { axis: 'y', offset: (westDeskFrontY - 657) / 0.9, behindSide: 'negative',
-      secondary: { axis: 'x', offset: -25, behindSide: 'positive' } }, renderOrder: 10
+    // Behind the seat's base, the chair covers the avatar. In front it stays below.
+    // One map pixel includes feet exactly touching the rear collider edge.
+    depth: { axis: 'y', offset: westChair.seatBack + westChair.legTip - westChair.seatFront - 140 + 1 / 0.9,
+      behindSide: 'negative' }, renderOrder: 10
   },
   {
     id: 'west-desk', source: 'furniture/table/escritorio x.png',
@@ -45,7 +44,7 @@ export const furniture = [
     depth: { axis: 'y', offset: southDesk.front - southDesk.pivot.y, behindSide: 'negative' }, renderOrder: 20
   },
   {
-    id: 'east-chair-left', source: 'furniture/chair/SILLA -Y.png',
+    id: 'east-chair-left', source: 'furniture/chair/SILLA Y.png',
     position: { x: 1241, y: 930 }, scale: 1, pivot: { x: 66, y: 150 },
     collider: [rect(southChair.left, southChair.seatBack + southChair.legTip - southChair.seatFront,
       southChair.right - southChair.left, southChair.seatFront - southChair.seatBack)],
@@ -59,7 +58,7 @@ export const furniture = [
     depth: { axis: 'y', offset: southDesk.front - southDesk.pivot.y, behindSide: 'negative' }, renderOrder: 20
   },
   {
-    id: 'east-chair-right', source: 'furniture/chair/SILLA -Y.png',
+    id: 'east-chair-right', source: 'furniture/chair/SILLA Y.png',
     position: { x: 1580, y: 930 }, scale: 1, pivot: { x: 66, y: 150 },
     collider: [rect(southChair.left, southChair.seatBack + southChair.legTip - southChair.seatFront,
       southChair.right - southChair.left, southChair.seatFront - southChair.seatBack)],

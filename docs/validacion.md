@@ -92,3 +92,7 @@ Sólo la silla lateral izquierda pasó de `renderOrder:30` a `renderOrder:10`; s
 ### Huella del pizarrón — 2026-10-08
 
 Los tres colliders parciales de patas y base del pizarrón se sustituyeron por `board-footprint`, un rectángulo de `x:1642…1802`, `y:283…442` que se solapa con la pared norte y cierra el pasillo posterior. La zona de interacción `board` mantiene sus coordenadas delante del mueble. Esta iteración modifica únicamente esa geometría del mapa; no se ejecutaron pruebas automatizadas.
+
+### Orientación y profundidad de sillas — 2026-10-08
+
+Las dos sillas derechas usan ahora `SILLA Y.png` en lugar de `SILLA -Y.png`, con las mismas dimensiones de 133 × 150 y sin cambios de collider, posición, escala ni pivot. La silla izquierda se dibuja sobre el avatar cuando el punto de pies está detrás de su base (`y < 631`); delante conserva el orden anterior. Cuando ambos muebles del conjunto izquierdo se dibujan sobre el avatar, la mesa sigue después de la silla. No se ejecutaron pruebas automatizadas en esta iteración.
