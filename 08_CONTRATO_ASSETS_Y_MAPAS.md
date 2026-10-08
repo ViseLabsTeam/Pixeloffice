@@ -74,7 +74,7 @@ Carpetas sugeridas para los recursos que falten: `ensambled`, `gifs`, `avatar`, 
 
 `SIN MUEBLESL.png` es el fondo oficial del mapa actual. Desarrollo define la geometría de las piezas sueltas y de los muebles incorporados sobre este fondo; el artista no necesita programar el manifest.
 
-Estado de recepción al 2026-10-08: `demo-v5` usa `SIN MUEBLESL.png` como fondo de 1920×1080 y cinco PNG de muebles sueltos en siete posiciones. El avatar masculino recibido conserva sus cuatro PNG de reposo y cuatro GIF de movimiento. El GIF `Tren .gif` se reproduce por las ventanas de derecha a izquierda, con 40 segundos de espera entre ventanas. Faltan los sprites limpio/sucio del pizarrón; el estado marcado actual es una representación temporal. Ver [inventario y faltantes](docs/assets.md).
+Estado de recepción al 2026-10-08: `demo-v5` usa `SIN MUEBLESL.png` como fondo de 1920×1080 y cinco PNG de muebles sueltos en siete posiciones. El avatar masculino recibido conserva sus cuatro PNG de reposo y cuatro GIF de movimiento. El GIF `Tren .gif` se reproduce por las ventanas de derecha a izquierda, con 15 segundos de espera entre ventanas. Faltan los sprites limpio/sucio del pizarrón; el estado marcado actual es una representación temporal. Ver [inventario y faltantes](docs/assets.md).
 
 ## 7. Aceptación de arte
 

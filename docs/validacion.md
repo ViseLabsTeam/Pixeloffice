@@ -99,4 +99,4 @@ Las dos sillas derechas usan ahora `SILLA Y.png` en lugar de `SILLA -Y.png`, con
 
 ### Tren en ventanas — 2026-10-08
 
-Se integró `Tren .gif` (88 cuadros, 8,8 segundos) en las aberturas completas de las tres ventanas. La secuencia empieza a la derecha, sigue por el centro y termina a la izquierda, con 40 segundos de paisaje fijo entre animaciones. El generador reduce los cuadros a 156 × 156 píxeles para respetar el presupuesto de memoria; se inspeccionó un cuadro extraído y TypeScript compiló. La reproducción completa en navegador no se comprobó en esta iteración.
+Se integró `Tren .gif` (88 cuadros, 8,8 segundos) en las aberturas completas de las tres ventanas. La secuencia empieza a la derecha, sigue por el centro y termina a la izquierda, con 15 segundos de paisaje fijo entre animaciones. El generador reduce los cuadros a 156 × 156 píxeles para respetar el presupuesto de memoria; se inspeccionó un cuadro extraído y TypeScript compiló. La reproducción completa en navegador no se comprobó en esta iteración.

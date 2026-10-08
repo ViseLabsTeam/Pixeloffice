@@ -31,7 +31,7 @@ export class Renderer {
   private drawTrain(scene:Scene):number|null{
     if(!scene.trainFrames.length||!scene.windows.length)return null;
     const duration=scene.trainFrames.reduce((sum,frame)=>sum+frame.durationMs,0);
-    const pause=40_000;
+    const pause=15_000;
     const slotDuration=duration+pause;
     const now=performance.now();
     this.trainEpoch??=now;
