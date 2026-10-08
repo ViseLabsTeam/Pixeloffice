@@ -94,6 +94,6 @@ export const interactions = [
   { hotspotId:'east-workstation-left',kind:'computer',label:'Escritorio izquierdo: accesos pendientes',area:rect(1118,891,246,87) },
   { hotspotId:'east-workstation-right',kind:'computer',label:'Escritorio derecho: accesos pendientes',area:rect(1457,891,246,87) }
 ];
-export const windows = [rect(324,191,156,43),rect(904,191,156,43),rect(1547,191,157,43)];
+export const windows = [rect(324,76,156,156),rect(904,76,156,156),rect(1547,76,157,156)];
 export const boardSurface = rect(1667,241,116,143);
 export const boardCorners = [{x:1668,y:246},{x:1782,y:299},{x:1782,y:380},{x:1668,y:326}];

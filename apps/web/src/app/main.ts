@@ -36,6 +36,7 @@ if (import.meta.env.DEV && debugParams.get('debug') === 'colliders' && debugPara
   if (canOccupy(demoMap, world.scene, point, world.colliders)) world.position = point;
 }
 let frame = 0;
+let trainTimer = 0;
 let lastTime = 0;
 let ready = false;
 let disposed = false;
@@ -62,6 +63,7 @@ function updateInterface() {
   actionButton.disabled = !ready || world.transitioning || (!door && !interaction);
 }
 function wake() {
+  if (trainTimer) { clearTimeout(trainTimer); trainTimer = 0; }
   if (!frame && ready && !disposed && !document.hidden) frame = requestAnimationFrame(tick);
 }
 function action() {
@@ -90,9 +92,13 @@ function tick(time: number) {
   const vector = input.vector();
   world.step(vector,seconds);
   void transition();
-  const animating = renderer.draw(world,seconds);
+  const nextTrainFrameMs = renderer.draw(world,seconds);
   updateInterface();
-  if (vector.x || vector.y || animating) wake(); else lastTime = 0;
+  if (vector.x || vector.y) wake();
+  else {
+    lastTime = 0;
+    if (nextTrainFrameMs !== null) trainTimer = window.setTimeout(wake,Math.max(1,Math.ceil(nextTrainFrameMs)));
+  }
 }
 // A secondary touch contact does not synthesize the mouse click used by a
 // native button in every browser. Preserve keyboard clicks and suppress duplicates.
@@ -118,16 +124,16 @@ resetButton.addEventListener('click',async () => {
 },{signal:controller.signal});
 const resize = new ResizeObserver(wake); resize.observe(canvas);
 document.addEventListener('visibilitychange',() => {
-  if (document.hidden) { cancelAnimationFrame(frame); frame = 0; input.reset(); lastTime = 0; }
+  if (document.hidden) { cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0; input.reset(); lastTime = 0; }
   else wake();
 },{signal:controller.signal});
 function dispose() {
   if (disposed) return;
-  disposed = true; ready = false; cancelAnimationFrame(frame); frame = 0;
+  disposed = true; ready = false; cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0;
   controller.abort(); resize.disconnect(); input.destroy(); localMedia.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
 }
 window.addEventListener('pagehide',event => {
-  if (event.persisted) { cancelAnimationFrame(frame); frame = 0; input.reset(); localMedia.stopAll(); lastTime = 0; }
+  if (event.persisted) { cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0; input.reset(); localMedia.stopAll(); lastTime = 0; }
   else dispose();
 },{signal:controller.signal});
 window.addEventListener('pageshow',event => { if (event.persisted) wake(); },{signal:controller.signal});

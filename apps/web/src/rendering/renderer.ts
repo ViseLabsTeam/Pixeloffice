@@ -9,7 +9,7 @@ export class Renderer {
   private sceneId='';
   private animationDirection: Direction | undefined;
   private animationTime=0;
-  private trainTime=0;
+  private trainEpoch: number | undefined;
   constructor(private readonly canvas:HTMLCanvasElement,private readonly map:MapBundle,private readonly cache:AssetCache){
     const context=canvas.getContext('2d');
     if(!context)throw new Error('El navegador no permite dibujar la oficina.');
@@ -17,6 +17,7 @@ export class Renderer {
   }
   private prepareFloor(scene:Scene){
     this.sceneId=scene.sceneId;
+    this.trainEpoch=undefined;
     this.floor.width=scene.logicalSize.width;this.floor.height=scene.logicalSize.height;
     const context=this.floor.getContext('2d');
     if(!context)throw new Error('No se pudo preparar la oficina');
@@ -27,22 +28,27 @@ export class Renderer {
     context.fillRect(0,0,this.floor.width,this.floor.height);
     context.drawImage(this.cache.get(asset.assetId),source.x,source.y,source.width,source.height,0,0,this.floor.width,this.floor.height);
   }
-  private drawTrain(scene:Scene,seconds:number){
-    if(!scene.trainFrames.length)return false;
+  private drawTrain(scene:Scene):number|null{
+    if(!scene.trainFrames.length||!scene.windows.length)return null;
     const duration=scene.trainFrames.reduce((sum,frame)=>sum+frame.durationMs,0);
-    this.trainTime=(this.trainTime+seconds*1000)%duration;
-    let elapsed=this.trainTime;
+    const pause=40_000;
+    const slotDuration=duration+pause;
+    const now=performance.now();
+    this.trainEpoch??=now;
+    const phase=(now-this.trainEpoch)%(slotDuration*scene.windows.length);
+    const slot=Math.floor(phase/slotDuration);
+    let elapsed=phase-slot*slotDuration;
+    if(elapsed>=duration)return slotDuration-elapsed;
     let selected=scene.trainFrames[0]!;
     for(const frame of scene.trainFrames){selected=frame;if(elapsed<frame.durationMs)break;elapsed-=frame.durationMs;}
     const image=this.cache.get(selected.assetId);
     const context=this.context;
-    for(const window of scene.windows){
-      context.save();
-      context.beginPath();context.rect(window.x,window.y,window.width,window.height);context.clip();
-      context.drawImage(image,0,0,image.naturalWidth,image.naturalHeight,window.x,window.y,window.width,window.height);
-      context.restore();
-    }
-    return scene.trainFrames.length>1;
+    const opening=scene.windows[scene.windows.length-1-slot]!;
+    context.save();
+    context.beginPath();context.rect(opening.x,opening.y,opening.width,opening.height);context.clip();
+    context.drawImage(image,0,0,image.naturalWidth,image.naturalHeight,opening.x,opening.y,opening.width,opening.height);
+    context.restore();
+    return selected.durationMs-elapsed;
   }
   private drawBoard(scene:Scene,dirty:boolean){
     if(!dirty)return;
@@ -121,7 +127,7 @@ export class Renderer {
     context.fillText('Cian: collider · Naranja: profundidad · Verde: pies · Rojo: punto de pies',1008,497);
     context.restore();
   }
-  draw(world:LocalWorld,seconds:number):boolean{
+  draw(world:LocalWorld,seconds:number):number|null{
     const {scene,position}=world;
     if(scene.sceneId!==this.sceneId)this.prepareFloor(scene);
     const bounds=this.canvas.getBoundingClientRect();const dpr=Math.min(window.devicePixelRatio||1,2);
@@ -134,7 +140,7 @@ export class Renderer {
     context.translate((width-scene.logicalSize.width*scale)/2,(height-scene.logicalSize.height*scale)/2);
     context.scale(scale,scale);
     context.drawImage(this.floor,0,0);
-    const trainAnimating=this.drawTrain(scene,seconds);
+    const nextTrainFrameMs=this.drawTrain(scene);
     this.drawBoard(scene,world.boardDirty);
     const avatarId=this.avatarAsset(world,seconds);
     const asset=assetById(this.map,avatarId),source=asset.sourceRect;
@@ -150,7 +156,7 @@ export class Renderer {
     context.fillStyle='#f4f4dc';context.font='bold 19px system-ui';context.textAlign='center';
     context.fillText('Vos',position.x,avatarRect.y-8);
     this.drawDebugGeometry(scene,world);
-    return trainAnimating;
+    return nextTrainFrameMs;
   }
   destroy(){this.floor.width=0;this.floor.height=0;this.canvas.width=0;this.canvas.height=0;}
 }

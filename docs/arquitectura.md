@@ -1,8 +1,8 @@
 # Arquitectura actual — base espacial para la demo v2
 
-Actualizado el 2026-10-06. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue incompleto respecto al tren, sprites del pizarrón y validación en dispositivo real.
+Actualizado el 2026-10-08. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue incompleto respecto a los sprites del pizarrón y la validación en dispositivo real.
 
-`apps/web/src/app` posee el ciclo de vida. Crea input, mundo local, caché, renderer y controles de medios; desmonta listeners, ResizeObserver, rAF, imágenes y pistas de captura al salir. Detiene el dibujo en segundo plano y programa frames mientras haya movimiento o paisaje animado. El límite visual es 30 FPS, con simulación basada en tiempo y subpasos de hasta dos unidades.
+`apps/web/src/app` posee el ciclo de vida. Crea input, mundo local, caché, renderer y controles de medios; desmonta listeners, ResizeObserver, rAF, temporizador del tren, imágenes y pistas de captura al salir. Detiene el dibujo en segundo plano y programa el próximo cuadro del tren sin redibujar durante las pausas de 40 segundos. El límite visual es 30 FPS, con simulación basada en tiempo y subpasos de hasta dos unidades.
 
 `engine/input` traduce teclado y Pointer Events a un vector normalizado. Conserva intensidad, aplica zona muerta y libera el control en blur, foco editable, pointercancel y pérdida de captura. La velocidad base es 240 unidades de mapa por segundo. La acción usa un botón DOM independiente, permitiendo un segundo pointer.
 
@@ -10,7 +10,7 @@ Actualizado el 2026-10-06. Describe implementación existente; los módulos futu
 
 `engine/world` es **una demostración local**, sin autoridad de permisos. Usa una escena fija de 1920×1080 y una caja de pies para resolver movimiento contra colliders definidos aparte del fondo PNG. Guarda localmente el estado limpio/marcado del pizarrón. Las estructuras de puertas y portales siguen disponibles en el contrato para etapas futuras, pero no se usan en esta oficina.
 
-`rendering` dibuja `SIN MUEBLESL.png`, el tren y el pizarrón antes del avatar. El fondo completo permanece detrás de él. Mesa, silla y planta se dibujan por separado según su referencia de profundidad y siempre con opacidad completa. La colisión transforma los rectángulos locales con el mismo pivot y escala que el sprite; nunca depende del alpha. Límite DPR=2 y presupuesto de bitmaps=64 MiB. El canvas conserva proporción 16:9 y usa escalado sin suavizado.
+`rendering` dibuja `SIN MUEBLESL.png`, el tren y el pizarrón antes del avatar. El tren reproduce sus 88 cuadros en la ventana derecha, luego central y luego izquierda, con 40 segundos entre cada una; los cuadros se generan a 156 × 156 píxeles. El fondo completo permanece detrás del avatar. Mesa, silla y planta se dibujan por separado según su referencia de profundidad y siempre con opacidad completa. La colisión transforma los rectángulos locales con el mismo pivot y escala que el sprite; nunca depende del alpha. Límite DPR=2 y presupuesto de bitmaps=64 MiB. El canvas conserva proporción 16:9 y usa escalado sin suavizado.
 
 `packages/contracts` centraliza coordenadas, geometría, modelos y validación. JSON Schema comprueba forma/versiones; validaciones semánticas comprueban IDs, referencias, spawns y geometría. El build comprueba firma, hash y dimensiones de PNG. El mapa `demo-v5` en `data/demo-map.json` contiene una escena, 11 colliders fijos, siete objetos y regiones de ventanas e interacción; no contiene credenciales ni estado temporal. Las animaciones guardan referencias y duraciones de cuadros independientes de la colisión de pies. La configuración editable está en `scripts/office-layout.mjs`.
 

@@ -96,3 +96,7 @@ Los tres colliders parciales de patas y base del pizarrón se sustituyeron por `
 ### Orientación y profundidad de sillas — 2026-10-08
 
 Las dos sillas derechas usan ahora `SILLA Y.png` en lugar de `SILLA -Y.png`, con las mismas dimensiones de 133 × 150 y sin cambios de collider, posición, escala ni pivot. La silla izquierda se dibuja sobre el avatar cuando el punto de pies está detrás de su base (`y < 631`); delante conserva el orden anterior. Cuando ambos muebles del conjunto izquierdo se dibujan sobre el avatar, la mesa sigue después de la silla. No se ejecutaron pruebas automatizadas en esta iteración.
+
+### Tren en ventanas — 2026-10-08
+
+Se integró `Tren .gif` (88 cuadros, 8,8 segundos) en las aberturas completas de las tres ventanas. La secuencia empieza a la derecha, sigue por el centro y termina a la izquierda, con 40 segundos de paisaje fijo entre animaciones. El generador reduce los cuadros a 156 × 156 píxeles para respetar el presupuesto de memoria; se inspeccionó un cuadro extraído y TypeScript compiló. La reproducción completa en navegador no se comprobó en esta iteración.

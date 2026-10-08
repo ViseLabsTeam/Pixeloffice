@@ -72,12 +72,13 @@ for(const [direction,suffix] of Object.entries(directions)){
   });
 }
 
-// The landscape GIF can be dropped at this stable path when its export arrives.
-const trainSource=`${root}legacy/pre-alpha/assets/gifs/train.gif`;
+// Official train animation. Each frame is drawn inside one window at a time.
+const trainSource=`${root}legacy/pre-alpha/assets/gifs/train/Tren .gif`;
 const trainFrames=[];
 if(existsSync(trainSource)){
   const gif=parseGIF(readFileSync(trainSource));
   const width=gif.lsd.width,height=gif.lsd.height;
+  const windowSize=156;
   const canvas=Buffer.alloc(width*height*4);
   let previous,restore;
   for(const [index,frame] of decompressFrames(gif,true).entries()){
@@ -94,7 +95,15 @@ if(existsSync(trainSource)){
       canvas.set(patch.subarray(source,source+4),target);
     }
     const assetId=`train-frame-${index}`;
-    register(assetId,pngPixels(width,height,canvas),width,height,'png');
+    // The source is 450 px square, but only 156 px square is displayed.
+    // Keep nearest-neighbor pixel art and stay within the 64 MiB bitmap budget.
+    const pixels=Buffer.alloc(windowSize*windowSize*4);
+    for(let y=0;y<windowSize;y++)for(let x=0;x<windowSize;x++){
+      const sourceY=Math.min(height-1,Math.floor((y+0.5)*height/windowSize));
+      const sourceX=Math.min(width-1,Math.floor((x+0.5)*width/windowSize));
+      canvas.copy(pixels,(y*windowSize+x)*4,(sourceY*width+sourceX)*4,(sourceY*width+sourceX)*4+4);
+    }
+    register(assetId,pngPixels(windowSize,windowSize,pixels),windowSize,windowSize,'png');
     trainFrames.push({assetId,durationMs:Math.max(20,frame.delay)});
     previous=frame;
   }

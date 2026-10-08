@@ -710,6 +710,2206 @@
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "746f9b46cd4153dcdedbda161bc7669ea9803a1fd82cce0e2cd4ee5293fed3ba"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-0",
+      "imageUrl": "/assets/peredo/train-frame-0.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "fb61edc25c80cbf9f7a92927b4329b6e7e066990bd01df97abb5678a2e7ec017"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-1",
+      "imageUrl": "/assets/peredo/train-frame-1.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "ab9549d69e5692b4a303a564c243f8231ad51b3e0d1d32686abe1f4a362b4ed7"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-2",
+      "imageUrl": "/assets/peredo/train-frame-2.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "28c099152d24c7c1b79205761cf2f67f5c7f5fef95f60d38f8dbfd7b2bec92c7"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-3",
+      "imageUrl": "/assets/peredo/train-frame-3.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "33b0ad5be9fea56a1ff7938b802219b3a636c8ae388e03f0404a0251e900270b"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-4",
+      "imageUrl": "/assets/peredo/train-frame-4.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "06a1a76ed4cf67765e7616771fa444f5e064ae1da748608cda413f79118214a4"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-5",
+      "imageUrl": "/assets/peredo/train-frame-5.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "7ab7976f040b9bf26b628cebfe952eb4729e8a0e1bbf0c9ea79cba01608363d5"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-6",
+      "imageUrl": "/assets/peredo/train-frame-6.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "08642e4fc1ab8c172726b4706219ced952c1087cc3b4732f4d4484af1f2cf776"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-7",
+      "imageUrl": "/assets/peredo/train-frame-7.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "09eb2bddc351a746bdbed59f2a3677b56f89af8fd13d3e1e66b0bdb7a79b9326"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-8",
+      "imageUrl": "/assets/peredo/train-frame-8.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "4315db79382fc3eb8d1b5a69d994d3760922015b424f6430dbbdd10fe085e5e0"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-9",
+      "imageUrl": "/assets/peredo/train-frame-9.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "86aebc0215f180d3d9cf17833dfda58e9edc0170e507f5c3528a757915ff284d"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-10",
+      "imageUrl": "/assets/peredo/train-frame-10.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "bcdad9cbc7c61e7cfbf7ab961a4d91d6187c0fed2c53b23acca7136bc365b0e7"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-11",
+      "imageUrl": "/assets/peredo/train-frame-11.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "2a12311a7812c2e264f42d929635e3c00da7e6c6694829a49e95fe890d573d84"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-12",
+      "imageUrl": "/assets/peredo/train-frame-12.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "32466117d69bfa6d13eda0435b1ee6d621348bccc73f81595624445d711a63b4"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-13",
+      "imageUrl": "/assets/peredo/train-frame-13.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "2c6043992b5664d52b135822a701a7ee676cbb8543ca0108da32147d397f21ae"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-14",
+      "imageUrl": "/assets/peredo/train-frame-14.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "1baf463bc75e2fd873ea87b393059c666f3e9c7acb231a6aedc6b2aa6d4c29a1"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-15",
+      "imageUrl": "/assets/peredo/train-frame-15.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "62e7e33613ff2fad38824b99520a8c8e819f39d638591af7f4ec8a50c5143040"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-16",
+      "imageUrl": "/assets/peredo/train-frame-16.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "3437fe26b7d8ae437d258a3950b7e3a6b9d627e52dc9a39f2f53df7f4e88c412"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-17",
+      "imageUrl": "/assets/peredo/train-frame-17.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e36e8bf81458445b3b23ac277e229f2967c503d4fc20f955de7b2ebd16d50ca0"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-18",
+      "imageUrl": "/assets/peredo/train-frame-18.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "3b3ef2735deadf4b9b9e7c2b8e863639c33d57f3157c7680ff2c133459ff652b"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-19",
+      "imageUrl": "/assets/peredo/train-frame-19.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "56f119da5b4a715fb02e83bf448bded7e643aec2a882d9a460b2bc12aa1400c6"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-20",
+      "imageUrl": "/assets/peredo/train-frame-20.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "9ccbf593385ecf46a9308113d213a2e0134530afbbf4be3340f1461aa1d33d58"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-21",
+      "imageUrl": "/assets/peredo/train-frame-21.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "1c06641f30581bd6f9628576b508e4bc2743a9e362ec0c68e8e3bde0859532a1"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-22",
+      "imageUrl": "/assets/peredo/train-frame-22.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "0490815bf34ac0233138bb03832619d23dc6924f5fc31c6114d5c159d4d88ac1"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-23",
+      "imageUrl": "/assets/peredo/train-frame-23.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "2ce1859899a5c67f8d40d0e1fb09990e2699afa33366c64ab77b18ba454be35a"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-24",
+      "imageUrl": "/assets/peredo/train-frame-24.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "6d14ddcf7f35c891b654b498d4799f38a0fac6b6a3cbb9a802ff79756ec2f33a"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-25",
+      "imageUrl": "/assets/peredo/train-frame-25.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "abb14c9326f533ca7f77261491a72f5c00f9829dd4faf74ab7f8d445322fcb3f"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-26",
+      "imageUrl": "/assets/peredo/train-frame-26.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "ed434b34608990f6062d8d8c06461279fb5d29b676cebd0332986c91385170f7"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-27",
+      "imageUrl": "/assets/peredo/train-frame-27.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "2b5f8f3688d94c8640dd096ac2da0d3952f59b4c5720457f65525bcf46ce4d68"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-28",
+      "imageUrl": "/assets/peredo/train-frame-28.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "91696740f989f8c4e260e5a9ff244d6f36fd6948833ec1c5853bd2b0b15ac36b"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-29",
+      "imageUrl": "/assets/peredo/train-frame-29.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "34ec7a736402b3dd0f38d98c33620a006140d4ede3576a9db53556e9581bf9d1"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-30",
+      "imageUrl": "/assets/peredo/train-frame-30.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e92aa6519e647a1ba801dfe0e38769d49df93f0461e4ff2d6a9bd87421285e0e"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-31",
+      "imageUrl": "/assets/peredo/train-frame-31.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "a018514f09c00045b232006d1985a87583829e6a38f3ec6875bee0ff388427a5"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-32",
+      "imageUrl": "/assets/peredo/train-frame-32.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "39b1fc47146773f4f9850194bc488b7ca5e16e466bb34eb711433ba49b31d88f"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-33",
+      "imageUrl": "/assets/peredo/train-frame-33.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "9f9de04f14a4e1c5bcb49c5b4e2e39fa355c29827ec0c35d57a7fabe567f467d"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-34",
+      "imageUrl": "/assets/peredo/train-frame-34.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "7a5dd6da5e0f60dbadd53f31f67d4282a18ef31dc4201408497a109debfe6fdd"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-35",
+      "imageUrl": "/assets/peredo/train-frame-35.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e1e739abd16f11e8bd3c7999adc723325fc574658dc4e1fdff60833acb0cdc61"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-36",
+      "imageUrl": "/assets/peredo/train-frame-36.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "87749cb7e6789bf56bd94926a5a3da8104259c4af04c1690cb58001dfea50c77"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-37",
+      "imageUrl": "/assets/peredo/train-frame-37.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "8c4bb60b883d37dc65eb04cad86c823da67c735a8f32125d5ac6b28f8967ffe5"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-38",
+      "imageUrl": "/assets/peredo/train-frame-38.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "d986bef49b4aafa5ea1a24d6782b2708ae9a0b00551477f266356803a9733444"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-39",
+      "imageUrl": "/assets/peredo/train-frame-39.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "fdf3985866f425ab59ce284103d4ef2d404bbba1f04cb3e6f50bcf606cfdab39"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-40",
+      "imageUrl": "/assets/peredo/train-frame-40.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "50ddd74034ae11347127e84e0543e6889e9283865f9588fabe807ea02f773463"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-41",
+      "imageUrl": "/assets/peredo/train-frame-41.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "01429969d3405b08036fc29aea8a05f25117342b32c3d9998b52bf1c443a69e3"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-42",
+      "imageUrl": "/assets/peredo/train-frame-42.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e5d3b43b01a8afe65ee29f59842aa82a998d5e0f66310937cfb2e2586f49af0b"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-43",
+      "imageUrl": "/assets/peredo/train-frame-43.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "55e82830406ba2e3c3a7497aab94c927042db87dc9f79a0b1c4adacf5f163b85"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-44",
+      "imageUrl": "/assets/peredo/train-frame-44.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "7eb5469012be53fc70cab0334189d2368547687b4b8cbd5ff1bbddf1b2091f73"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-45",
+      "imageUrl": "/assets/peredo/train-frame-45.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "6c63752667d9609b3a5afa9f5c60e5421c3cbdbec9a4f8e981a4aa406e7756d5"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-46",
+      "imageUrl": "/assets/peredo/train-frame-46.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e365c923cf228f54c7b744caaeb540292c022a913a51ec48723386225018ee60"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-47",
+      "imageUrl": "/assets/peredo/train-frame-47.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "5162800f2319e911be76f4edc2cc62440771503dfed14a7451621eedf51cdae9"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-48",
+      "imageUrl": "/assets/peredo/train-frame-48.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "f94ee369a2ccb27cde343d815d2e0afad4ccae124a0bb85e5042d90270bb0df8"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-49",
+      "imageUrl": "/assets/peredo/train-frame-49.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "74ef93b4bcffc86efe9f6446564dd65c1be3fc06bd67533ae2f32a46e360cd9c"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-50",
+      "imageUrl": "/assets/peredo/train-frame-50.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "faf914bedb1ddbc8105760e821d14b34a58ce235942791908eb88a7256eeab48"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-51",
+      "imageUrl": "/assets/peredo/train-frame-51.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "4471168ee308cf64085c361d625b76c0dbd8104ac58aa6074f26f33f0fd7276f"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-52",
+      "imageUrl": "/assets/peredo/train-frame-52.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "72124939ddbbd59e00cc2c250dcd7730417cbf8e9550d4db930694f2adaac2dd"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-53",
+      "imageUrl": "/assets/peredo/train-frame-53.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "0e97ea59ff5fb57c5e9db6bd423dd2945d9db7e446fecaaaa207602d82fd0773"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-54",
+      "imageUrl": "/assets/peredo/train-frame-54.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "d8d24c0a167544b06a61891eb6ec5baf03ea6218b0263277b9fd8fe98d81870b"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-55",
+      "imageUrl": "/assets/peredo/train-frame-55.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "16f211e5c6dfac98fc7fe07b120221d6cfaad0743f84b95581fdf4bbc4bb0028"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-56",
+      "imageUrl": "/assets/peredo/train-frame-56.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e9787421b2550b5dceada2d08d801f35fefddd6023c610ed3cb02fa91dfbaacf"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-57",
+      "imageUrl": "/assets/peredo/train-frame-57.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "423af29592df81b3c3552a94888de82f81168c8d0e355d2dac0e84264b4df877"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-58",
+      "imageUrl": "/assets/peredo/train-frame-58.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "bd7a590841e4e3a0a8a8bf65f272b9c78b6efb040860f1f4155017e95276c512"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-59",
+      "imageUrl": "/assets/peredo/train-frame-59.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "44a2f65afdf574207f8feee609bfb5d7b1af2932f47b41dd881763ee901f0e67"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-60",
+      "imageUrl": "/assets/peredo/train-frame-60.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "948a699429751ee204ef1c52a9ae74932c91d0fc6946d2bab023a306b6ab728e"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-61",
+      "imageUrl": "/assets/peredo/train-frame-61.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "31e11bff07a0b3db272a46b60ea9e01264a8e1eaf2399c0ae62f50cec9f71d66"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-62",
+      "imageUrl": "/assets/peredo/train-frame-62.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "d7f833cd00ea504bb3a828c1c47922cce8d0f57570bedf7554d4e2946c3de195"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-63",
+      "imageUrl": "/assets/peredo/train-frame-63.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "b72bf7aa9a5de61c1669e05b3eb75c80ff9e76c612ce04767e105519d669dfca"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-64",
+      "imageUrl": "/assets/peredo/train-frame-64.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "d07f9515aab6a694acbe826e25b3c5255ba56ec738569bc1f48aea3b6ec5b479"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-65",
+      "imageUrl": "/assets/peredo/train-frame-65.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "2845e4b0dde386037e6715238e23891f9531e5f0f15a95f5a2a38b9ac87edd11"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-66",
+      "imageUrl": "/assets/peredo/train-frame-66.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "92ca201e1fb0c151c9f09af84e4d8e1eed8c9f94adbc4232e34ca33c18ff950c"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-67",
+      "imageUrl": "/assets/peredo/train-frame-67.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "0cf93a7584e066f116d27d1f0b7742849083129ce289245d2b9a3994c1629218"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-68",
+      "imageUrl": "/assets/peredo/train-frame-68.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "92cf5fe981a8970ad2f2443219b6784456d34f0176a1edf12aab168a9de9c238"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-69",
+      "imageUrl": "/assets/peredo/train-frame-69.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "7cefc743e3c41e5a499d1f22b56d4932ca6b7860d3f23c277d8f58a93a7e2384"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-70",
+      "imageUrl": "/assets/peredo/train-frame-70.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "104440f3b3a7a75faa4b8a9868a2897e7b394531cab78afecb259b00e4741887"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-71",
+      "imageUrl": "/assets/peredo/train-frame-71.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "35c515cfcd1fe7f696501d7e5fd48daaaf504f79c96706e2af3c8371bf22bf2d"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-72",
+      "imageUrl": "/assets/peredo/train-frame-72.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "92a3c6c7f247c44b5eb89af17ef4627babc432f3ee7c5db33b2c7ceeafd86506"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-73",
+      "imageUrl": "/assets/peredo/train-frame-73.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "d5b4cfb193034b06190e48055837a44d7c79d377a7917a24db1f90a1eabb1209"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-74",
+      "imageUrl": "/assets/peredo/train-frame-74.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "9aeeeca609feb3fc383c58e11cbb0901eaba17d48c9992030032cbd7b9650ce3"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-75",
+      "imageUrl": "/assets/peredo/train-frame-75.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "f7d70f601f89a9ae35f06c1b9b530dd94cfc44d51a6d83106804ea5d71711493"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-76",
+      "imageUrl": "/assets/peredo/train-frame-76.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "6f59d39a4134f2617e40afdf62ed23b58f4b8816c6b6de847dfb82f25fdbf15f"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-77",
+      "imageUrl": "/assets/peredo/train-frame-77.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "2c1603a92376456eb495fee0f2c39e92de2d5e338792b81240d751b5f5711f42"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-78",
+      "imageUrl": "/assets/peredo/train-frame-78.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "92d8004c83ed7eaf32e0da8698de90627ef3386e34aad75f6efc6956dc6c5a8c"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-79",
+      "imageUrl": "/assets/peredo/train-frame-79.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "e2dd9f43612e09bcae548d61c36a44fc7cca4d58b6cfdd785ea3c311227b11cc"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-80",
+      "imageUrl": "/assets/peredo/train-frame-80.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "4459fe333f0acc2089153bfe601d97c6325ab2d3e8122a2002db15ce686e9b52"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-81",
+      "imageUrl": "/assets/peredo/train-frame-81.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "7e19a91759f7ae7a0568992d0ad6bfdf06e68c31cdb68b0bd9bc122abed2195c"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-82",
+      "imageUrl": "/assets/peredo/train-frame-82.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "cb8aa2eed2dd5720d82b96526d44d321ea63dabc4152d8273907e58b3ad7380f"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-83",
+      "imageUrl": "/assets/peredo/train-frame-83.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "16eebf55b0697b203862076e67be2665bbf1da281ca703625252a92ff4e063e3"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-84",
+      "imageUrl": "/assets/peredo/train-frame-84.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "112c69a9e2960e9dbda4787e961a28e53eb23f438df36e181bdb4e0d3352f48d"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-85",
+      "imageUrl": "/assets/peredo/train-frame-85.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "be4919bf6d60e9aef2799d1efe9be19ab80fc35039021aa9d4f3c963ed809969"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-86",
+      "imageUrl": "/assets/peredo/train-frame-86.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "4e0c3284620051d0c138cecffaf1baaba84ec2e3d9fb79501bc97fe0694a2293"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "train-frame-87",
+      "imageUrl": "/assets/peredo/train-frame-87.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 156,
+        "height": 156
+      },
+      "pivot": {
+        "x": 78,
+        "y": 156
+      },
+      "worldScale": 1,
+      "layer": "world",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "d7756edf60fb49e39883f2ba042c7b5c7325a83b1b284dfc03221bc6df81557c"
     }
   ],
   "scenes": [
@@ -974,26 +3174,379 @@
         {
           "shape": "rect",
           "x": 324,
-          "y": 191,
+          "y": 76,
           "width": 156,
-          "height": 43
+          "height": 156
         },
         {
           "shape": "rect",
           "x": 904,
-          "y": 191,
+          "y": 76,
           "width": 156,
-          "height": 43
+          "height": 156
         },
         {
           "shape": "rect",
           "x": 1547,
-          "y": 191,
+          "y": 76,
           "width": 157,
-          "height": 43
+          "height": 156
         }
       ],
-      "trainFrames": [],
+      "trainFrames": [
+        {
+          "assetId": "train-frame-0",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-1",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-2",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-3",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-4",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-5",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-6",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-7",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-8",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-9",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-10",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-11",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-12",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-13",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-14",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-15",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-16",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-17",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-18",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-19",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-20",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-21",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-22",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-23",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-24",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-25",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-26",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-27",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-28",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-29",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-30",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-31",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-32",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-33",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-34",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-35",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-36",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-37",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-38",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-39",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-40",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-41",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-42",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-43",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-44",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-45",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-46",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-47",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-48",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-49",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-50",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-51",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-52",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-53",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-54",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-55",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-56",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-57",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-58",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-59",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-60",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-61",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-62",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-63",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-64",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-65",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-66",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-67",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-68",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-69",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-70",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-71",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-72",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-73",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-74",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-75",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-76",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-77",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-78",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-79",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-80",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-81",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-82",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-83",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-84",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-85",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-86",
+          "durationMs": 100
+        },
+        {
+          "assetId": "train-frame-87",
+          "durationMs": 100
+        }
+      ],
       "boardSurface": {
         "shape": "rect",
         "x": 1667,
