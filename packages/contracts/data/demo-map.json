@@ -134,7 +134,7 @@
           "behindSide": "positive"
         }
       },
-      "renderOrder": 30,
+      "renderOrder": 10,
       "interaction": null,
       "variant": "peredo-import",
       "contentHash": "7e057fe258c593652f0f1a57772f3ba4b66943c6c443c8220091d4123ab0b6ff"

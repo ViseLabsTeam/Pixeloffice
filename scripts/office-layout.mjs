@@ -22,9 +22,9 @@ export const furniture = [
     collider: [rect(westChair.left, westChair.seatBack + westChair.legTip - westChair.seatFront,
       westChair.right - westChair.left, westChair.seatFront - westChair.seatBack)],
     // Front approaches from the left or below stay above both furniture sprites.
-    // Matching the overlapping desk's front line keeps the chair above the desk.
+    // Keep the same front line so the avatar's depth behavior stays unchanged.
     depth: { axis: 'y', offset: (westDeskFrontY - 657) / 0.9, behindSide: 'negative',
-      secondary: { axis: 'x', offset: -25, behindSide: 'positive' } }, renderOrder: 30
+      secondary: { axis: 'x', offset: -25, behindSide: 'positive' } }, renderOrder: 10
   },
   {
     id: 'west-desk', source: 'furniture/table/escritorio x.png',

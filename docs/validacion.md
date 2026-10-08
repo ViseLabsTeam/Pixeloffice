@@ -84,3 +84,7 @@ Se sustituyó el margen uniforme de 4 px del escritorio lateral por límites der
 ### Asiento, base y superposición de las sillas — 2026-10-06
 
 Las tres sillas ahora tienen colliders de base medidos desde el asiento y las patas, con una entrada visual posterior equivalente a la longitud visible de esas patas. Se ajustaron sus referencias de profundidad para que el avatar pase por delante en el lado de uso y quede parcialmente oculto detrás. `renderOrder:30` coloca las sillas delante de los escritorios (`renderOrder:20`) cuando se solapan. Se inspeccionaron capturas manuales con colliders visibles junto a la silla lateral y las dos derechas. Una comparación del manifest actual con `HEAD` confirmó que los tres colliders de escritorio son idénticos. Las pruebas automatizadas no se ejecutaron en esta iteración.
+
+### Capa del conjunto izquierdo — 2026-10-08
+
+Sólo la silla lateral izquierda pasó de `renderOrder:30` a `renderOrder:10`; su escritorio permanece en 20 y cubre el solapamiento de ambos PNG. Los dos conjuntos derechos conservan sus valores anteriores. Los colliders, posiciones, escalas y reglas de profundidad del avatar no se modificaron.
