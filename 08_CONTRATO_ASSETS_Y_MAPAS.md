@@ -4,7 +4,7 @@
 
 ## 1. Objetivo
 
-Integrar una oficina fija de pixel art conservando el diseño de Peredo. `SIN MUEBLESL.png` define el fondo de 1920×1080. Los muebles incorporados contra las paredes permanecen allí; el escritorio lateral `escritorio x.png`, los dos escritorios derechos `escritorio -y.png`, sus sillas y `PLANTASL.png` son objetos separados, con colisión y profundidad propias. El avatar se dibuja sobre todo el fondo y los muebles son opacos. No habrá editor ni muebles movibles para usuarios.
+Integrar una oficina fija de pixel art conservando el diseño de Peredo. `SIN MUEBLESL.png` define el fondo de 1920×1080. Los muebles incorporados contra las paredes permanecen allí; el escritorio lateral `escritorio -x.png`, los dos escritorios derechos `escritorio -y.png`, sus sillas y `PLANTASL.png` son objetos separados, con colisión y profundidad propias. El avatar se dibuja sobre todo el fondo y los muebles son opacos. No habrá editor ni muebles movibles para usuarios.
 
 La expresión “32 bits” es una referencia de estilo del equipo; no fija un tile de 32×32 ni dimensiones de avatar. Registrar ancho/alto reales, escala y pivots antes de exportar todo. No confundir profundidad de color del PNG con cantidad de píxeles del dibujo.
 
@@ -22,7 +22,7 @@ Conservar el fondo original de 1920×1080 sin suavizado ni escalado accidental. 
 |---|---|
 | Oficina | `SIN MUEBLESL.png` define el fondo visible; `total-office.jpeg` es referencia histórica. |
 | Paredes y muebles incorporados | Dibujados detrás del avatar en el fondo. Colliders e interacciones se entregan como metadatos independientes. |
-| Muebles sueltos | `escritorio x.png`, dos instancias de `escritorio -y.png`, `SILLA X.png`, dos instancias de `SILLA Y.png` y `PLANTASL.png` se dibujan como objetos con geometría propia. |
+| Muebles sueltos | `escritorio -x.png`, dos instancias de `escritorio -y.png`, `SILLA X.png`, dos instancias de `SILLA Y.png` y `PLANTASL.png` se dibujan como objetos con geometría propia. |
 | Tren | GIF de paisaje para recortar dentro de las tres ventanas, conservando marcos y paredes. |
 | Avatar hombre/mujer | Frente, espalda, izquierda y derecha; mismo punto de pies por vista. |
 | Ropa | Máscara o capas para recolorear sólo ropa, conservando piel, pelo y sombras. |

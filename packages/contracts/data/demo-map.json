@@ -142,12 +142,12 @@
         "shape": "rect",
         "x": 0,
         "y": 0,
-        "width": 554,
-        "height": 722
+        "width": 584,
+        "height": 698
       },
       "pivot": {
-        "x": 277,
-        "y": 662
+        "x": 313,
+        "y": 656
       },
       "worldScale": 0.3,
       "layer": "world",
@@ -155,8 +155,8 @@
       "colliders": [
         {
           "shape": "rect",
-          "x": 94,
-          "y": 142,
+          "x": 130,
+          "y": 136,
           "width": 348,
           "height": 520
         }
@@ -174,7 +174,7 @@
       "renderOrder": 20,
       "interaction": null,
       "variant": "peredo-import",
-      "contentHash": "ee811242b91d1900bdb3270d36e53c8d1bf26e9a637adcc537470b05a7603ecf"
+      "contentHash": "8a93f497e8f7512abffe69ee1938514b9fb0dbd4a493c72e6c177c1bc3183d45"
     },
     {
       "schemaVersion": 1,

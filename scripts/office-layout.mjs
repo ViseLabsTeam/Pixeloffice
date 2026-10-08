@@ -9,7 +9,7 @@ const frontClearance = 2;
 // Desk colliders begin one front-leg length behind the back edge of the tabletop
 // and end at the front-leg tips. The avatar's foot box then stops with its waist
 // approximately at the front edge of the tabletop.
-const westDesk = { top: 34, front: 554, legTip: 662, left: 94, right: 442, pivot: { x: 277, y: 662 } };
+const westDesk = { top: 28, front: 548, legTip: 656, left: 130, right: 478, pivot: { x: 313, y: 656 } };
 const southDesk = { top: 216, front: 554, legTip: 674, left: 158, right: 838, pivot: { x: 158, y: 674 } };
 const westChair = { seatBack: 70, seatFront: 100, legTip: 140, left: 28, right: 107 };
 const southChair = { seatBack: 60, seatFront: 105, legTip: 142, left: 22, right: 111 };
@@ -26,7 +26,7 @@ export const furniture = [
       behindSide: 'negative' }, renderOrder: 10
   },
   {
-    id: 'west-desk', source: 'furniture/table/escritorio x.png',
+    id: 'west-desk', source: 'furniture/table/escritorio -x.png',
     position: { x: 305.7, y: 706.8 }, scale: 0.3, pivot: westDesk.pivot,
     collider: [rect(westDesk.left, westDesk.top + westDesk.legTip - westDesk.front,
       westDesk.right - westDesk.left, westDesk.front - westDesk.top)],

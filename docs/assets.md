@@ -28,7 +28,7 @@ Base de las rutas: `legacy/pre-alpha/assets/images/`. Estos diecisiete archivos 
 
 También se recibieron `legacy/pre-alpha/assets/gifs/avatar/man/avatar-hombre-X.gif`, `avatar-hombreX.gif`, `avatar-hombreY.gif` y `avatar-hombre-Y.gif`, todos de 45 × 66 píxeles. Sus secuencias tienen respectivamente 3, 3, 2 y 2 cuadros. Los PNG representan reposo y los GIF movimiento. `-X` corresponde a izquierda/A, `X` a derecha/D, `Y` a arriba/W y `-Y` a abajo/S.
 
-`SIN MUEBLESL.png` define el fondo visible. `escritorio x.png`, dos instancias de `escritorio -y.png`, `SILLA X.png`, dos instancias de `SILLA Y.png` y `PLANTASL.png` se colocan como objetos separados; las demás piezas permanecen como originales recibidos. `total-office.jpeg` guía su distribución. El avatar conserva la correspondencia de direcciones indicada arriba.
+`SIN MUEBLESL.png` define el fondo visible. `escritorio -x.png`, dos instancias de `escritorio -y.png`, `SILLA X.png`, dos instancias de `SILLA Y.png` y `PLANTASL.png` se colocan como objetos separados; las demás piezas permanecen como originales recibidos. `total-office.jpeg` guía su distribución. El avatar conserva la correspondencia de direcciones indicada arriba.
 
 ## Paquete todavía incompleto
 
