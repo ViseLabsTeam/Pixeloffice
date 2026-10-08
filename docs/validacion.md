@@ -104,3 +104,7 @@ Se integró `Tren .gif` (88 cuadros, 8,8 segundos) en las aberturas completas de
 ### Sprites oficiales del pizarrón — 2026-10-08
 
 Se integraron `PIZARRA-clear.png` y `PIZARRA-dirty.png` con reflejo horizontal y la misma posición/escala sobre el fondo. E alterna entre dibujar y borrar; el estado sucio conserva debajo el sprite limpio para mantener las patas. El build aprobó TypeScript, las 112 imágenes y los builds API/web. Pasaron las seis pruebas unitarias espaciales y los dos recorridos del pizarrón en escritorio y móvil: comprobaron E, el botón Interactuar, cambios de píxeles en el panel y retorno exacto a limpio. Se inspeccionaron las capturas de ambos estados. Las colisiones e interacciones mantienen sus coordenadas.
+
+### Oficina a pantalla completa — 2026-10-08
+
+Se retiraron los paneles, cabecera, pie, controles visibles y etiqueta del avatar. El canvas llena el viewport sin scroll ni franjas; la cámara sigue al personaje con escala uniforme. El arrastre sobre el escenario reemplaza al joystick visible y un toque corto interactúa. El build, las ocho pruebas unitarias/integración y 18 recorridos de navegador aprobaron; dos casos de teclado en perfil móvil se omiten por diseño. Se comprobaron cobertura y redimensionado en escritorio y móvil, movimiento por arrastre, colisiones, estados del pizarrón, capas visuales y cuadros del tren. Se inspeccionaron las capturas en vertical y horizontal. Los controles de cámara y micrófono quedan accesibles mediante C/M, sin vista previa visible.

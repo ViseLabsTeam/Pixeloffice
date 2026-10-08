@@ -14,10 +14,6 @@ function element<T extends HTMLElement>(id: string): T {
 }
 const canvas = element<HTMLCanvasElement>('world');
 const status = element('status');
-const actionButton = element<HTMLButtonElement>('action');
-const resetButton = element<HTMLButtonElement>('reset');
-const sceneName = element('scene-name');
-const position = element('position');
 const hint = element('hint');
 const controller = new AbortController();
 const cache = new AssetCache(demoMap);
@@ -43,24 +39,15 @@ let disposed = false;
 
 function notify(message: string, error = false) { status.textContent = message; status.dataset.error = String(error); }
 function updateInterface() {
-  if (sceneName.textContent !== world.scene.name) {
-    sceneName.textContent = world.scene.name;
-    element('scene-count').textContent = '1 espacio';
-    element('scene-description').textContent = 'Oficina completa · Movete con WASD, flechas o joystick';
-    canvas.dataset.scene = world.scene.sceneId;
-  }
-  const x = Math.round(world.position.x); const y = Math.round(world.position.y);
-  const coordinates = `${x}, ${y}`;
-  if (position.textContent !== coordinates) position.textContent = coordinates;
+  canvas.dataset.scene = world.scene.sceneId;
   // Debug/test coordinates retain subpixel precision at collision boundaries.
   canvas.dataset.x = String(world.position.x); canvas.dataset.y = String(world.position.y);
   canvas.dataset.direction = world.direction;
   canvas.dataset.board = world.boardDirty ? 'dirty' : 'clean';
   const door = world.nearbyDoor();
   const interaction = world.nearbyInteraction();
-  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o Interactuar` : interaction?.kind === 'board' ? `${world.boardDirty ? 'Borrar' : 'Dibujar en'} el pizarrón · E o Interactuar` : interaction ? `${interaction.label} · E o Interactuar` : 'Movete con WASD, flechas o el joystick.';
+  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o un toque` : interaction?.kind === 'board' ? `${world.boardDirty ? 'Borrar' : 'Dibujar en'} el pizarrón · E o un toque` : interaction ? `${interaction.label} · E o un toque` : 'Movete con WASD, flechas o arrastrando sobre la oficina.';
   if (hint.textContent !== message) hint.textContent = message;
-  actionButton.disabled = !ready || world.transitioning || (!door && !interaction);
 }
 function wake() {
   if (trainTimer) { clearTimeout(trainTimer); trainTimer = 0; }
@@ -76,7 +63,11 @@ function action() {
   }
   wake();
 }
-const input = new Input(element('joystick'),element('joystick-knob'),wake,action);
+const input = new Input(canvas,wake,action,{
+  r: () => { void resetWorld(); },
+  c: () => { void localMedia.toggle('camera'); },
+  m: () => { void localMedia.toggle('microphone'); }
+});
 async function transition() {
   try {
     const changed = await world.transition(scene => cache.prepare(scene),performance.now());
@@ -100,28 +91,17 @@ function tick(time: number) {
     if (nextTrainFrameMs !== null) trainTimer = window.setTimeout(wake,Math.max(1,Math.ceil(nextTrainFrameMs)));
   }
 }
-// A secondary touch contact does not synthesize the mouse click used by a
-// native button in every browser. Preserve keyboard clicks and suppress duplicates.
-let lastTouchAction = -Infinity;
-actionButton.addEventListener('pointerup',event => {
-  if (event.pointerType !== 'touch' || actionButton.disabled) return;
-  event.preventDefault(); lastTouchAction = performance.now(); action();
-},{signal:controller.signal});
-actionButton.addEventListener('click',event => {
-  if (event.detail > 0 && performance.now() - lastTouchAction < 750) return;
-  action();
-},{signal:controller.signal});
-resetButton.addEventListener('click',async () => {
+async function resetWorld() {
   if (world.transitioning || !ready) return;
   const next = new LocalWorld(demoMap);
-  ready = false; resetButton.disabled = true; input.reset();
+  ready = false; input.reset();
   try {
     await cache.prepare(next.scene);
     if (disposed) { next.destroy(); return; }
     world.destroy(); world = next; lastTime = 0; notify('Volviste a la entrada.');
   } catch (error) { next.destroy(); notify(String(error),true); }
-  finally { if (!disposed) { ready = true; resetButton.disabled = false; wake(); } }
-},{signal:controller.signal});
+  finally { if (!disposed) { ready = true; wake(); } }
+}
 const resize = new ResizeObserver(wake); resize.observe(canvas);
 document.addEventListener('visibilitychange',() => {
   if (document.hidden) { cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0; input.reset(); lastTime = 0; }

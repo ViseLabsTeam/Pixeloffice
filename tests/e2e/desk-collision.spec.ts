@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { assetById, canOccupy, initialDoors, objectRect, sceneColliders, type MapBundle, type Point } from '@pixel-office/contracts';
+import { dragScene } from './scene-controls';
 
 const map=JSON.parse(readFileSync('packages/contracts/data/demo-map.json','utf8')) as MapBundle;
 const scene=map.scenes[0]!;
@@ -24,20 +25,7 @@ async function drive(page:Page,control:'keyboard'|'joystick',vector:Point){
     for(const key of keys)await page.keyboard.up(key);
     return;
   }
-  const zone=page.locator('#joystick');await zone.scrollIntoViewIfNeeded();
-  const bounds=await zone.boundingBox();if(!bounds)throw new Error('Joystick invisible');
-  const magnitude=Math.hypot(vector.x,vector.y),radius=bounds.width*.3;
-  const point={x:bounds.x+bounds.width/2+vector.x/magnitude*radius,
-    y:bounds.y+bounds.height/2+vector.y/magnitude*radius,id:1};
-  if(await page.evaluate(()=>matchMedia('(pointer: coarse)').matches)){
-    const client=await page.context().newCDPSession(page);
-    await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[point]});
-    await page.waitForTimeout(700);
-    await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[point]});
-    await client.detach();
-  }else{
-    await page.mouse.move(point.x,point.y);await page.mouse.down();await page.waitForTimeout(700);await page.mouse.up();
-  }
+  await dragScene(page,vector,700);
 }
 
 for(const control of ['keyboard','joystick'] as const){

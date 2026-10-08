@@ -134,15 +134,19 @@ export class Renderer {
     const context=this.context;
     context.setTransform(1,0,0,1,0,0);context.imageSmoothingEnabled=false;
     context.fillStyle='#182936';context.fillRect(0,0,width,height);
-    const scale=Math.min(width/scene.logicalSize.width,height/scene.logicalSize.height);
-    context.translate((width-scene.logicalSize.width*scale)/2,(height-scene.logicalSize.height*scale)/2);
-    context.scale(scale,scale);
-    context.drawImage(this.floor,0,0);
-    const nextTrainFrameMs=this.drawTrain(scene);
-    this.drawBoard(scene,world.boardDirty);
     const avatarId=this.avatarAsset(world,seconds);
     const asset=assetById(this.map,avatarId),source=asset.sourceRect;
     const avatarRect=spriteRect(this.map,avatarId,position);
+    const scale=Math.max(width/scene.logicalSize.width,height/scene.logicalSize.height);
+    const viewWidth=width/scale,viewHeight=height/scale;
+    const cameraX=Math.max(0,Math.min(scene.logicalSize.width-viewWidth,position.x-viewWidth/2));
+    const cameraY=Math.max(0,Math.min(scene.logicalSize.height-viewHeight,avatarRect.y+avatarRect.height/2-viewHeight/2));
+    this.canvas.dataset.cameraX=String(cameraX);this.canvas.dataset.cameraY=String(cameraY);
+    this.canvas.dataset.worldScale=String(scale);
+    context.setTransform(scale,0,0,scale,-cameraX*scale,-cameraY*scale);
+    context.drawImage(this.floor,0,0);
+    const nextTrainFrameMs=this.drawTrain(scene);
+    this.drawBoard(scene,world.boardDirty);
     const objects=[...scene.objects].sort((a,b)=>assetById(this.map,a.assetId).renderOrder-assetById(this.map,b.assetId).renderOrder);
     const behindAvatar=new Set(objects.filter(object=>this.objectBehind(object,world)).map(object=>object.objectId));
     // The left desk must cover its chair even when the avatar is behind only the chair.
@@ -151,8 +155,6 @@ export class Renderer {
     context.drawImage(this.cache.get(avatarId),source.x,source.y,source.width,source.height,
       Math.round(avatarRect.x),Math.round(avatarRect.y),avatarRect.width,avatarRect.height);
     for(const object of objects)if(behindAvatar.has(object.objectId))this.drawObject(object);
-    context.fillStyle='#f4f4dc';context.font='bold 19px system-ui';context.textAlign='center';
-    context.fillText('Vos',position.x,avatarRect.y-8);
     this.drawDebugGeometry(scene,world);
     return nextTrainFrameMs;
   }

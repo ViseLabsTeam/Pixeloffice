@@ -6,6 +6,8 @@
 
 Integrar una oficina fija de pixel art conservando el diseño de Peredo. `SIN MUEBLESL.png` define el fondo de 1920×1080. Los muebles incorporados contra las paredes permanecen allí; el escritorio lateral `escritorio -x.png`, los dos escritorios derechos `escritorio -y.png`, sus sillas y `PLANTASL.png` son objetos separados, con colisión y profundidad propias. El avatar se dibuja sobre todo el fondo y los muebles son opacos. No habrá editor ni muebles movibles para usuarios.
 
+La vista de la oficina ocupa todo el viewport y sólo muestra pixel art: sin cabecera, paneles laterales, controles visibles, márgenes ni etiqueta sobre el avatar. El mapa se escala uniformemente hasta cubrir la pantalla; si se recorta por su proporción, una cámara limitada a los bordes sigue al personaje. En táctil se arrastra sobre el escenario para moverse y se toca para interactuar.
+
 La expresión “32 bits” es una referencia de estilo del equipo; no fija un tile de 32×32 ni dimensiones de avatar. Registrar ancho/alto reales, escala y pivots antes de exportar todo. No confundir profundidad de color del PNG con cantidad de píxeles del dibujo.
 
 ## 2. Entrega para la oficina compuesta

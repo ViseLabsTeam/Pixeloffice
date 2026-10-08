@@ -1,41 +1,48 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { type MapBundle } from '@pixel-office/contracts';
+import { dragScene, sceneSignature, tapScene } from './scene-controls';
 
 const map=JSON.parse(readFileSync('packages/contracts/data/demo-map.json','utf8')) as MapBundle;
 const x=async(page:Page)=>Number(await page.locator('#world').getAttribute('data-x'));
 async function hold(page:Page,key:string,milliseconds:number){
   await page.keyboard.down(key);await page.waitForTimeout(milliseconds);await page.keyboard.up(key);
 }
-test('oficina completa, cuatro direcciones y escala al cambiar viewport',async({page},info)=>{
+test('oficina a pantalla completa, cuatro direcciones y cámara al redimensionar',async({page},info)=>{
   await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   await expect(page.locator('#world')).toHaveAttribute('data-scene','office');
   for(const [key,direction] of [['w','up'],['s','down'],['a','left'],['d','right']]){
     await hold(page,key!,110);await expect(page.locator('#world')).toHaveAttribute('data-direction',direction!);
   }
-  const size=await page.locator('#world').evaluate(canvas=>{
-    const element=canvas as HTMLCanvasElement;
-    return {ratio:element.getBoundingClientRect().width/element.getBoundingClientRect().height,width:element.width,height:element.height};
-  });
-  expect(size.ratio).toBeCloseTo(16/9,1);
-  expect(size.width).toBeGreaterThan(0);expect(size.height).toBeGreaterThan(0);
-  if(info.project.name==='desktop'){
-    await page.setViewportSize({width:1100,height:800});
-    await expect.poll(async()=>page.locator('#world').evaluate(element=>(element as HTMLCanvasElement).width)).not.toBe(size.width);
-    await page.screenshot({path:'test-results/office-v5-desktop.png',fullPage:true});
-  }else await page.screenshot({path:'test-results/office-v5-mobile.png',fullPage:true});
+  const checkScreen=async()=>{
+    const size=await page.locator('#world').evaluate(node=>{
+      const canvas=node as HTMLCanvasElement,bounds=canvas.getBoundingClientRect(),scale=Number(canvas.dataset.worldScale);
+      return {x:bounds.x,y:bounds.y,width:bounds.width,height:bounds.height,viewportWidth:innerWidth,viewportHeight:innerHeight,
+        scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight,
+        cameraX:Number(canvas.dataset.cameraX),cameraY:Number(canvas.dataset.cameraY),viewWidth:canvas.width/scale,viewHeight:canvas.height/scale};
+    });
+    expect(size.x).toBe(0);expect(size.y).toBe(0);
+    expect(size.width).toBe(size.viewportWidth);expect(size.height).toBe(size.viewportHeight);
+    expect(size.scrollWidth).toBe(size.viewportWidth);expect(size.scrollHeight).toBe(size.viewportHeight);
+    expect(size.cameraX).toBeGreaterThanOrEqual(0);expect(size.cameraY).toBeGreaterThanOrEqual(0);
+    expect(size.cameraX+size.viewWidth).toBeLessThanOrEqual(1920.001);
+    expect(size.cameraY+size.viewHeight).toBeLessThanOrEqual(1080.001);
+  };
+  await checkScreen();
+  await expect(page.locator('header, aside, footer, button:visible')).toHaveCount(0);
+  await page.screenshot({path:`test-results/fullscreen-${info.project.name}.png`});
+  const bitmapWidth=await page.locator('#world').evaluate(node=>(node as HTMLCanvasElement).width);
+  await page.setViewportSize(info.project.name==='desktop'?{width:1100,height:800}:{width:844,height:390});
+  await expect.poll(()=>page.locator('#world').evaluate(node=>(node as HTMLCanvasElement).width)).not.toBe(bitmapWidth);
+  await checkScreen();
+  await page.screenshot({path:`test-results/fullscreen-resized-${info.project.name}.png`});
 });
 test('pizarrón limpio y sucio mediante interacción',async({page},info)=>{
   await page.goto('/?debug=colliders&x=1692&y=480');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
   await expect(page.locator('#hint')).toContainText('Dibujar en el pizarrón');
-  const panelSignature=async()=>page.locator('#world').evaluate(node=>{
-    const canvas=node as HTMLCanvasElement,scale=Math.min(canvas.width/1920,canvas.height/1080);
-    const x=(canvas.width-1920*scale)/2+1668*scale,y=(canvas.height-1080*scale)/2+244*scale;
-    const pixels=canvas.getContext('2d')!.getImageData(Math.floor(x),Math.floor(y),Math.ceil(110*scale),Math.ceil(126*scale)).data;
-    return pixels.reduce((hash,value)=>(Math.imul(hash,31)+value)>>>0,0);
-  });
+  const panelSignature=()=>sceneSignature(page,{x:1668,y:244,width:110,height:126});
   const clean=await panelSignature();
   await page.keyboard.press('e');
   await expect(page.locator('#world')).toHaveAttribute('data-board','dirty');
@@ -46,36 +53,23 @@ test('pizarrón limpio y sucio mediante interacción',async({page},info)=>{
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
   await expect.poll(panelSignature).toBe(clean);
   await page.screenshot({path:`test-results/board-clean-${info.project.name}.png`,fullPage:true});
-  await page.getByRole('button',{name:'Interactuar'}).click();
+  await tapScene(page);
   await expect(page.locator('#world')).toHaveAttribute('data-board','dirty');
-  await page.getByRole('button',{name:'Interactuar'}).click();
+  await tapScene(page);
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
 });
-test('joystick mueve y se detiene al soltarlo',async({page})=>{
+test('arrastrar el escenario mueve y se detiene al soltar',async({page})=>{
   await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
-  const zone=page.locator('#joystick');await zone.scrollIntoViewIfNeeded();
-  const bounds=await zone.boundingBox();if(!bounds)throw new Error('Joystick invisible');
   const start=await x(page);
-  const point={x:bounds.x+bounds.width*.8,y:bounds.y+bounds.height/2,id:1};
-  if(await page.evaluate(()=>matchMedia('(pointer: coarse)').matches)){
-    const client=await page.context().newCDPSession(page);
-    await client.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[point]});
-    await page.waitForTimeout(250);
-    await client.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[point]});
-    await client.detach();
-  }else{
-    await page.mouse.move(point.x,point.y);await page.mouse.down();await page.waitForTimeout(250);await page.mouse.up();
-  }
+  const camera=Number(await page.locator('#world').getAttribute('data-camera-x'));
+  await dragScene(page,{x:1,y:0},250);
   expect(await x(page)).toBeGreaterThan(start);
+  if(camera>0)expect(Number(await page.locator('#world').getAttribute('data-camera-x'))).toBeGreaterThan(camera);
   await page.waitForTimeout(150);const stopped=await x(page);
   await page.waitForTimeout(150);expect(await x(page)).toBe(stopped);
 });
 test('el avatar se dibuja encima de la pared del fondo al acercarse',async({page})=>{
-  const pixel=async()=>page.locator('#world').evaluate(canvas=>{
-    const image=canvas as HTMLCanvasElement;
-    const x=Math.round(1100*image.width/1920),y=Math.round(250*image.height/1080);
-    return [...image.getContext('2d')!.getImageData(x,y,1,1).data];
-  });
+  const pixel=()=>sceneSignature(page,{x:1100,y:250,width:1,height:1});
   await page.goto('/?debug=colliders&x=1100&y=600');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   const wallAlone=await pixel();
@@ -84,12 +78,8 @@ test('el avatar se dibuja encima de la pared del fondo al acercarse',async({page
   expect(await pixel()).not.toEqual(wallAlone);
 });
 test('el escritorio separado permanece opaco delante del avatar',async({page})=>{
-  const pixel=async()=>page.locator('#world').evaluate(canvas=>{
-    const image=canvas as HTMLCanvasElement;
-    const x=Math.round(320*image.width/1920),y=Math.round(525*image.height/1080);
-    return [...image.getContext('2d')!.getImageData(x,y,1,1).data];
-  });
-  await page.goto('/?debug=colliders&x=948&y=600');
+  const pixel=()=>sceneSignature(page,{x:320,y:525,width:1,height:1});
+  await page.goto('/?debug=colliders&x=320&y=750');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   const deskAlone=await pixel();
   await page.goto('/?debug=colliders&x=320&y=550');
@@ -98,11 +88,7 @@ test('el escritorio separado permanece opaco delante del avatar',async({page})=>
 });
 test('el tren cambia de cuadro dentro de las ventanas',async({page})=>{
   test.skip(map.scenes[0]!.trainFrames.length<2,'Falta el GIF oficial del tren en los assets recibidos.');
-  await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
-  const sample=async()=>page.locator('#world').evaluate(canvas=>{
-    const context=(canvas as HTMLCanvasElement).getContext('2d')!;
-    const bounds=(canvas as HTMLCanvasElement).getBoundingClientRect();
-    return [...context.getImageData(Math.round(396*bounds.width/1920),Math.round(210*bounds.height/1080),1,1).data];
-  });
-  const first=await sample();await page.waitForTimeout(600);expect(await sample()).not.toEqual(first);
+  await page.goto('/?debug=colliders&x=1692&y=480');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  const sample=()=>sceneSignature(page,{x:1548,y:140,width:155,height:36});
+  const first=await sample();await expect.poll(sample,{timeout:5000}).not.toBe(first);
 });

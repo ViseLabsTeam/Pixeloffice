@@ -2,6 +2,8 @@
 
 El archivo editable es [`scripts/office-layout.mjs`](../scripts/office-layout.mjs). `packages/contracts/data/demo-map.json` y las copias de imágenes de `apps/web/public/assets/peredo/` son **generados** mediante `node scripts/generate-demo-assets.mjs`; no ajustes el JSON generado a mano. El mapa usa las coordenadas originales de `SIN MUEBLESL.png`: 1920 × 1080 píxeles, con origen (0, 0) arriba a la izquierda, `x` hacia la derecha e `y` hacia abajo. Canvas, fondo, avatar y geometrías reciben una sola transformación al cambiar el tamaño de la ventana.
 
+La vista llena el viewport con una escala uniforme de cobertura y una cámara que sigue al avatar, sin deformar el arte. En pantallas que no sean 16:9 se muestra una parte del mapa; caminar desplaza el encuadre hasta sus bordes. Esa transformación vive en `apps/web/src/rendering/renderer.ts` y no cambia ninguna coordenada física del mapa.
+
 ## Campos de cada mueble
 
 | Campo | Unidad y efecto |
