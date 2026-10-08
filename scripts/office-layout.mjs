@@ -95,5 +95,9 @@ export const interactions = [
   { hotspotId:'east-workstation-right',kind:'computer',label:'Escritorio derecho: accesos pendientes',area:rect(1457,891,246,87) }
 ];
 export const windows = [rect(324,76,156,156),rect(904,76,156,156),rect(1547,76,157,156)];
-export const boardSurface = rect(1667,241,116,143);
-export const boardCorners = [{x:1668,y:246},{x:1782,y:299},{x:1782,y:380},{x:1668,y:326}];
+// Full 260 x 280 PNGs, including transparent margins. Mirrored art matches
+// the board already painted in the background at this exact map position.
+export const board = {
+  cleanAssetId: 'board-clean', dirtyAssetId: 'board-dirty',
+  position: { x: 1592, y: 208 }, scale: 1, flipX: true
+};

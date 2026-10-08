@@ -363,6 +363,56 @@
     },
     {
       "schemaVersion": 1,
+      "assetId": "board-clean",
+      "imageUrl": "/assets/peredo/board-clean.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 260,
+        "height": 280
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "ground",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "bd628473c765bdac934f8c227cf5beefdd53ce2c840e43b95b122e88f20c7bf6"
+    },
+    {
+      "schemaVersion": 1,
+      "assetId": "board-dirty",
+      "imageUrl": "/assets/peredo/board-dirty.png",
+      "sourceRect": {
+        "shape": "rect",
+        "x": 0,
+        "y": 0,
+        "width": 260,
+        "height": 280
+      },
+      "pivot": {
+        "x": 0,
+        "y": 0
+      },
+      "worldScale": 1,
+      "layer": "ground",
+      "sortAnchorY": 0,
+      "colliders": [],
+      "depth": null,
+      "renderOrder": 0,
+      "interaction": null,
+      "variant": "peredo-import",
+      "contentHash": "2faf491453c1fa3214be1e15de79b2c21333de7cf8d352e163408f10c2e79510"
+    },
+    {
+      "schemaVersion": 1,
       "assetId": "avatar-man-left-idle",
       "imageUrl": "/assets/peredo/avatar-man-left-idle.png",
       "sourceRect": {
@@ -3547,31 +3597,16 @@
           "durationMs": 100
         }
       ],
-      "boardSurface": {
-        "shape": "rect",
-        "x": 1667,
-        "y": 241,
-        "width": 116,
-        "height": 143
-      },
-      "boardCorners": [
-        {
-          "x": 1668,
-          "y": 246
+      "board": {
+        "cleanAssetId": "board-clean",
+        "dirtyAssetId": "board-dirty",
+        "position": {
+          "x": 1592,
+          "y": 208
         },
-        {
-          "x": 1782,
-          "y": 299
-        },
-        {
-          "x": 1782,
-          "y": 380
-        },
-        {
-          "x": 1668,
-          "y": 326
-        }
-      ]
+        "scale": 1,
+        "flipX": true
+      }
     }
   ]
 }

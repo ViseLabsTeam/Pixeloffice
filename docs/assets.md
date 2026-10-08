@@ -34,7 +34,6 @@ También se recibieron `legacy/pre-alpha/assets/gifs/avatar/man/avatar-hombre-X.
 
 No se identificaron en esta entrega reciente exports nuevos para:
 
-- Sprites del pizarrón limpio y sucio que coincidan con su perspectiva en la composición.
 - Avatar femenino de cuatro vistas y máscaras/capas de ropa para ambos avatares.
 - Arcade Snake, estación Pong e iconos de UI.
 - Metadatos de escala, pivots, colliders, profundidad, acústica e interacción.
@@ -46,7 +45,7 @@ Hay otras imágenes antiguas de computadora, sillas y arcade en legacy; su exist
 
 El mapa actual `packages/contracts/data/demo-map.json` usa `demo-v5` y una escena de 1920×1080. `scripts/generate-demo-assets.mjs` copia el fondo y los cinco PNG originales usados en siete muebles sin alterar sus píxeles, conserva los cuatro PNG del avatar y extrae diez cuadros de sus GIF para el canvas. El avatar se dibuja a escala 2 sobre todo el fondo. Sus pies tienen una caja de 30×12 unidades independiente del sprite. Hay 11 colliders fijos, incluido uno continuo para el pizarrón, y siete objetos opacos con collider y profundidad independientes. `?debug=colliders` muestra su alineación. [Campos de ajuste](ajuste-mapa-oficina.md).
 
-El manifest contiene 110 imágenes: fondo, siete instancias PNG de muebles, cuatro PNG de reposo, diez cuadros de movimiento del avatar y 88 cuadros del tren reducidos a 156 × 156 píxeles. Los muebles integrados en la pared permanecen en el fondo. La región limpia del pizarrón forma parte del PNG de fondo. El estado marcado usa trazos temporales recortados a su panel hasta recibir los sprites oficiales. El tren pasa por las ventanas de derecha a izquierda, con 15 segundos sin tren entre animaciones.
+El manifest contiene 112 imágenes: fondo, siete instancias PNG de muebles, dos estados del pizarrón, cuatro PNG de reposo, diez cuadros de movimiento del avatar y 88 cuadros del tren reducidos a 156 × 156 píxeles. Los muebles integrados en la pared permanecen en el fondo. Los PNG oficiales `furniture/board/PIZARRA-clear.png` (2530 bytes) y `PIZARRA-dirty.png` (3200 bytes) miden 260 × 280 píxeles y se reflejan horizontalmente sobre el pizarrón del fondo. El estado sucio se superpone al limpio para conservar las patas transparentes en su export. E dibuja o borra. El tren pasa por las ventanas de derecha a izquierda, con 15 segundos sin tren entre animaciones.
 
 La integración final debe confirmar la geometría, las máscaras y el tamaño del avatar contra el fondo original y un dispositivo físico. Dimensiones de archivo, unidades lógicas y tamaño CSS son conceptos distintos.
 

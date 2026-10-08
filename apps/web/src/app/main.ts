@@ -58,7 +58,7 @@ function updateInterface() {
   canvas.dataset.board = world.boardDirty ? 'dirty' : 'clean';
   const door = world.nearbyDoor();
   const interaction = world.nearbyInteraction();
-  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o Interactuar` : interaction?.kind === 'board' ? 'Cambiar pizarrón · E o Interactuar' : interaction ? `${interaction.label} · E o Interactuar` : 'Movete con WASD, flechas o el joystick.';
+  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o Interactuar` : interaction?.kind === 'board' ? `${world.boardDirty ? 'Borrar' : 'Dibujar en'} el pizarrón · E o Interactuar` : interaction ? `${interaction.label} · E o Interactuar` : 'Movete con WASD, flechas o el joystick.';
   if (hint.textContent !== message) hint.textContent = message;
   actionButton.disabled = !ready || world.transitioning || (!door && !interaction);
 }

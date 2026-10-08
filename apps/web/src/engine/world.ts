@@ -42,7 +42,7 @@ export class LocalWorld {
     if (!item) return;
     if (item.kind === 'board') {
       this.boardDirty = !this.boardDirty;
-      return this.boardDirty ? 'Pizarrón marcado.' : 'Pizarrón limpio.';
+      return this.boardDirty ? 'Dibujaste en el pizarrón.' : 'Borraste el pizarrón.';
     }
     return item.label;
   }

@@ -43,7 +43,8 @@ export const mapSchema = {
       presentationSurfaces: array(object({ surfaceId: id, objectId: id, area: rect })),
       colliders: array(object({ colliderId: id, area: rect })),
       interactions: array(object({ hotspotId: id, kind: { enum: ['board','computer'] }, label: { type:'string', minLength:1 }, area: rect })),
-      windows: array(rect), trainFrames: array(object({ assetId: id, durationMs: positive })), boardSurface: rect, boardCorners: {type:'array',items:point,minItems:4,maxItems:4}
+      windows: array(rect), trainFrames: array(object({ assetId: id, durationMs: positive })),
+      board: object({ cleanAssetId: id, dirtyAssetId: id, position: point, scale: positive, flipX: { type:'boolean' } })
     }))
   })
 };
@@ -79,6 +80,7 @@ export function validateMap(candidate: unknown): MapBundle {
     unique(scene.interactions.map(item => item.hotspotId), 'interacciones');
     for (const item of scene.objects) assetById(map, item.assetId);
     for (const frame of scene.trainFrames) assetById(map, frame.assetId);
+    assetById(map, scene.board.cleanAssetId); assetById(map, scene.board.dirtyAssetId);
     for (const door of scene.doors) {
       assetById(map, door.openAssetId); assetById(map, door.closedAssetId);
     }

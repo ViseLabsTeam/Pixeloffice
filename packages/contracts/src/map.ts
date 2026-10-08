@@ -55,8 +55,7 @@ export interface Scene {
   interactions: SceneInteraction[];
   windows: Rect[];
   trainFrames: AnimationFrame[];
-  boardSurface: Rect;
-  boardCorners: Point[];
+  board: { cleanAssetId: string; dirtyAssetId: string; position: Point; scale: number; flipX: boolean };
 }
 export interface MapBundle {
   schemaVersion: 1;

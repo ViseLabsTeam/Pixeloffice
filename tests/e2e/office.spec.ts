@@ -25,14 +25,30 @@ test('oficina completa, cuatro direcciones y escala al cambiar viewport',async({
     await page.screenshot({path:'test-results/office-v5-desktop.png',fullPage:true});
   }else await page.screenshot({path:'test-results/office-v5-mobile.png',fullPage:true});
 });
-test('pizarrón limpio y sucio mediante interacción',async({page})=>{
+test('pizarrón limpio y sucio mediante interacción',async({page},info)=>{
   await page.goto('/?debug=colliders&x=1692&y=480');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
-  await expect(page.locator('#hint')).toContainText('Cambiar pizarrón');
+  await expect(page.locator('#hint')).toContainText('Dibujar en el pizarrón');
+  const panelSignature=async()=>page.locator('#world').evaluate(node=>{
+    const canvas=node as HTMLCanvasElement,scale=Math.min(canvas.width/1920,canvas.height/1080);
+    const x=(canvas.width-1920*scale)/2+1668*scale,y=(canvas.height-1080*scale)/2+244*scale;
+    const pixels=canvas.getContext('2d')!.getImageData(Math.floor(x),Math.floor(y),Math.ceil(110*scale),Math.ceil(126*scale)).data;
+    return pixels.reduce((hash,value)=>(Math.imul(hash,31)+value)>>>0,0);
+  });
+  const clean=await panelSignature();
+  await page.keyboard.press('e');
+  await expect(page.locator('#world')).toHaveAttribute('data-board','dirty');
+  await expect(page.locator('#hint')).toContainText('Borrar el pizarrón');
+  await expect.poll(panelSignature).not.toBe(clean);
+  await page.screenshot({path:`test-results/board-dirty-${info.project.name}.png`,fullPage:true});
+  await page.keyboard.press('e');
+  await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
+  await expect.poll(panelSignature).toBe(clean);
+  await page.screenshot({path:`test-results/board-clean-${info.project.name}.png`,fullPage:true});
   await page.getByRole('button',{name:'Interactuar'}).click();
   await expect(page.locator('#world')).toHaveAttribute('data-board','dirty');
-  await page.keyboard.press('e');
+  await page.getByRole('button',{name:'Interactuar'}).click();
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
 });
 test('joystick mueve y se detiene al soltarlo',async({page})=>{

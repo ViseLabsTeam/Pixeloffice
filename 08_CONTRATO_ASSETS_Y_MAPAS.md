@@ -10,7 +10,7 @@ La expresión “32 bits” es una referencia de estilo del equipo; no fija un t
 
 ## 2. Entrega para la oficina compuesta
 
-`SIN MUEBLESL.png` es el fondo fijo y `total-office.jpeg` queda como referencia de distribución. El GIF del tren ya está integrado en las tres ventanas; faltan los sprites del pizarrón limpio/sucio y los recursos de ropa. Los tres escritorios, sus sillas y la planta se dibujan por separado, conservando los PNG originales.
+`SIN MUEBLESL.png` es el fondo fijo y `total-office.jpeg` queda como referencia de distribución. El GIF del tren está integrado en las tres ventanas y los PNG oficiales del pizarrón se reflejan horizontalmente para coincidir con la composición. Faltan los recursos de ropa. Los tres escritorios, sus sillas y la planta se dibujan por separado, conservando los PNG originales.
 
 Desarrollo comprueba escala, punto de pies, colliders y profundidad en desktop/mobile. Las paredes y muebles incorporados usan coordenadas del fondo; los muebles sueltos usan coordenadas de sus PNG, pivot y escala explícitos. Los escritorios detienen los pies delanteros a la altura de las puntas de las patas y permiten por detrás una entrada visual equivalente a la longitud de esas patas. [Guía de ajuste](docs/ajuste-mapa-oficina.md).
 
@@ -44,6 +44,7 @@ Coordenadas de la oficina en los píxeles originales de 1920×1080, origen arrib
 | colliders | Superficie física que bloquea la caja de pies, separada por obstáculo. |
 | depth/renderOrder | Referencias de dibujo de los muebles PNG separados; no afectan sus colliders ni su opacidad. |
 | windows | Recortes que muestran el tren sin cubrir marcos ni paredes. |
+| board | Assets limpio/sucio, posición, escala y reflejo horizontal compartidos. E alterna entre dibujar y borrar. |
 | soundBlockers | Segmentos de bloqueo acústico; no derivarlos de todo mueble. |
 | interaction | Tipo, alcance y datos de objeto interactivo. |
 
@@ -74,7 +75,7 @@ Carpetas sugeridas para los recursos que falten: `ensambled`, `gifs`, `avatar`, 
 
 `SIN MUEBLESL.png` es el fondo oficial del mapa actual. Desarrollo define la geometría de las piezas sueltas y de los muebles incorporados sobre este fondo; el artista no necesita programar el manifest.
 
-Estado de recepción al 2026-10-08: `demo-v5` usa `SIN MUEBLESL.png` como fondo de 1920×1080 y cinco PNG de muebles sueltos en siete posiciones. El avatar masculino recibido conserva sus cuatro PNG de reposo y cuatro GIF de movimiento. El GIF `Tren .gif` se reproduce por las ventanas de derecha a izquierda, con 15 segundos de espera entre ventanas. Faltan los sprites limpio/sucio del pizarrón; el estado marcado actual es una representación temporal. Ver [inventario y faltantes](docs/assets.md).
+Estado de recepción al 2026-10-08: `demo-v5` usa `SIN MUEBLESL.png` como fondo de 1920×1080 y cinco PNG de muebles sueltos en siete posiciones. El avatar masculino recibido conserva sus cuatro PNG de reposo y cuatro GIF de movimiento. El GIF `Tren .gif` se reproduce por las ventanas de derecha a izquierda, con 15 segundos de espera entre ventanas. `PIZARRA-clear.png` y `PIZARRA-dirty.png` representan los estados del pizarrón, reflejados horizontalmente al dibujarse. Ver [inventario y faltantes](docs/assets.md).
 
 ## 7. Aceptación de arte
 

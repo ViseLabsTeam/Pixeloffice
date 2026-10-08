@@ -103,9 +103,9 @@ describe('oficina mixta: coordenadas y circulación',()=>{
     const world=new LocalWorld(demoMap);
     expect(world.activateInteraction()).toBeUndefined();
     world.position={x:1692,y:480};
-    expect(world.activateInteraction()).toBe('Pizarrón marcado.');
+    expect(world.activateInteraction()).toBe('Dibujaste en el pizarrón.');
     expect(world.boardDirty).toBe(true);
-    expect(world.activateInteraction()).toBe('Pizarrón limpio.');
+    expect(world.activateInteraction()).toBe('Borraste el pizarrón.');
     expect(world.boardDirty).toBe(false);
   });
 });

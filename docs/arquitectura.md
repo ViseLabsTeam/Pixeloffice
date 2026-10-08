@@ -1,6 +1,6 @@
 # Arquitectura actual — base espacial para la demo v2
 
-Actualizado el 2026-10-08. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue incompleto respecto a los sprites del pizarrón y la validación en dispositivo real.
+Actualizado el 2026-10-08. Describe implementación existente; los módulos futuros se rigen por [03](../03_TECNOLOGIAS_Y_ARQUITECTURA.md). I1 sigue pendiente de validación en dispositivo real.
 
 `apps/web/src/app` posee el ciclo de vida. Crea input, mundo local, caché, renderer y controles de medios; desmonta listeners, ResizeObserver, rAF, temporizador del tren, imágenes y pistas de captura al salir. Detiene el dibujo en segundo plano y programa el próximo cuadro del tren sin redibujar durante las pausas de 15 segundos. El límite visual es 30 FPS, con simulación basada en tiempo y subpasos de hasta dos unidades.
 
@@ -30,6 +30,6 @@ Actualizado el 2026-10-08. Describe implementación existente; los módulos futu
 
 Estos módulos se incorporarán con implementación y pruebas en I2–I4. No se agregan SDKs sin uso a I1. Cuentas, equipos, horarios, PostgreSQL, OAuth/APIs de Google, catálogo comercial y editor quedan fuera del plan; no hay I5 de esta entrega.
 
-Los tipos de dominio expresan ahora participantes y sesiones temporales, pero no implementan el servicio ni hacen efectivo el límite de diez. El esquema del mapa de prueba todavía necesita ampliarse para máscaras de ropa, bloqueos acústicos, variantes de pizarrón e interacciones definitivas de 08.
+Los tipos de dominio expresan ahora participantes y sesiones temporales, pero no implementan el servicio ni hacen efectivo el límite de diez. El esquema del mapa incluye los dos estados oficiales del pizarrón y su transformación compartida; todavía necesita ampliarse para máscaras de ropa, bloqueos acústicos e interacciones definitivas de 08.
 
 La pre-alpha vive aislada en `legacy/pre-alpha`; el nuevo grafo de imports no incluye PeerJS, BroadcastChannel, Tailwind CDN ni los antiguos handlers.

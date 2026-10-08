@@ -4,7 +4,7 @@ import { deflateSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { parseGIF, decompressFrames } from 'gifuct-js';
-import { avatarFootCollider, furniture, fixedColliders, interactions, windows, boardSurface, boardCorners } from './office-layout.mjs';
+import { avatarFootCollider, furniture, fixedColliders, interactions, windows, board } from './office-layout.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const output=`${root}apps/web/public/assets/peredo`;
@@ -51,6 +51,11 @@ for(const item of furniture){
     pivot:item.pivot,worldScale:item.scale,colliders:item.collider,depth:item.depth,
     renderOrder:item.renderOrder
   });
+}
+
+for(const [assetId,filename] of [[board.cleanAssetId,'PIZARRA-clear.png'],[board.dirtyAssetId,'PIZARRA-dirty.png']]){
+  const bytes=readFileSync(`${images}/furniture/board/${filename}`);
+  register(assetId,bytes,bytes.readUInt32BE(16),bytes.readUInt32BE(20),'png',{pivot:{x:0,y:0},layer:'ground'});
 }
 
 const directions={left:'-X',right:'X',up:'Y',down:'-Y'};
@@ -121,8 +126,7 @@ const scene={
   interactions,
   windows,
   trainFrames,
-  boardSurface,
-  boardCorners
+  board
 };
 const map={schemaVersion:1,mapVersion,entry:{sceneId:'office',spawnId:'entry'},
   avatar:{avatarId:'man-avatar',views,animations,footCollider:avatarFootCollider},assets,scenes:[scene]};

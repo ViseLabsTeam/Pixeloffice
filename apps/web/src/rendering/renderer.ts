@@ -51,17 +51,15 @@ export class Renderer {
     return selected.durationMs-elapsed;
   }
   private drawBoard(scene:Scene,dirty:boolean){
-    if(!dirty)return;
-    const context=this.context;
+    const context=this.context,board=scene.board;
+    const clean=assetById(this.map,board.cleanAssetId);
     context.save();
-    context.beginPath();
-    scene.boardCorners.forEach((corner,index)=>index?context.lineTo(corner.x,corner.y):context.moveTo(corner.x,corner.y));
-    context.closePath();context.clip();
-    context.scale(1.2,1.2);
-    // Temporary visible state until Peredo's clean/dirty exports arrive.
-    context.strokeStyle='#64849b';context.lineWidth=3;context.lineCap='square';
-    for(const {x,y,width} of [{x:1404,y:231,width:48},{x:1404,y:244,width:55},{x:1410,y:257,width:45},{x:1417,y:271,width:36}]){
-      context.beginPath();context.moveTo(x,y);context.lineTo(x+width,y+Math.round(width*.47));context.stroke();
+    context.translate(board.position.x+(board.flipX?clean.sourceRect.width*board.scale:0),board.position.y);
+    context.scale((board.flipX?-1:1)*board.scale,board.scale);
+    // Dirty contains only the panel. Keep the clean frame/legs underneath it.
+    for(const id of dirty?[board.cleanAssetId,board.dirtyAssetId]:[board.cleanAssetId]){
+      const asset=assetById(this.map,id),source=asset.sourceRect;
+      context.drawImage(this.cache.get(id),source.x,source.y,source.width,source.height,0,0,source.width,source.height);
     }
     context.restore();
   }
