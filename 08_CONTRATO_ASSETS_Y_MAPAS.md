@@ -49,6 +49,8 @@ Coordenadas de la oficina en los píxeles originales de 1920×1080, origen arrib
 
 La biblioteca incorporada tiene una zona sólida que conecta con la pared para impedir pasar por detrás. Cada escritorio bloquea todo el ancho del tablero. En profundidad, su collider empieza una longitud de pata dentro del borde visual posterior y termina en las puntas de las patas delanteras: así la cintura se alinea aproximadamente con el borde frontal del tablero y los pies sólo avanzan por detrás esa longitud. El monitor no amplía el collider. Las sillas usan una base sólida medida desde asiento y patas; delante, el avatar se dibuja sobre ellas, y detrás queda parcialmente oculto. En el conjunto más a la izquierda, la silla se dibuja primero y el escritorio cubre sus píxeles solapados. Los dos conjuntos derechos conservan el orden anterior. La planta bloquea la maceta, no el follaje. La máscara de recolor no debe teñir toda la silueta del personaje.
 
+La huella sólida del pizarrón se une a la pared norte y cubre el espacio entre sus patas para impedir pasar por detrás. La zona de interacción permanece delante del mueble.
+
 ## 5. Plantilla fija
 
 El mapa incluye schemaVersion/mapVersion, la escena fija de 1920×1080, ambiente, spawn, colliders, muebles sueltos, ventanas e interacciones. El servidor y cliente usan la misma geometría y versión; no aceptar mapa enviado por participante. El contrato conserva tipos de puertas y portales para etapas futuras, aunque la composición actual no los usa.

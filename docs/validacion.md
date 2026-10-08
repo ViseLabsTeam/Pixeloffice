@@ -88,3 +88,7 @@ Las tres sillas ahora tienen colliders de base medidos desde el asiento y las pa
 ### Capa del conjunto izquierdo — 2026-10-08
 
 Sólo la silla lateral izquierda pasó de `renderOrder:30` a `renderOrder:10`; su escritorio permanece en 20 y cubre el solapamiento de ambos PNG. Los dos conjuntos derechos conservan sus valores anteriores. Los colliders, posiciones, escalas y reglas de profundidad del avatar no se modificaron.
+
+### Huella del pizarrón — 2026-10-08
+
+Los tres colliders parciales de patas y base del pizarrón se sustituyeron por `board-footprint`, un rectángulo de `x:1642…1802`, `y:283…442` que se solapa con la pared norte y cierra el pasillo posterior. La zona de interacción `board` mantiene sus coordenadas delante del mueble. Esta iteración modifica únicamente esa geometría del mapa; no se ejecutaron pruebas automatizadas.

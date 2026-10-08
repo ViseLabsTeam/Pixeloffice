@@ -85,9 +85,8 @@ export const fixedColliders = [
   ['west-cabinet-base', 120, 283, 256, 80 + frontClearance],
   ['fridge-base', 566, 283, 102, 48 + frontClearance],
   ['center-bookshelf-base', 724, 283, 127, 107 + frontClearance],
-  ['board-left-leg', 1642, 378, 36, 38 + frontClearance],
-  ['board-right-leg', 1762, 396, 40, 44 + frontClearance],
-  ['board-base', 1660, 408, 122, 32 + frontClearance]
+  // Connect the board's legs and panel footprint to the north wall: no rear passage.
+  ['board-footprint', 1642, 283, 160, 159]
 ].map(([colliderId, x, y, width, height]) => ({ colliderId, area: rect(x, y, width, height) }));
 
 export const interactions = [

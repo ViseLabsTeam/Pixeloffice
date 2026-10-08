@@ -915,33 +915,13 @@
           }
         },
         {
-          "colliderId": "board-left-leg",
+          "colliderId": "board-footprint",
           "area": {
             "shape": "rect",
             "x": 1642,
-            "y": 378,
-            "width": 36,
-            "height": 40
-          }
-        },
-        {
-          "colliderId": "board-right-leg",
-          "area": {
-            "shape": "rect",
-            "x": 1762,
-            "y": 396,
-            "width": 40,
-            "height": 46
-          }
-        },
-        {
-          "colliderId": "board-base",
-          "area": {
-            "shape": "rect",
-            "x": 1660,
-            "y": 408,
-            "width": 122,
-            "height": 34
+            "y": 283,
+            "width": 160,
+            "height": 159
           }
         }
       ],
