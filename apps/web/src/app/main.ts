@@ -8,6 +8,8 @@ import { Renderer } from '../rendering/renderer';
 import { LocalMedia } from '../media/local-media';
 import { AudioMixer } from '../media/audio-mixer';
 import { OfficeMenu } from '../ui/office-menu';
+import { ScreenShare } from '../media/screen-share';
+import { BoardPanel } from '../ui/board-panel';
 
 function element<T extends HTMLElement>(id: string): T {
   const node = document.getElementById(id);
@@ -21,6 +23,8 @@ const controller = new AbortController();
 const cache = new AssetCache(demoMap);
 const renderer = new Renderer(canvas,demoMap,cache);
 const audio = new AudioMixer();
+const screenShare = new ScreenShare();
+const openPanels = new Set<string>();
 const localMedia = new LocalMedia(
   { camera: element<HTMLButtonElement>('camera-toggle'), microphone: element<HTMLButtonElement>('microphone-toggle') },
   element<HTMLVideoElement>('camera-preview'),
@@ -51,7 +55,7 @@ function updateInterface() {
   canvas.dataset.playerName = world.displayName;
   const door = world.nearbyDoor();
   const interaction = world.nearbyInteraction();
-  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o un toque` : interaction?.kind === 'board' ? `${world.boardDirty ? 'Borrar' : 'Dibujar en'} el pizarrón · E o un toque` : interaction ? `${interaction.label} · E o un toque` : 'Movete con WASD, flechas o arrastrando sobre la oficina.';
+  const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o un toque` : interaction?.kind === 'board' ? 'Abrir el pizarrón · E o un toque' : interaction ? `${interaction.label} · E o un toque` : 'Movete con WASD, flechas o arrastrando sobre la oficina.';
   if (hint.textContent !== message) hint.textContent = message;
 }
 function wake() {
@@ -59,10 +63,12 @@ function wake() {
   if (!frame && ready && !disposed && !document.hidden) frame = requestAnimationFrame(tick);
 }
 function action() {
-  if (!ready || menu.isOpen || !menu.entered || world.transitioning) return;
+  if (!ready || openPanels.size || !menu.entered || world.transitioning) return;
   const message = world.toggleDoor();
   if (message) notify(message);
-  else {
+  else if (world.nearbyInteraction()?.kind === 'board') {
+    board.open(); notify('Pizarrón abierto.');
+  } else {
     const result = world.activateInteraction();
     if (result) notify(result);
   }
@@ -74,10 +80,19 @@ const input = new Input(canvas,wake,action,{
   m: () => { void localMedia.toggle('microphone'); },
   escape: () => menu.openSettings()
 });
+function blockControls(panel:string,blocked:boolean){
+  if(blocked)openPanels.add(panel);else openPanels.delete(panel);
+  input.setEnabled(!disposed && openPanels.size===0 && menu.entered);wake();
+}
+const board = new BoardPanel(screenShare,{
+  blocked: blocked => blockControls('board',blocked),
+  changed: dirty => { world.boardDirty=dirty;updateInterface();wake(); }
+});
 const menu = new OfficeMenu(audio,localMedia,{
   nameChanged: name => { world.displayName = name; canvas.dataset.playerName = name; },
-  blocked: blocked => { input.setEnabled(!blocked); wake(); },
-  leave: () => { void resetWorld(); }
+  blocked: blocked => blockControls('menu',blocked),
+  leave: () => { board.reset();screenShare.stop();void resetWorld(); },
+  present: () => board.open('screen')
 });
 menu.start();
 async function transition() {
@@ -94,7 +109,7 @@ function tick(time: number) {
   lastTime = time;
   const vector = input.vector();
   world.step(vector,seconds);
-  if (!menu.isOpen && menu.entered) void transition();
+  if (!openPanels.size && menu.entered) void transition();
   const nextTrainFrameMs = renderer.draw(world,seconds);
   updateInterface();
   if (vector.x || vector.y) wake();
@@ -107,6 +122,7 @@ async function resetWorld() {
   if (world.transitioning || !ready) return;
   const next = new LocalWorld(demoMap);
   next.displayName = world.displayName;
+  next.boardDirty = board.dirty;
   ready = false; menu.setReady(false); input.reset();
   try {
     await cache.prepare(next.scene);
@@ -123,10 +139,10 @@ document.addEventListener('visibilitychange',() => {
 function dispose() {
   if (disposed) return;
   disposed = true; ready = false; cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0;
-  controller.abort(); resize.disconnect(); input.destroy(); menu.destroy(); localMedia.destroy(); audio.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
+  controller.abort(); resize.disconnect(); input.destroy(); menu.destroy(); board.destroy(); screenShare.destroy(); localMedia.destroy(); audio.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
 }
 window.addEventListener('pagehide',event => {
-  if (event.persisted) { cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0; input.reset(); localMedia.stopAll(); audio.pauseMusic(); lastTime = 0; }
+  if (event.persisted) { cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0; input.reset(); screenShare.stop(); localMedia.stopAll(); audio.pauseMusic(); lastTime = 0; }
   else dispose();
 },{signal:controller.signal});
 window.addEventListener('pageshow',event => { if (event.persisted) wake(); },{signal:controller.signal});

@@ -8,11 +8,12 @@ function element<T extends HTMLElement>(id:string):T {
   if(!node)throw new Error(`Elemento del menú ausente: ${id}`);
   return node as T;
 }
-type Tab='profile'|'audio'|'camera'|'music';
+type Tab='profile'|'audio'|'camera'|'screen'|'music';
 interface MenuCallbacks {
   nameChanged:(name:string)=>void;
   blocked:(blocked:boolean)=>void;
   leave:()=>void;
+  present:()=>void;
 }
 
 export class OfficeMenu {
@@ -48,6 +49,7 @@ export class OfficeMenu {
     },options);
     click('welcome-settings',()=>this.openSettings());
     click('open-settings',()=>this.openSettings());
+    click('open-presentation',()=>this.callbacks.present());
     click('close-settings',()=>this.back());click('done-settings',()=>this.back());
     click('leave-office',()=>{
       this.media.stopAll();this.audio.stopMusic();this.entered=false;
@@ -134,7 +136,7 @@ export class OfficeMenu {
   }
   private selectTab(tab:Tab){
     this.tab=tab;
-    for(const name of ['profile','audio','camera','music'] as const){
+    for(const name of ['profile','audio','camera','screen','music'] as const){
       const active=name===tab;const button=element(`tab-${name}`);
       button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1;
       element(`panel-${name}`).hidden=!active;

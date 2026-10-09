@@ -46,6 +46,7 @@
           <button id="tab-profile" role="tab" type="button" aria-selected="true" aria-controls="panel-profile" data-tab="profile">Perfil</button>
           <button id="tab-audio" role="tab" type="button" aria-selected="false" aria-controls="panel-audio" data-tab="audio" tabindex="-1">Audio</button>
           <button id="tab-camera" role="tab" type="button" aria-selected="false" aria-controls="panel-camera" data-tab="camera" tabindex="-1">Cámara</button>
+          <button id="tab-screen" role="tab" type="button" aria-selected="false" aria-controls="panel-screen" data-tab="screen" tabindex="-1">Pantalla</button>
           <button id="tab-music" role="tab" type="button" aria-selected="false" aria-controls="panel-music" data-tab="music" tabindex="-1">Música</button>
         </div>
         <div class="settings-panels">
@@ -64,6 +65,15 @@
             <div class="camera-frame"><video id="camera-preview" autoplay muted playsinline hidden aria-label="Vista previa de tu cámara"></video><div id="camera-placeholder"><svg viewBox="0 0 24 20" aria-hidden="true"><path d="M1 5h4V1h10v4h4v3l4-3v13l-4-3v4H1zm5 3v7h8V8z" fill="currentColor" fill-rule="evenodd"/></svg><span>Cámara apagada</span></div></div>
             <p class="menu-note">Cámara y micrófono se activan por separado. Podés entrar con ambos apagados.</p>
           </section>
+          <section id="panel-screen" role="tabpanel" aria-labelledby="tab-screen" hidden>
+            <div class="setting-card">
+              <h3>Presentar pantalla</h3>
+              <p class="menu-note">Mostrá una pestaña, ventana o pantalla desde el panel del pizarrón. La cámara puede seguir encendida.</p>
+              <button id="open-presentation" class="pixel-button primary-button" type="button">Abrir presentación →</button>
+              <p class="menu-note">El navegador te permite elegir qué capturar. En esta versión la vista es local.</p>
+            </div>
+            <div class="setting-card"><h3>Un pizarrón para tus ideas</h3><p class="menu-note">Dentro de la oficina, acercate al pizarrón y pulsá E o tocá el escenario para abrir el lienzo.</p></div>
+          </section>
           <section id="panel-music" role="tabpanel" aria-labelledby="tab-music" hidden>
             <div class="music-card"><div id="music-bars" class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div><p class="menu-eyebrow">SUENA EN TU OFICINA</p><h3 id="music-title">Tarde de píxeles</h3><p id="music-state" class="menu-note">Ambiente 8 bit · En pausa</p></div></div>
             <div class="music-actions"><button id="music-play" class="pixel-button primary-button" type="button">Reproducir</button><button id="music-stop" class="pixel-button" type="button">Detener</button></div>
@@ -75,6 +85,58 @@
         </div>
         <p id="media-status" class="media-status" role="status" aria-live="polite">Cámara y micrófono apagados.</p>
         <div class="settings-footer"><span>Los cambios se aplican al instante.</span><button id="done-settings" class="pixel-button" type="button">Listo</button></div>
+      </section>
+    </dialog>
+    <dialog id="board-dialog" aria-labelledby="board-title" aria-describedby="board-description">
+      <div class="board-heading">
+        <div><p class="menu-eyebrow">ESPACIO DE IDEAS</p><h2 id="board-title">El pizarrón</h2></div>
+        <div class="board-heading-actions"><button id="board-stop-presentation" class="pixel-button danger-button" type="button" hidden>Detener presentación</button><button id="board-close" class="close-button" type="button" aria-label="Cerrar pizarrón">×</button></div>
+      </div>
+      <p id="board-description" class="menu-note">Dibujá o presentá tu pantalla. Tu dibujo se conserva al cerrar este panel.</p>
+      <div class="board-tabs" role="tablist" aria-label="Contenido del pizarrón">
+        <button id="board-tab-draw" role="tab" type="button" aria-selected="true" aria-controls="board-panel-draw">Dibujar</button>
+        <button id="board-tab-screen" role="tab" type="button" aria-selected="false" aria-controls="board-panel-screen" tabindex="-1">Presentar pantalla</button>
+      </div>
+      <section id="board-panel-draw" role="tabpanel" aria-labelledby="board-tab-draw">
+        <div class="drawing-toolbar" role="group" aria-label="Herramientas de dibujo">
+          <div class="drawing-tools">
+            <button class="pixel-button" data-drawing-tool="pen" type="button" aria-pressed="true" title="Lápiz (B)">✎ Lápiz</button>
+            <button class="pixel-button" data-drawing-tool="eraser" type="button" aria-pressed="false" title="Goma (E)">▱ Goma</button>
+            <button class="pixel-button" data-drawing-tool="line" type="button" aria-pressed="false" title="Línea (L)">╱ Línea</button>
+            <button class="pixel-button" data-drawing-tool="rectangle" type="button" aria-pressed="false" title="Rectángulo (R)">□ Rectángulo</button>
+            <button class="pixel-button" data-drawing-tool="ellipse" type="button" aria-pressed="false" title="Elipse (O)">○ Elipse</button>
+          </div>
+          <div class="drawing-options">
+            <div class="drawing-colors" role="group" aria-label="Paleta de colores">
+              <button type="button" data-drawing-color="#263645" style="--swatch:#263645" aria-label="Negro" aria-pressed="true"></button>
+              <button type="button" data-drawing-color="#d64f4f" style="--swatch:#d64f4f" aria-label="Rojo" aria-pressed="false"></button>
+              <button type="button" data-drawing-color="#df8b30" style="--swatch:#df8b30" aria-label="Naranja" aria-pressed="false"></button>
+              <button type="button" data-drawing-color="#e8bd39" style="--swatch:#e8bd39" aria-label="Amarillo" aria-pressed="false"></button>
+              <button type="button" data-drawing-color="#388455" style="--swatch:#388455" aria-label="Verde" aria-pressed="false"></button>
+              <button type="button" data-drawing-color="#3577c6" style="--swatch:#3577c6" aria-label="Azul" aria-pressed="false"></button>
+              <button type="button" data-drawing-color="#8353ad" style="--swatch:#8353ad" aria-label="Violeta" aria-pressed="false"></button>
+              <label class="custom-color"><span class="sr-only">Color personalizado</span><input id="board-color" type="color" value="#263645" title="Elegir otro color" /></label>
+            </div>
+            <label class="drawing-size" for="board-size">Grosor <input id="board-size" type="range" min="1" max="48" step="1" value="6" /><output id="board-size-value" for="board-size">6 px</output></label>
+            <label class="drawing-fill"><input id="board-fill" type="checkbox" disabled /> Rellenar figura</label>
+          </div>
+          <div class="drawing-actions">
+            <button id="board-undo" class="pixel-button quiet-button" type="button" title="Deshacer (Ctrl+Z)" disabled>↶ Deshacer</button>
+            <button id="board-redo" class="pixel-button quiet-button" type="button" title="Rehacer (Ctrl+Y o Ctrl+Shift+Z)" disabled>↷ Rehacer</button>
+            <button id="board-clear" class="pixel-button quiet-button" type="button" disabled>Limpiar</button>
+            <button id="board-download" class="pixel-button quiet-button" type="button">Guardar PNG ↓</button>
+          </div>
+        </div>
+        <div class="drawing-desk"><canvas id="board-canvas" width="960" height="540" tabindex="0" aria-label="Lienzo para dibujar con mouse, lápiz o dedo" aria-describedby="drawing-help"></canvas></div>
+        <div class="board-footer"><span id="board-document-state" role="status">Lienzo limpio</span><span id="drawing-help">B lápiz · E goma · Ctrl+Z deshacer · Esc cerrar</span></div>
+        <p id="board-message" class="menu-note" role="status" aria-live="polite"></p>
+      </section>
+      <section id="board-panel-screen" role="tabpanel" aria-labelledby="board-tab-screen" hidden>
+        <div class="screen-controls"><button id="screen-toggle" class="pixel-button primary-button" type="button" aria-pressed="false">Presentar pantalla</button><label><input id="screen-audio" type="checkbox" /> Incluir audio, si la fuente lo permite</label></div>
+        <div class="screen-frame"><video id="screen-preview" autoplay muted playsinline hidden aria-label="Vista previa de la pantalla presentada"></video><div id="screen-placeholder"><svg viewBox="0 0 32 28" aria-hidden="true"><path d="M0 0h32v22H19v3h7v3H6v-3h7v-3H0zm3 3v16h26V3z" fill="currentColor" fill-rule="evenodd"/></svg><h3>Tu próxima idea, en pantalla</h3><p>Elegí qué mostrar desde el selector del navegador.</p></div></div>
+        <p id="screen-source" class="menu-note">Sin presentación activa</p>
+        <p id="screen-status" class="media-status" role="status" aria-live="polite"></p>
+        <p class="menu-note">Vista local: todavía no se transmite a otras personas. La captura se detiene al cerrar el pizarrón. El audio capturado no se reproduce en tus altavoces.</p>
       </section>
     </dialog>
     <script type="module" src="/src/app/main.ts"></script>

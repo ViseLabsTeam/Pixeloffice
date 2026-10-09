@@ -41,10 +41,8 @@ export class LocalWorld {
   activateInteraction(): string | undefined {
     const item = this.nearbyInteraction();
     if (!item) return;
-    if (item.kind === 'board') {
-      this.boardDirty = !this.boardDirty;
-      return this.boardDirty ? 'Dibujaste en el pizarrón.' : 'Borraste el pizarrón.';
-    }
+    // The editor owns the document; merely approaching/opening never changes its ink.
+    if (item.kind === 'board') return 'Abrir el pizarrón.';
     return item.label;
   }
   toggleDoor(): string | undefined {

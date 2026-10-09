@@ -1,0 +1,78 @@
+#board-dialog {
+  width: min(1120px, calc(100% - 32px)); max-width: none; height: min(880px, calc(100dvh - 32px)); max-height: calc(100dvh - 32px);
+  padding: 22px 24px 16px; border: 4px solid var(--accent); color: var(--cream); background: var(--ink);
+  box-shadow: 8px 8px 0 #101e28, 0 0 0 4px #101e28; overflow: hidden; overscroll-behavior: contain;
+  font: 13px/1.5 'Lucida Console', 'Courier New', monospace; scrollbar-color: var(--accent) var(--ink);
+}
+#board-dialog[open] { display: flex; flex-direction: column; }
+#board-panel-draw, #board-panel-screen { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; }
+#board-panel-draw { display: flex; flex-direction: column; }
+#board-panel-draw > :not(.drawing-desk) { flex-shrink: 0; }
+#board-dialog::backdrop { background: #10232bc9; }
+#board-dialog h2, #board-dialog h3, #board-dialog p { margin: 0; }
+#board-dialog h2 { font-size: 25px; line-height: 1.4; }
+#board-dialog h3 { font-size: 16px; }
+#board-dialog button:disabled { cursor: default; }
+.board-heading, .board-heading-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-shrink: 0; }
+.board-heading .close-button { min-width: 40px; }
+#board-description { margin-top: 8px !important; }
+.board-tabs { display: flex; gap: 8px; margin: 12px 0; border-bottom: 2px solid #48616a; padding-bottom: 8px; flex-shrink: 0; }
+.board-tabs button { min-height: 42px; padding: 8px 18px; border: 0; background: var(--panel); color: var(--muted); font: inherit; }
+.board-tabs button[aria-selected="true"] { color: var(--cream); background: var(--panel-light); box-shadow: inset 0 -3px var(--accent); }
+.drawing-toolbar { display: grid; gap: 12px; padding: 12px; border: 2px solid #48616a; background: var(--panel); }
+.drawing-tools, .drawing-options, .drawing-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.drawing-tools .pixel-button { flex: 1; min-width: 105px; white-space: nowrap; }
+.drawing-tools .pixel-button[aria-pressed="true"] { background: #3b5b61; border-color: var(--accent); color: var(--cream); box-shadow: inset 0 -3px var(--accent); }
+.drawing-options { justify-content: space-between; column-gap: 20px; }
+.drawing-colors { display: flex; align-items: center; gap: 7px; padding: 3px; flex-wrap: wrap; }
+.drawing-colors button { position: relative; width: 30px; height: 30px; border: 2px solid #c1cbbf; background: var(--swatch); }
+.drawing-colors button[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+.drawing-colors button[aria-pressed="true"]::after { content: ''; position: absolute; inset: 7px; background: white; border: 1px solid #172c35; }
+.custom-color { display: flex; height: 32px; }
+#board-color { padding: 2px; width: 36px; height: 32px; border: 2px solid #7e9691; border-radius: 0; background: #132831; cursor: pointer; }
+.drawing-size { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.drawing-size input { width: 96px; height: 30px; accent-color: var(--accent); }
+.drawing-size output { min-width: 40px; color: var(--accent); }
+.drawing-fill, .screen-controls label { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+.drawing-fill input, .screen-controls input { width: 18px; height: 18px; accent-color: var(--accent); }
+.drawing-actions { border-top: 1px solid #48616a; padding-top: 10px; }
+.drawing-actions .pixel-button { font-size: 11px; }
+#board-download { margin-left: auto; }
+.drawing-desk { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); flex: 1 1 0; min-height: 170px; place-items: center; padding: 12px; margin-top: 12px; overflow: hidden; background: #3a5156; border: 2px solid #647871; }
+#board-canvas {
+  display: block; width: auto; height: auto; max-width: 100%; max-height: 100%;
+  background: #fff; box-shadow: 4px 4px 0 #182b34; touch-action: none; cursor: crosshair; user-select: none;
+}
+#board-canvas:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+#board-canvas[data-tool="eraser"] { cursor: cell; }
+.board-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; margin-top: 10px; font-size: 10px; color: var(--muted); }
+#board-document-state { color: var(--mint); }
+#board-message { min-height: 18px; margin-top: 4px !important; }
+.screen-controls { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; margin: 16px 0; }
+.screen-frame { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; max-height: 55dvh; background: #0d1f27; border: 2px solid #48616a; overflow: hidden; }
+#screen-preview { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+#screen-placeholder { display: flex; flex-direction: column; gap: 16px; align-items: center; justify-content: center; padding: 20px; text-align: center; color: var(--muted); }
+#screen-placeholder svg { width: 64px; height: 56px; color: var(--accent); shape-rendering: crispEdges; }
+#screen-placeholder p { font-size: 11px; }
+#screen-source { margin: 10px 0 !important; overflow-wrap: anywhere; }
+#screen-status { margin-bottom: 10px !important; }
+#open-presentation { margin: 20px 0 16px; }
+@media (max-width: 600px) {
+  #board-dialog { width: calc(100% - 16px); height: calc(100dvh - 16px); max-height: calc(100dvh - 16px); border-width: 3px; padding: 14px 12px 10px; }
+  #board-dialog h2 { font-size: 21px; }
+  .board-heading { align-items: flex-start; }
+  .board-heading-actions { flex-wrap: wrap-reverse; justify-content: flex-end; gap: 8px; }
+  #board-stop-presentation { max-width: 140px; padding: 6px; font-size: 10px; }
+  .board-tabs button { flex: 1; padding: 8px; font-size: 11px; }
+  .drawing-toolbar { padding: 8px; }
+  .drawing-tools { gap: 6px; }
+  .drawing-tools .pixel-button { min-width: 80px; padding: 8px; font-size: 10px; }
+  .drawing-colors { gap: 6px; }
+  .drawing-colors button { width: 28px; height: 30px; }
+  .drawing-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  #board-download { margin-left: 0; }
+  .drawing-desk { padding: 7px; }
+  #screen-placeholder { gap: 8px; padding: 14px; }
+  #screen-placeholder svg { width: 40px; height: 35px; }
+  #screen-placeholder h3 { font-size: 13px; }
+}

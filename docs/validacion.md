@@ -108,3 +108,9 @@ Se integraron `PIZARRA-clear.png` y `PIZARRA-dirty.png` con reflejo horizontal y
 ### Oficina a pantalla completa — 2026-10-08
 
 Se retiraron los paneles, cabecera, pie, controles visibles y etiqueta del avatar. El canvas llena el viewport sin scroll ni franjas; la cámara sigue al personaje con escala uniforme. El arrastre sobre el escenario reemplaza al joystick visible y un toque corto interactúa. El build, las ocho pruebas unitarias/integración y 18 recorridos de navegador aprobaron; dos casos de teclado en perfil móvil se omiten por diseño. Se comprobaron cobertura y redimensionado en escritorio y móvil, movimiento por arrastre, colisiones, estados del pizarrón, capas visuales y cuadros del tren. Se inspeccionaron las capturas en vertical y horizontal. Los controles de cámara y micrófono quedan accesibles mediante C/M, sin vista previa visible.
+
+### Editor de pizarrón y captura de pantalla local — 2026-10-09
+
+E ahora abre un editor con lápiz, goma, figuras, paleta, grosor, ocho pasos de deshacer/rehacer, limpieza y exportación PNG. Los píxeles del documento determinan el sprite limpio/sucio; abrirlo no alterna el estado. El panel ofrece `getDisplayMedia`, vista previa y finalización desde la UI, cierre o navegador. Cámara y micrófono tienen ciclos de vida independientes. Se documentaron las limitaciones locales en [pizarrón y presentación](pizarron-presentacion.md).
+
+`npm run build` aprobó TypeScript, las 112 imágenes y compilación API/web. Las comprobaciones existentes se adaptaron al nuevo flujo, pero no se ejecutaron pruebas automatizadas ni recorridos de navegador en esta entrega. Quedan sin verificar selección real de pantalla, navegadores/dispositivos físicos, descarga y herramientas mediante interacción real. Tampoco se implementaron ni validaron transmisión entre usuarios, reserva exclusiva ni convergencia del dibujo compartido.
