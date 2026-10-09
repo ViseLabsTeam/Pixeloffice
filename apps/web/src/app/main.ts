@@ -6,6 +6,8 @@ import { LocalWorld } from '../engine/world';
 import { AssetCache } from '../rendering/assets';
 import { Renderer } from '../rendering/renderer';
 import { LocalMedia } from '../media/local-media';
+import { AudioMixer } from '../media/audio-mixer';
+import { OfficeMenu } from '../ui/office-menu';
 
 function element<T extends HTMLElement>(id: string): T {
   const node = document.getElementById(id);
@@ -18,11 +20,13 @@ const hint = element('hint');
 const controller = new AbortController();
 const cache = new AssetCache(demoMap);
 const renderer = new Renderer(canvas,demoMap,cache);
+const audio = new AudioMixer();
 const localMedia = new LocalMedia(
   { camera: element<HTMLButtonElement>('camera-toggle'), microphone: element<HTMLButtonElement>('microphone-toggle') },
   element<HTMLVideoElement>('camera-preview'),
   element('camera-placeholder'),
-  element('media-status')
+  element('media-status'),
+  audio
 );
 let world = new LocalWorld(demoMap);
 // Developer-only setup for visually checking colliders and input at a valid position.
@@ -44,6 +48,7 @@ function updateInterface() {
   canvas.dataset.x = String(world.position.x); canvas.dataset.y = String(world.position.y);
   canvas.dataset.direction = world.direction;
   canvas.dataset.board = world.boardDirty ? 'dirty' : 'clean';
+  canvas.dataset.playerName = world.displayName;
   const door = world.nearbyDoor();
   const interaction = world.nearbyInteraction();
   const message = door ? `${world.doors[door.doorId] ? 'Cerrar' : 'Abrir'} puerta · E o un toque` : interaction?.kind === 'board' ? `${world.boardDirty ? 'Borrar' : 'Dibujar en'} el pizarrón · E o un toque` : interaction ? `${interaction.label} · E o un toque` : 'Movete con WASD, flechas o arrastrando sobre la oficina.';
@@ -54,7 +59,7 @@ function wake() {
   if (!frame && ready && !disposed && !document.hidden) frame = requestAnimationFrame(tick);
 }
 function action() {
-  if (!ready || world.transitioning) return;
+  if (!ready || menu.isOpen || !menu.entered || world.transitioning) return;
   const message = world.toggleDoor();
   if (message) notify(message);
   else {
@@ -66,8 +71,15 @@ function action() {
 const input = new Input(canvas,wake,action,{
   r: () => { void resetWorld(); },
   c: () => { void localMedia.toggle('camera'); },
-  m: () => { void localMedia.toggle('microphone'); }
+  m: () => { void localMedia.toggle('microphone'); },
+  escape: () => menu.openSettings()
 });
+const menu = new OfficeMenu(audio,localMedia,{
+  nameChanged: name => { world.displayName = name; canvas.dataset.playerName = name; },
+  blocked: blocked => { input.setEnabled(!blocked); wake(); },
+  leave: () => { void resetWorld(); }
+});
+menu.start();
 async function transition() {
   try {
     const changed = await world.transition(scene => cache.prepare(scene),performance.now());
@@ -82,7 +94,7 @@ function tick(time: number) {
   lastTime = time;
   const vector = input.vector();
   world.step(vector,seconds);
-  void transition();
+  if (!menu.isOpen && menu.entered) void transition();
   const nextTrainFrameMs = renderer.draw(world,seconds);
   updateInterface();
   if (vector.x || vector.y) wake();
@@ -94,13 +106,14 @@ function tick(time: number) {
 async function resetWorld() {
   if (world.transitioning || !ready) return;
   const next = new LocalWorld(demoMap);
-  ready = false; input.reset();
+  next.displayName = world.displayName;
+  ready = false; menu.setReady(false); input.reset();
   try {
     await cache.prepare(next.scene);
     if (disposed) { next.destroy(); return; }
     world.destroy(); world = next; lastTime = 0; notify('Volviste a la entrada.');
   } catch (error) { next.destroy(); notify(String(error),true); }
-  finally { if (!disposed) { ready = true; wake(); } }
+  finally { if (!disposed) { ready = true; menu.setReady(true); wake(); } }
 }
 const resize = new ResizeObserver(wake); resize.observe(canvas);
 document.addEventListener('visibilitychange',() => {
@@ -110,15 +123,15 @@ document.addEventListener('visibilitychange',() => {
 function dispose() {
   if (disposed) return;
   disposed = true; ready = false; cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0;
-  controller.abort(); resize.disconnect(); input.destroy(); localMedia.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
+  controller.abort(); resize.disconnect(); input.destroy(); menu.destroy(); localMedia.destroy(); audio.destroy(); world.destroy(); renderer.destroy(); cache.destroy();
 }
 window.addEventListener('pagehide',event => {
-  if (event.persisted) { cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0; input.reset(); localMedia.stopAll(); lastTime = 0; }
+  if (event.persisted) { cancelAnimationFrame(frame); clearTimeout(trainTimer); frame = 0; trainTimer = 0; input.reset(); localMedia.stopAll(); audio.pauseMusic(); lastTime = 0; }
   else dispose();
 },{signal:controller.signal});
 window.addEventListener('pageshow',event => { if (event.persisted) wake(); },{signal:controller.signal});
 if (import.meta.hot) import.meta.hot.dispose(dispose);
 cache.prepare(world.scene).then(() => {
   if (disposed) return;
-  ready = true; canvas.dataset.ready = 'true'; notify('La oficina está lista para explorar.'); wake();
-}).catch(error => { notify(`No pudimos cargar la oficina: ${String(error)}`,true); });
+  ready = true; menu.setReady(true); canvas.dataset.ready = 'true'; notify('La oficina está lista para explorar.'); wake();
+}).catch(error => { if (!disposed) { const message = `No pudimos cargar la oficina: ${String(error)}`; notify(message,true); menu.setError(message); } });

@@ -7,6 +7,7 @@ export class LocalWorld {
   direction: Direction;
   moving = false;
   boardDirty = false;
+  displayName = '';
   readonly doors: Record<string, boolean>;
   colliders: Rect[];
   transitioning = false;

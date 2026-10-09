@@ -1,6 +1,11 @@
 import { type Page } from '@playwright/test';
 import { type Point } from '@pixel-office/contracts';
 
+export async function enterOffice(page:Page){
+  await page.locator('#entry-name').fill('Visitante');
+  await page.locator('#enter-office').click();
+}
+
 export async function dragScene(page:Page,vector:Point,milliseconds:number){
   const bounds=await page.locator('#world').boundingBox();
   if(!bounds)throw new Error('Escenario invisible');

@@ -1,3 +1,4 @@
+import { type AudioMixer } from './audio-mixer';
 type Device = 'camera' | 'microphone';
 
 const labels: Record<Device, string> = { camera: 'cámara', microphone: 'micrófono' };
@@ -14,7 +15,8 @@ export class LocalMedia {
     private readonly buttons: Record<Device, HTMLButtonElement>,
     private readonly preview: HTMLVideoElement,
     private readonly placeholder: HTMLElement,
-    private readonly status: HTMLElement
+    private readonly status: HTMLElement,
+    private readonly audio: AudioMixer
   ) {
     for (const device of ['camera', 'microphone'] as const) {
       buttons[device].addEventListener('click', () => { void this.toggle(device); }, { signal: this.controller.signal });
@@ -46,6 +48,7 @@ export class LocalMedia {
     const track = this.tracks[device];
     delete this.tracks[device];
     if (track) track.stop();
+    if (device === 'microphone') this.audio.disconnectMicrophone();
     if (device === 'camera') {
       this.preview.pause();
       this.preview.srcObject = null;
@@ -83,8 +86,10 @@ export class LocalMedia {
       return;
     }
     try {
+      if (device === 'microphone') await this.audio.enable();
+      if (this.destroyed || requestId !== this.requestIds[device] || !this.desired[device]) return;
       const stream = await navigator.mediaDevices.getUserMedia(device === 'camera'
-        ? { video: true, audio: false } : { video: false, audio: true });
+        ? { video: true, audio: false } : { video: false, audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: false } });
       const track = device === 'camera' ? stream.getVideoTracks()[0] : stream.getAudioTracks()[0];
       for (const extra of stream.getTracks()) if (extra !== track) extra.stop();
       if (!track || track.readyState !== 'live') {
@@ -96,6 +101,7 @@ export class LocalMedia {
         return;
       }
       this.tracks[device] = track;
+      if (device === 'microphone') this.audio.connectMicrophone(new MediaStream([track]));
       track.addEventListener('ended', () => {
         if (this.tracks[device] !== track) return;
         this.stop(device);

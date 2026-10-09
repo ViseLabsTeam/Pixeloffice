@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { assetById, canOccupy, initialDoors, objectRect, sceneColliders, type MapBundle, type Point } from '@pixel-office/contracts';
-import { dragScene } from './scene-controls';
+import { dragScene, enterOffice } from './scene-controls';
 
 const map=JSON.parse(readFileSync('packages/contracts/data/demo-map.json','utf8')) as MapBundle;
 const scene=map.scenes[0]!;
@@ -16,6 +16,7 @@ async function startAt(page:Page,point:Point){
   expect(canOccupy(map,scene,point,all)).toBe(true);
   await page.goto(`/?debug=colliders&x=${point.x}&y=${point.y}`);
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await enterOffice(page);
 }
 async function drive(page:Page,control:'keyboard'|'joystick',vector:Point){
   if(control==='keyboard'){

@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { type MapBundle } from '@pixel-office/contracts';
-import { dragScene, sceneSignature, tapScene } from './scene-controls';
+import { dragScene, enterOffice, sceneSignature, tapScene } from './scene-controls';
 
 const map=JSON.parse(readFileSync('packages/contracts/data/demo-map.json','utf8')) as MapBundle;
 const x=async(page:Page)=>Number(await page.locator('#world').getAttribute('data-x'));
@@ -9,7 +9,7 @@ async function hold(page:Page,key:string,milliseconds:number){
   await page.keyboard.down(key);await page.waitForTimeout(milliseconds);await page.keyboard.up(key);
 }
 test('oficina a pantalla completa, cuatro direcciones y cámara al redimensionar',async({page},info)=>{
-  await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');await enterOffice(page);
   await expect(page.locator('#world')).toHaveAttribute('data-scene','office');
   for(const [key,direction] of [['w','up'],['s','down'],['a','left'],['d','right']]){
     await hold(page,key!,110);await expect(page.locator('#world')).toHaveAttribute('data-direction',direction!);
@@ -29,7 +29,7 @@ test('oficina a pantalla completa, cuatro direcciones y cámara al redimensionar
     expect(size.cameraY+size.viewHeight).toBeLessThanOrEqual(1080.001);
   };
   await checkScreen();
-  await expect(page.locator('header, aside, footer, button:visible')).toHaveCount(0);
+  await expect(page.locator('header, aside, footer, dialog[open], button:visible:not(#open-settings)')).toHaveCount(0);
   await page.screenshot({path:`test-results/fullscreen-${info.project.name}.png`});
   const bitmapWidth=await page.locator('#world').evaluate(node=>(node as HTMLCanvasElement).width);
   await page.setViewportSize(info.project.name==='desktop'?{width:1100,height:800}:{width:844,height:390});
@@ -40,6 +40,7 @@ test('oficina a pantalla completa, cuatro direcciones y cámara al redimensionar
 test('pizarrón limpio y sucio mediante interacción',async({page},info)=>{
   await page.goto('/?debug=colliders&x=1692&y=480');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await enterOffice(page);
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
   await expect(page.locator('#hint')).toContainText('Dibujar en el pizarrón');
   const panelSignature=()=>sceneSignature(page,{x:1668,y:244,width:110,height:126});
@@ -59,7 +60,7 @@ test('pizarrón limpio y sucio mediante interacción',async({page},info)=>{
   await expect(page.locator('#world')).toHaveAttribute('data-board','clean');
 });
 test('arrastrar el escenario mueve y se detiene al soltar',async({page})=>{
-  await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await page.goto('/');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');await enterOffice(page);
   const start=await x(page);
   const camera=Number(await page.locator('#world').getAttribute('data-camera-x'));
   await dragScene(page,{x:1,y:0},250);
@@ -72,23 +73,27 @@ test('el avatar se dibuja encima de la pared del fondo al acercarse',async({page
   const pixel=()=>sceneSignature(page,{x:1100,y:250,width:1,height:1});
   await page.goto('/?debug=colliders&x=1100&y=600');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await enterOffice(page);
   const wallAlone=await pixel();
   await page.goto('/?debug=colliders&x=1100&y=300');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await enterOffice(page);
   expect(await pixel()).not.toEqual(wallAlone);
 });
 test('el escritorio separado permanece opaco delante del avatar',async({page})=>{
   const pixel=()=>sceneSignature(page,{x:320,y:525,width:1,height:1});
   await page.goto('/?debug=colliders&x=320&y=750');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await enterOffice(page);
   const deskAlone=await pixel();
   await page.goto('/?debug=colliders&x=320&y=550');
   await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await enterOffice(page);
   expect(await pixel()).toEqual(deskAlone);
 });
 test('el tren cambia de cuadro dentro de las ventanas',async({page})=>{
   test.skip(map.scenes[0]!.trainFrames.length<2,'Falta el GIF oficial del tren en los assets recibidos.');
-  await page.goto('/?debug=colliders&x=1692&y=480');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');
+  await page.goto('/?debug=colliders&x=1692&y=480');await expect(page.locator('#world')).toHaveAttribute('data-ready','true');await enterOffice(page);
   const sample=()=>sceneSignature(page,{x:1548,y:140,width:155,height:36});
   const first=await sample();await expect.poll(sample,{timeout:5000}).not.toBe(first);
 });

@@ -2,7 +2,7 @@
 
 Demo de portafolio de **Vice Labs** con Canvas 2D y TypeScript. Objetivo final: oficina fija, acceso sin cuenta y sesiones temporales de hasta diez participantes, según las especificaciones [00–08 v2](00_LEEME.md).
 
-La aplicación implementa un **recorrido individual por la oficina fija a pantalla completa**, con sólo pixel art visible. `SIN MUEBLESL.png` (1920×1080) forma el fondo; los tres escritorios, sus sillas y una planta se dibujan por separado, con collider y profundidad propios, siempre opacos. El avatar se dibuja sobre todo el fondo. Conserva sus cuatro direcciones, PNG de reposo y cuadros de GIF de movimiento, con escala adaptada al escenario. Su velocidad es de 240 unidades por segundo. C y M activan cámara y micrófono por separado para uso local; sus paneles están ocultos. El tren animado pasa por las tres ventanas de derecha a izquierda, con 15 segundos de espera entre ventanas. El pizarrón usa los PNG oficiales reflejados horizontalmente: E permite dibujar y volver a borrar. Sesiones compartidas, chat, transmisión de audio/vídeo, pantalla, accesos externos a Google Workspace, Snake y Pong siguen pendientes en la aplicación actual. [Ajuste manual del mapa](docs/ajuste-mapa-oficina.md).
+La aplicación implementa un **recorrido individual por la oficina fija a pantalla completa**, con menú de entrada y configuración de estilo pixel art. `SIN MUEBLESL.png` (1920×1080) forma el fondo; los tres escritorios, sus sillas y una planta se dibujan por separado, con collider y profundidad propios, siempre opacos. El avatar se dibuja sobre todo el fondo. Conserva sus cuatro direcciones, PNG de reposo y cuadros de GIF de movimiento, con escala adaptada al escenario. Su velocidad es de 240 unidades por segundo. El tren animado pasa por las tres ventanas de derecha a izquierda, con 15 segundos de espera entre ventanas. El pizarrón usa los PNG oficiales reflejados horizontalmente: E permite dibujar y volver a borrar. Sesiones compartidas, chat, transmisión de audio/vídeo, pantalla, accesos externos a Google Workspace, Snake y Pong siguen pendientes en la aplicación actual. [Ajuste manual del mapa](docs/ajuste-mapa-oficina.md).
 
 Cuentas, equipos persistentes, horarios, OAuth/APIs de Google, editor de mapas y tienda están fuera del alcance. Ver [inventario y faltantes de arte](docs/assets.md).
 
@@ -15,7 +15,16 @@ npm ci
 npm run dev
 ```
 
-Abrir `http://127.0.0.1:5173`. WASD/flechas o arrastrar sobre el escenario para moverse; E o un toque corto para cambiar el pizarrón o consultar la zona del escritorio. R vuelve a la entrada. C activa/apaga la cámara y M el micrófono; sólo solicitan permisos por esa acción. La captura funciona en localhost o HTTPS y no se transmite a otros participantes en este recorrido. El escenario llena el área visible sin paneles, barras ni marcos. Conserva la proporción del arte y la cámara sigue al avatar cuando la relación de pantalla recorta una parte del mapa.
+Abrir `http://127.0.0.1:5173`, elegir un nombre y pulsar **Entrar a la oficina**. WASD/flechas o arrastrar sobre el escenario para moverse; E o un toque corto para cambiar el pizarrón o consultar la zona del escritorio. R vuelve al punto de entrada. **Escape o el engranaje** abren la configuración; el movimiento se detiene mientras el menú está abierto. El escenario llena el área visible y conserva la proporción del arte; la cámara sigue al avatar cuando la relación de pantalla recorta una parte del mapa.
+
+## Menú y configuración
+
+- **Perfil:** nombre de 2 a 24 caracteres, editable antes y después de entrar, y salida al inicio.
+- **Audio:** encender/apagar micrófono, ganancia de 0 a 200 % y medidor de nivel. El control de otras voces ajusta un mezclador independiente de 0 a 100 %; no hay voces remotas hasta implementar las llamadas compartidas.
+- **Cámara:** permiso independiente del micrófono y vista previa. C/M también alternan estos dispositivos durante el recorrido. Requieren localhost o HTTPS y no transmiten a otras personas en esta etapa.
+- **Música:** ambiente instrumental generado localmente, archivo de audio del equipo, reproducción, pausa, detención, repetición y volumen independiente. La música se escucha sólo en ese navegador.
+
+Nombre y niveles se guardan en `sessionStorage` durante la sesión de la pestaña. Cámara, micrófono y reproducción comienzan apagados al cargar la aplicación. Salir al inicio detiene los medios y vuelve al punto de entrada. [Archivos y funcionamiento del menú](docs/menu-configuracion.md).
 
 API inicial opcional en otra terminal: `npm run dev:api`. Expone `http://127.0.0.1:3001/healthz` y `/maps/demo-v5/manifest`. Sólo contiene el mapa público de prueba; aún no autentica ni sincroniza usuarios.
 
